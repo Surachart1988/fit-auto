@@ -1,0 +1,333 @@
+﻿@model  CentralService.Models.SystemModel
+@{
+    ViewBag.Title = "กำหนดการทำงานของระบบ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section css{
+    @Styles.Render("~/Content/datatables-style")
+    <style>
+        .has-feedback {
+            margin-bottom: 0;
+        }
+
+        th {
+            background-color: #313167;
+            color: white;
+        }
+    </style>
+}
+<div class="row">
+    <div class="col-md-12 title-head">
+        <h1 style="margin: 0;">
+            <img src="~/Content/img/ICON/config.jpg" width="80" height="80" hspace="3" vspace="3" align="middle" alt="" style="padding-right: 0;" />
+            <font size="5"><b style="font-weight: 700;">&nbsp;&nbsp;กำหนดการทำงานของระบบ</b></font>
+        </h1>
+    </div>
+</div>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myForm", name = "myForm" }))
+                {
+                    <div class="panel panel-default">
+
+                        <table class="table table-bordered nowrap">
+                            <thead>
+                                <tr>
+                                    <th width="6%" class="text-center"><label>ลำดับที่</label></th>
+                                    <th width="34%" class="text-center"><label>รายการ</label></th>
+                                    <th class="text-center"><label>ตั้งค่า</label></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">1</td>
+                                    <td>ใช้ลิ้นชักเงินสด</td>
+                                    <td>
+                                        <label class="radio-inline radio radio-success">
+                                            @Html.RadioButtonFor(m => m.cashdw, 1, new { id = "cashdw_yes" })
+                                            @Html.Label("cashdw_yes", "ใช้")
+                                        </label>
+                                        <label class="radio-inline radio radio-success">
+                                            @Html.RadioButtonFor(m => m.cashdw, 0, new { id = "cashdw_no" })
+                                            @Html.Label("allow_no", "ไม่ใช้")
+                                        </label>
+                                    </td>
+                                </tr>
+                                @*<tr>
+                                                                    <td class="text-center">2</td>
+                                                                    <td>เลือกจังหวัดที่ใช้ประจำ</td>
+                                                                    <td class="form-group row">
+                                                                        <div class="col-sm-4 has-feedback" style="padding-left: 0;">
+                                                                            @Html.DropDownListFor(model => model.provid,
+                                    new SelectList(Model.AddressModel.ProvinceList, "prov_id", "prov_name"),
+                                            (object)new
+                                            {
+                                                @class = "form-control",
+                                                data_equals = "0",
+                                                data_equals_error = "กรุณาระบุ จังหวัด"
+                                            }
+                                            )
+                                                                            <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                                                            <div class="help-block with-errors"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>*@
+                                <tr>
+                                    <td class="text-center">2</td>
+                                    <td>วันที่ปิดงวดเดือนสินค้า</td>
+                                    <td>
+                                        <div class="col-sm-2" style="padding-left: 0;">
+                                            @Html.TextBoxFor(model => model.alert_month, "",
+    new { @maxlength = "2", @class = "form-control 30day", autocomplete = "off" })
+                                        </div>
+                                        วัน
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">3</td>
+                                    <td>คำนวนบริการครั้งถัดไปลูกค้าทั้งหมดที่มีรถยนต์</td>
+                                    <td>
+                                        @{
+                                            var isChecked = Model.all_nextservices == "True";
+                                        }
+                                        @Html.CheckBox("cball_nextserv", isChecked)
+                                        @Html.HiddenFor(m => m.all_nextservices)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">4</td>
+                                    <td>ระยะเวลาติดตามผลการให้บริการ</td>
+                                    <td>
+                                        <div class="col-sm-2" style="padding-left: 0;">
+                                            @Html.TextBoxFor(model => model.used_dayservices_alert, "",
+    new { @maxlength = "3", @class = "form-control numberonly", autocomplete = "off" })
+                                        </div>
+                                        วัน
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">5</td>
+                                    <td>URL Server Client</td>
+                                    <td class="form-group row">
+                                        <div class="col-sm-8 has-feedback" style="padding-left: 0;">
+                                            @Html.TextBoxFor(model => model.client_url, "",
+    new
+{
+@maxlength = "500",
+@class = "form-control",
+autocomplete = "off",
+@type = "url",
+        data_error = "กรุณาระบุ URL Server Client",
+        required = "required"
+    })
+                                            <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <button id="btnConnect" type="button" class="btn btn-warning" value="@Model.client_url">
+                                                ตรวจสอบการเชื่อมต่อ
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">6</td>
+                                    <td>Web Service HQ URL</td>
+                                    <td class="form-group row">
+                                        <div class="col-sm has-feedback" style="padding-left: 0;">
+                                            @Html.TextBoxFor(model => model.hq_url, "",
+    new
+{
+@maxlength = "500",
+@class = "form-control",
+autocomplete = "off",
+@type = "url",
+        data_error = "กรุณาระบุ Web Service HQ URL",
+        required = "required"
+    })
+                                            <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">7</td>
+                                    <td>พอร์ตเชื่อมต่อเครื่อง EDC</td>
+                                    <td>
+                                        <div class="col-sm-4" style="padding-left: 0;">
+                                            @Html.DropDownListFor(model => model.card_port_no, new SelectListItem[]{
+                                       new SelectListItem() {Text = "ไม่ใช้เครื่อง EDC", Value=""},
+                                       new SelectListItem() {Text = "COM 1", Value="COM1"},
+                                       new SelectListItem() {Text = "COM 2", Value="COM2"},
+                                       new SelectListItem() {Text = "COM 3", Value="COM3"},
+                                       new SelectListItem() {Text = "COM 4", Value="COM4"},
+                                       new SelectListItem() {Text = "COM 5", Value="COM5"},
+                                       new SelectListItem() {Text = "COM 6", Value="COM6"},
+                                       new SelectListItem() {Text = "COM 7", Value="COM7"},
+                                       new SelectListItem() {Text = "COM 8", Value="COM8"},
+                                       new SelectListItem() {Text = "COM 9", Value="COM9"},
+                                       new SelectListItem() {Text = "COM 10", Value="COM10"},
+                                       new SelectListItem() {Text = "COM 11", Value="COM11"},
+                                       new SelectListItem() {Text = "COM 12", Value="COM12"},
+                                       new SelectListItem() {Text = "COM 13", Value="COM13"},
+                                       new SelectListItem() {Text = "COM 14", Value="COM14"},
+                                       new SelectListItem() {Text = "COM 15", Value="COM15"},
+                                       new SelectListItem() {Text = "COM 16", Value="COM16"},
+                                       new SelectListItem() {Text = "COM 17", Value="COM17"},
+                                       new SelectListItem() {Text = "COM 18", Value="COM18"},
+                                       new SelectListItem() {Text = "COM 19", Value="COM19"},
+                                       new SelectListItem() {Text = "COM 20", Value="COM20"}
+                                  },
+                                   new { @class = "form-control", autocomplete = "off" })
+                                        </div>
+                                        @*<div class="col-sm-4">
+                                                <button id="btnconnect" type="button" class="btn btn-warning">
+                                                    ตรวจสอบการเชื่อมต่อ
+                                                </button>
+                                            </div>*@
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">8</td>
+                                    <td>รูปแบบปัดเศษทศนิยม การรับชำระ</td>
+                                    <td>
+                                        <div class="col-sm-4" style="padding-left: 0;">
+                                            @Html.DropDownListFor(model => model.payment_round_digit, new SelectListItem[]{
+                                          new SelectListItem() {Text = "ใช้ทศนิยมตามจริง", Value=""},
+                                          new SelectListItem() {Text = "ปัดจุดทศนิยม", Value="1"}
+                                        },
+                                        new { @class = "form-control", autocomplete = "off" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">9</td>
+                                    <td>ระบุเครื่องพิมพ์กระดาษ A4</td>
+                                    <td>
+                                        <div class="col-sm-4" style="padding-left: 0;">
+                                            @Html.DropDownListFor(model => model.printer_default, new SelectList(Model.PrinterList, "print_id", "print_name"),
+                                        new { @class = "form-control", autocomplete = "off" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">10</td>
+                                    <td>ระบุเครื่องพิมพ์กระดาษสลิป</td>
+                                    <td>
+                                        <div class="col-sm-4" style="padding-left: 0;">
+                                            @Html.DropDownListFor(model => model.printer_slip_default, new SelectList(Model.PrinterList, "print_id", "print_name"),
+                                        new { @class = "form-control", autocomplete = "off" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">11</td>
+                                    <td>ไม่แสดงราคาสินค้าในใบส่งสินค้าชั่วคราว</td>
+                                    <td>
+                                        @{
+                                            var isChked = Model.rpt_print_price == "True";
+                                        }
+                                        @Html.CheckBox("cbrpt_print_price", isChked)
+                                        @Html.HiddenFor(m => m.rpt_print_price)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">12</td>
+                                    <td>URL BlueCard Server</td>
+                                    <td>
+                                        <div class="col-sm-12" style="padding-left: 0;">
+                                            @Html.TextBoxFor(model => model.bluecard_url, "",
+    new { @maxlength = "500", @class = "form-control", autocomplete = "off" })
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    @Html.HiddenFor(Model => Model.branch_id)
+                    @Html.HiddenFor(Model => Model.branch_no)
+                    @Html.HiddenFor(Model => Model.dealercode)
+                    @Html.HiddenFor(Model => Model.provid)
+                    @Html.HiddenFor(Model => Model.formprint)
+                    @Html.HiddenFor(Model => Model.print_comp)
+                    @Html.HiddenFor(Model => Model.print_tax)
+                    @Html.HiddenFor(Model => Model.formprint_2)
+                    @Html.HiddenFor(Model => Model.doc_select)
+                    @Html.HiddenFor(Model => Model.DATE_REPORT_TYPE)
+                    @Html.HiddenFor(Model => Model.formprint_bill)
+                    @Html.HiddenFor(Model => Model.pay_rt_tmp)
+                    @Html.HiddenFor(Model => Model.pay_rt_inv)
+                    @Html.HiddenFor(Model => Model.pay_ws_tmp)
+                    @Html.HiddenFor(Model => Model.pay_ws_inv)
+                    @Html.HiddenFor(Model => Model.used_edit_doc_no2)
+                    @Html.HiddenFor(Model => Model.used_edit_doc_no2_key)
+                    @Html.HiddenFor(Model => Model.ROOT_PATH)
+                    @Html.HiddenFor(Model => Model.used_film_option)
+                    @Html.HiddenFor(Model => Model.used_docno_ref_num)
+                    @Html.HiddenFor(Model => Model.used_locat_barcode)
+                    @Html.HiddenFor(Model => Model.pro_name_order)
+                    @Html.HiddenFor(Model => Model.po_config_ini)
+                    @Html.HiddenFor(Model => Model.print_header_footer_report)
+                    @Html.HiddenFor(Model => Model.Job_Head_Technician)
+                    @Html.HiddenFor(Model => Model.Job_Detail_Technician)
+                    @Html.HiddenFor(Model => Model.default_doc)
+                    @Html.HiddenFor(Model => Model.check_credit_total)
+                    @Html.HiddenFor(Model => Model.check_close_job)
+                    @Html.HiddenFor(Model => Model.special_promotion)
+                    @Html.HiddenFor(Model => Model.fastcash_openjob)
+                    @Html.HiddenFor(Model => Model.cus_pro_price)
+                    @Html.HiddenFor(Model => Model.Used_Handheld)
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <input type="submit" name="btnSave" value="บันทึก" id="btnSave" class="btn btn-success">
+                            &nbsp;
+                            <a class="btn btn-danger" href="@Url.Action("Index")">ยกเลิก</a>
+                        </div>
+                    </div>
+                    <div class="col-md-1">&nbsp;</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/datatables-script")
+    @Scripts.Render("~/bundles/admin/form")
+    <script>
+        var _form = new _Form()
+        $(document).ready(function () {
+            _form.init()
+        })
+        $("#cball_nextserv").change(function () {
+            if (this.checked) {
+                $("#all_nextservices").val("True");
+            }
+            else {
+                $("#all_nextservices").val("");
+            }
+        })
+        $('#client_url').change(function () {
+            if (this) {
+                $('#btnConnect').val(this.value);
+            }
+        })
+        $("#cbrpt_print_price").change(function () {
+            if (this.checked) {
+                $("#rpt_print_price").val("True");
+            }
+            else {
+                $("#rpt_print_price").val("");
+            }
+        })
+        $('#myForm').validator().on('submit', function (e) {
+            if (e.isDefaultPrevented()) {
+                // handle the invalid form...
+            } else {
+                // everything looks good!
+            }
+        });
+    </script>
+}

@@ -1,0 +1,72 @@
+﻿@model newHQ.Models.MessageViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myForm", name = "myForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="card">
+        <div class="card-header">
+            <h2>แก้ไขข้อมูล @Enum.GetName(typeof(CentralService.Enums.MessageDocType), Model.DocType)</h2>
+        </div>
+        <div class="card-body">
+            @Html.HiddenFor(m => m.Id)
+            @Html.Partial("FormPartial", Model)
+        </div>
+        @if (!string.IsNullOrWhiteSpace(Model.FileName))
+        {
+        <table class="table table-striped table-bordered nowrap" style="width:100%;font-size: 13px;">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FileName)
+                    </th>
+
+                    <th>เอกสารแนบ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.FileName)
+                    </td>
+
+                    <td>
+                        @Html.HiddenFor(model => model.FileName)
+                        <button type="button" class="btn btn-outline-primary" onclick="openDocFull('@Session["rootUrl"]/Content/UploadPdfOfMessage/@Model.FileName')">
+                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        }
+        <div class="card-footer text-center">
+            <input type="submit" value="บันทึก" class="btn btn-success" />
+            <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Index", new { doctype = (int)Model.DocType })'">กลับ</button>
+        </div>
+    </div>
+}
+
+@section css{
+    @Styles.Render("~/Content/daterangepicker")
+    @Styles.Render("~/Content/datatables-style")
+}
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/daterangepicker")
+    @Scripts.Render("~/bundles/datatables-script")
+    @Scripts.Render("~/bundles/message/form")
+
+    <script>
+        var pageForm = new MessageForm()
+        $(document).ready(function () {
+            pageForm.init()
+        })
+    </script>
+}

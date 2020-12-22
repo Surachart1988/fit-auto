@@ -1,0 +1,120 @@
+﻿@model CentralService.Models.ExtraPromotionModel
+
+<style>
+    .modal-content {
+        width: 100%;
+    }
+</style>
+
+<div class="modal fade" id="modal-select-prodgroup" tabindex="-1" role="dialog" aria-labelledby="selectProductgroup" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 title-head">
+                            <h4>กลุ่มสินค้า</h4>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div id="bError_productgrp" class="row" style="display: none">
+                                <div class="col-md-12">
+                                    <div>
+                                        <table class="col-md-12 table-bordered table-striped table-condensed tables" cellspacing="0" id="gv_error" style="border-collapse:collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="11">
+                                                        <center><span style="font-size: 20px; color: Red;">ไม่พบข้อมูลกลุ่มสินค้า</span></center>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="gv_productgrp_wrapper" class="row" style="display: normal">
+                                <div class="col-md-12">
+                                    <table id="gv_productgrp" class="table table-hover table-striped dataTable no-footer" cellspacing="0" style="border-collapse: collapse; width: 100%;" role="grid" aria-describedby="gv_progroup_info">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <input id="gv_productgrp_CheckBox_all" type="checkbox" name="gv_productgrp_CheckBox_all">
+                                                    <label for="gv_productgrp_CheckBox_all"> เลือกทั้งหมด</label>
+                                                </th>
+                                                <th class="text-center">รหัสกลุ่มสินค้า</th>
+                                                <th class="text-center">กลุ่มสินค้า</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                for (int i = 0; i < Model.prodfirstgroupList.Count; i++)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.CheckBoxFor(x => Model.prodfirstgroupList[i].IsCheck, new { style = "opacity: 1;" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => Model.prodfirstgroupList[i].product_group_code)
+                                                            @Html.HiddenFor(m => Model.prodfirstgroupList[i].product_group_name)
+                                                            @Html.DisplayFor(x => Model.prodfirstgroupList[i].product_group_code)
+                                                        </td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => Model.prodfirstgroupList[i].product_group_code)
+                                                            @Html.HiddenFor(m => Model.prodfirstgroupList[i].product_group_name)
+                                                            @Html.DisplayFor(x => Model.prodfirstgroupList[i].product_group_name)
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                @:
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <input type="button" name="btnSave" value="บันทึก" id="btnSaveProdGrp" class="btn btn-primary">
+                            <input type="button" name="btnClose" value="ยกเลิก" id="btnClose" data-dismiss="modal" class="btn btn-danger">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#btnSaveProdGrp").click(function (e) {
+
+        var list = []; var values = []; var Item = ""; var value = "";
+        $("#gv_productgrp").DataTable().rows().nodes().to$().find('input[type="checkbox"]:checked').each(function () {
+
+            Item = $(this).closest('tr').find("td").eq(2).text().trim();
+            list.push(Item);
+            value = $(this).closest('tr').find("td").eq(1).text().trim();
+            values.push(value);
+        });
+
+        if (list.length === 0) {
+            warningAlert('กรุณาเลือกข้อมูล');
+            e.preventDefault();
+        } else {
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "SaveData",
+                data: { 'data': values.join(), '_type': "productgrp" },
+                success: function (data) {
+                    $('#modal-select-prodgroup').modal('toggle');
+                    $("#txt_prodgroup").val(list.join(', '));
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to retrieve.');
+                }
+            });
+        }
+    });
+</script>

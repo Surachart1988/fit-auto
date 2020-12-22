@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "BlueCardRedeemModal";
+}
+
+<!-- Modal -->
+<div class="modal fade" id="blueCardRedeemModal" tabindex="-1" role="dialog" style="z-index:2000">
+    <div class="modal-dialog" role="document" style="margin: auto;
+    margin-top: 140px;
+    width: 55vw;
+    height: 30vh;
+    max-width: none;">
+        <div class="modal-content">
+
+            <div class="modal-header" style="border-bottom-color: #363167;
+            background-color: #0194D9;
+            color: white;">
+                <h4 class="modal-title">Blue Card Point</h4>
+                <button type="button" class="close" onclick="popup();return false;"  aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+            </div>
+
+            <div class="modal-body">
+                <form name="getPoitBluecard">
+                    <div class="row">
+
+                        <div class="col-1"></div>
+
+                        <div class="col-8">
+                            <div class="form-group row">
+                                <span class="col-4 col-form-label col-form-label-sm">เบอร์โทรศัพท์</span>
+                                <input class="form-control form-control-sm col-md-8 input-mobileth" id="txtBlueCardMobile" name="txtBlueCardMobile" type="text" value="">
+                            </div>
+                            <div class="form-group row">
+                                <span class="col-4 col-form-label col-form-label-sm">Blue No.</span>
+                                <input type="text" class="form-control form-control-sm col-8 input-card" id="txtBlueCardNo">
+                            </div>
+                            <div class="form-group row">
+                                <span class="col-4 col-form-label col-form-label-sm">คะแนนสะสม</span>
+                                <input type="text" class="form-control form-control-sm col-8 input-balance-point" id="txtBalancePoint" readonly>
+                            </div>
+                            @*<div class="form-group row">
+                                    <span class="col-4 col-form-label col-form-label-sm">Blue Card Code</span>
+                                    <input type="text" class="form-control form-control-sm col-8" id="txtBlueCardCode" maxlength="4" readonly>
+                                </div>*@
+                            <input type="hidden" class="form-control form-control-sm col-8" id="txtBlueCardCode" maxlength="4" readonly>
+                            <input type="hidden" class="form-control form-control-sm money col-8" id="txtBlueCardMoney" aria-describedby="basic-addon1" readonly>
+                            @*<div class="form-group row">
+                                    <span class="col-4 col-form-label col-form-label-sm">มูลค่าเงินสด</span>
+                                    <input type="hidden" class="form-control form-control-sm money col-8" id="txtBlueCardMoney" aria-describedby="basic-addon1" readonly>
+                                </div>*@
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+            @*<div class="modal-footer">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">หมายเหตุ</span>
+                        </div>
+                        <input type="text" class="form-control" id="txtBlueCardNote" aria-describedby="basic-addon1">
+                    </div>
+                    <button type="button" id="btnBlueCardReceiveMoney" class="btn btn-success">ยืนยัน</button>
+                </div>*@
+
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div>
+<script>
+    function popup() {
+        $('[id="blueCardRedeemModal"]').hide();//$('[id="bluecard"]').modal()
+        $('.modal-backdrop').remove();
+    }
+</script>

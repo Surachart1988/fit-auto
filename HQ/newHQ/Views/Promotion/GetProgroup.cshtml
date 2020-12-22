@@ -1,0 +1,139 @@
+﻿@model CentralService.Models.ExtraPromotionModel
+
+<style>
+    .modal-content {
+        width: 100%;
+    }
+</style>
+
+<div class="modal fade" id="modal-select-progroup" tabindex="-1" role="dialog" aria-labelledby="selectPromotionGroup" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 title-head">
+                            <h4>ข้อมูลประเภทสินค้า</h4>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div id="bError_progroup" class="row" style="display: none">
+                                <div class="col-md-12">
+                                    <div>
+                                        <table class="col-md-12 table-bordered table-striped table-condensed tables" cellspacing="0" id="gv_error" style="border-collapse:collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="11">
+                                                        <center><span style="font-size: 20px; color: Red;">ไม่พบข้อมูลโปรโมชั่น</span></center>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="gv_progroup_wrapper" class="row" style="display: normal">
+                                <div class="col-md-12">
+                                    <table id="gv_progroup" class="table table-hover table-striped dataTable no-footer" cellspacing="0" style="border-collapse: collapse; width: 100%;" role="grid" aria-describedby="gv_progroup_info">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <input id="gv_progroup_CheckBox_all" type="checkbox" name="gv_progroup_CheckBox_all">
+                                                    <label for="gv_progroup_CheckBox_all"> เลือกทั้งหมด</label>
+                                                </th>
+                                                <th class="text-center">รหัสประเภทสินค้า</th>
+                                                <th class="text-center">ประเภทสินค้า</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                for (int i = 0; i < Model.progroupList.Count; i++)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.CheckBoxFor(x => Model.progroupList[i].IsCheck, new { style = "opacity: 1;" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => Model.progroupList[i].progroup_code)
+                                                            @Html.HiddenFor(m => Model.progroupList[i].progroup_name)
+                                                            @Html.DisplayFor(x => Model.progroupList[i].progroup_code)
+                                                        </td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => Model.progroupList[i].progroup_code)
+                                                            @Html.HiddenFor(m => Model.progroupList[i].progroup_name)
+                                                            @Html.DisplayFor(x => Model.progroupList[i].progroup_name)
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                @:
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <input type="button" name="btnSave" value="บันทึก" id="btnSaveProGroup" class="btn btn-primary">
+                            <input type="button" name="btnClose" value="ยกเลิก" id="btnClose" data-dismiss="modal" class="btn btn-danger">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#btnSaveProGroup").click(function (e) {
+
+            var list = []; var values = []; var Item = ""; var value = "";
+            $("#gv_progroup").DataTable().rows().nodes().to$().find('input[type="checkbox"]:checked').each(function () {
+
+                Item = $(this).closest('tr').find("td").eq(2).text().trim();
+                list.push(Item);
+                value = $(this).closest('tr').find("td").eq(1).text().trim();
+                values.push(value);
+            });
+
+            if (list.length === 0) {
+                warningAlert('กรุณาเลือกข้อมูล');
+                e.preventDefault();
+            } else {
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "SaveData",
+                    data: { 'data': values.join(), '_type': "progroup" },
+                    success: function (data) {
+                        $('#modal-select-progroup').modal('toggle'); // close yourself
+                        $("#txt_progroup").val(list.join(', '));
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve.');
+                    }
+                });
+            }
+        });
+    });
+</script>
+<script>
+            //$.ajax({
+            //    cache: false,
+            //    type: "GET",
+            //    url: "GetProbrand",
+            //    data: { 'data': values2.join() },
+            //    success: function (data) {
+            //        $("#probrand_popup").html(data);
+            //        $("#gv_probrand").DataTable();
+            //        $('#modal-select-progroup').modal('toggle'); // close yourself
+            //        $("#txt_progroup").val(values.join(', '));
+            //    },
+            //    error: function (xhr, ajaxOptions, thrownError) {
+            //        alert('Failed to retrieve.');
+            //    }
+            //});
+</script>

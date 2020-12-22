@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "CashModal";
+}
+
+<!-- Modal -->
+<div class="modal fade" id="PartialcashModal" tabindex="-1" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document" style="height: 70vh;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">รับชำระเงินสด</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+            </div>
+
+            <div class="modal-body">
+                <div class="card text-white bg-success calculator-card ">
+                    <div class="card-body card-lg">
+                        <p class="text-details">ราคาทั้งหมดที่ต้องจ่าย (บาท)</p>
+                        <input id="txtPartialPaymentMoneyCash"  class="input-no-bg text-result-lg money" readonly />
+                    </div>
+                </div>
+                <div class="card text-white bg-secondary calculator-card ">
+                    <div class="card-body card-lg">
+                        <p class="text-details">ราคาที่ต้องการชำระ (บาท)</p>
+                        <input id="txtPartialPaymentReceive"   class="input-no-bg text-result-lg  money receive" />
+                    </div>
+                </div>
+                <div class="card text-white bg-info calculator-card ">
+                    <div class="card-body card-lg">
+                        <p class="text-details">รับเงินมา (บาท)</p>
+                        <input id="txtPartialPaymentCash" class="input-no-bg text-result-lg money receive" />
+                    </div>
+                </div>
+                <div class="card text-white bg-warning calculator-card ">
+                    <div class="card-body card-lg">
+                        <p class="text-details">เงินทอน (บาท)</p>
+                        <input id="txtPartialChangeMoney" class="input-no-bg text-result-lg money" value="0" readonly />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">หมายเหตุ</span>
+                    </div>
+                    <input type="text" class="form-control" id="txtPartialCashNote" aria-describedby="basic-addon1">
+                </div>
+                <button type="button" id="btnPartialCashReceiveMoney" class="btn btn-success">รับเงิน</button>
+            </div>
+        </div><!-- modal-content -->
+
+    </div><!-- modal-dialog -->
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        this.PartialCashMoney = $('#PartialcashModal');
+        this.PartialCashMoney.on('shown.bs.modal', function () {
+            var AmountTotal = parseFloat($('#txtPaymentBalance').val().replace(",", ""));
+            $('#txtPartialPaymentMoneyCash').val(AmountTotal.toFixed(2));
+            $('#txtPartialPaymentCash').val('0.00');
+            $('#txtPartialPaymentReceive').val('0.00');
+            $('#txtPartialChangeMoney').val('0.00');
+            $('#btnPartialCashReceiveMoney').prop('disabled', true);
+            $('#txtPartialPaymentReceive').focus();
+        });
+
+        //$('#txtPartialPaymentReceive').keyup(function () {
+        //  //  $('#txtPartialPaymentCash').val($(this).val());
+        //});
+
+        $('.receive').keyup(function () {
+          //  parseFloat($(id).val().replace(",", ""));
+            var AmountTotal = parseFloat($('#txtPartialPaymentReceive').val().replace(",", "")); 
+            var AmountTotalAll = parseFloat($('#txtPartialPaymentMoneyCash').val().replace(",", "")); 
+            var AmountCash = $('#txtPartialPaymentCash').val();
+            if ((AmountCash >= AmountTotal || AmountCash >= AmountTotalAll) && AmountTotal > 0 ) {
+                $('#btnPartialCashReceiveMoney').prop('disabled', false);
+                $('#txtPartialChangeMoney').val(AmountCash - AmountTotal);
+            } else {
+                $('#btnPartialCashReceiveMoney').prop('disabled', true);
+                $('#txtPartialChangeMoney').val('0.00');
+            }
+
+        });
+
+
+
+
+    });
+
+</script>

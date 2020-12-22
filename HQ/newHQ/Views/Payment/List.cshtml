@@ -1,0 +1,79 @@
+﻿@model CentralService.Models.ExtraDiscountIconModel
+@{
+    ViewBag.Title = "List";
+}
+
+<style>
+    table thead tr {
+        background-color: #363167;
+        color: white;
+        line-height: 1vh;
+    }
+
+    tr.selected {
+        background-color: #0194d9 !important;
+        background-color: #0194d947 !important;
+    }
+</style>
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">กำหนดส่วนลดพิเศษ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">กำหนดการชำระ</a>
+            </li>
+            <li class="nav-item ml-auto">
+                <button type="button" class="btn btn-outline-success"
+                        onclick="location.href='@Url.Action("CreateDiscount")'">
+                    <i class="fa fa-plus" style="font-size: 25px;"></i>สร้าง
+                </button>
+                <button type="button" class="btn btn-outline-warning"
+                        onclick="openDocPrint('@Session["aspUrl"].ToString()/extra_discount_sendclient.asp')">
+                    <i class="fa fa-share-square" style="font-size: 25px;"></i>นำข้อมูลออกไปสาขา
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "searchForm" }))
+        {
+            <table class="table table-striped table-bordered nowrap" id="extra-discount-list" style="width:100%;font-size: 13px;">
+                <thead>
+                    <tr>
+                        <th>@Html.LabelFor(m => m.Code)</th>
+                        <th>@Html.LabelFor(m => m.Name)</th>
+                        <th>@Html.LabelFor(m => m.ProgroupCode)</th>
+                        <th>@Html.LabelFor(m => m.CustypeCode)</th>
+                        <th>@Html.LabelFor(m => m.Baht)</th>
+                        <th>@Html.LabelFor(m => m.RankNo)</th>
+                        <th><label>คำสั่ง</label></th>
+                    </tr>
+                </thead>
+            </table>
+        }
+    </div>
+</div>
+
+
+
+@section css{
+    @Styles.Render("~/Content/datatables-style")
+}
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/datatables-script")
+    @Scripts.Render("~/bundles/payment/list")
+    <script>
+        var pageForm = new PaymentList()
+        $(document).ready(function () {
+            pageForm.getUrl = '@Url.Action("GetDTResult")'
+            pageForm.editUrl = '@Url.Action("EditDiscount")'
+            pageForm.deleteUrl = '@Url.Action("DeleteExtraDiscount")'
+            pageForm.init()
+        })
+    </script>
+}
+

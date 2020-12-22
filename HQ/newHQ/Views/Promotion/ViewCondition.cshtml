@@ -1,0 +1,654 @@
+﻿@model CentralService.Models.ExtraPromotionModel
+@{
+    ViewBag.Title = "กำหนดข้อมูลโปรโมชั่น";
+    Layout = "~/Views/Shared/_LayoutPromotion.cshtml";
+}
+
+@section css{
+    @Styles.Render("~/Content/datatables-style")
+}
+
+<style>
+    body {
+        min-height: 100vh !important;
+        width: 100% !important;
+    }
+</style>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 title-head">
+                <h1>
+                    <img src="@Url.Content("~/Content/img/ICON/icon_customer.png")" alt="">เงื่อนไขโปรโมชั่น
+                    <span id="lblProId">PRO0001</span>
+                    :
+                    <span id="lblProName">testPromotion11</span>
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">&nbsp;</div>
+            <div class="col-md-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">เพิ่มข้อมูลโปรโมชั่น</div>
+                    <div id="Step5" class="panel-body">
+                        <div id="Step5_Give" class="row">
+                            <div class="col-md-12 rows">
+                                <p style="font-weight: bold; color: #555;">โปรโมชั่นส่วนลดราคา</p>
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12 rows">
+                                                <div class="col-md-12 rows">
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-2" align="right">กลุ่มสินค้า :</div>
+                                                    <div class="col-md-8">
+                                                        <input name="txt_productfirstgroup" type="text" value="Non Hydrocarbon" readonly="readonly" id="txt_productfirstgroup" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 rows">
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-2" align="right">ประเภทสินค้า :</div>
+                                                    <div class="col-md-8">
+                                                        <textarea name="txt_progroup" rows="3" cols="20" readonly="readonly" id="txt_progroup" class="form-control">ยางรถยนต์</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 rows">
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-2" align="right">ยี่ห้อสินค้า :</div>
+                                                    <div class="col-md-8">
+                                                        <textarea name="txt_pro_brand" rows="3" cols="20" readonly="readonly" id="txt_pro_brand" class="form-control">BRIDGESTONE,CONTINENTAL,DEESTONE,DUNLOP,FIRESTONE,GOODYEAR,MICHELIN,NEXEN,PIRELLI,YOKOHAMA,อื่นๆ</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 rows">
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-2" align="right">รุ่นสินค้าสินค้า :</div>
+                                                    <div class="col-md-8">
+                                                        <textarea name="txt_pro_model" rows="3" cols="20" readonly="readonly" id="txt_pro_model" class="form-control">(Front) P ZERO CORSA,(JP) BLUEARTH AE-50,(Rear) P ZERO CORSA,107ZL SPEC II,A008,A10 ,A10E</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 rows">
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-2" align="right">ขนาดสินค้า :</div>
+                                                    <div class="col-md-8">
+                                                        <textarea name="txt_pro_size" rows="3" cols="20" readonly="readonly" id="txt_pro_size" class="form-control"> 12362 12V 55W  ST C2, M-28,0.17L,0.5KG,0451103086,047500-17604D,155-70R12,165-60R13,165-60R14</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 rows">
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-2" align="right">สินค้า : </div>
+                                                    <div class="col-md-8">
+                                                        <style>
+                                                            #list_product {
+                                                                min-height: 150px;
+                                                            }
+                                                        </style>
+                                                        <select size="4" name="list_product" id="list_product" class="form-control" readonly="">
+                                                            <option value=" 12362 12V 55W  ST C2 3K V-Series"> 12362 12V 55W  ST C2 3K V-Series</option>
+                                                            <option value=" 12362 12V 55W  ST C2 BRIDGESTONE B250"> 12362 12V 55W  ST C2 BRIDGESTONE B250</option>
+                                                            <option value=" 12362 12V 55W  ST C2 BRIDGESTONE B250"> 12362 12V 55W  ST C2 BRIDGESTONE B250</option>
+                                                            <option value=" 12362 12V 55W  ST C2 BRIDGESTONE B250"> 12362 12V 55W  ST C2 BRIDGESTONE B250</option>
+                                                            <option value=" 12362 12V 55W  ST C2 FB PREMIUM GOLD"> 12362 12V 55W  ST C2 FB PREMIUM GOLD</option>
+                                                            <option value=" 12362 12V 55W  ST C2 FIT AUTO CABIN FILTER"> 12362 12V 55W  ST C2 FIT AUTO CABIN FILTER</option>
+                                                            <option value=" 12362 12V 55W  ST C2 MANN GEAR FILTER"> 12362 12V 55W  ST C2 MANN GEAR FILTER</option>
+                                                            <option value=" 12362 12V 55W  ST C2 MANN GEAR FILTER"> 12362 12V 55W  ST C2 MANN GEAR FILTER</option>
+                                                            <option value=" 12455 100W 12V RA C2 SYNTHETIC 0W-30777"> 12455 100W 12V RA C2 SYNTHETIC 0W-30777</option>
+                                                            <option value=" M-28 FB OE"> M-28 FB OE</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 rows">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-6 rows" align="center">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="radio radio-success">
+                                                                    <span class="aspNetDisabled"><input id="rdo_pro_give_type_id_2" type="radio" name="pro_give_type_id" value="rdo_pro_give_type_id_2" checked="checked" disabled="disabled"><label for="rdo_pro_give_type_id_2">&nbsp;</label></span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                มากกว่า จำนวน
+                                                            </td>
+                                                            <td>
+                                                                <input name="txt_pro_give_type_id_2" type="text" value="3" readonly="readonly" id="txt_pro_give_type_id_2" class="form-control keyInteger" autocomplete="off" style="width: 60px; display: inline-block;">
+                                                            </td>
+                                                            <td>
+                                                                ชิ้น
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 10%">
+                                                                <div class="radio radio-success">
+                                                                    <span class="aspNetDisabled"><input id="rdo_pro_give_type_id_1" type="radio" name="pro_give_type_id" value="rdo_pro_give_type_id_1" disabled="disabled"><label for="rdo_pro_give_type_id_1">&nbsp;</label></span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                ทุกๆ จำนวน
+                                                            </td>
+                                                            <td>
+                                                                <input name="txt_pro_give_type_id_1" type="text" readonly="readonly" id="txt_pro_give_type_id_1" class="form-control keyInteger" autocomplete="off" style="width: 60px; display: inline-block;">
+                                                            </td>
+                                                            <td>
+                                                                ชิ้น
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 rows">
+                                            <div class="col-md-4" align="right">จำนวนที่ระบุข้างต้นใช้สำหรับสินค้านี้ :</div>
+                                            <div class="col-md-4">
+                                                <div class="radio radio-success">
+                                                    <table id="rbl_pro_give_product_same" class="aspNetDisabled">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><span class="aspNetDisabled"><input id="rbl_pro_give_product_same_0" type="radio" name="rbl_pro_give_product_same" value="1" checked="checked" disabled="disabled"><label for="rbl_pro_give_product_same_0">เป็นสินค้ารหัสเดียวกัน&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span class="aspNetDisabled"><input id="rbl_pro_give_product_same_1" type="radio" name="rbl_pro_give_product_same" value="0" disabled="disabled"><label for="rbl_pro_give_product_same_1">เป็นสินค้าต่างรหัสกันได้</label></span></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="Step5_PriceTotal" class="col-md-12 rows">
+                                <p style="font-weight: bold; color: #555;">กำหนดเงื่อนไขราคา</p>
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-3" align="center"></div>
+                                            <div class="col-md-7">
+                                                <div class="radio radio-success">
+                                                    <table id="rbl_pro_price_id" class="aspNetDisabled">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><span class="aspNetDisabled"><input id="rbl_pro_price_id_0" type="radio" name="rbl_pro_price_id" value="1" disabled="disabled"><label for="rbl_pro_price_id_0">ราคารวมขั้นต่ำ ของรหัสสินค้าเดียวกัน ที่รวมรายการ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span class="aspNetDisabled"><input id="rbl_pro_price_id_1" type="radio" name="rbl_pro_price_id" value="2" disabled="disabled"><label for="rbl_pro_price_id_1">ราคารวมขั้นต่ำ ของสินค้าทั้งหมด ที่ร่วมรายการ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span class="aspNetDisabled"><input id="rbl_pro_price_id_2" type="radio" name="rbl_pro_price_id" value="3" checked="checked" disabled="disabled"><label for="rbl_pro_price_id_2">ราคารวมขั้นต่ำทั้งบิล&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></span></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-7">
+                                                <span>ราคารวมขั้นต่ำของสินค้า</span>&nbsp;
+                                                <input name="txt_pro_price_total" type="text" value="100" readonly="readonly" id="txt_pro_price_total" autocomplete="off" class="form-control keyTwoDecimal" style="width: 20%; display: inline-block;">
+                                                &nbsp;
+                                                <span>
+                                                    บาท
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="div_search_pro_code_give" class="col-md-12 rows">
+                                <p style="font-weight: bold; color: #555;">รูปแบบของรางวัล</p>
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="col-md-3"></div>
+                                                <div class="col-md-8">
+                                                    <div class="checkbox checkbox-success">
+                                                        <span class="aspNetDisabled" name="cb_pro_give_same_buy_view"><input id="cb_pro_give_same_buy_view" type="checkbox" name="cb_pro_give_same_buy_view" disabled="disabled" onclick="javascript:setTimeout('__doPostBack(\'cb_pro_give_same_buy_view\',\'\')', 0)"><label for="cb_pro_give_same_buy_view">แถมสินค้ารหัสเดียวกันกับที่ซื้อ</label></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="div_search_give_view" class="col-md-12 rows">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-2" align="right">สินค้า : </div>
+                                                <div class="col-md-8">
+                                                    <div class="row">
+                                                        <style>
+                                                            #lst_search_pro_code_give {
+                                                                min-height: 150px;
+                                                            }
+                                                        </style>
+                                                        <select size="4" name="lst_search_pro_code_give" multiple="multiple" id="lst_search_pro_code_give" class="form-control" readonly=""></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="col-md-12 rows">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-6">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="radio radio-success">
+                                                                        <span class="aspNetDisabled"><input id="rdo_pro_discount_id_1" type="radio" name="pro_discount_id" value="rdo_pro_discount_id_1" disabled="disabled"><label for="rdo_pro_discount_id_1">&nbsp;</label></span>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    เป็นส่วนลดสินค้า
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <input name="txt_pro_discount_rate_1" type="text" id="txt_pro_discount_rate_1" class="form-control keyInteger" autocomplete="off" style="width: 60px; display: inline-block;">
+                                                                    &nbsp;
+                                                                    <span id="lbl_pro_discount_unit_1"></span>
+                                                                </td>
+                                                                <td style="display: none">
+                                                                    &nbsp;
+                                                                    อัตราราคาที่ใช้ในการคำนวณ
+                                                                </td>
+                                                                <td>
+                                                                    &nbsp;
+                                                                    <select name="ddl_rate_price_cal" id="ddl_rate_price_cal" class="form-control" style="width: 150px; display: none;">
+                                                                        <option value="MAX">ราคาสูงสุด</option>
+                                                                        <option value="MIN">ราคาต่ำสุด</option>
+                                                                        <option value="CUSTOM">กำหนดราคาเอง</option>
+                                                                    </select>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="radio radio-success">
+                                                                        <span class="aspNetDisabled"><input id="rdo_pro_discount_id_2" type="radio" name="pro_discount_id" value="rdo_pro_discount_id_2" checked="checked" disabled="disabled"><label for="rdo_pro_discount_id_2">&nbsp;</label></span>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    สำหรับแลกซื้อสินค้า
+                                                                </td>
+                                                                <td colspan="4"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td>
+                                                                    จำนวน&nbsp;<input name="txt_pro_discount_num" type="text" value="1" id="txt_pro_discount_num" class="form-control keyInteger" autocomplete="off" style="width: 60px; display: inline-block;">
+                                                                </td>
+                                                                <td>
+                                                                    ส่วนลด&nbsp;
+                                                                </td>
+                                                                <td>
+                                                                    <input name="txt_pro_discount_rate_2" type="text" value="100" id="txt_pro_discount_rate_2" class="form-control keyInteger" autocomplete="off" style="width: 60px; display: inline-block;">
+                                                                    &nbsp;
+                                                                    <span id="lbl_pro_discount_unit_2">%</span>
+                                                                </td>
+                                                                <td colspan="2"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <a id="Button1" class="btn btn-default" onclick="history.back();">ย้อนกลับ</a>
+                                @*<a href="promotion_list.aspx" class="btn btn-default">ย้อนกลับ</a>*@
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                    </div>
+                </div>
+                <div class="col-md-1">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+    @*<div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 title-head">
+                    <h1>
+                        <img src="@Url.Content("~/Content/img/ICON/icon_customer.png")" alt="">กำหนดข้อมูลโปรโมชั่น
+                    </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1">&nbsp;</div>
+                <div class="col-md-10">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">เพิ่มข้อมูลโปรโมชั่น</div>
+
+                        @using (Html.BeginForm("CreatePromotion3", null, FormMethod.Post, new { id = "myForm", name = "myForm" }))
+                        {
+                            <div id="Step3" class="panel-body">
+                                <div id="Step5_Give" class="row">
+                                    <div class="col-md-12 rows">
+                                        <p style="font-weight: bold; color: #555;">เงื่อนไขโปรโมชั่น</p>
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 rows">
+                                                        <div id="Step3_Customer" class="col-md-12 rows">
+                                                            <div class="col-md-2"></div>
+                                                            <div class="col-md-2" align="right">เลือกประเภทลูกค้า :</div>
+                                                            <div class="col-md-4">
+                                                                <div class="checkbox checkbox-success">
+                                                                    <table id="cbl_customer">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td><input id="cbl_customer_0" type="checkbox" name="cbl_customer$0" value="01"><label for="cbl_customer_0">ลูกค้าทั่วไป</label></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><input id="cbl_customer_1" type="checkbox" name="cbl_customer$1" value="02"><label for="cbl_customer_1">ลูกค้าเงินเชื่อ(Credit Sale)</label></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><input id="cbl_customer_2" type="checkbox" name="cbl_customer$2" value="03"><label for="cbl_customer_2">รถ PTTOR</label></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 rows">
+                                                            <div class="col-md-2"></div>
+                                                            <div class="col-md-2" align="right">กลุ่มสินค้า :</div>
+                                                            <div class="col-md-4">
+                                                                <select name="ddl_productfirstgroup" onchange="javascript:setTimeout('__doPostBack(\'ddl_productfirstgroup\',\'\')', 0)" id="ddl_productfirstgroup" class="form-control" style="display: inline-block;">
+                                                                    <option selected="selected" value="">เลือกกลุ่มสินค้าทั้งหมด</option>
+                                                                    <option value="20">น้ำมันหล่อลื่น</option>
+                                                                    <option value="90">Non Hydrocarbon</option>
+                                                                    <option value="80">บริการ</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 rows">
+                                                            <div class="col-md-2"></div>
+                                                            <div class="col-md-2" align="right">ประเภทสินค้า :</div>
+                                                            <div class="col-md-4">
+                                                                <select name="ddl_progroup" onchange="javascript:setTimeout('__doPostBack(\'ddl_progroup\',\'\')', 0)" id="ddl_progroup" class="form-control" style="display: inline-block;">
+                                                                    <option selected="selected" value="">เลือกประเภทสินค้าทั้งหมด</option>
+
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-3" style="margin-left:0; margin-top:10px">
+                                                                <input type="submit" name="btn_progroup_popup" value="เลือกประเภทสินค้า" id="btn_progroup_popup" class="btn btn-info">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 rows">
+                                                            <div class="col-md-2"></div>
+                                                            <div class="col-md-2" align="right">ยี่ห้อสินค้า :</div>
+                                                            <div class="col-md-4">
+                                                                <select size="4" name="ddl_pro_brand" multiple="multiple" onchange="javascript:setTimeout('__doPostBack(\'ddl_pro_brand\',\'\')', 0)" id="ddl_pro_brand" class="SetSelectise selectized" tabindex="-1" style="display: none;"></select><div class="selectize-control SetSelectise multi plugin-remove_button"><div class="selectize-input items not-full"><input type="text" autocomplete="off" tabindex="" placeholder="เลือกยี่ห้อสินค้าทั้งหมด" style="width: 136px;"></div><div class="selectize-dropdown SetSelectise multi plugin-remove_button" style="display: none;"><div class="selectize-dropdown-content"></div></div></div>
+
+                                                            </div>
+                                                            <div class="col-md-3" style="margin-left:0; margin-top:10px">
+                                                                <input type="submit" name="btn_brand_popup" value="เลือกยี่ห้อสินค้า" id="btn_brand_popup" class="btn btn-info">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 rows">
+                                                            <div class="col-md-2"></div>
+                                                            <div class="col-md-2" align="right">รุ่นสินค้าสินค้า :</div>
+                                                            <div class="col-md-4">
+                                                                <select size="4" name="ddl_pro_model" multiple="multiple" onchange="javascript:setTimeout('__doPostBack(\'ddl_pro_model\',\'\')', 0)" id="ddl_pro_model" class="SetSelectise selectized" tabindex="-1" style="display: none;"></select><div class="selectize-control SetSelectise multi plugin-remove_button"><div class="selectize-input items not-full has-options"><input type="text" autocomplete="off" tabindex="" placeholder="เลือกรุ่นสินค้า" style="width: 81px;"></div><div class="selectize-dropdown SetSelectise multi plugin-remove_button" style="display: none;"><div class="selectize-dropdown-content"></div></div></div>
+
+                                                            </div>
+                                                            <div class="col-md-3" style="margin-left:0; margin-top:10px">
+                                                                <input type="submit" name="Button4" value="เลือกรุ่นสินค้า" id="Button4" class="btn btn-info">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 rows">
+                                                            <div class="col-md-2"></div>
+                                                            <div class="col-md-2" align="right">ขนาดสินค้า :</div>
+                                                            <div class="col-md-4">
+                                                                <select size="4" name="ddl_pro_size" multiple="multiple" onchange="javascript:setTimeout('__doPostBack(\'ddl_pro_size\',\'\')', 0)" id="ddl_pro_size" class="SetSelectise selectized" tabindex="-1" style="display: none;"></select><div class="selectize-control SetSelectise multi plugin-remove_button"><div class="selectize-input items not-full"><input type="text" autocomplete="off" tabindex="" placeholder="เลือกขนาดสินค้าทั้งหมด" style="width: 142px;"></div><div class="selectize-dropdown SetSelectise multi plugin-remove_button" style="display: none;"><div class="selectize-dropdown-content"></div></div></div>
+
+                                                            </div>
+                                                            <div class="col-md-3" style="margin-left:0; margin-top:10px">
+                                                                <input type="submit" name="Button5" value="เลือกขนาดสินค้า" id="Button5" class="btn btn-info">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 rows">
+                                                            <div class="col-md-2"></div>
+                                                            <div class="col-md-2" align="right">ค้นหาสินค้า : </div>
+                                                            <div class="col-md-4">
+                                                                <select size="4" name="ddl_pro_code" multiple="multiple" onchange="javascript:setTimeout('__doPostBack(\'ddl_pro_code\',\'\')', 0)" id="ddl_pro_code" class="SetSelectise selectized" tabindex="-1" style="display: none;"></select><div class="selectize-control SetSelectise multi plugin-remove_button"><div class="selectize-input items not-full"><input type="text" autocomplete="off" tabindex="" placeholder="เลือกสินค้าทั้งหมด" style="width: 110px;"></div><div class="selectize-dropdown SetSelectise multi plugin-remove_button" style="display: none;"><div class="selectize-dropdown-content"></div></div></div>
+
+
+                                                            </div>
+                                                            <div class="col-md-3" style="margin-left:0; margin-top:10px">
+                                                                <input type="submit" name="Button6" value="เลือกสินค้า" id="Button6" class="btn btn-info">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 rows">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-6 rows" align="center">
+                                                        <table>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="width: 10%">
+                                                                        <div class="radio radio-success">
+                                                                            <input id="rdo_pro_give_type_id_1" type="radio" name="pro_give_type_id" value="rdo_pro_give_type_id_1"><label for="rdo_pro_give_type_id_1">&nbsp;</label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        ทุกๆ จำนวน
+                                                                    </td>
+                                                                    <td>
+                                                                        <input name="txt_pro_give_type_id_1" type="text" id="txt_pro_give_type_id_1" class="form-control" autocomplete="off" style="width: 60px; display: inline-block;">
+                                                                    </td>
+                                                                    <td>
+                                                                        ชิ้น
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="radio radio-success">
+                                                                            <input id="rdo_pro_give_type_id_2" type="radio" name="pro_give_type_id" value="rdo_pro_give_type_id_2"><label for="rdo_pro_give_type_id_2">&nbsp;</label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        มากกว่า จำนวน
+                                                                    </td>
+                                                                    <td>
+                                                                        <input name="txt_pro_give_type_id_2" type="text" id="txt_pro_give_type_id_2" class="form-control" autocomplete="off" style="width: 60px; display: inline-block;">
+                                                                    </td>
+                                                                    <td>
+                                                                        ชิ้น
+                                                                    </td>
+                                                                </tr>
+
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 rows">
+                                                    <div class="col-md-4" align="right">จำนวนที่ระบุข้างต้นใช้สำหรับสินค้านี้ :</div>
+                                                    <div class="col-md-4">
+                                                        <div class="radio radio-success">
+                                                            <table id="rbl_pro_give_product_same">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><input id="rbl_pro_give_product_same_0" type="radio" name="rbl_pro_give_product_same" value="1"><label for="rbl_pro_give_product_same_0">เป็นสินค้ารหัสเดียวกัน&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><input id="rbl_pro_give_product_same_1" type="radio" name="rbl_pro_give_product_same" value="0"><label for="rbl_pro_give_product_same_1">เป็นสินค้าต่างรหัสกันได้</label></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div id="Step5_PriceTotal" class="col-md-12 rows">
+                                        <p style="font-weight: bold; color: #555;">กำหนดเงื่อนไขราคา</p>
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-3" align="center"></div>
+                                                    <div class="col-md-7">
+                                                        <div class="radio radio-success">
+                                                            <table id="rbl_pro_price_id">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><input id="rbl_pro_price_id_0" type="radio" name="rbl_pro_price_id" value="1"><label for="rbl_pro_price_id_0">ราคารวมขั้นต่ำ ของรหัสสินค้าเดียวกัน ที่รวมรายการ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><input id="rbl_pro_price_id_1" type="radio" name="rbl_pro_price_id" value="2"><label for="rbl_pro_price_id_1">ราคารวมขั้นต่ำ ของสินค้าทั้งหมด ที่ร่วมรายการ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><input id="rbl_pro_price_id_2" type="radio" name="rbl_pro_price_id" value="3"><label for="rbl_pro_price_id_2">ราคารวมขั้นต่ำทั้งบิล&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3"></div>
+                                                    <div class="col-md-7">
+                                                        <span>ราคารวมขั้นต่ำของสินค้า</span>&nbsp;<input name="txt_pro_price_total" type="text" value="0.00" id="txt_pro_price_total" autocomplete="off" class="form-control keyTwoDecimal" style="width: 20%; display: inline-block;">&nbsp;<span>บาท</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="div_search_pro_code_give" class="col-md-12 rows">
+                                        <p style="font-weight: bold; color: #555;">รูปแบบของรางวัล</p>
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <br>
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-3"></div>
+                                                        <div class="col-md-8">
+                                                            <div class="checkbox checkbox-success">
+                                                                <input id="cb_pro_give_same_buy" type="checkbox" name="cb_pro_give_same_buy" onclick="javascript:setTimeout('__doPostBack(\'cb_pro_give_same_buy\',\'\')', 0)"><label for="cb_pro_give_same_buy">แถมสินค้ารหัสเดียวกันกับที่ซื้อ</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <div id="div_search_give" class="col-md-12 rows">
+                                                        <div class="col-md-3" align="right"> </div>
+                                                        <div class="col-md-8">
+                                                            หรือ แถมสินค้าต่างชนิดกัน ค้นหาสินค้า :
+                                                            <select size="4" name="lst_search_pro_code_give" multiple="multiple" id="lst_search_pro_code_give" class="SetSelectise selectized" tabindex="-1" style="display: none;"></select><div class="selectize-control SetSelectise multi plugin-remove_button"><div class="selectize-input items not-full has-options"><input type="text" autocomplete="off" tabindex="" style="width: 4px;"></div><div class="selectize-dropdown SetSelectise multi plugin-remove_button" style="display: none;"><div class="selectize-dropdown-content"></div></div></div>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="col-md-12 rows">
+                                                        <div class="col-md-3"></div>
+                                                        <div class="col-md-6">
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="radio radio-success">
+                                                                                <input id="rdo_pro_discount_id_1" type="radio" name="pro_discount_id" value="rdo_pro_discount_id_1"><label for="rdo_pro_discount_id_1">&nbsp;</label>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            เป็นส่วนลดสินค้า
+                                                                        </td>
+                                                                        <td></td>
+                                                                        <td>
+                                                                            <input name="txt_pro_discount_rate_1" type="text" id="txt_pro_discount_rate_1" class="form-control" autocomplete="off" style="width: 60px; display: inline-block;">
+                                                                            &nbsp;
+                                                                            <select name="ddl_pro_discount_unit_1" id="ddl_pro_discount_unit_1" class="form-control" style="width: 60px; display: inline-block;">
+                                                                                <option selected="selected" value="percent">%</option>
+                                                                                <option value="baht">บาท</option>
+                                                                            </select>
+                                                                        </td>
+                                                                        <td style="display: none">
+                                                                            &nbsp;
+                                                                            อัตราราคาที่ใช้ในการคำนวณ
+                                                                        </td>
+                                                                        <td>
+                                                                            &nbsp;
+                                                                            <select name="ddl_rate_price_cal" id="ddl_rate_price_cal" class="form-control" style="width: 150px; display: none;">
+                                                                                <option selected="selected" value="MAX">ราคาสูงสุด</option>
+                                                                                <option value="MIN">ราคาต่ำสุด</option>
+                                                                                <option value="CUSTOM">กำหนดราคาเอง</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="radio radio-success">
+                                                                                <input id="rdo_pro_discount_id_2" type="radio" name="pro_discount_id" value="rdo_pro_discount_id_2"><label for="rdo_pro_discount_id_2">&nbsp;</label>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            สำหรับแลกซื้อสินค้า
+                                                                        </td>
+                                                                        <td colspan="4"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td>
+                                                                            จำนวน&nbsp;<input name="txt_pro_discount_num" type="text" id="txt_pro_discount_num" class="form-control" autocomplete="off" style="width: 60px; display: inline-block;">
+                                                                        </td>
+                                                                        <td>
+                                                                            ส่วนลด&nbsp;
+                                                                        </td>
+                                                                        <td>
+                                                                            <input name="txt_pro_discount_rate_2" type="text" id="txt_pro_discount_rate_2" class="form-control" autocomplete="off" style="width: 60px; display: inline-block;">
+                                                                            &nbsp;
+                                                                            <select name="ddl_pro_discount_unit_2" id="ddl_pro_discount_unit_2" class="form-control" style="width: 60px; display: inline-block;">
+                                                                                <option selected="selected" value="percent">%</option>
+                                                                                <option value="baht">บาท</option>
+                                                                            </select>
+                                                                        </td>
+                                                                        <td colspan="2"></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>&nbsp;</div>
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <input type="submit" name="btnPreviousStep2" value="ย้อนกลับ" id="btnPreviousStep2" class="btn btn-default">&nbsp;
+                                        <input type="submit" name="btnNextStep6_Save" value="บันทึก" id="btnNextStep6_Save" class="btn btn-primary">
+                                        <span id="lblTestSession"></span>
+                                    </div>
+                                </div>
+                                <div>&nbsp;</div>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="col-md-1">&nbsp;</div>
+                </div>
+            </div>
+        </div>*@
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/datatables-script")
+    @*@Scripts.Render("~/bundles/promotion/create")*@
+}

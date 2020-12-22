@@ -1,0 +1,71 @@
+﻿@model  CentralService.Models.MasterData.Campaign.CampaignModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section css{
+    @Styles.Render("~/Content/datatables-style")
+}
+<div class="row">
+    <div class="col-md-12 title-head">
+        <h1 style="margin: 0;">
+            <img src="~/Content/img/ICON/icon_customer.png" width="80" height="80" hspace="3" vspace="3" align="middle" alt="" style="padding-right: 0;" />
+            <font size="5"><b style="font-weight: 700;">&nbsp;&nbsp;กำหนดข้อมูลแคมเปญ</b></font>
+        </h1>
+    </div>
+</div>
+<div id="page-wrapper" class="container-fluid" style="padding: 0;padding-right: 15px;padding-left: 15px;">
+    <div class="row">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "searchForm", name = "searchForm" }))
+        {
+            @Html.Partial("_SearchForm", new CentralService.Models.SearchModel
+                           {
+                               TitleName = "สอบถามข้อมูลแคมเปญ",
+                               PageType = "Campaign"
+                           })
+            <div class="row">
+                <div class="col-md-8"></div>
+                <div id="divAdd" class="col-md-4">
+                    <br>
+                    <div class="table-page text-right">
+                        <button type="button" class="btn btn-success"
+                                onclick="location.href='@Url.Action("Create")'">
+                            เพิ่มแคมเปญ
+                        </button>
+                        <button id="btnsendclient" onclick="openPopupFull('@Url.Action("Index", "SendClient", new { act = "campaign" })')" type="button" class="btn btn-warning">นำข้อมูลออกไปสาขา</button>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <table class="table table-striped table-bordered nowrap" id="gv_campaign" style="width:100%;font-size: 13px;">
+                    <thead>
+                        <tr>
+                            <th>@Html.LabelFor(m => m.campaign_id)</th>
+                            <th>@Html.LabelFor(m => m.campaign_name)</th>
+                            <th>@Html.LabelFor(m => m.deleted)</th>
+                            <th class="text-center"><label>คำสั่ง</label></th>
+                            <th class="text-center"><label>ยกเลิก</label></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/datatables-script")
+    @Scripts.Render("~/bundles/campaign/index")
+    <script>
+    var pageForm = new CampaignIndex();
+        $(document).ready(function () {
+            pageForm.indexUrl = '@Url.Action("index")';
+            pageForm.getUrl = '@Url.Action("GetAll")';
+            pageForm.editUrl = '@Url.Action("Create")';
+            pageForm.delUrl = '@Url.Action("Delete")';
+            pageForm.init();
+        });
+    </script>
+}

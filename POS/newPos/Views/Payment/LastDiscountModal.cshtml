@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "LastDiscountModal";
+}
+
+<!-- Modal -->
+<div class="modal fade" id="lastDiscountModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="height: 25vh;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">ส่วนลดอื่นๆ</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+            </div>
+
+            <div class="modal-body">
+                <label id="lblLastDiscountIsValid" class="invalid" hidden>ไม่สามารถให้ส่วนลดมากกว่ายอดชำระได้</label>
+            </div>
+            <div class="modal-footer">
+                <div class="input-group col-8">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">ส่วนลดอื่นๆ</span>
+                    </div>
+                    <input type="text" class="form-control money" id="txtLastDiscount" aria-describedby="basic-addon1" style="width: 30%;">
+                    <input type="text" class="form-control percent" id="txtLastDiscountPercent" aria-describedby="basic-addon1" style="width: 30%;">
+                </div>
+                <div class="col">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="rdoUnitLastDiscount" id="rdoUnitLastDiscount1" value="0" checked>
+                        <label class="form-check-label" for="rdoUnitLastDiscount1">
+                            บาท
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="rdoUnitLastDiscount" id="rdoUnitLastDiscount2" value="1">
+                        <label class="form-check-label" for="rdoUnitLastDiscount2">
+                            เปอร์เซ็น
+                        </label>
+                    </div>
+                </div>
+                <button type="button" id="btnLastDiscount" class="btn btn-success">ยืนยัน</button>
+            </div>
+
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div>
+

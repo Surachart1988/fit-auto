@@ -1,0 +1,67 @@
+﻿@model  CentralService.Models.ExtraPromotionModel
+
+<div class="modal fade" id="modal-select-branch" tabindex="-1" role="dialog" aria-labelledby="selectBranchModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span id="lblheader">เลือกสาขาที่เข้าร่วมโปรโมชั่น</span>
+                    </div>
+                    <div class="panel-body">
+                        <div id="panel4" class="row">
+                            <div class="col-md-12 rows">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <div class="row" style="padding-left: 0px; padding-right: 0px;">
+                                            <div class="col-md-12 rows">
+                                                <div class="col-md-12">
+                                                    <table id="gv_proBranch" class="table table-hover table-striped dataTable no-footer" cellspacing="0" style="border-collapse: collapse; width: 100%;" role="grid" aria-describedby="gv_progroup_info">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="check">
+                                                                    <input id="chkall" type="checkbox" name="chkall">
+                                                                    <label for="chkall"> เลือกทั้งหมด</label>
+                                                                </th>
+                                                                <th class="text-center">รหัสสาขา</th>
+                                                                <th class="text-center">ชื่อสาขา</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @{
+                                                                for (int i = 0; i < Model.Dealers.Count; i++)
+                                                                {
+                                                                    <tr>
+                                                                        <td>
+                                                                            @Html.CheckBoxFor(x => Model.Dealers[i].IsCheck, new { style = "opacity: 1;" })
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.HiddenFor(m => Model.Dealers[i].plant_no)
+                                                                            @Html.HiddenFor(m => Model.Dealers[i].DealerName)
+                                                                            @Html.DisplayFor(x => Model.Dealers[i].plant_no)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.HiddenFor(m => Model.Dealers[i].dealercode)
+                                                                            @Html.HiddenFor(m => Model.Dealers[i].DealerName)
+                                                                            @Html.DisplayFor(x => Model.Dealers[i].DealerName)
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                                @:
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

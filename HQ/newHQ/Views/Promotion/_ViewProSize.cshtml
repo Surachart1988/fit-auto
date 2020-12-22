@@ -1,0 +1,6 @@
+﻿@model CentralService.Models.ExtraPromotionModel
+
+@Html.DropDownListFor(model => model.pro_size_code, new SelectList(Model.ddlProSizeList, "pro_size_code", "size_name")
+    , Model.Mode == "v" ?
+        (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" } :
+        (object)new { @class = "form-control", autocomplete = "off" })

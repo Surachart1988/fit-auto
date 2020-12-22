@@ -1,0 +1,121 @@
+﻿@model  CentralService.Models.TransferDataModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=11, IE=10, IE=9, ie=8, ie=7">
+    <title>นำข้อมูลออกไปสาขา - newHQ App</title>
+    @Styles.Render("~/Content/admin/css")
+    @Styles.Render("~/Content/datatables-style")
+    <style>
+        .ptext {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body bgcolor="#FFFFFF" text="#000000">
+    @Scripts.Render("~/bundles/admin/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/admin/bootstrap")
+    @Scripts.Render("~/bundles/admin-lte/js")
+    @Scripts.Render("~/bundles/js")
+    @Scripts.Render("~/bundles/admin/js")
+    <div id="pageLoading"></div>
+    <div class="wrapper">
+        <div>
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    @if (Model.DealerList.Any(a => a.SendStatus == false))
+                    {
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12 title-head normal2-black">
+                                <div align="center"><font color="#000000"><b>สาขาที่นำข้อมูลออก</b></font></div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <table class="table table-striped table-bordered nowrap" id="gv_errbranch" style="width:100%;font-size: 13px;">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">รหัสสาขา</th>
+                                        <th class="text-center">PLANT No.</th>
+                                        <th class="text-center">ชื่อสาขา</th>
+                                        <th class="text-center">url</th>
+                                        <th class="text-center">error</th>
+                                        <th class="text-center">สถานะ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        foreach (var item in Model.DealerList)
+                                        {
+                                            <tr>
+                                                <td>@item.dealercode</td>
+                                                <td>@item.plant_no</td>
+                                                <td>@item.DealerName</td>
+                                                <td>@item.http_path</td>
+                                                <td>@item.error_massage</td>
+                                                <td>
+                                                    @if (item.SendStatus)
+                                                    {
+                                                        <b><p class="text-success">ส่งข้อมูลสำเร็จ</p></b>
+                                                    }
+                                                    else
+                                                    {
+                                                        <b><p class="text-danger">ส่งข้อมูลไม่สำเร็จ</p></b>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <button type="button" onclick="window.close();" class="col-xs-12 btn btn-primary">ปิด</button>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="modal" tabindex="-1" role="dialog" style="display: block;">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    @*<div class="modal-header">
+                                            <h5 class="modal-title">Modal title</h5>
+                                        </div>*@
+                                    <div class="modal-body ptext">
+                                        <p>นำข้อมูลออกไปสาขาที่ต้องการเรียบร้อยแล้ว</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" onclick="window.close();" class="col-xs-12 btn btn-primary">ปิด</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-backdrop fade show" style="opacity: .5;"></div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/datatables-script")
+    <script>
+        $(document).ready(function () {
+            if ($("#gv_errbranch") != null) {
+                $("#gv_errbranch").DataTable();
+            }
+        });
+    </script>
+</body>
+</html>

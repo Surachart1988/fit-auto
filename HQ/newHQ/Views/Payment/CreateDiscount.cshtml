@@ -1,0 +1,35 @@
+﻿@model CentralService.Models.ExtraDiscountIconModel
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+    .input-group-prepend label {
+        width: 8vw;
+    }
+</style>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myForm", name = "myForm" }))
+{
+    <div class="card">
+        <div class="card-header">
+            <h2>เพิ่มข้อมูลส่วนลดพิเศษ</h2>
+        </div>
+        <div class="card-body">
+            @Html.Partial("FormPartial", Model)
+        </div>
+        <div class="card-footer text-center">
+            <input type="submit" value="บันทึก" class="btn btn-success" />
+            <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("List")'">กลับ</button>
+        </div>
+    </div>
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/payment/extradiscount")
+    <script>
+        var pageForm = new ExtraDiscountForm()
+        $(document).ready(function () {
+            pageForm.init()
+        })
+    </script>
+}
+

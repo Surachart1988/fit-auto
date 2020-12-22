@@ -1,0 +1,358 @@
+﻿@using System.Linq;
+@using System;
+@model newPos.Models.MenuListModel
+@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    .side-menu-title p {
+        display: inline;
+    }
+
+    .col {
+        padding-right: 0;
+        padding-left: 0;
+    }
+</style>
+<div class="row">
+    <div class="col-6">
+        <div id="custom-search-input">
+            <div class="input-group input-group-sm col-md-12">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">ค้นหาข้อมูล:</span>
+                </div>
+                <input id="txt-search-modal" type="text" class="form-control" placeholder="ชื่อลูกค้า/ทะเบียนรถยนต์/เบอร์โทรศัพท์/หมายเลข Blue Card" style="width:20vh">
+                <span class="input-group-btn">
+                    <button id="btn-search-modal" class="btn btn-info btn-lg" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <label id="version">@Session["version1"]</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6 menu-group">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    @Html.HiddenFor(model => model.WifiModel.wifi_brand)
+                    @Html.HiddenFor(model => model.WifiModel.wifi_branch)
+                    @Html.HiddenFor(model => model.WifiModel.wifi_pos)
+                    @{ var model1 = Model.NotificationIcons.Where(m => m.GroupNo == 1).ToArray();
+                        for (int i = 0; i < 12; i++)
+                        {
+                            if (i < model1.Count())
+                            {
+                                var ifx = "";
+                                if (model1[i].Action?.ActionName == "Index")
+                                {
+                                    ifx = "notallowed";
+                                }
+                                <div class="col-3 menu-col dots @ifx">
+
+                                    <a class="@ifx"
+                                       @if (model1[i].Action?.ActionName == "BlueCard")
+                                       {
+                                           <text> href="#" id="btnBluecard" </text> 
+                                       }
+                                       else if (model1[i].Action?.ActionName == "Genwifi")
+                                       {
+                                           <text> href="#" id="btngenwifi" </text> 
+                                       }
+                                       else if (model1[i].Action?.ActionName == "Index")
+                                       {
+                                           <text> href="#" id="@ifx" </text> 
+                                       }
+                                       else
+                                       {
+                                           <text> href="@Url.Action(model1[i].Action?.ActionName, model1[i].Action?.ControllerName, model1[i].Action?.RouteValues)" </text> 
+                                       }>
+
+
+                                        @*<a href="@Url.Action(model1[i].Action?.ActionName, model1[i].Action?.ControllerName, model1[i].Action?.RouteValues)">*@
+
+                                        <span class="@ifx">
+                                            <img class="menu-icon" src="~/Content/img/ICON/@model1[i].ImgName" />
+                                        </span>
+                                    </a>
+
+                                    <label class="menu-name @ifx">
+                                        @model1[i].Name
+                                    </label>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-3 menu-col">
+                                    <a>
+                                        <img class="menu-icon" src="~/Content/img/ICON/ICON-18.png" />
+                                    </a>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 menu-group">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+
+                    @{ var model2 = Model.NotificationIcons.Where(m => m.GroupNo == 2).ToArray();
+                        for (int i = 0; i < 12; i++)
+                        {
+                            if (i < model2.Count())
+                            {
+                                <div id="dot-@i" class="col-3 menu-col dots">
+                                    <a href="@Url.Action(model2[i].Action?.ActionName, model2[i].Action?.ControllerName, model2[i].Action?.RouteValues)">
+                                        <span>
+                                            <img class="menu-icon" src="~/Content/img/ICON/@model2[i].ImgName" />
+                                            <mark>@model2[i].Number</mark>
+                                        </span>
+                                    </a>
+                                    <label class="menu-name new">
+                                        @model2[i].Name
+                                    </label>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-3 menu-col">
+                                    <a>
+                                        <img class="menu-icon" src="~/Content/img/ICON/ICON-18.png" />
+                                    </a>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6 menu-group">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="chart" id="bar-chart" style="height: 35vh;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 menu-group">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="height:30vh">
+                    <div class="col-6 line-right details-list">
+                        <div class="row head">
+                            <div class="btn btn-fit">
+                                <img src="~/Content/img/ICON/ICON-31.png" />
+                                <span class="side-menu-title">News</span>
+                            </div>
+                        </div>
+                        @{var messageModel = Model.Messages.Where(m => m.DocType == CentralService.Enums.MessageDocType.ข่าวสาร).ToArray();
+                            for (int i = 0; i < 4; i++)
+                            {
+                                if (i < messageModel.Count())
+                                {
+                                    var messageName = messageModel[i].Name;
+                                    <div class="row">
+                                        <div class="col-2" style="padding-right:0px;">
+                                            <img src="~/Content/img/ICON/news.jpg" />
+                                        </div>
+                                        <div class="col" style="margin-left:-15px;">
+                                            @if (!string.IsNullOrWhiteSpace(messageModel[i].FileName))
+                                            {
+                                                <a class="side-menu-title" href="Javascript:openDocFull('@Session["netHQUrl"]/Content/UploadPdfOfMessage/@messageModel[i].FileName')">
+                                                    @messageName
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <span class="side-menu-title">
+                                                    @messageName
+                                                </span>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                    <div class="col-6 details-list">
+                        <div class="row head">
+                            <div class="btn btn-fit">
+                                <img src="~/Content/img/ICON/ICON-30.png" />
+                                <span class="side-menu-title">Promotions</span>
+                            </div>
+                        </div>
+                        @{var promotionModel = Model.Messages.Where(m => m.DocType == CentralService.Enums.MessageDocType.โปรโมชั่น).ToArray();
+                            for (int i = 0; i < 4; i++)
+                            {
+                                if (i < promotionModel.Count())
+                                {
+                                    var promotionName = promotionModel[i].Name;
+                                    <div class="row">
+                                        <div class="col-2" style="padding-right:0px;">
+                                            <img src="~/Content/img/ICON/promotion.gif" />
+                                        </div>
+                                        <div class="col" style="margin-left:-15px;">
+                                            @if (!string.IsNullOrWhiteSpace(promotionModel[i].FileName))
+                                            {
+                                                <a class="side-menu-title" href="Javascript:openDocFull('@Session["netHQUrl"]/Content/UploadPdfOfMessage/@promotionModel[i].FileName')">
+                                                    @promotionName
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <span class="side-menu-title">
+                                                    @promotionName
+                                                </span>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="row" style="height:5vh">
+                    <div class="col-6 line-right text-right">
+                        <a data-toggle="modal" href="#message-modal" id="newsAll">
+                            <U>
+                                อ่านต่อทั้งหมด
+                            </U>
+                        </a>
+                    </div>
+                    <div class="col-6 text-right" style="padding-right: 30px;">
+                        <a data-toggle="modal" href="#message-modal" id="promotionsAll">
+                            <U>
+                                อ่านต่อทั้งหมด
+                            </U>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+@Html.Partial("SearchModal", new CentralService.Models.SearchModel())
+@Html.Partial("MessageModal", new CentralService.Models.MessageModel())
+@Html.Partial("BlueCardRegisterModal", Model.BlueCardModel)
+@Html.Partial("BlueCardRedeemModal")
+@Html.Partial("BlueCard")
+@Html.Partial("BlueCardOpenBatchModal")
+@Html.Partial("AlertEndOldBatchModal")
+
+@Html.Partial("StoreCloseModal")
+
+@section css{
+    @Styles.Render("~/Content/datatables-style")
+    @Styles.Render("~/Content/payment")
+}
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/dashboard")
+    @Scripts.Render("~/bundles/datatables-script")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script>
+        var pageForm = new DashboardForm()
+        var blueCardModal = new BlueCardModal();
+        var messageModal = new MessageModal()
+        $(document).ready(function () {
+
+            let getBrowserurl = window.top.location.href;
+            let url = getBrowserurl.split("/");
+
+            $.ajax({
+                url: url[0]+'//'+url[2]+'/ptt_client_1/chk_close.asp',
+                success: function success(result) {
+                    if (result != '') {
+                        let arrmonth = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฏาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+                        $('#CloseModal').modal($('#textalert').html('กรุณาปิดงวดเดือน' + arrmonth[result]));
+                    }
+                }
+            });
+
+            if ('@Model.EndOldBatch' == "False") {
+                $('#EndOldBatchModal').modal();
+            } else {
+                if('@Model.OpenBatch' === "False") {
+                    $('#OpenBatchBlueCardModal').modal();
+                }
+            }
+            if ('@Model.CloseBatchToday' == "True") {
+                $(".notallowed")
+                    .css({ "opacity": "0.5", "cursor": "not-allowed" })
+                    .attr("tabindex", "-1");
+                $('#btnCloseBatch').prop("disabled", true);
+            }
+
+            if (CheckCloseBatchDayEnd()) {
+                $('#btnCloseBatch').click();
+
+            }
+            if ('@ViewBag.CountNotSuccess' == '0') {
+                $('#btnReSendOrderBlueCard').prop("disabled", true);
+            } else {
+                $('#btnReSendOrderBlueCard').prop("disabled", false);
+            }
+
+            pageForm.getNotificationsUrl = '@Url.Action("GetNotifications")'
+            pageForm.getSearchListUrl = '@Url.Action("GetDTResult")'
+            pageForm.getSearchListHqUrl = '@Url.Action("GetDTResultToHqAsync")'
+            pageForm.getWifiGen = '@Url.Action("Genwifi")'
+            pageForm.CheckCustomerCarDataUrl = '@Url.Action("CheckCustomerCarData")'
+
+            pageForm.UrlCheckClientCustomerVehicle = '@Url.Action("CheckClientCustomerVehicle")'
+            pageForm.init()
+
+            messageModal.getUrl = '@Url.Action("GetDTResult", "Message")'
+            messageModal.selectUrl = '@Session["netHQUrl"]/Content/UploadPdfOfMessage/'
+            messageModal.init()
+
+            blueCardModal.indexForm = blueCardModal
+            blueCardModal.addUrl = '@Url.Action("RedeemPoints", "BlueCard")'
+            blueCardModal.getUrl = '@Url.Action("Get", "BlueCard")'
+            
+            blueCardModal.getPointBalanceUrl = '@Url.Action("GetPointBalance", "BlueCard")'
+            blueCardModal.CheckRegisterBlueCardUrl = '@Url.Action("CheckRegisterBlueCard", "BlueCard")'
+            blueCardModal.UrlRegisterBlueCard = '@Url.Action("RegisterBlueCard", "BlueCard")'
+            blueCardModal.ReSendOrderBlueCardUrl = '@Url.Action("ReSendOrderBlueCard", "BlueCard")'
+
+            blueCardModal.init()
+        });
+
+        function CheckCloseBatchDayEnd() {
+            var Message = getUrlVars()["RunBatchDayEnd"]
+            if (Message != undefined && Message == "00") {
+                return true;
+
+            } else {
+                return false;
+            }
+        }
+
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+                function(m, key, value) {
+                    vars[key] = value;
+                });
+            return vars;
+        }
+    </script>
+}

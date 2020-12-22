@@ -1,0 +1,95 @@
+﻿
+@{
+    Layout = null;
+}
+<!-- Navigation -->
+<header class="main-header">
+    <!-- Logo -->
+    <a href="@Url.Action("Index", "Home")" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <img src="~/Content/img/ICON/ICON-19.png" class="fit-auto-logo" /><b>@Session["dealerCode"]</b> @Session["dealerName"]
+        <!-- logo for regular state and mobile devices -->
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" id="sidebar-toggle">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+
+        <div class="navbar-custom-menu">
+            <input type="hidden" id="client-url" value="@Session["aspUrl"]" />
+            <input type="hidden" id="hq-url" value="@Session["aspHQUrl"]" />
+            <input type="hidden" id="branch-no" value="@Session["branchNo"]" />
+            <input type="hidden" id="user-id" value="@Session["gbUserId"]" />
+            <input type="hidden" id="dealer-code" value="@Session["dealerCode"]" />
+            <ul class="nav navbar-nav">
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="hidden-xs"><b>User: </b>@Session["gbuser"]</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header">
+                            <p>
+                                ชื่อ @Session["gbuser"] - Lv. @Session["gblevel"]
+                                <small>Username: @Session["gbusername"]</small>
+                                <small>รหัสพนักงาน: @Session["gbsempno"]</small>
+                                <small>ชื่อพนักงาน: @Session["gbuser"]</small>
+                                <small>รหัสสาขา: @Session["dealerCode"]</small>
+                                <small>ชื่อสาขา: @Session["dealerName"]</small>
+                            </p>
+                        </li>
+                        <!-- Menu Body -->
+                        <li class="user-body">
+                            Ip Address:
+                            @{if (Session["aspUrl"] != null)
+                                {
+                                    <span>@Session["aspUrl"].ToString().Replace("/PTT_Client_1", "").Replace("http://", "")</span>
+                                }
+                            }
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-right">
+                                <a id="btn-logout" class="btn btn-default btn-flat" href="@Url.Action("Logout", "User")">ออกจากระบบ</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <span id="dateNow"></span>
+        </div>
+
+    </nav>
+</header>
+
+<script>
+    var datetime = null,
+        date = null;
+
+    var update = function () {
+        datetime.text(moment().format('DD/MM/YYYY, HH:mm:ss'))
+    };
+
+    $(document).ready(function () {
+        $('.main-header .logo').width(($('.logo').text().length * 7) + $('.main-header .logo').width())
+        datetime = $('#dateNow')
+        update();
+        setInterval(update, 1000);
+
+        $('#btn-logout').click(function () {
+            localStorage.removeItem('menu-open')
+        })
+
+        $('#sidebar-toggle').click(function () {
+            if ($(".sidebar-collapse").length) {
+                $('#form-iframe').css("padding-left", "0px");
+            } else {
+                $('#form-iframe').css("padding-left", "25px");
+               
+            }
+        });
+    })
+</script>

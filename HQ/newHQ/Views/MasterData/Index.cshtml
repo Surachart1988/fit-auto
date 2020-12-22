@@ -1,0 +1,96 @@
+﻿@model CentralService.Models.MasterDataModel
+@{
+    ViewBag.Title = "กำหนดข้อมูลหลัก";
+}
+
+@section css{
+    @Styles.Render("~/Content/masterdata")
+    @Styles.Render("~/Content/datatables-style")
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="metro">
+            <div class="container-desktop">
+                <div class="row">
+                    <div align="left">
+                        @Html.Partial("SetMasterDataMenu")
+                    </div>
+                </div>
+
+                @if (Model.Id == 0)
+                {
+                    <div style="border: solid 1px #eeeeee; margin: 5px 5px; border-radius: 3px; background: #fbe2da" align="center">
+                        <div>
+                            <h4>
+                                เป็นการกำหนดข้อมูลหลักที่ใช้ในโปรแกรม ซึ่งข้อมูลแต่ละตัวผู้ใช้สามารถ เพิ่ม แก้ไข และ ลบ ได้
+                                <p></p>
+                                โดยต้องทำการแก้ไขก่อนการเริ่มใช้งานโปรแกรม เพราะถ้าแก้ไขหลังจากที่เริ่มใช้โปรแกรมแล้ว ข้อมูลอาจจะผิดเพี้ยนได้
+                                <p></p>
+                            </h4>
+                            <h3> <font color="#FE2E64">การทำงานให้คลิกไปที่ชื่อเมนูข้อมูลด้านบนที่ต้องการจัดการข้อมูล</font></h3>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div align="left" class="metro">
+        @if (Model.Id == 99)
+        {
+            @Html.Partial("BlueCardRedeemSetting", Model)
+        }
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/datatables-script")
+    @Scripts.Render("~/bundles/masterdata/index")
+    <script>
+        var pageForm = new MasterDataForm();
+
+        $(document).ready(function () {
+            
+            pageForm.form = $('IrredeemableForm');
+            pageForm.init();
+        });
+
+        var rdo = document.getElementById("blueCard_exchange_ratebyFit");
+        if (rdo != null) {
+            if (rdo.checked) {
+                    $(".rolebluecard").show();
+            } else {
+                $(".rolebluecard").hide();
+            }
+        }
+        $('input[type="radio"]').on('click change', function(e) {
+            if (this.id === "blueCard_exchange_ratebyFit") {
+                $(".rolebluecard").show();
+            } else {
+                $(".rolebluecard").hide();
+            }
+        });
+
+        $('.keyInteger').keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                return false;
+            }
+        });
+        $('.onKeysPrice').keypress(function (e) {
+            if ((e.which != 46 || $(this).val().indexOf('.') != -1) && ((e.which < 48 || e.which > 57) && (e.which != 0 && e.which != 8))) {
+                e.preventDefault();
+            }
+            var text = $(this).val();
+            if ((text.indexOf('.') != -1) && (text.substring(text.indexOf('.')).length > 2) && (e.which != 0 && e.which != 8) && ($(this)[0].selectionStart >= text.length - 2)) {
+                e.preventDefault();
+            }
+        });
+        $('.onKeysPrice').change(function () {
+            var v = parseFloat(this.value);
+            this.value = (isNaN(v)) ? '' : v.toFixed(2);
+        });
+        //rdo.click(function (e) {
+        //    $(".rolebluecard").show();
+        //    });
+    </script>
+}

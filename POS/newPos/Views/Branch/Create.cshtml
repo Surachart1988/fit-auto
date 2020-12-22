@@ -1,0 +1,423 @@
+﻿@model  CentralService.Models.SystemData.BranchModel
+@{
+    ViewBag.Title = "กำหนดข้อมูลสาขา";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section css{
+    @Styles.Render("~/Content/datatables-style")
+    <style>
+        .has-feedback {
+            margin-bottom: 0;
+        }
+    </style>
+}
+
+<div class="row">
+    <div class="col-md-12 title-head">
+        <h1 style="margin: 0;">
+            <img src="~/Content/img/ICON/config.jpg" width="80" height="80" hspace="3" vspace="3" align="middle" alt="" style="padding-right: 0;" />
+            <font size="5"><b style="font-weight: 700;">&nbsp;&nbsp;กำหนดข้อมูลสาขา</b></font>
+        </h1>
+    </div>
+</div>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @{
+                            if (Model.Mode == "v")
+                            {
+                                @Html.Raw("ข้อมูลบริษัท")
+                            }
+                            else
+                            {
+                                if (Model.doc_no_run != 0)
+                                {
+                                    @Html.Raw("แก้ไขข้อมูลสาขา&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;&nbsp;&nbsp;<span id='lbl_pro_name'>" + Model.branch_name + "</span>")
+                                }
+                                else
+                                {
+                                    @Html.Raw("เพิ่มข้อมูลสาขา")
+                                }
+                            }
+                        }
+                    </div>
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myForm", name = "myForm" }))
+                    {
+                        @Html.HiddenFor(Model => Model.doc_no_run, new { data_pk_id = Model.doc_no_run })
+                        <div class="panel-body">
+                            <div class="form-group row has-feedback">
+                                <label for="inputdealercode" class="col-sm-2 col-form-label text-right">รหัสสาขา<font color="#FF0000">*</font></label>
+                                <div class="col-sm-10">
+                                    @if (Model.Mode == "v")
+                                    {
+                                        @Html.TextBoxFor(model => model.dealercode, "", new { @class = "form-control", autocomplete = "off", @disabled = "disabled" })
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBoxFor(model => model.dealercode, "",
+                                                   Model.doc_no_run != 0 ?
+                                                   (object)new { @class = "form-control", autocomplete = "off", @readonly = "readonly" } :
+                                                   (object)new { @maxlength = "4", @class = "form-control numberonly", autocomplete = "off", data_remote = "checkDealerCode", data_error = "กรุณากรอก รหัสตัวแทนสาขา", required = "required" })
+                                    }
+                                    @Html.ValidationMessageFor(model => model.dealercode, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row has-feedback">
+                                <label for="inputplant_no" class="col-sm-2 col-form-label text-right">PLANT No.<font color="#FF0000">*</font></label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.plant_no, ""
+            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+            : (object)new { @maxlength = "4", @class = "form-control", autocomplete = "off", data_remote = "checkPlantNo", data_error = "กรุณาระบุ PLANT No.", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.plant_no, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row has-feedback">
+                                <label for="inputbranch_name" class="col-sm-2 col-form-label text-right">ชื่อสาขา<font color="#FF0000">*</font></label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.branch_name, ""
+            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+            : (object)new { @maxlength = "80", @class = "form-control", autocomplete = "off", data_error = "กรุณาระบุ ชื่อสาขา", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.branch_name, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row has-feedback">
+                                <label for="inputcom_name" class="col-sm-2 col-form-label text-right">ชื่อสาขาตามการจดทะเบียน<font color="#FF0000">*</font></label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.com_name, ""
+            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+            : (object)new { @maxlength = "100", @class = "form-control", autocomplete = "off", data_error = "กรุณาระบุ ชื่อสาขาตามการจดทะเบียน", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.com_name, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputadd_no" class="col-sm-2 col-form-label text-right">เลขที่</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(model => model.add_no, ""
+        , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+        : (object)new { @maxlength = "50", @class = "form-control numberonly", autocomplete = "off" })
+                                </div>
+                                <div class="col-sm-1" style="padding: 0; margin: 0; width: 0%;">
+                                    <label for="inputadd_moo" class="col-form-label">หมู่</label>
+                                </div>
+                                <div class="col-sm-6" style="padding-left: 25px;">
+                                    @Html.TextBoxFor(model => model.add_moo, ""
+       , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+       : (object)new { @maxlength = "50", @class = "form-control numberonly", autocomplete = "off" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputadd_trog" class="col-sm-2 col-form-label text-right">ตรอก</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.add_trog, ""
+        , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+        : (object)new { @maxlength = "50", @class = "form-control", autocomplete = "off" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputadd_soi" class="col-sm-2 col-form-label text-right">ซอย</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.add_soi, ""
+        , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+        : (object)new { @maxlength = "50", @class = "form-control", autocomplete = "off" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputadd_road" class="col-sm-2 col-form-label text-right">ถนน</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.add_road, ""
+        , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+        : (object)new { @maxlength = "50", @class = "form-control", autocomplete = "off" })
+                                </div>
+                            </div>
+
+                            @Html.Partial("~/Views/Components/_AddressForm.cshtml", Model.AddressModel)
+
+                            <div class="form-group row">
+                                <label for="inputadd_tel" class="col-sm-2 col-form-label text-right">โทรศัพท์</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.add_tel, ""
+        , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+        : (object)new { @maxlength = "50", @class = "form-control input-telephone", autocomplete = "off" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputadd_fax" class="col-sm-2 col-form-label text-right">แฟกซ์</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.add_fax, ""
+        , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+        : (object)new { @maxlength = "50", @class = "form-control input-fax", autocomplete = "off" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row has-feedback">
+                                <label for="inpute_mail" class="col-sm-2 col-form-label text-right">อีเมล์</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.e_mail, ""
+        , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+        : (object)new { @maxlength = "50", @class = "form-control", autocomplete = "off", @type = "email", data_error = "ระบุอีเมลไม่ถูกต้อง" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row has-feedback">
+                                <label for="inpute_web_site" class="col-sm-2 col-form-label text-right">โฮมเพจ</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.web_site, ""
+        , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+        : (object)new { @maxlength = "50", @class = "form-control", autocomplete = "off", @type = "url", data_error = "ระบุโฮมเพจไม่ถูกต้อง", placeholder = "https://www.url.com/" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row has-feedback">
+                                <label for="inputtax_number" class="col-sm-2 col-form-label text-right">เลขประจำตัวผู้เสียภาษี<font color="#FF0000">*</font></label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.tax_number, ""
+            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+            : (object)new { @maxlength = "13", @class = "form-control numberonly", autocomplete = "off", data_error = "กรุณาระบุ เลขประจำตัวผู้เสียภาษี", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.tax_number, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputtax_branch" class="col-sm-2 col-form-label text-right">สถานประกอบการ</label>
+                                <div class="col-sm-2">
+                                    @Html.DropDownListFor(model => model.tax_branch, new SelectListItem[]{
+                                        new SelectListItem() {Text = "เลือกข้อมูล", Value=""},
+                                        new SelectListItem() {Text = "สำนักงานใหญ่", Value="สำนักงานใหญ่"},
+                                        new SelectListItem() {Text = "สาขา", Value="สาขา"}}
+     , Model.Mode == "v" ?
+     (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" } :
+     (object)new { @class = "form-control", autocomplete = "off" })
+                                </div>
+                                <div class="col-sm-1" style="padding: 0; margin: 0;">
+                                    <label for="inputtax_branch_id" class="col-form-label">เลขที่สาขา :</label>
+                                </div>
+                                <div class="col-sm-7">
+                                    @Html.TextBoxFor(model => model.tax_branch_id, ""
+            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+            : (object)new { @maxlength = "5", @class = "form-control numberonly", autocomplete = "off" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row has-feedback">
+                                <label for="inputMID" class="col-sm-2 col-form-label text-right">MID<font color="#FF0000">*</font></label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.mid, ""
+            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+            : (object)new { @maxlength = "15", @class = "form-control", autocomplete = "off", data_error = "กรุณาระบุ MID", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.mid, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row has-feedback">
+                                <label for="inputTID" class="col-sm-2 col-form-label text-right">TID<font color="#FF0000">*</font></label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.tid, ""
+            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+            : (object)new { @maxlength = "8", @class = "form-control", autocomplete = "off", data_error = "กรุณาระบุ TID", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.tid, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row has-feedback">
+                                <label for="inputPOS_ComID" class="col-sm-2 col-form-label text-right">POS_ComputerID<font color="#FF0000">*</font></label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.POS_ComputerID, ""
+            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+            : (object)new { @maxlength = "8", @class = "form-control numberonly", autocomplete = "off", data_error = "กรุณาระบุ POS_ComputerID", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.POS_ComputerID, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row has-feedback">
+                                <label for="inputpos_id_1" class="col-sm-2 col-form-label text-right">POS ID 1<font color="#FF0000">*</font></label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.pos_id_1, ""
+            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+            : (object)new { @maxlength = "15", @class = "form-control", autocomplete = "off", data_error = "กรุณาระบุ POS ID 1", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.pos_id_1, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputpos_id_2" class="col-sm-2 col-form-label text-right">POS ID 2</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.pos_id_2, ""
+            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+            : (object)new { @maxlength = "15", @class = "form-control", autocomplete = "off" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputpos_id_3" class="col-sm-2 col-form-label text-right">POS ID 3</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.pos_id_3, ""
+            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+            : (object)new { @maxlength = "15", @class = "form-control", autocomplete = "off" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row has-feedback">
+                                <label for="inputsold_to" class="col-sm-2 col-form-label text-right">SOLD_TO<font color="#FF0000">*</font></label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.sold_to, ""
+            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+            : (object)new
+            {
+                @class = "form-control",
+                autocomplete = "off",
+                @maxlength = "8",
+                data_minlength_error = "กรุณาระบุ SOLD_TO ให้ครบ 8 ตัวอักษร",
+                data_minlength = "8",
+                data_remote = "checkSOLDTO",
+                data_error = "กรุณาระบุ SOLD_TO",
+                required = "required"
+            })
+                                    @Html.ValidationMessageFor(model => model.sold_to, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row has-feedback">
+                                <label for="inputship_to" class="col-sm-2 col-form-label text-right">SHIP_TO<font color="#FF0000">*</font></label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.ship_to, ""
+            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+            : (object)new
+            {
+                @class = "form-control",
+                autocomplete = "off",
+                @maxlength = "8",
+                data_minlength_error = "กรุณาระบุ SHIP_TO ให้ครบ 8 ตัวอักษร",
+                data_minlength = "8",
+                data_remote = "checkSHIPTO",
+                data_error = "กรุณาระบุ SHIP_TO",
+                required = "required"
+            })
+                                    @Html.ValidationMessageFor(model => model.ship_to, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row has-feedback">
+                                <label for="inputip_address" class="col-sm-2 col-form-label text-right">ip address<font color="#FF0000">*</font></label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.ip_address, ""
+            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+            : (object)new { @maxlength = "120", @class = "form-control", autocomplete = "off", data_error = "กรุณาระบุ ip address", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.ip_address, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row has-feedback">
+                                <label for="inputip_address_pub" class="col-sm-2 col-form-label text-right">ip_address_pub<font color="#FF0000">*</font></label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.ip_address_pub, ""
+            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+            : (object)new { @maxlength = "120", @class = "form-control", autocomplete = "off", data_error = "กรุณาระบุ ip_address_pub", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.ip_address_pub, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row has-feedback">
+                                <label for="inputhttp_path" class="col-sm-2 col-form-label text-right">HQ HTTP Path<font color="#FF0000">*</font></label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(model => model.http_path, ""
+                                           , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                           : (object)new { @maxlength = "120", @class = "form-control", autocomplete = "off", @type = "url", data_error = "กรุณาระบุ HTTP Path", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.http_path, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button id="btnConnect" type="button" class="btn btn-warning" value="@Model.http_path">
+                                        ตรวจสอบการเชื่อมต่อ
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputbranch_used" class="col-sm-2 col-form-label text-right">สถานะ</label>
+                                <div class="col-sm-2">
+                                    @Html.DropDownListFor(model => model.branch_used, new SelectListItem[]{
+                                        new SelectListItem() {Text = "Active", Value="True"},
+                                        new SelectListItem() {Text = "InActive", Value="False"}}
+                                    , Model.Mode == "v" ?
+                                    (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" } :
+                                    (object)new { @class = "form-control", autocomplete = "off" })
+                                </div>
+                            </div>
+
+                            @Html.HiddenFor(Model => Model.flag_hq)
+                            @Html.HiddenFor(Model => Model.branch_no)
+                            @Html.HiddenFor(Model => Model.add_date)
+                            @Html.HiddenFor(Model => Model.add_time)
+                        </div>
+                    }
+
+                    @if (Model.Mode == "v")
+                    {
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <a class="btn btn-default" href="@Url.Action("Index")">กลับ</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <br />
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    var _url = $"{Request.Url.GetLeftPart(UriPartial.Authority)}{Url.Content("~/")}";
+}
+@section scripts {
+    @Scripts.Render("~/bundles/datatables-script")
+    @Scripts.Render("~/bundles/branch/create")
+    @Scripts.Render("~/bundles/admin/form")
+    <script>
+        var pageForm = new BranchForm()
+        var _form = new _Form()
+        $(document).ready(function () {
+            pageForm.init();
+            _form.posUrl = '@_url';
+            _form.init()
+        })
+    </script>
+}

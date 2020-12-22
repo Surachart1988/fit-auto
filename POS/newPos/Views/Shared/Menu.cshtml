@@ -1,0 +1,1121 @@
+﻿@{
+    Layout = null;
+}
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu tree" data-widget="tree">
+            <li class="treeview">
+                <a href="#" class="dropdown-collapse">
+                    <i class="fa fa-search fa-fw"></i> <span class="side-menu-title">ค้นหาข้อมูล</span><span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="qr_03.asp?tab_show=hide" })">ค้นหารถยนต์</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="qr_01.asp" })">ค้นหาใบรับประกันสินค้า</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="qr_01_tb.asp" })">ค้นหาใบรับประกันสินค้ายางรถบรรทุก</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="qr_02.asp" })">ค้นหาลูกค้า</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="qr_04.asp" })">ค้นหาผู้จำหน่าย</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="qr_05.asp" })">ค้นหาสินค้า</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="qr_06.asp" })">ค้นหาประวัติการซื้อสินค้า</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="qr_07.asp" })">ค้นหาคู่มือการใช้รถยนต์</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="qr_08.asp" })">ค้นหาบัตรเงินสด</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="qr_settlement.asp" })">ค้นหา Settlement</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li class="treeview">
+                <a href="#" class="dropdown-collapse">
+                    <i class="fa fa-shopping-cart fa-fw"></i> <span class="side-menu-title">ขาย</span><span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="@Url.Action("Index", "Job", new { AspFile = "#" })">ใบสั่งซ่อม</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_abb_list.asp" })">ใบเสร็จรับเงิน/ใบกำกับภาษี(อย่างย่อ)</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_tmp_list.asp" })">ใบส่งของชั่วคราว</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_pttor_list.asp?clear_session=1" })">บิลเชื่อ PTTOR</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_inv_list.asp" })">ใบกำกับภาษีเต็มรูป</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_disc_list.asp" })">ใบลดหนี้/รับคืนสินค้า</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_pr_list.asp" })">ใบเสนอราคา</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_dp_list.asp" })">ใบรับเงินมัดจำ</a>
+                    </li>
+
+
+
+
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="endjob_rt.asp" })">ยกเลิกใบสั่งซ่อม</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_checklist.asp" })">ใบตรวจสอบสภาพรถยนต์</a>
+                    </li>
+                    <!--li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="startjob_rt_shipping.asp" })">ใบจัดสินค้า</a>
+                    </li-->
+                    <!--li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_tmp_cancel_list.asp" })">ยกเลิกใบส่งสินค้าชั่วคราว</a>
+                    <li-->
+                    <!--li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_abb_cancel_list.asp" })">ยกเลิกใบเสร็จรับเงิน/ใบกำกับภาษี(อย่างย่อ)</a>
+                    <li-->
+
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_inv_cancel_list.asp" })">ยกเลิกใบเสร็จรับเงิน/ใบกำกับภาษี</a>
+                    </li>
+
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_disc_cancel_list.asp" })">ยกเลิกใบลดหนี้/รับคืนสินค้า</a>
+                    </li>
+
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_pr_cancel_list.asp" })">ยกเลิกใบเสนอราคา</a>
+                    </li>
+
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_vote_list.asp" })">ประเมินความพึงพอใจลูกค้า</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="call_track_list.asp" })">ติดตามผลการให้บริการ</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="settlement_list.asp" })">Settlement</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li class="treeview">
+
+                <a href="#" class="dropdown-collapse">
+                    <i class="fa fa-dollar fa-fw"></i> <span class="side-menu-title">จัดซื้อ</span><span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="pc_pr_list.asp" })">ใบขอซื้อสินค้า</a>
+                    </li>
+
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="end_pr_list.asp" })">ยกเลิกใบขอซื้อสินค้า</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li class="treeview">
+                <a href="#" class="dropdown-collapse">
+                    <i class="fa fa-cloud fa-fw"></i> <span class="side-menu-title">การจัดการคลังสินค้า</span><span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="stk_incre_list.asp?clear_session=1" })">ใบรับเข้าสินค้า</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="stk_transfer_list.asp" })">ใบสั่งโอนสินค้าระหว่างสาขา</a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="stk_transfer_receive_list.asp" })">ใบรับโอนสินค้าระหว่างสาขา</a>
+                    </li>
+
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="stk_incre_cancel_list.asp" })">ประวัติใบรับเข้าสินค้า</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="stk_return_list.asp" })">ใบส่งคืนสินค้า</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="stk_return_cancel_list.asp" })">ยกเลิกใบส่งคืนสินค้า</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="stk_move_list.asp" })">ใบโอนสินค้า</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="stk_move_cancel_list.asp" })">ยกเลิกใบโอนสินค้า</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="stk_update_list.asp" })">ใบปรับลดปรับเพิ่ม</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="stk_update_cancel_list.asp" })">ยกเลิกใบปรับปรุงสินค้า</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="stk_claim_list.asp" })">ใบรับเคลมสินค้า</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="stk_claim_cancel_list.asp" })">ยกเลิกใบเคลมสินค้า</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="stk_barcode_list.asp" })">ใบนับสต็อกสินค้า</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="stk_sumstock_list.asp" })">ใบรวมสต็อกสินค้า</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="stk_checkstock2_list.asp" })">ใบเช็คสต๊อกสินค้า/ใบปิดงวดสินค้า</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bar_code.asp" })">พิมพ์บาร์โค้ดสินค้า</a>
+                    </li>
+
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li class="treeview">
+                <a href="#" class="dropdown-collapse">
+                    <i class="fa fa-database fa-fw"></i> <span class="side-menu-title">ข้อมูลหลัก</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bs_cust.asp" })">ทะเบียนลูกค้า</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bs_custcar_pttor.asp" })">ทะเบียนรถ PTTOR</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bs_supp.asp" })">ทะเบียนผู้จำหน่าย</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Vendor", new { AspFile = "Vendor" })">ทะเบียนผู้จำหน่าย</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bs_stock.asp?tab_show=hide" })">ทะเบียนสินค้า</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_stock_old.asp" })">ทะเบียนสินค้าเก่า</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_stock_asc.asp" })">ทะเบียนวัสดุสิ้นเปลือง/อุปกรณ์สำนักงาน</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bs_product_set.asp" })">ทะเบียนสินค้าชุด</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bs_promotion.asp" })">ทะเบียนส่งเสริมการขาย</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bs_filmcar.asp" })">รายการติดตั้งฟิล์ม</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bs_saveprice.asp?froceRedirectHome=true" })">บันทึกราคาขาย</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bs_grooveprice.asp" })">Customer Price Group</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bs_checklist.asp" })">รายการตรวจสภาพรถ</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bs_emp.asp" })">ทะเบียนพนักงาน</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bs_doc.asp" })">ทะเบียนเอกสาร</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "MasterData", new { menuid = 0,AspFile = "SetMain" })">กำหนดข้อมูลหลัก</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="campaign_list.aspx?user_id=" + Session["gbUserId"] })">กำหนดข้อมูลแคมเปญ</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Campaign", new { AspFile = "Campaign" })">กำหนดข้อมูลแคมเปญ</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Promotion" , new { AspFile="#" })">กำหนดข้อมูลโปรโมชั่น</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
+            <li class="treeview">
+                <a href="#" class="dropdown-collapse">
+                    <i class="fa fa-users fa-fw"></i> <span class="side-menu-title">ค่าใช้จ่าย/วัสดุสิ้นเปลือง</span><span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="pay_list.asp" })">ใบบันทึกค่าใช้จ่าย</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="pay_cancel_list.asp" })">ยกเลิกบันทึกค่าใช้จ่าย</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="asc_list.asp" })">ใบเบิกวัสดุสิ้นเปลือง</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="asc_cancel_list.asp" })">ยกเลิกเบิกวัสดุสิ้นเปลือง</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li class="treeview" hidden>
+                <a href="#" class="dropdown-collapse">
+                    <i class="fa fa-users fa-fw"></i> <span class="side-menu-title">ลูกหนี้</span><span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_pay_list.asp" })">ใบรับชำระลูกหนี้</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_return_list.asp" })">ใบคืนชำระลูกหนี้</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rtpay_depay_list.asp" })">ใบลดหนี้ลูกหนี้</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rtpay_depay_cancel_list.asp" })">ยกเลิกใบลดหนี้ลูกหนี้</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rtpay_depayinv_list.asp" })">ใบลดหนี้ลูกหนี้(ตามใบเสร็จ)</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rtpay_depayinv_cancel_list.asp" })">ยกเลิกใบลดหนี้ลูกหนี้(ตามใบเสร็จ)</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rtpay_inpay_list.asp" })">ใบเพิ่มหนี้ลูกหนี้</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rtpay_inpay_cancel_list.asp" })">ยกเลิกใบเพิ่มหนี้ลูกหนี้</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rtpay_inpayinv_list.asp" })">ใบเพิ่มหนี้ลูกหนี้(ตามใบเสร็จ)</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rtpay_inpayinv_cancel_list.asp" })">ยกเลิกใบเพิ่มหนี้ลูกหนี้(ตามใบเสร็จ)</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_bill_list.asp" })">ใบวางบิล</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rt_bill_cancel_list.asp" })">ยกเลิกใบวางบิล</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level
+                </li>
+                        <li class="treeview" hidden>
+                    <a href="#" class="dropdown-collapse">
+                        <i class="fa fa-user fa-fw"></i> <span class="side-menu-title">การจัดการเจ้าหนี้</span><span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="deb_pay_list.asp" })">ใบชำระเจ้าหนี้</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="deb_return_list.asp" })">ใบเจ้าหนี้คืนชำระ</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="deb_depay_list.asp" })">ใบลดหนี้เจ้าหนี้</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="deb_depayinv_list.asp" })">ใบลดหนี้เจ้าหนี้(ตามใบรับเข้า)</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="deb_inpay_list.asp" })">ใบเพิ่มหนี้เจ้าหนี้</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="deb_inpayinv_list.asp" })">ใบเพิ่มหนี้เจ้าหนี้(ตามใบรับเข้า)</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="deb_bill_list.asp" })">ใบวางบิล</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="deb_bill_cancel_list.asp" })">ยกเลิกใบวางบิล</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level
+                </li>
+                        <li class="treeview">
+                            <a href="#" class="dropdown-collapse">
+                                <i class="fa fa-credit-card fa-fw"></i> <span class="side-menu-title">เช็คธนาคาร</span><span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+
+                            <ul class="treeview-menu">
+                                <li>
+                                    <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="chq_rec.asp" })">บันทึกการรับเช็ค</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="chq_pay.asp" })">บันทึกการจ่ายเช็ค</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="qr_bank_list.asp" })">ค้นหาข้อมูลบัญชีธนาคาร</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bs_bank_list.asp" })">ข้อมูลบัญชีธนาคาร</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+            </li>
+            <li class="treeview">
+                <a href="#" class="dropdown-collapse">
+                    <i class="fa fa-wpforms fa-fw"></i> <span class="side-menu-title">หัก ณ ที่จ่าย</span><span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="wth_list.asp" })">ใบหัก ณ ที่จ่าย</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_vat3.asp" })" hidden>รายงานสรุปรายการภาษีเงินได้ถูกหัก ณ ที่จ่าย</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_PND1.asp" })" hidden>ภ.ง.ด.1</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_PND2.asp" })" hidden>ภ.ง.ด.2</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_PND3.asp" })" hidden>ภ.ง.ด.3</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_PND53.asp" })" hidden>ภ.ง.ด.53</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_PND54.asp" })" hidden>ภ.ง.ด.54</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_PND1A.asp" })" hidden>ภ.ง.ด.1ก</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_PND2A.asp" })" hidden>ภ.ง.ด.2ก</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_PND3A.asp" })" hidden>ภ.ง.ด.3ก</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li class="treeview">
+                <a href="#" class="dropdown-collapse">
+                    <i class="fa fa-calendar fa-fw"></i>
+                    <span class="side-menu-title">ตารางนัดหมายลูกค้า</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="cust_point.asp" })">ตารางนัดหมายลูกค้า</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li class="treeview">
+                <a href="#" class="dropdown-collapse">
+                    <i class="fa fa-money fa-fw"></i> <span class="side-menu-title">ลูกค้าสัมพันธ์</span><span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="prn_customer.asp" })">ลูกค้าสัมพันธ์</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="comm_list.asp" })">Commission</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
+            <li class="treeview">
+                <a href="#" class="dropdown-collapse">
+                    <i class="fa fa-money fa-fw"></i>
+                    <span class="side-menu-title">รับ-จ่ายเงินสด/ปิดสิ้นวัน</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="ledger_sumary_list.asp" })">บันทึกรับ-จ่ายเงินสด</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="day_end_list.asp" })">ปิดสิ้นวัน</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li class="treeview" id="report-menu">
+                <a href="#" class="dropdown-collapse">
+                    <i class="fa fa-area-chart fa-fw"></i>
+                    <span class="side-menu-title">รายงาน</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="#" class="dropdown-collapse">
+                            <i class=""></i>
+                            <span class="side-menu-title">รายงานการขาย</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="li12_002_001">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_job.asp" })">รายงานใบสั่งซ่อม</a>
+                            </li>
+                            <li id="li12_002_002">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_pr.asp" })">รายงานใบเสนอราคา</a>
+                            </li>
+                            <li id="li12_002_003">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_Pre_Receive.asp" })">รายงานใบรับเงินมัดจำ</a>
+                            </li>
+                            <li id="li12_002_004">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_sum_day.asp" })">รายงานสรุปการขายประจำวัน</a>
+                            </li>
+                            <li id="li12_002_005">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_sum_receive.asp" })">รายงานสรุปการรับชำระประจำวัน</a>
+                            </li>
+                            <li id="li12_002_006">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_sum_receive_credit.asp" })">รายงานสรุปยอดบัตรเครดิต</a>
+                            </li>
+                            <li id="li12_002_007">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_online_payment.asp" })">รายงานสรุปการรับชำระ Online Payment</a>
+                            </li>
+                            <li id="li12_002_008">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_sale_summary.asp" })">รายงานสรุปยอดขาย</a>
+                            </li>
+                            <li id="li12_002_009">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_use_promotion.asp" })">รายงานสรุปการใช้โปรโมชั่น</a>
+                            </li>
+                            <li id="li12_002_010">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_Profile_Service.asp" })">รายงานประวัติการใช้บริการ</a>
+                            </li>
+                            <li id="li12_002_011">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_inv.asp" })">รายงานใบกำกับภาษีเต็มรูป</a>
+                            </li>
+                            <li id="li12_002_012">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_ejournal.asp" })">รายงาน E-Journal</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#" class="dropdown-collapse">
+                            <i class=""></i>
+                            <span class="side-menu-title">รายงานการซื้อ</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_Pobuy.asp" })">รายงานใบขอซื้อสินค้า</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_Product_keep.asp" })">รายงานสินค้าค้างรับ</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#" class="dropdown-collapse">
+                            <i class=""></i>
+                            <span class="side-menu-title">รายงานคลังสินค้า</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <!-- <li id="li12_003_001">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_pro_stock.asp" })">สินค้าคงเหลือ </a>
+                            </li>
+                            <li id="li12_003_007">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_pro_movement.asp" })">ความเคลื่อนไหวสินค้า</a>
+                            </li>
+                            <li id="li12_003_004">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_NoSale_sale.asp" })">สินค้าที่ไม่เคลื่อนไหว</a>
+                            </li>
+                            <li id="li12_003_009">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_apreceive.asp" })">ใบรับเข้าสินค้า</a>
+                            </li>
+                            <li id="li12_003_006">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_pcn.asp" })">ใบส่งคืนสินค้า</a>
+                            </li>
+
+                            <li id="li12_003_002" hidden>
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_product_price.asp" })">ร่องราคาสินค้า</a>
+                            </li>
+
+                            <li id="li12_003_011">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_trn_receive.asp" })">ใบรับโอนสินค้าระหว่างสาขา</a>
+                            </li>
+
+                            <li id="li12_003_012">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_trn_order.asp" })">ใบสั่งโอนสินค้าระหว่างสาขา</a>
+                            </li>
+
+                            <li id="li12_003_003">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_check_before_ini.asp" })">ตรวจยอดก่อนรับเข้า</a>
+                            </li>
+
+                            <li id="li12_003_005">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_min_stock.asp" })"> ROP/EOQ</a>
+                            </li>
+
+
+                            <li id="li12_003_008" hidden>
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_pro_movement_no_ict.asp" })">ความเคลื่อนไหวสินค้า(ยกเว้นใบโอน)</a>
+                            </li>
+
+                            <li id="li12_003_010">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_dot.asp" })">DOT ยาง</a>
+                            </li>
+                               -->
+                            <li id="li12_015_001">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_pro_stock.asp" })">รายงานสินค้าคงคลัง</a>
+                            </li>
+                            <li id="li12_015_002">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_pro_movement.asp" })">รายงานความเคลื่อนไหวของสินค้า</a>
+                            </li>
+                            <li id="li12_015_003">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_min_stock.asp" })">รายงาน ROP/EOQ</a>
+                            </li>
+                            <li id="li12_015_004">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_apreceive.asp" })">รายงานการรับเข้าสินค้า</a>
+                            </li>
+                            <li id="li12_015_005">
+                                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "rpt_dot.asp" })">รายงาน DOT ยาง</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#" class="dropdown-collapse">
+                            <i class=""></i>
+                            <span class="side-menu-title">รายงานข้อมูลหลัก</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="li12_004_000">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="Test_diss_A.asp" })">รายงาน Customer Price Group</a>
+                            </li>
+                            <li id="li12_004_001">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_Car.asp" })">รายงานทะเบียนรถยนต์</a>
+                            </li>
+                            <li id="li12_004_002">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_Product.asp" })">รายงานทะเบียนสินค้า</a>
+                            </li>
+                            <li id="li12_004_003">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_Cust.asp" })">รายงานทะเบียนลูกค้า</a>
+                            </li>
+                            <li id="li12_004_000">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_vendor.asp" })">รายงานทะเบียนผู้จำหน่าย</a>
+                            </li>
+                            <li id="li12_004_009">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_PTTOR.asp" })">รายงานทะเบียนรถ PTTOR</a>
+                            </li>
+
+                            <li id="li12_004_004" hidden>
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_buy_size.asp" })">ทะเบียนสินค้าใหม่</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#" class="dropdown-collapse">
+                            <i class=""></i>
+                            <span class="side-menu-title">รายงานภาษี</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="li12_004_008">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_tax_po.asp" })">รายงานภาษีซื้อ</a>
+                            </li>
+                            <li id="li12_004_009">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_tax_sale.asp" })">รายงานภาษีขาย</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#" class="dropdown-collapse">
+                            <i class=""></i>
+                            <span class="side-menu-title">รายงานการรับ-จ่ายเงิน</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="li12_004_001">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_receive_day.asp" })">รายงานรับเงินประจำวัน</a>
+                            </li>
+                            <li id="li12_004_002">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_pay_day.asp" })">รายงานจ่ายเงินประจำวัน</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#" class="dropdown-collapse">
+                            <i class=""></i>
+                            <span class="side-menu-title">รายงานลูกค้าสัมพันธ์</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="li12_002_002">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_next_serv.asp" })">รายงานบริการครั้งถัดไปของลูกค้า</a>
+                            </li>
+                            <li id="li12_002_003">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_NoContact.asp" })">รายงานลูกค้าที่ขาดการติดต่อ</a>
+                            </li>
+                            <li id="li12_002_004">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_Comment.asp" })" hidden>รายงานวิเคราะห์ความพึงพอใจของลูกค้า</a>
+                            </li>
+                            <li id="li12_002_005">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_calltrack.asp" })" hidden>รายงานติดตาม 3 วันหลังให้บริการ</a>
+                            </li>
+                            <li id="li12_002_006">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_cus_birthday.asp" })">รายงานวันเกิดลูกค้า</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#" class="dropdown-collapse">
+                            <i class=""></i>
+                            <span class="side-menu-title">รายงานบันทึกการใช้งานระบบ</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="li12_004_001">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_document_log.asp" })">รายงานบันทึกการจัดการเอกสาร</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <!--SubMenu Hidden : รายงานเจ้าหนี้ / รายงานลูกหนี้ / รายงานเช็ค / รายงานวิเคราะห์การขาย / รายงานวิเคราะห์การซื้อ / รายงานพิเศษ / Business Intelligence-->
+                    <!--
+                    <li class="treeview">
+                        <a href="#" class="dropdown-collapse">
+                            <i class=""></i>
+                            <span class="side-menu-title">รายงานเจ้าหนี้</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="li12_004_001">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_AP_add.asp" })">เพิ่มหนี้ที่เจ้าหนี้</a>
+                            </li>
+                            <li id="li12_004_002">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_AP_add2.asp" })">เพิ่มหนี้เจ้าหนี้ตามใบรับเข้า</a>
+                            </li>
+                            <li id="li12_004_003">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_AP_down.asp" })">ลดหนี้เจ้าหนี้</a>
+                            </li>
+                            <li id="li12_004_004">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_AP_down2.asp" })">ลดหนี้เจ้าหนี้ตามใบรับเข้า</a>
+                            </li>
+                            <li id="li12_004_005">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_ap_keep.asp" })">เจ้าหนี้ค้างชำระ</a>
+                            </li>
+                            <li id="li12_004_006">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_AP_Pay.asp" })">จ่ายชำระเจ้าหนี้</a>
+                            </li>
+                            <li id="li12_004_007">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_sum_ap_pay.asp" })">สรุปการจ่ายชำระประจำวัน</a>
+                            </li>
+                            <li id="li12_004_008">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_tax_po.asp" })">ภาษีซื้อ</a>
+                            </li>
+                            <li id="li12_004_009">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_credit_vendor.asp" })">อายุเจ้าหนี้</a>
+                            </li>
+                        </ul>
+                    </li>
+                    -->
+                    <!--
+                    <li class="treeview">
+                        <a href="#" class="dropdown-collapse">
+                            <i class=""></i>
+                            <span class="side-menu-title">รายงานลูกหนี้</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="li12_004_001">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_check_ar.asp" })">การวางบิล/รับชำระลูกหนี้</a>
+                            </li>
+                            <li id="li12_004_002">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_AR_add.asp" })">เพิ่มหนี้ลูกหนี้</a>
+                            </li>
+                            <li id="li12_004_003">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_AR_add2.asp" })">เพิ่มหนี้ลูกหนี้ตามใบเสร็จ</a>
+                            </li>
+                            <li id="li12_004_004">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_AR_down.asp" })">ลดหนี้ลูกหนี้</a>
+                            </li>
+                            <li id="li12_004_005">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_AR_down2.asp" })">ลดหนี้ลูกหนี้ตามใบเสร็จ</a>
+                            </li>
+                            <li id="li12_004_006">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_AR_Keep.asp" })">ลูกหนี้ค้างชำระ</a>
+                            </li>
+                            <li id="li12_004_007">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_AR_Receive.asp" })">ชำระลูกหนี้</a>
+                            </li>
+                            <li id="li12_004_008">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="Rpt_Confirm_Receive.asp" })">สถานะการรับเงิน</a>
+                            </li>
+                            <li id="li12_004_009">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_tax_sale.asp" })">ภาษีขาย</a>
+                            </li>
+                            <li id="li12_004_009">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_credit_customer.asp" })">อายุลูกหนี้</a>
+                            </li>
+                        </ul>
+                    </li>
+                    -->
+                    <!--
+                    <li class="treeview">
+                        <a href="#" class="dropdown-collapse">
+                            <i class=""></i>
+                            <span class="side-menu-title">รายงานเช็ค</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="li12_002_001">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_Pay_Cheque.asp" })">การจ่ายเช็ค</a>
+                            </li>
+                            <li id="li12_002_002">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_Receive_Cheque.asp" })">การรับเช็ค</a>
+                            </li>
+                            <li id="li12_002_003">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_Account.asp" })">ความเคลื่อนไหวบัญชี</a>
+                            </li>
+                            <li id="li12_002_004">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_Day.asp" })" title="รายงานสรุปการรับจ่ายเงินประจำวัน">สรุปการรับจ่ายเงินประจำวัน</a>
+                            </li>
+                        </ul>
+                    </li>
+                    -->
+                    <!--
+                    <li class="treeview">
+                        <a href="#" class="dropdown-collapse">
+                            <i class=""></i>
+                            <span class="side-menu-title">รายงานวิเคราะห์การขาย</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="li12_002_001" hidden>
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_Profit.asp" })">วิเคราะห์กำไร-ขาดทุน</a>
+                            </li>
+                            <li id="li12_002_002">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_sale_group.asp" })" title="รายงานวิเคราะห์ขายตามประเภทสินค้า">วิเคราะห์ขายตามประเภทสินค้า</a>
+                            </li>
+                            <li id="li12_002_003">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_brand.asp" })">วิเคราะห์ขายตามยี่ห้อสินค้า</a>
+                            </li>
+                            <li id="li12_002_004">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_model.asp" })">วิเคราะห์ขายตามรุ่นสินค้า</a>
+                            </li>
+                            <li id="li12_002_001">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_size.asp" })">วิเคราะห์ขายตามขนาดสินค้า</a>
+                            </li>
+                            <li id="li12_002_002">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_Sale_custgroup.asp" })" title="รายงานวิเคราะห์ขายตามประเภทลูกค้า">วิเคราะห์ขายตามประเภทลูกค้า</a>
+                            </li>
+                            <li id="li12_002_003">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_sale_cust.asp" })">วิเคราะห์ขายตามลูกค้า</a>
+                            </li>
+                            <li id="li12_002_004" hidden>
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_financial.asp" })" title="รายงานวิเคราะห์กำไรขาดทุน จากการดำเนินงาน">วิเคราะห์กำไรขาดทุน จากการดำ...</a>
+                            </li>
+                        </ul>
+                    </li>
+                    -->
+                    <!--
+                    <li class="treeview" hidden>
+                        <a href="#" class="dropdown-collapse">
+                            <i class=""></i>
+                            <span class="side-menu-title">รายงานวิเคราะห์การซื้อ</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="li12_002_001">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_buy_group.asp" })" title="วิเคราะห์การซื้อตามประเภทสินค้า">วิเคราะห์การซื้อตามประเภท...</a>
+                            </li>
+                            <li id="li12_002_002">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_buy_brand.asp" })" title="วิเคราะห์การซื้อตามยี่ห้อสินค้า">วิเคราะห์การซื้อตามยี่ห้อสินค้า</a>
+                            </li>
+                            <li id="li12_002_003">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_buy_model.asp" })">วิเคราะห์การซื้อตามรุ่นสินค้า</a>
+                            </li>
+                            <li id="li12_002_004">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_buy_size.asp" })" title="วิเคราะห์การซื้อตามขนาดสินค้า">วิเคราะห์การซื้อตามขนาด...</a>
+                            </li>
+                            <li id="li12_002_004">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_vendor.asp" })">วิเคราะห์การซื้อตามผู้จำหน่าย</a>
+                            </li>
+                        </ul>
+                    </li>
+                        -->
+                    <!--
+                    <li class="treeview">
+                        <a href="#" class="dropdown-collapse">
+                            <i class=""></i>
+                            <span class="side-menu-title">รายงานพิเศษ</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="li12_002_001">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_Profile_Service.asp" })">ประวัติการใช้บริการลูกค้า</a>
+                            </li>
+                            <li id="li12_002_002">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_next_serv.asp" })">บริการครั้งต่อไป</a>
+                            </li>
+                            <li id="li12_002_003">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_NoContact.asp" })">ลูกค้าที่ขาดการติดต่อ</a>
+                            </li>
+                            <li id="li12_002_004" hidden>
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_Comment.asp" })">วิเคราะห์ความพึงพอใจ</a>
+                            </li>
+                            <li id="li12_002_004" hidden>
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_calltrack.asp" })">ติดตามผลการให้บริการ</a>
+                            </li>
+                            <li id="li12_002_004" hidden>
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_satisfaction_anlysis.asp" })" title="วิเคราะห์การติดตามผลการให้บริการ">วิเคราะห์การติดตามผลการ...</a>
+                            </li>
+                            <li id="li12_002_004" hidden>
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_vat_balance_movement.asp" })">Vat Balance</a>
+                            </li>
+                            <li id="li12_002_004" hidden>
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_vat_balance_movement2.asp" })">ความเคลื่อนไหว Vat Balance</a>
+                            </li>
+                            <li id="li12_002_004">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_sum_sale_receive.asp" })" title="รายงานสรุปการซื้อขาย-รับชำระประจำวัน">สรุปการซื้อขาย-รับชำระประจำวัน</a>
+                            </li>
+                        </ul>
+                    </li>
+                    -->
+                    <!--
+                    <li class="treeview" hidden>
+                        <a href="#" class="dropdown-collapse" title="Business Intelligence Report">
+                            <i class=""></i>
+                            <span class="side-menu-title">Business Intelligence...</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="li12_002_001">
+                                <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="rpt_bi_list.asp" })">BI Report List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    -->
+                    <!--SubMenu Hidden : รายงานเจ้าหนี้ / รายงานลูกหนี้ / รายงานเช็ค / รายงานวิเคราะห์การขาย / รายงานวิเคราะห์การซื้อ / รายงานพิเศษ / Business Intelligence-->
+                </ul>
+
+                <!-- /.nav-second-level -->
+            </li>
+            <li class="treeview">
+                <a href="#" class="dropdown-collapse">
+                    <i class="fa fa-cog fa-fw"></i> <span class="side-menu-title">ข้อมูลระบบ</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="conf_system.asp" })">กำหนดการทำงานระบบ</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Branch", new { AspFile = "#" })">กำหนดข้อมูลสาขา</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="conf_start_system.asp" })">ข้อมูลเริ่มต้นระบบ</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="authen_list.asp" })">กำหนดสิทธิการใช้งาน</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bs_log.asp" })">ค้นหาการใช้งาน</a>
+                    </li>
+                    <li hidden>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="function_db_backup.asp" })">สำรองฐานข้อมูล</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bs_export_bill.asp" })" hidden>นำข้อมูลออกแบบเอกสาร</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="bs_document_log.asp" })">ค้นหาการใช้งานเอกสาร</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="chk_log_bluecard.asp"})">ตรวจสอบ Log Blue Card</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="treeview" hidden>
+                <a href="#" class="dropdown-collapse">
+                    <i class="fa fa-code fa-fw"></i> <span class="side-menu-title">โปรแกรมพิเศษ</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="function_movement.asp" })">ปรับปรุงความเคลื่อนไหวของสินค้า</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="function_stock_update.asp" })">ปรับปรุงสต็อก Balance</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="function_balance.asp" })">ปรับปรุงยอดเงิน Balance</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="update_nextserv_noicard.asp" })" title="ปรับข้อมูลบริการครั้งต่อไป : ลูกค้าทั่วไป">ปรับข้อมูลบริการครั้งต่อไป</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="function_avgcost.asp" })">ปรับราคาทุนเฉลี่ย:ลูกค้าทั่วไป</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ClassicAsp", "Home" , new { AspFile="function_cst_create.asp" })">สร้างใบเช็คสต็อกที่ราคาทุนติดลบ</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+</aside>
+
+<script>
+          $("#report-menu").click(function () {
+
+
+           $("#report-menu ul.treeview-menu li.treeview").find("ul.treeview-menu").css("display", "none");
+
+
+        })
+    $(document).ready(function () {
+
+        $('a.dropdown-collapse').click(function () {
+            localStorage.removeItem('menu-open');
+            setTimeout(function () {
+                $('.treeview').each(function (index, ele) {
+                    if (ele.className.indexOf('menu-open') > -1) {
+                        localStorage.setItem('menu-open', index)
+                    }
+                })
+            }, 10);
+
+        });
+        if (localStorage.getItem('menu-open')) {
+            $('.treeview').each(function (index, ele) {
+                if (index == localStorage.getItem('menu-open')) {
+                    ele.classList.add("menu-open");
+                    $('.treeview.menu-open ul.treeview-menu').css({ 'display': "block" })
+
+                    var urlCerrent = window.location.href
+                    var pageName = urlCerrent.split('=');
+                    if (pageName.length > 1) {
+                        $('.treeview.menu-open ul.treeview-menu a').each(function (index, aele) {
+                            if (aele.href.indexOf(pageName[1]) > -1) {
+                                aele.style.color = 'white'
+                            }
+                        })
+                    }
+                }
+            })
+        }
+        if (
+            localStorage.getItem('menu-open') == "12" ||
+            localStorage.getItem('menu-open') == "13" ||
+            localStorage.getItem('menu-open') == "14" ||
+            localStorage.getItem('menu-open') == "15" ||
+            localStorage.getItem('menu-open') == "16" ||
+            localStorage.getItem('menu-open') == "17" ||
+            localStorage.getItem('menu-open') == "18" ||
+            localStorage.getItem('menu-open') == "19"
+        ) {
+            setTimeout(function () {
+                $("#report-menu").addClass("menu-open");
+                $("#report-menu ul.treeview-menu").css("display", "block");
+                check_show_sub(localStorage.getItem('menu-open'))
+            }, 100);
+        }
+       @*การทำงานของฟังก์ชั่น check_show_sub เช็คว่า ul.treeview-menu หาก localStorage.getItem ได้ค่า 11 12 13 14 15 19 20 จะทำให้ซ่อนเมนู (รายงาน) *@
+        function check_show_sub(number) {
+            for (var i = 0; i < 10; i++) {
+                $("#report-menu ul.treeview-menu li.treeview").eq(i).find("ul.treeview-menu").css("display", "none");
+            }
+            if (number == 12) $("#report-menu ul.treeview-menu li.treeview").eq(0).find("ul.treeview-menu").css("display", "block");
+            if (number == 13) $("#report-menu ul.treeview-menu li.treeview").eq(1).find("ul.treeview-menu").css("display", "block");
+            if (number == 14) $("#report-menu ul.treeview-menu li.treeview").eq(2).find("ul.treeview-menu").css("display", "block");
+            if (number == 15) $("#report-menu ul.treeview-menu li.treeview").eq(3).find("ul.treeview-menu").css("display", "block");
+            if (number == 16) $("#report-menu ul.treeview-menu li.treeview").eq(4).find("ul.treeview-menu").css("display", "block");
+            if (number == 17) $("#report-menu ul.treeview-menu li.treeview").eq(5).find("ul.treeview-menu").css("display", "block");
+            if (number == 18) $("#report-menu ul.treeview-menu li.treeview").eq(6).find("ul.treeview-menu").css("display", "block");
+            if (number == 19) $("#report-menu ul.treeview-menu li.treeview").eq(7).find("ul.treeview-menu").css("display", "block");
+        }
+    })
+
+
+
+</script>
+<!-- Navigation -->

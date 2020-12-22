@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=11, IE=10, IE=9, ie=8, ie=7">
+    <title>@ViewBag.Title - newPos App</title>
+    @Styles.Render("~/Content/css")
+    @RenderSection("css", required: false)
+    <style>
+        .icon-bar {
+            position: fixed;
+            top: 50px;
+            width: 100%;
+            display: block;
+            transition: top 0.2s;
+        }
+        textarea:focus, input:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/admin-lte/js")
+    @Scripts.Render("~/bundles/js")
+
+    @*<div id="pageLoading"></div>*@
+    <div class="wrapper">
+        @Html.Partial("Head")
+
+        @Html.Partial("Menu")
+
+        <div class="content-wrapper" style="overflow: hidden;">
+            @RenderBody()
+        </div>
+        @Html.Partial("_LoadingModal")
+    </div>
+
+   
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
+<script>
+    //Loadding
+
+</script>

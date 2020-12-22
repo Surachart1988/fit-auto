@@ -1,0 +1,160 @@
+﻿@model CentralService.Models.ExtraPromotionModel
+
+<style>
+    .modal-content {
+        width: 110%;
+    }
+</style>
+
+<div class="modal fade" id="modal-select-prosize" tabindex="-1" role="dialog" aria-labelledby="selectPromotionSize" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 title-head">
+                            <h4>ข้อมูลขนาดสินค้า</h4>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div id="bError_prosize" class="row" style="display: none">
+                                <div class="col-md-12">
+                                    <div>
+                                        <table class="col-md-12 table-bordered table-striped table-condensed tables" cellspacing="0" id="gv_error" style="border-collapse:collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="11">
+                                                        <center><span style="font-size: 20px; color: Red;">ไม่พบข้อมูลโปรโมชั่น</span></center>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="gv_prosize_wrapper" class="row" style="display: normal">
+                                <div class="col-md-12">
+                                    <table class="table table-hover table-striped dataTable no-footer" cellspacing="0" id="gv_prosize" style="border-collapse:collapse; width: 100%" role="grid" aria-describedby="gv_prosize_info">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <input id="gv_prosize_CheckBox_all" type="checkbox" name="gv_prosize_CheckBox_all">
+                                                    <label for="gv_prosize_CheckBox_all"> เลือกทั้งหมด</label>
+                                                </th>
+                                                <th class="text-center">รหัสขนาดสินค้า</th>
+                                                <th class="text-center">ขนาดสินค้า</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                for (int i = 0; i < Model.ProSizeList.Count; i++)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.CheckBoxFor(x => Model.ProSizeList[i].IsCheck, new { style = "opacity: 1;" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => Model.ProSizeList[i].pro_size_code)
+                                                            @Html.HiddenFor(m => Model.ProSizeList[i].size_name)
+                                                            @Html.DisplayFor(x => Model.ProSizeList[i].pro_size_code)
+                                                        </td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => Model.ProSizeList[i].pro_size_code)
+                                                            @Html.HiddenFor(m => Model.ProSizeList[i].size_name)
+                                                            @Html.DisplayFor(x => Model.ProSizeList[i].size_name)
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                @:
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <input type="button" name="btnSave" value="บันทึก" id="btnSaveProsize" class="btn btn-primary">
+                            <input type="button" name="btnClose" value="ยกเลิก" id="btnClose" data-dismiss="modal" class="btn btn-danger">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#btnSaveProsize").click(function (e) {
+
+            var list = []; var values = []; var Item = ""; var value = "";
+            $("#gv_prosize").DataTable().rows().nodes().to$().find('input[type="checkbox"]:checked').each(function () {
+
+                Item = $(this).closest('tr').find("td").eq(2).text().trim();
+                list.push(Item);
+                value = $(this).closest('tr').find("td").eq(1).text().trim();
+                values.push(value);
+            });
+
+            if (list.length === 0) {
+                warningAlert('กรุณาเลือกข้อมูล');
+                e.preventDefault();
+            } else {
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "SaveData",
+                    data: { 'data': values.join(), '_type': "prosize" },
+                    success: function (data) {
+                        $('#modal-select-prosize').modal('toggle'); // close yourself
+                        $("#txt_pro_size").val(list.join(', '));
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve.');
+                    }
+                });
+            }
+        });
+    });
+</script>
+<script>
+                            //$(document).ready(function () {
+                            //    $("#btnSaveProsize").click(function (e) {
+                            //        var values = [], rowValue = "";
+                            //        var values2 = [], rowValue2 = "";
+                            //        $('#gv_prosize tbody tr  input:checkbox').each(function () {
+                            //            if (this.checked) {
+                            //                $(this).closest('tr').find("td:not([class])").map(function () {
+                            //                    rowValue = $(this).text().trim();
+                            //                    rowValue2 = $(this).closest('tr').find("td:not([class])").eq(0).find('input').val();
+                            //                });
+                            //                values.push(rowValue);
+                            //                values2.push(rowValue2);
+                            //            }
+                            //        });
+                            //        if (values2.length === 0) {
+                            //            warningAlert('กรุณาเลือกข้อมูล');
+                            //            e.preventDefault();
+                            //        } else {
+                            //            $('#modal-select-prosize').modal('toggle'); // close yourself
+                            //            $("#txt_pro_size").val(values.join(', '));
+                            //            //$.ajax({
+                            //            //    cache: false,
+                            //            //    type: "GET",
+                            //            //    url: "GetProduct",
+                            //            //    data: { 'data': values2.join() },
+                            //            //    success: function (data) {
+                            //            //        $("#procode_popup").html(data);
+                            //            //        $("#gv_procode").DataTable();
+
+                            //            //    },
+                            //            //    error: function (xhr, ajaxOptions, thrownError) {
+                            //            //        alert('Failed to retrieve.');
+                            //            //    }
+                            //            //});
+                            //        }
+                            //    });
+                            //});
+</script>

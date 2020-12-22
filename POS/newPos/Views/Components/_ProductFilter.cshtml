@@ -1,0 +1,53 @@
+﻿@model CentralService.Models.ProductFilterModel
+
+    <div class="col-sm-2">
+        <div class="input-group input-daterange">
+            <span class="input-group-addon">
+                กลุ่มสินค้า
+            </span>
+            @Html.DropDownListFor(model => model.product_group_code,
+           new SelectList(Model.ddlProdFirstGrpList, "product_group_code", "product_group_name"),
+           new { @class = "form-control", autocomplete = "off" })
+
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="input-group input-daterange">
+            <span class="input-group-addon">
+                ประเภทสินค้า
+            </span>
+            @Html.DropDownListFor(model => model.progroup_code,
+           new SelectList(Model.ddlProGrpList, "progroup_code", "progroup_name"),
+           new { @class = "form-control", autocomplete = "off" })
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="input-group input-daterange">
+            <span class="input-group-addon">
+                ยี่ห้อ
+            </span>
+            @Html.DropDownListFor(model => model.pro_brand_code,
+            new SelectList(Model.ddlProBrandList, "pro_brand_code", "pro_brand"),
+            new { @class = "form-control", autocomplete = "off" })
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="input-group input-daterange">
+            <span class="input-group-addon">
+                รุ่น
+            </span>
+            @Html.DropDownListFor(model => model.pro_model_code,
+            new SelectList(Model.ddlProModelList, "pro_model_code", "pro_model"),
+            new { @class = "form-control", autocomplete = "off" })
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="input-group input-daterange">
+            <span class="input-group-addon">
+                ขนาดสินค้า
+            </span>
+            @Html.DropDownListFor(model => model.pro_size_code,
+           new SelectList(Model.ddlProSizeList, "pro_size_code", "size_name"),
+           new { @class = "form-control", autocomplete = "off" })
+        </div>
+    </div>

@@ -1,0 +1,102 @@
+﻿@using CentralService.Models;
+
+
+@model List<PromotionAndDiscountModal>
+@{
+    ViewBag.Title = "PromotionModal";
+}
+
+<!-- Modal -->
+<div class="modal fade" id="checkPromotionModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="height: auto;width: 90vw;margin-top:1vh">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">โปรโมชั่นที่มีสิทธิได้รับ</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+
+            <div class="modal-body">
+                <div id="promotionList">
+                    <table class="table table-striped table-bordered nowrap" id="promotion-list" style="width:100%;font-size: 1vw;">
+                        <thead>
+                            <tr>
+
+                                <th class="text-center">ลำดับ</th>
+                                <th style="display:none">รหัสโปรโมชั่น</th>
+                                <th style="display:none">ประเภท</th>
+                                <th style="display:none">ชื่อโปรโมชั่น</th>
+                                <th class="text-center">รายการโปรโมชั่นที่ได้รับ</th>
+                                <th class="text-center">สินค้าที่ได้แถม/แลกซื้อ/ส่วนลดที่ได้รับ</th>
+                                <th class="text-center">จำนวน</th>
+                                <th style="display:none">ราคา</th>
+                                <th style="display:none">&nbsp;</th>
+                                <th style="display:none">&nbsp;</th>
+                                <th style="display:none">&nbsp;</th>
+                                <th style="display:none">&nbsp;</th>
+                                <th style="display:none">&nbsp;</th>
+                                <th style="display:none">&nbsp;</th>
+                                <th style="display:none">&nbsp;</th>
+                                <th style="display:none">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                var number = 0;
+                                foreach (var product in Model)
+                                {
+
+                                    number++;
+                                    <tr class="@product.CouponId">
+                                        <td>@number</td>
+                                        <td style="display:none">@product.Code</td>
+                                        <td style="display:none">@product.Type</td>
+                                        <td style="display:none">@product.Name</td>
+                                        <td>@product.Name : @product.ProdectDetail</td>
+                                        @if (product.PromotionType == "3")
+                                        {
+                                            var name = product.ProductGiveName ?? product.ProdectDetail;
+                                            <td> @name </td>
+                                        }
+                                        else
+                                        {
+                                            if (product.pro_group_type_used == 5 || product.pro_group_type_used == 6)
+                                            {
+                                                <td> โปรโมชั่นส่วนลดราคา @product.Discount บาท</td>
+
+                                            }
+                                            else
+                                            {
+                                                <td> @product.Type @product.Discount</td>
+
+                                            }
+                                            @*<td>@product.ProductGiveName @product.Discount @product.Type</td>*@
+                                        }
+                                        <td>@product.Number</td>
+                                        <td style="display:none">@product.Money</td>
+                                        <td style="display:none">@product.ProductGiveCode</td>
+                                        <td style="display:none">@product.PromotionType</td>
+                                        <td style="display:none">@product.Discount</td>
+                                        <td style="display:none">@product.CouponId</td>
+                                        <td style="display:none">@product.CouponCode</td>
+                                        <td style="display:none">@product.CouponCalType</td>
+                                        <td style="display:none">@product.Product_Ref_Code</td>
+                                        <td style="display:none">@product.give_same_buy</td>
+                                    </tr>
+
+                                }
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="modal-footer center">
+                <button type="button" id="btnPromotionConfirm" class="btn btn-success">ยืนยัน</button>
+            </div>
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div>
+

@@ -1,0 +1,836 @@
+﻿@model CentralService.Models.PaymentModel
+@{
+    /**/
+
+    ViewBag.Title = "Payment";
+}
+<style>
+    .show_option {
+        display: normal;
+    }
+
+    .hide_option {
+        display: none;
+    }
+</style>
+
+<div class="card">
+    <div class="card-header main">
+        รับชำระเงิน
+        <button type="button" id="btnBack" class="btn btn-danger"
+                onclick="$('#Cancel').val(true); $('#myForm').submit()">
+            ยกเลิก
+        </button>
+    </div>
+    <div class="card-body" style="padding-top:0">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myForm", name = "myForm" }))
+        {
+            <div class="row">
+
+                <div class="col-md-6" style="padding-right:0px">
+                    @Html.HiddenFor(model => model.CustomerCode)
+                    @Html.HiddenFor(model => model.DocNo)
+                    @Html.HiddenFor(model => model.RefDocNo)
+                    @Html.HiddenFor(model => model.DocCode)
+                    @Html.HiddenFor(model => model.CashAmount)
+                    @Html.HiddenFor(model => model.PaymentCashNote)
+                    @Html.HiddenFor(model => model.Cancel)
+                    @Html.HiddenFor(model => model.PaymentAmount)
+                    @Html.HiddenFor(model => model.BlueCardSaveNo)
+                    @Html.HiddenFor(model => model.BlueCardSaveMobile)
+                    @Html.HiddenFor(model => model.BlueCardNo)
+                    @Html.HiddenFor(model => model.BlueCardCode)
+                    @Html.HiddenFor(model => model.BlueCardMoney)
+                    @Html.HiddenFor(model => model.BlueCardUsePoint)
+                    @Html.HiddenFor(model => model.CustTypeCode)
+                    @Html.HiddenFor(model => model.CustTypeName)
+                    @Html.HiddenFor(model => model.PaymentType)
+                    @Html.HiddenFor(Model => Model.BlueCardType)
+
+                    <div class="card border-light" style="height: 35vh;">
+                        <table class="table table-striped table-bordered" id="product-list" style="width:100%;font-size: 1vw;">
+                            <thead>
+                                <tr style="line-height: 1vh;">
+                                    <th class="text-center">รายการสินค้า</th>
+                                    <th>จำนวน</th>
+                                    <th>ราคา/หน่วย</th>
+                                    <th>ราคารวม</th>
+                                    <th>ลบ</th>
+                                    <th style="display:none">&nbsp;</th>
+                                    <th style="display:none">&nbsp;</th>
+                                    <th style="display:none">&nbsp;</th>
+                                    <th style="display:none">&nbsp;</th>
+                                    <th style="display:none">&nbsp;</th>
+                                    <th style="display:none">&nbsp;</th>
+                                    <th style="display:none">&nbsp;</th>
+                                    <th style="display:none">&nbsp;</th>
+                                    <th style="display:none">&nbsp;</th>
+                                    <th style="display:none">&nbsp;</th>
+                                    <th style="display:none">&nbsp;</th>
+                                    <th style="display:none">&nbsp;</th>
+                                    <th style="display:none">&nbsp;</th>
+                                    <th style="display:none">&nbsp;</th>
+                                    <th style="display:none">&nbsp;</th>
+                                    <th style="display:none">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.PromotionAndDiscountModalList != null)
+                                {
+                                    for (int i = 0; i < Model.PromotionAndDiscountModalList.Count(); i++)
+                                    {
+                                        var product = Model.PromotionAndDiscountModalList[i];
+                                        <tr>
+                                            <td pro_code="@product.Code">@product.Name</td>
+                                            <td>@product.Number</td>
+                                            <td>@product.Money</td>
+                                            <td>
+                                                @(product.Number * product.Money)
+                                            </td>
+                                            <td style="padding-left:0px;text-align:center;"></td>
+                                            <td style="display:none">@product.tmp_No</td>
+                                            <td style="display:none">@product.tmp_Code</td>
+                                            <td style="display:none">@product.tmp_Name</td>
+                                            <td style="display:none">@product.tmp_Type</td>
+                                            <td style="display:none">@product.tmp_ProductDetail</td>
+                                            <td style="display:none">@product.tmp_ProductGiveName</td>
+                                            <td style="display:none">@product.tmp_Number</td>
+                                            <td style="display:none">@product.tmp_Money</td>
+                                            <td style="display:none">@product.tmp_ProductGiveCode</td>
+                                            <td style="display:none">@product.tmp_PromotionType</td>
+                                            <td style="display:none">@product.tmp_Discount</td>
+                                            <td style="display:none">@product.tmp_CouponId</td>
+                                            <td style="display:none">@product.tmp_CouponCode</td>
+                                            <td style="display:none">@product.tmp_CouponCalType</td>
+                                            <td style="display:none">@product.tmp_Product_Ref_Code</td>
+                                            <td style="display:none">@product.tmp_give_same_buy</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card border-light" style="height: 17vh;">
+                        <table class="table table-striped table-bordered" id="discount-list" style="width:100%;font-size: 1vw;">
+                            <thead>
+                                <tr style="line-height: 1vh;">
+                                    <th class="text-center">รายการส่วนลด</th>
+                                    <th style="display:none">&nbsp;</th>
+                                    <th>จำนวน</th>
+                                    <th>ราคา</th>
+                                    <th>ลบ</th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+                    <div class="card border-light">
+                        <div class="card-body" style="padding-top: 0.5rem;padding-left: 0.9rem;padding-right: 0.5rem;">
+                            <div class="text-summary">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>ราคารวม</label>
+                                    </div>
+                                    <div class="col">
+                                        @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "input-no-bg  money", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>จำนวนสินค้าทั้งหมด</label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="input-no-bg text-box single-line" readonly="readonly" id="TotalNumber" type="text" value="@Model.PromotionAndDiscountModalList.Sum(p => p.Number)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-group">
+                        <div class="card text-white bg-info">
+                            <div class="card-body">
+                                <p class="text-details">ส่วนลดคูปอง (บาท)</p>
+                                @Html.EditorFor(model => model.TotalDiscount, new { htmlAttributes = new { @class = "input-no-bg text-head-summary money", @readonly = "readonly" } })
+                            </div>
+                        </div>
+                        <div class="card text-white bg-warning">
+                            <div class="card-body">
+                                <p class="text-details">ส่วนลดอื่นๆ (บาท)</p>
+                                <input type="text" id="txtExtraDiscount" class="input-no-bg text-head-summary money" autocomplete="off" readonly="readonly" value="0" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card-group" hidden>
+                        <div class="card text-white bg-secondary">
+                            <div class="card-body">
+                                <p class="text-details">รับเงินสด (บาท)</p>
+                                @Html.EditorFor(model => model.PaymentCash, new { htmlAttributes = new { @class = "input-no-bg text-head-summary money", @readonly = "readonly" } })
+                            </div>
+                        </div>
+                        <div class="card text-white bg-secondary">
+                            <div class="card-body">
+                                <p class="text-details">เงินทอน (บาท)</p>
+                                @Html.EditorFor(model => model.ChangeMoney, new { htmlAttributes = new { @class = "input-no-bg text-head-summary money", @readonly = "readonly" } })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-group">
+                        <div class="card text-white bg-success">
+                            <div class="card-body">
+                                <p class="text-details">ราคาทั้งหมดที่ต้องจ่าย (บาท)</p>
+                                <input class="input-no-bg text-head-summary money text-box single-line" id="txtPaymentMoney" name="txtPaymentMoney" readonly="readonly" type="text" value="0">
+                                @*@Html.EditorFor(model => model.PaymentAmount, new { htmlAttributes = new { @class = "input-no-bg text-head-summary money", @readonly = "readonly" } })*@
+                            </div>
+                        </div>
+                        <div class="card text-white bg-danger" hidden>
+                            <div class="card-body">
+                                <p class="text-details">ยอดคงเหลือ (บาท)</p>
+                                <input class="input-no-bg text-head-summary money text-box single-line" id="txtBalance" name="txtBalance" readonly="readonly" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-6">
+                    <div class="card border-light">
+                        <div class="card-header">จัดการเอกสาร</div>
+                        <div class="card-body">
+                            <div class="text-head">
+                                @{
+                                    var paymentIconList2 = Model.PaymentIconList.Where(p => p.GroubId == 1).ToArray();
+                                    <div class="row">
+                                        <div class="col-payment-2">
+                                            <a data-toggle="modal" href="#checkPromotionModal" title="เช็คโปรโมชั่น" class="card payment-icon mx-auto" style="background-color:green;width:12vh;cursor: pointer;">
+                                                <label class="label-payment-2">
+                                                    เช็ค<br />โปรโมชั่น
+                                                </label>
+                                            </a>
+                                        </div>
+
+                                        @for (int i = 0; i < 4; i++)
+                                        {
+                                            if (i < paymentIconList2.Count())
+                                            {
+                                                <div class="col-payment-2">
+                                                    <a data-toggle="modal" href="#@paymentIconList2[i].ModalId" title="@paymentIconList2[i].Name">
+                                                        <img class="payment-icon" src="~/Content/img/PAYICON/@paymentIconList2[i].ImgName">
+                                                        @*<label class="text-payment">เงินสด</label>*@
+                                                    </a>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="col-payment-2">
+                                                    @*<a>
+                                                            <img class="payment-icon" src="~/Content/img/PAYICON/icon-09.png">
+                                                            <label class="text-payment"></label>
+                                                        </a>*@
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-light">
+                        <div class="card-header">เลือกรูปแบบการชำระเงิน</div>
+                        <div class="card-body">
+                            <div class="text-head">
+                                @{
+                                    var paymentIconList = Model.PaymentIconList.Where(p => p.GroubId == 0).ToArray();
+
+                                    <div class="row" style="text-align:center">
+
+                                        @for (int i = 0; i < 10; i++)
+                                        {
+                                            if (i < paymentIconList.Count())
+                                            {
+                                                var PayId = "ID_" + paymentIconList[i].ModalId;
+
+
+                                                <div class="col-payment-2">
+                                                    <a data-toggle="modal" href="#@paymentIconList[i].ModalId" title="@paymentIconList[i].Name" id="@PayId">
+                                                        <img class="payment-icon" src="~/Content/img/PAYICON/@paymentIconList[i].ImgName">
+                                                        @*<label class="text-payment">เงินสด</label>*@
+                                                    </a>
+                                                </div>
+                                            }
+
+                                        }
+
+
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-light">
+                        <div class="card-header">รายการส่วนลด</div>
+                        <div class="card-body">
+                            <div class="text-head" style="overflow-y: auto;overflow-x: hidden;">
+                                <div class="row" style="text-align: center">
+                                    @{
+                                        var discountList = Model.DiscountIconList;
+                                        int CountList = Model.DiscountIconList.Count / 2;
+                                        int j1 = 0, j2 = 0;
+
+                                        int LastRow = Convert.ToInt16(Math.Floor(Convert.ToDecimal(Model.DiscountIconList.Count / 2)));
+
+                                        if (CountList == 1 || discountList.Count == 1)
+                                        {
+                                            j1 = Model.DiscountIconList.Count;
+                                            j2 = 0;
+                                        }
+                                        else
+                                        {
+                                            if (CountList % 2 == 0)
+                                            {
+                                                j1 = CountList;
+                                                j2 = CountList;
+                                            }
+                                            else
+                                            {
+                                                j1 = (int)Math.Floor((double)(CountList / 2)) + 1;
+                                                j2 = (int)Math.Floor((double)(CountList / 2));
+                                            }
+                                        }
+                                        foreach (var item in discountList)
+                                        {
+                                            <div class="col-payment-2">
+                                                <a @if (item.RequestPass == true) { <text> href="javascript:pageForm.SetModalCouponDigit('@item.Name','@item.Baht','@item.Percents','@item.Code','@item.CouponId','');" </text>  } else { <text> href="javascript:pageForm.addExtraDiscount('@item.Name','@item.Baht','@item.Percents','@item.Code','','');" </text> }
+                                                   title="@item.Name"
+                                                   class="card payment-icon mx-auto"
+                                                   style="background-color: #a0c1ff; width: 12vh; cursor: pointer;">
+                                                    @{
+                                                        if (item.pro_group_type_used == 6)
+                                                        {
+                                                            <label class="label-payment-2" style="color: #000000">
+                                                                @item.Name<br />(@item.Percents บาท)
+                                                            </label>
+                                                        }
+                                                        else
+                                                        {
+                                                            if (item.Percents > 0)
+                                                            {
+                                                                <label class="label-payment-2" style="color: #000000">
+                                                                    @item.Name<br /> (@item.Percents %)
+                                                                </label>
+                                                            }
+                                                            else
+                                                            {
+                                                                <label class="label-payment-2" style="color: #000000">
+                                                                    @item.Name<br />(@item.Baht บาท)
+                                                                </label>
+                                                            }   
+                                                        }
+                                                    }
+                                                </a>
+                                            </div>
+                                        }
+                                        @*for (int i = 0; i < j1; i++)
+                                            {
+                                                <div class="col-payment-2">
+                                                    <a @if (discountList[i].RequestPass == true) { <text> href="javascript:pageForm.SetModalCouponDigit('@discountList[i].Name','@discountList[i].Baht','@discountList[i].Percents','@discountList[i].Code','@discountList[i].CouponId','');" </text>  } else { <text> href="javascript:pageForm.addExtraDiscount('@discountList[i].Name','@discountList[i].Baht','@discountList[i].Percents','@discountList[i].Code','','');" </text> }
+                                                       title="@discountList[i].Name"
+                                                       class="card payment-icon mx-auto"
+                                                       style="background-color: #a0c1ff; width: 12vh; cursor: pointer;">
+                                                        @{
+                                                            if (discountList[i].Percents > 0)
+                                                            {
+                                                                <label class="label-payment-2" style="color: #000000">
+                                                                    @discountList[i].Name<br /> (@discountList[i].Percents %)
+                                                                </label>
+                                                            }
+                                                            else
+                                                            {
+                                                                <label class="label-payment-2" style="color: #000000">
+                                                                    @discountList[i].Name<br />(@discountList[i].Baht บาท)
+                                                                </label>
+                                                            }
+                                                        }
+                                                    </a>
+                                                </div>
+                                            }*@
+                                        <div class="col-payment-2">
+                                            <a data-toggle="modal" href="#lastDiscountModal" title="ส่วนลดอื่นๆ" class="card payment-icon mx-auto"
+                                               style="background-color: #a0c1ff; width: 12vh; cursor: pointer;">
+                                                <label class="label-payment-2" style="color: #000000">
+                                                    ส่วนลดอื่นๆ
+                                                </label>
+                                            </a>
+                                        </div>
+                                        @*for (int i = j1; i < j1 + j2; i++)
+                                            {
+                                                <div class="col-payment-2">
+                                                    <a @if (discountList[i].RequestPass == true) { <text> href="javascript:pageForm.SetModalCouponDigit('@discountList[i].Name','@discountList[i].Baht','@discountList[i].Percents','@discountList[i].Code','@discountList[i].CouponId','@discountList[i].PassDigit');" </text>  } else { <text> href="javascript:pageForm.addExtraDiscount('@discountList[i].Name','@discountList[i].Baht','@discountList[i].Percents','@discountList[i].Code','','');" </text> }
+                                                       title="@discountList[i].Name"
+                                                       class="card payment-icon mx-auto"
+                                                       style="background-color: #a0c1ff; width: 12vh; cursor: pointer;">
+                                                        @{
+                                                            if (discountList[i].Percents > 0)
+                                                            {
+                                                                <label class="label-payment-2" style="color: #000000">
+                                                                    @discountList[i].Name<br /> (@discountList[i].Percents %)
+                                                                </label>
+                                                            }
+                                                            else
+                                                            {
+                                                                <label class="label-payment-2" style="color: #000000">
+                                                                    @discountList[i].Name<br />(@discountList[i].Baht บาท)
+                                                                </label>
+                                                            }
+                                                        }
+                                                    </a>
+                                                </div>
+                                            }*@
+
+                                        @*<div style="overflow-y: auto">
+                                                <div style="display: flex;">
+                                                    @for (int i = 0; i < j1; i++)
+                                                    {
+                                                        <div class="col-payment-2">
+                                                            <a @if (discountList[i].RequestPass == true) { <text> href="javascript:pageForm.SetModalCouponDigit('@discountList[i].Name','@discountList[i].Baht','@discountList[i].Percents','@discountList[i].Code','@discountList[i].CouponId','');" </text>  } else { <text> href="javascript:pageForm.addExtraDiscount('@discountList[i].Name','@discountList[i].Baht','@discountList[i].Percents','@discountList[i].Code','','');" </text> }
+                                                               title="@discountList[i].Name"
+                                                               class="card payment-icon mx-auto"
+                                                               style="background-color: #a0c1ff; width: 12vh; cursor: pointer;">
+                                                                @{
+                                                                    if (discountList[i].Percents > 0)
+                                                                    {
+                                                                        <label class="label-payment-2" style="color: #000000">
+                                                                            @discountList[i].Name<br /> (@discountList[i].Percents %)
+                                                                        </label>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <label class="label-payment-2" style="color: #000000">
+                                                                            @discountList[i].Name<br />(@discountList[i].Baht บาท)
+                                                                        </label>
+                                                                    }
+                                                                }
+                                                            </a>
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <div style="display: flex;">
+                                                    <div class="col-payment-2">
+                                                        <a data-toggle="modal" href="#lastDiscountModal" title="ส่วนลดอื่นๆ" class="card payment-icon mx-auto"
+                                                           style="background-color: #a0c1ff; width: 12vh; cursor: pointer;">
+                                                            <label class="label-payment-2" style="color: #000000">
+                                                                ส่วนลดอื่นๆ
+                                                            </label>
+                                                        </a>
+                                                    </div>
+                                                    @for (int i = j1; i < j1 + j2; i++)
+                                                    {
+                                                        <div class="col-payment-2">
+                                                            <a @if (discountList[i].RequestPass == true) { <text> href="javascript:pageForm.SetModalCouponDigit('@discountList[i].Name','@discountList[i].Baht','@discountList[i].Percents','@discountList[i].Code','@discountList[i].CouponId','@discountList[i].PassDigit');" </text>  } else { <text> href="javascript:pageForm.addExtraDiscount('@discountList[i].Name','@discountList[i].Baht','@discountList[i].Percents','@discountList[i].Code','','');" </text> }
+                                                               title="@discountList[i].Name"
+                                                               class="card payment-icon mx-auto"
+                                                               style="background-color: #a0c1ff; width: 12vh; cursor: pointer;">
+                                                                @{
+                                                                    if (discountList[i].Percents > 0)
+                                                                    {
+                                                                        <label class="label-payment-2" style="color: #000000">
+                                                                            @discountList[i].Name<br /> (@discountList[i].Percents %)
+                                                                        </label>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <label class="label-payment-2" style="color: #000000">
+                                                                            @discountList[i].Name<br />(@discountList[i].Baht บาท)
+                                                                        </label>
+                                                                    }
+                                                                }
+                                                            </a>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>*@
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height:20vh" hidden>
+                        <table class="table table-striped table-bordered" id="payment-list" style="width:100%;font-size: 1vw;">
+                            <thead>
+                                <tr style="line-height: 1vh;">
+                                    <th></th>
+                                    <th>ประเภทของการชำระ</th>
+                                    <th>จำนวน</th>
+                                    <th>เลขบัตร/เอกสารอ้างอิง</th>
+                                    <th>หมายเหตุ</th>
+                                    <th>แก้ไข/ลบ</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @*@if (Model.DepositModel != null)
+                                    {
+                                        <tr>
+                                            <td>@Model.DepositModel.Id</td>
+                                            <td>เงินมัดจำ</td>
+                                            <td>@Model.DepositModel.Money</td>
+                                            <td>@Model.DepositModel.DepositNo</td>
+                                            <td>@Model.DepositModel.Note</td>
+                                            <td>delete</td>
+                                            <td>depositModal</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    }*@
+                            </tbody>
+                        </table>
+                    </div>
+                    @*<div class="row" >
+                            <div class="col-12" style="text-align:center">
+                                <button type="submit" id="btnSubmit" class="btn btn-success">ยืนยัน</button>
+                            </div>
+
+                        </div>*@
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+<div class="row" style="display:none;">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div id="timeContainer" class="well well-sm">
+            <timer id="timerValue"></timer>
+        </div>
+        <div id="timerButtons">
+            <button id="start" class="btn btn-success">START</button>
+            <button id="stop" class="btn btn-danger" disabled="disabled">STOP</button>
+            <button id="reset" class="btn btn-default" disabled="disabled">RESET</button>
+            <button id="checkEdcStatus" class="btn btn-info">Check EDC payment status</button>
+        </div>
+        <div class="col-sm-4 col-sm-4 col-md-4"></div>
+    </div>
+</div>
+
+<div id="modalEdcCheck" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                <h4 class="modal-title">EDC Checking</h4>
+            </div>
+            <div class="modal-body text-center">
+                <h2> EDC is open </h2>
+                <a class="btn btn-danger" id="btnCloseModalEdc">Close</a>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+@Html.Partial("LastDiscountModal")
+@Html.Partial("CashModal")
+@*@Html.Partial("PttorModal")*@
+@Html.Partial("CreditEdcModal")
+@Html.Partial("CreditCardModal")
+@Html.Partial("DepositModal")
+@Html.Partial("DeductibleModal")
+@*@Html.Partial("BlueCardRedeemModal")*@
+@Html.Partial("LazadaModal")
+@Html.Partial("BlueCardSaveModal")
+@Html.Partial("OnlinePaymentModal", Model.OnlinePaymentIconList)
+@Html.Partial("OnlinePaymentDetailModal")
+@if (Model.DocCode != "A302")
+{
+    @Html.Partial("PromotionModal", Model.PromotionModalList)
+}
+
+@Html.Partial("PartialPaymentModel", Model.PaymentIconList)
+@Html.Partial("CouponModal")
+<!-- Modal Partial Payment -->
+@Html.Partial("PartialCashModal")
+
+@Html.Partial("PartialCreditCardModal")
+@Html.Partial("PartialCreditEdcModal")
+@Html.Partial("PartialBlueCardRedeemModal")
+@Html.Partial("CheckPassCouponModal")
+
+
+@section css{
+    @Styles.Render("~/Content/datatables-style")
+    @Styles.Render("~/Content/payment")
+}
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/datatables-script")
+    @Scripts.Render("~/bundles/payment")
+
+    <script>
+
+        var pageForm = new PaymentForm()
+        var cashModal = new CashModal()
+     //   var pttorModal = new PttorModal()
+        var creditCardModal = new CreditCardModal()
+        var depositModal = new DepositModal()
+        var deductibleModal = new DeductibleModal()
+        var creditEdcModal = new CreditEdcModal()
+        //var blueCardModal = new BlueCardModal()
+        //var lazadaModal = new LazadaModal()
+        var OnlinePaymentModal = new OnlinePaymentModal()
+        var promotionModal = new PromotionModal()
+        var CreditCardModalPartial = new CreditCardModalPartial()
+        var CreditEdcModalPartial = new CreditEdcModalPartial()
+        var BlueCardModalPartialPartial = new BlueCardModalPartialPartial()
+
+        $(document).ready(function () {
+            pageForm.addDiscountUrl = '@Url.Action("AddDiscount")'
+            pageForm.deleteDiscountUrl = '@Url.Action("DeleteDiscount")'
+            pageForm.deletePaymentOtherUrl = '@Url.Action("DeletePaymentOther")'
+            pageForm.deletePaymentCreditCardUrl = '@Url.Action("DeletePaymentCredit")'
+            pageForm.deleteDepositUrl = '@Url.Action("DeletePaymentDeposit")'
+            pageForm.clearProductListTempUrl = '@Url.Action("ClearProductListTemp")'
+            pageForm.deleteProductPomotionUrl = '@Url.Action("DeletePromotion")'
+            pageForm.RoundUnitType = '@Model.PaymentRoundDigit';
+            pageForm.getCheckCouponUrl = '@Url.Action("CheckCoupon")'
+            pageForm.CheckCouponDigitUrl = '@Url.Action("CheckCouponDigit")'
+            pageForm.CheckEdcStatusUrl = '@Url.Action("CheckEdcStatus")'
+            pageForm.StartEdcCheck = '@Url.Action("StartEdcCheck")'
+            pageForm.deletePaymentCashUrl = '@Url.Action("DeletePaymentCash")'
+            pageForm.init()
+
+            cashModal.indexForm = pageForm
+            cashModal.AddPaymentUrl = '@Url.Action("AddPaymentCash")'
+            cashModal.init()
+
+            //pttorModal.indexForm = pageForm
+           // pttorModal.init()
+
+            creditCardModal.indexForm = pageForm
+            creditCardModal.addUrl = '@Url.Action("AddPaymentCredit")'
+            creditCardModal.updateUrl = '@Url.Action("UpdatePaymentCredit")'
+            creditCardModal.init()
+
+            CreditCardModalPartial.indexForm = pageForm
+            CreditCardModalPartial.addUrl = '@Url.Action("AddPaymentCredit")'
+            CreditCardModalPartial.updateUrl = '@Url.Action("UpdatePaymentCredit")'
+            CreditCardModalPartial.init()
+
+            creditEdcModal.indexForm = pageForm
+            creditEdcModal.portNo = '@Model.PortNoEDC';
+            creditEdcModal.addUrl = '@Url.Action("AddPaymentCredit")'
+            creditEdcModal.updateUrl = '@Url.Action("UpdatePaymentCredit")'
+
+            CreditEdcModal.urlGetTextPostCardEDC = '@Url.Action("SentToEDCCreditCard", "EDCReader")'
+
+            creditEdcModal.urlProcessEdc = '@Url.Action("ProcessEdc")'
+            creditEdcModal.urlAddEdcReceive = '@Url.Action("AddEdcReceive")'
+            creditEdcModal.urlSavePaymentEDC = '@Url.Action("SavePaymentCardEDC")'
+            creditEdcModal.urlGetEdcReceive = '@Url.Action("GetEdcReceive")'
+
+            creditEdcModal.init()
+
+            CreditEdcModalPartial.indexForm = pageForm
+            CreditEdcModalPartial.CheckEdcStatusUrl = '@Url.Action("CheckEdcStatus")'
+            CreditEdcModalPartial.init()
+
+
+            BlueCardModalPartialPartial.indexForm = pageForm
+            BlueCardModalPartialPartial.addUrl = '@Url.Action("RedeemPoints", "BlueCard")'
+            BlueCardModalPartialPartial.urlAddSession = '@Url.Action("MaintainPartialPayment")'
+            BlueCardModalPartialPartial.getUrl = '@Url.Action("Get", "BlueCard")'
+            BlueCardModalPartialPartial.getPointBalanceUrl = '@Url.Action("GetPointBalance", "BlueCard")'
+            BlueCardModalPartialPartial.getUrl2 = '@Url.Action("GetCardActivated", "BlueCard")'
+            BlueCardModalPartialPartial.init()
+
+
+
+            depositModal.indexForm = pageForm
+            depositModal.getUrl = '@Url.Action("GetDepositModels")'
+            depositModal.addUrl = '@Url.Action("AddPaymentDeposit")'
+            depositModal.init()
+
+            deductibleModal.indexForm = pageForm
+            deductibleModal.addUrl = '@Url.Action("AddPaymentOther")'
+            deductibleModal.init()
+
+            // Move blueCardRedeem to Partail Payment
+            $('a[href="#blueCardRedeemModal"]').hide();
+            @*blueCardModal.indexForm = pageForm
+            blueCardModal.addUrl = '@Url.Action("RedeemPoints", "BlueCard")'
+            blueCardModal.getUrl = '@Url.Action("Get", "BlueCard")'
+            blueCardModal.getPointBalanceUrl = '@Url.Action("GetPointBalance", "BlueCard")'
+            BlueCardModal.urlPrintReport = '@Url.Action("PrintReport", "Print")'
+            blueCardModal.init()*@
+
+            @*lazadaModal.indexForm = pageForm
+            lazadaModal.addUrl = '@Url.Action("AddPaymentOther")'
+            lazadaModal.init()*@
+            OnlinePaymentModal.indexForm = pageForm
+            OnlinePaymentModal.addUrl = '@Url.Action("AddPaymentOther")'
+            OnlinePaymentModal.init()
+
+            promotionModal.indexForm = pageForm
+            promotionModal.addGiveUrl = '@Url.Action("AddProduct")'
+            promotionModal.addDiscountUrl = '@Url.Action("AddDiscount")'
+            promotionModal.checkPromotionGiveUrl = '@Url.Action("CheckPromotionGive")'
+            promotionModal.init()
+            pageForm.promotionForm = promotionModal;
+
+
+
+            $('.no-footer,.dataTables_scrollHeadInner').css("width", "100%");
+            $('#ID_PartialPayment').click(function () {
+
+                if ($('#PaymentAmount').val() > 0) {
+                    $('#ID_PartialPayment').removeAttr('href')
+                    warningAlert("มีการชำระรูปแบบอื่นแล้ว ไม่สามารถจ่ายแบบ Partial ได้");
+                } else {
+                    $('#ID_PartialPayment').attr("href ='#PartialPayment'");
+                }
+
+            });
+
+        });
+
+
+
+            var timerDiv = document.getElementById('timerValue'),
+                start = document.getElementById('start'),
+                stop = document.getElementById('stop'),
+                reset = document.getElementById('reset'),
+                t;
+
+
+            var cookieTime = getCookie('time');
+
+
+            if (cookieTime != null && cookieTime != '00:00:00') {
+                var savedCookie = cookieTime;
+                var initialSegments = savedCookie.split('|');
+                var savedTimer = initialSegments[0];
+                var timerSegments = savedTimer.split(':');
+                var seconds = parseInt(timerSegments[2]),
+                    minutes = parseInt(timerSegments[1]),
+                    hours = parseInt(timerSegments[0]);
+                timer();
+                document.getElementById('timerValue').textContent = savedTimer;
+                $('#stop').removeAttr('disabled');
+                $('#reset').removeAttr('disabled');
+            } else {
+                var seconds = 0, minutes = 0, hours = 0;
+                timerDiv.textContent = "00:00:00";
+            }
+
+
+            var curdate = new Date();
+            var exp = new Date();
+
+
+            exp.setTime(exp + 2592000000);
+
+            function add() {
+
+                seconds++;
+                if (seconds >= 60) {
+                    seconds = 0;
+                    minutes++;
+                    if (minutes >= 60) {
+                        minutes = 0;
+                        hours++;
+                    }
+                }
+
+                timerDiv.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00")
+                    + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00")
+                    + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+
+                var timerTime = timerDiv.textContent.replace("%3A", ":");
+
+                setCookie('time', timerTime + '|' + curdate, exp);
+
+                timer();
+            }
+
+            function timer() {
+
+                t = setTimeout(add, 3000);
+                $("#checkEdcStatus").click();
+              //  timer2();
+            }
+
+
+            start.onclick = timer;
+
+
+            stop.onclick = function () {
+                clearTimeout(t);
+            }
+
+            reset.onclick = function () {
+                timerDiv.textContent = "00:00:00";
+                seconds = 0; minutes = 0; hours = 0;
+                setCookie('time', "00:00:00", exp);
+            }
+
+
+
+            $('#start').on('click', function() {
+            	$('#stop').removeAttr('disabled');
+            	$('#reset').removeAttr('disabled');
+            });
+
+            $('#stop').on('click', function() {
+            	$(this).prop('disabled', 'disabled');
+            });
+
+            $('#reset').on('click', function() {
+            	$(this).prop('disabled', 'disabled');
+            });
+
+
+            function setCookie(name, value, expires) {
+                document.cookie = name + "=" + value + "; path=/" + ((expires == null) ? "" : "; expires=" + expires.toGMTString());
+            }
+
+            function getCookie(name) {
+                var cname = name + "=";
+                var dc = document.cookie;
+
+                if (dc.length > 0) {
+                    begin = dc.indexOf(cname);
+                    if (begin != -1) {
+                        begin += cname.length;
+                        end = dc.indexOf(";", begin);
+                        if (end == -1) end = dc.length;
+                        return unescape(dc.substring(begin, end));
+                    }
+                }
+                return null;
+            }
+
+/**
+ * TODO: Continue timing the timer while away...
+ */
+    </script>
+}
+

@@ -1,0 +1,371 @@
+﻿@model List<CentralService.Models.PaymentIconModel>
+@{
+    ViewBag.Title = "Partial Payment";
+}
+
+<!-- Modal -->
+<div class="modal fade" id="PartialPayment" tabindex="-1" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document" style="height: auto;width: 60vw;margin-top:1vh">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Partial Payment</h4>
+                <button type="button" class="close" id="ClosePaymentPartial"><span aria-hidden="true">&times;</span></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+
+                            <div class="panel-body">
+
+                                <div class="row" align="center">
+                                    <div class="col-md-6">
+
+                                        <div class="card-group">
+                                            <div class="card text-white bg-info">
+                                                <div class="card-body">
+                                                    <p class="text-details">ยอดรวม</p>
+                                                    <input type="text" id="txtPaymentTotal" class="input-no-bg text-head-summary money" autocomplete="off" readonly="readonly" value="0" />
+                                                </div>
+                                            </div>
+                                            <div class="card text-white bg-warning">
+                                                <div class="card-body">
+                                                    <p class="text-details">จ่ายแล้ว</p>
+                                                    <input type="text" id="txtPaymentAmount" class="input-no-bg text-head-summary money" autocomplete="off" readonly="readonly" value="0" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-group">
+                                            <div class="card text-white bg-success">
+                                                <div class="card-body">
+                                                    <p class="text-details">ยอดคงเหลือ</p>
+                                                    <input type="text" id="txtPaymentBalance" class="input-no-bg text-head-summary money" autocomplete="off" readonly="readonly" value="0" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        @*<div>รูปแบบการรับชำระ </div>*@
+                                        <div class="row">
+                                            @foreach (var item in Model.Where(x => x.PartialPaymentShow == true).ToList())
+                                            {
+
+                                                var ModelId = "#Partial" + item.ModalId;
+
+                                                if (item.ModalId == "creditEdcModal")
+                                                {
+                                                    <div class="col-2" style="margin-right:15px;margin-left:15px;">
+                                                        <a href="@ModelId" title="@item.Name" id="@ModelId.Remove(0,1)">
+                                                            <img class="payment-icon" src="~/Content/img/PAYICON/@item.ImgName">
+
+                                                        </a>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="col-2" style="margin-right:15px;margin-left:15px;">
+                                                        <a data-toggle="modal" href="@ModelId" title="@item.Name">
+                                                            <img class="payment-icon" src="~/Content/img/PAYICON/@item.ImgName">
+
+                                                        </a>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-md-12" id="PartialPaymentTable">
+                        @Html.Action("PartialPaymentTable")
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer center">
+                <button type="button" id="ConfirmSavePartialPayment" onclick="SavePartialPayment()" class="btn btn-success">ยืนยัน</button>
+            </div>
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+
+</div>
+<script>
+    $(document).ready(function () {
+        this.PartialPayment = $('#PartialPayment');
+
+       // CreateDtTable();
+
+        this.PartialPayment.on('shown.bs.modal', function () {
+
+            this.HideCashAmount = ToDouble('#CashAmount');
+            this.HidePaymentAmount = ToDouble('#PaymentAmount');
+            this.HideTotalAmount = ToDouble('#txtPaymentMoney');
+
+            $('#txtPaymentTotal').val(this.HideTotalAmount.toFixed(2));
+            $('#txtPaymentAmount').val(this.HidePaymentAmount.toFixed(2));
+            $('#txtPaymentBalance').val((this.HideTotalAmount - this.HidePaymentAmount).toFixed(2));
+
+            $('#ConfirmSavePartialPayment').prop('disabled', true);
+
+        });
+        //$('#PartialcreditEdcModal').click(function () {
+
+        //    if ($('#txtPaymentAmount').val() > 0) {
+        //        $('#PartialcreditEdcModal').removeAttr('href')
+        //        warningAlert("มีการชำระรูปแบบอื่นแล้ว ไม่สามารถจ่ายแบบ Partial ได้");
+        //    } else {
+        //        $('#PartialcreditEdcModal').attr("href ='#PartialcreditEdcModal'");
+        //    }
+
+        //});
+        $('#ClosePaymentPartial').click(function () {
+            confirmAlert("ต้องการยกเลิกรายการจ่ายแบบ Partial?", function (event) {
+                if (!event) {
+                   //var url =
+                    $.get('@Url.Action("PartialPaymentTable")', "", function (data) {
+
+                        $('#PartialPaymentTable').html("");
+                        $('#PartialPaymentTable').html(data);
+                        $('#PartialPayment').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
+                    });
+
+                } else {
+
+                }
+            });
+
+        });
+        //this.PartialPayment.on('hidden.bs.modal', function () {
+
+        //});
+
+
+        //function ToDouble(id) {
+        //    return parseFloat($(id).val().replace(",", ""));
+        //}
+        function ToDouble(id) {
+            return parseFloat($(id).val().replace(",", ""));
+        }
+        //-------------- Add Cash Money ------------------------------------
+             $('#btnPartialCashReceiveMoney').click(function () {
+
+             var url = '@Url.Action("MaintainPartialPayment")';
+              var data = {
+                  Action: "Add",
+                  DocNo: $('#DocNo').val(),
+                  DocCode: $('#DocCode').val(),
+                  PaymentType: "CashPayment",
+                  Money: $('#txtPartialPaymentReceive').val(),
+                  ChangeMoney: $('#txtPartialChangeMoney').val(),
+                  PaymentTotal: $('#txtPaymentMoney').val(),
+                  Remark: $('#txtPartialCashNote').val()
+              };
+                 $.post(url, data, function (result) {
+
+                     if (result.Success) {
+                         $('#txtPaymentAmount').val(result.PaymentSum.toFixed(2));
+                         if (result.PaymentBalance < 0) {
+                             $('#txtPaymentBalance').val('0.00');
+                         } else {
+                             $('#txtPaymentBalance').val(result.PaymentBalance.toFixed(2));
+                         }
+                         $('#PartialPaymentTable').html("");
+                         $('#PartialPaymentTable').html(result.Table);
+                         $('#PartialcashModal').hide();
+                         if (result.PaymentBalance <= 0) {
+                             $('#ConfirmSavePartialPayment').prop('disabled', false);
+                         }
+                     } else {
+                         warningAlert("ไม่สามารถเพิ่มได้");
+                     }
+                 });
+        });
+
+
+        //-------------- Add Credit Card ------------------------------------
+           $('#btnPartialCreditCardReceiveMoney').click(function () {
+
+             var url = '@Url.Action("MaintainPartialPayment")';
+              var data = {
+                  Action: "Add",
+                  DocNo: $('#DocNo').val(),
+                  DocCode: $('#DocCode').val(),
+                  PaymentType: "CreditPayment",
+                  Money: $('#txtPartialPaymentCreditCard').val(),
+                  PaymentCr: $('#txtPartialPaymentCreditCard').val(),
+                  CardTypeCode: $('#ddPartialCardType').val(),
+                  CreditNumber: $('#txtPartialCreditNumber').val(),
+                  ExpiredMonth: $('#ddPartialCreditMonth').val(),
+                  ExpiredYear: $('#ddPartialCreditYear').val(),
+                  ApprCode: $('#txtPartialApprCode').val(),
+                  BankCode: $('#ddPartialBank').val(),
+                  PaymentFormatId: $('#ddPartialPaymentFormat').val(),
+                  Note: $('#txtPartialCreditCardNote').val(),
+                  ConnectType: 'card',
+                  CreditType: $('#crTypeCreditPartial').val(),
+                  PaymentTotal: $('#txtPaymentMoney').val(),
+                  PaymentNumberId: $('#txtPartialCreditNumber').val()
+              };
+                 $.post(url, data, function (result) {
+
+                     if (result.Success) {
+                         $('#txtPaymentAmount').val(result.PaymentSum.toFixed(2));
+
+                         if (result.PaymentBalance < 0) {
+                             $('#txtPaymentBalance').val('0.00');
+                         } else {
+                             $('#txtPaymentBalance').val(result.PaymentBalance.toFixed(2));
+                         }
+
+
+                         $('#PartialPaymentTable').html("");
+                         $('#PartialPaymentTable').html(result.Table);
+                         $('#PartialcreditCardModal').hide();
+                         if (result.PaymentBalance <= 0) {
+                             $('#ConfirmSavePartialPayment').prop('disabled', false);
+                         }
+                     } else {
+                         warningAlert("ไม่สามารถเพิ่มได้");
+                     }
+                 });
+        });
+
+          //-------------- Add Credit Card EDC ------------------------------------
+        $('#btnPartialEdcReceiveMoney').click(function () {
+
+             var url = '@Url.Action("MaintainPartialPayment")';
+              var data = {
+                  Action: "Add",
+                  DocNo: $('#DocNo').val(),
+                  DocCode: $('#DocCode').val(),
+                  PaymentType: "CreditPayment",
+                  Money: $('#txtPartialPaymentCreditEdc').val(),
+                  PaymentCr: $('#txtPartialPaymentCreditCard').val(),
+                  CardTypeCode: $('#ddPartialCardTypeEdc').val(),
+                  CreditNumber: $('#txtPartialCreditEdcNumber').val(),
+                  ExpiredMonth: $('#txtPartialCrediEdctMonth').val(),
+                  ExpiredYear: $('#txtPartialCreditEdcYear').val(),
+                  ApprCode: $('#txtPartialApprCodeEdc').val(),
+                  BankCode: $('#ddPartialBankEdc').val(),
+                  PaymentFormatId: $('#ddPartialPaymentFormatEdc').val(),
+                  Note: $('#txtPartialEdcNote').val(),
+                  ConnectType: 'card',
+                  CreditType: $('#ddPartialCardTypeEdc').val(),
+                  PaymentNumberId: $('#txtPartialCreditEdcNumber').val(),
+                  PaymentTotal: $('#txtPaymentMoney').val()
+              };
+                 $.post(url, data, function (result) {
+
+                     if (result.Success) {
+                         $('#txtPaymentAmount').val(result.PaymentSum.toFixed(2));
+
+                         if (result.PaymentBalance < 0) {
+                             $('#txtPaymentBalance').val('0.00');
+                         } else {
+                             $('#txtPaymentBalance').val(result.PaymentBalance.toFixed(2));
+                         }
+                         $('#PartialPaymentTable').html("");
+                         $('#PartialPaymentTable').html(result.Table);
+                         $('#CreditEdcModalPartial').hide();
+                         if (result.PaymentBalance <= 0) {
+                             $('#ConfirmSavePartialPayment').prop('disabled', false);
+                         }
+                     } else {
+                         warningAlert("ไม่สามารถเพิ่มได้");
+                     }
+                 });
+        });
+
+           //-------------- Add Blue Card ------------------------------------
+        // Add  blue card in js blue-card-modal-partial.js
+        //$('#btnBlueCardReceiveMoney').click(function () {
+
+
+        //});
+
+
+
+    });
+
+    function CreateDtTable() {
+
+        $('#PartialPayment-list').dataTable({
+            "searching": false,
+            "paging": false,
+            "ordering": false,
+            "scrollCollapse": true,
+            "info": false,
+            columns: [
+                {
+                    data: "PaymentTypeName",
+                    className: "text-center",
+                },
+
+                {
+                data: "money",
+                className: "text-right",
+                render: $.fn.dataTable.render.number(',', '.', 2)
+                },
+                { data: "PaymentNumberId" },
+                { data: "Remark" }
+            ]
+        });
+
+    }
+
+
+        function SavePartialPayment() {
+           var url = '@Url.Action("CheckSavePartialPayment")';
+
+            $.post(url, "", function (result) {
+                if (result.Success) {
+                    $('#PartialPayment').modal('hide');
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
+
+                    if (result._UseBlueCard) {
+                        $('#myForm').submit();
+                    } else {
+                        $('#blueCardSaveModal').modal();
+                    }
+
+                } else {
+                    warningAlert("กรุณารับชำระให้ครบจำนวน");
+                }
+
+            });
+        }
+        function EditPartialPayment() {
+            var url = "";
+            var data = "";
+            $.post(url, data, function (result) {
+
+
+            });
+        }
+        function DeletePartialPayment() {
+            var url = "";
+            var data = "";
+            $.post(url, data, function (result) {
+
+
+            });
+    }
+
+
+
+</script>
+
+

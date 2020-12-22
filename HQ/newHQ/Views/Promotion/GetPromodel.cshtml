@@ -1,0 +1,159 @@
+﻿@model CentralService.Models.ExtraPromotionModel
+
+<style>
+    .modal-content {
+        width: 100%;
+    }
+</style>
+
+<div class="modal fade" id="modal-select-promodel" tabindex="-1" role="dialog" aria-labelledby="selectPromotionModel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 title-head">
+                            <h4>ข้อมูลรุ่นสินค้า</h4>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div id="bError_promodel" class="row" style="display: none">
+                                <div class="col-md-12">
+                                    <div>
+                                        <table class="col-md-12 table-bordered table-striped table-condensed tables" cellspacing="0" id="gv_error" style="border-collapse:collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="11">
+                                                        <center><span style="font-size: 20px; color: Red;">ไม่พบข้อมูลโปรโมชั่น</span></center>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="gv_promodel_wrapper" class="row" style="display: normal">
+                                <div class="col-md-12">
+                                    <table class="table table-hover table-striped dataTable no-footer" cellspacing="0" id="gv_promodel" style="border-collapse:collapse; width: 100%" role="grid" aria-describedby="gv_promodel_info">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <input id="gv_promodel_CheckBox_all" type="checkbox" name="gv_promodel_CheckBox_all">
+                                                    <label for="gv_promodel_CheckBox_all"> เลือกทั้งหมด</label>
+                                                </th>
+                                                <th class="text-center">รหัสรุ่นสินค้า</th>
+                                                <th class="text-center">รุ่นสินค้า</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                for (int i = 0; i < Model.PromodelList.Count; i++)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.CheckBoxFor(x => Model.PromodelList[i].IsCheck, new { style = "opacity: 1;" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => Model.PromodelList[i].pro_model_code)
+                                                            @Html.HiddenFor(m => Model.PromodelList[i].pro_model)
+                                                            @Html.DisplayFor(x => Model.PromodelList[i].pro_model_code)
+                                                        </td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => Model.PromodelList[i].pro_model_code)
+                                                            @Html.HiddenFor(m => Model.PromodelList[i].pro_model)
+                                                            @Html.DisplayFor(x => Model.PromodelList[i].pro_model)
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                @:
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <input type="button" name="btnSave" value="บันทึก" id="btnSavePromodel" class="btn btn-primary">
+                            <input type="button" name="btnClose" value="ยกเลิก" id="btnClose" data-dismiss="modal" class="btn btn-danger">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#btnSavePromodel").click(function (e) {
+
+            var list = []; var values = []; var Item = ""; var value = "";
+            $("#gv_promodel").DataTable().rows().nodes().to$().find('input[type="checkbox"]:checked').each(function () {
+
+                Item = $(this).closest('tr').find("td").eq(2).text().trim();
+                list.push(Item);
+                value = $(this).closest('tr').find("td").eq(1).text().trim();
+                values.push(value);
+            });
+
+            if (list.length === 0) {
+                warningAlert('กรุณาเลือกข้อมูล');
+                e.preventDefault();
+            } else {
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "SaveData",
+                    data: { 'data': values.join(), '_type': "promodel" },
+                    success: function (data) {
+                        $('#modal-select-promodel').modal('toggle'); // close yourself
+                        $("#txt_pro_model").val(list.join(', '));
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve.');
+                    }
+                });
+            }
+        });
+    });
+</script>
+<script>
+                //$(document).ready(function () {
+                //    $("#btnSavePromodel").click(function (e) {
+                //        var values = [], rowValue = "";
+                //        var values2 = [], rowValue2 = "";
+                //        $('#gv_promodel tbody tr  input:checkbox').each(function () {
+                //            if (this.checked) {
+                //                $(this).closest('tr').find("td:not([class])").map(function () {
+                //                    rowValue = $(this).text().trim();
+                //                    rowValue2 = $(this).closest('tr').find("td:not([class])").eq(0).find('input').val();
+                //                });
+                //                values.push(rowValue);
+                //                values2.push(rowValue2);
+                //            }
+                //        });
+                //        if (values2.length === 0) {
+                //            warningAlert('กรุณาเลือกข้อมูล');
+                //            e.preventDefault();
+                //        } else {
+                //            $.ajax({
+                //                cache: false,
+                //                type: "GET",
+                //                url: "GetProSize",
+                //                data: { 'data': values2.join() },
+                //                success: function (data) {
+                //                    $("#prosize_popup").html(data);
+                //                    $("#gv_prosize").DataTable();
+                //                    $('#modal-select-promodel').modal('toggle'); // close yourself
+                //                    $("#txt_pro_model").val(values.join(', '));
+                //                },
+                //                error: function (xhr, ajaxOptions, thrownError) {
+                //                    alert('Failed to retrieve.');
+                //                }
+                //            });
+                //        }
+                //    });
+                //});
+</script>

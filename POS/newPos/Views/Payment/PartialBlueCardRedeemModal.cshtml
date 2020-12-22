@@ -1,0 +1,128 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "BlueCardRedeemModal";
+}
+
+<!-- Modal -->
+<div class="modal fade" id="PartialblueCardRedeemModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="height: auto;top:0px">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Blue Card</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4"><h6>ประเภทบัตรที่ใช้</h6></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+
+                        @*<button class="btn btn-lg btn-info" type="button" name="bct" id="BlueCardType1"><i class="fa fa-lg fa-credit-card"></i> Blue Card</button>*@
+                        <button name="bct" id="BlueCardType1" type="button"> <img src="~/Content/img/PAYICON/icon_blue_card.jpg" /></button>
+                    </div>
+                    <div class="col-md-3">
+
+                        @* <button class="btn btn-lg btn-default" type="button" name="bct" id="BlueCardType2"><i class="fa fa-lg fa-credit-card"></i> CO-Brand</button>*@
+                        <button name="bct" id="BlueCardType2" type="button">  <img src="~/Content/img/PAYICON/icon_co-brand.jpg" /></button>
+                    </div>
+                    <div class="col-md-3">
+                        <button name="bct" id="BlueCardType3" type="button">
+                            <img src="~/Content/img/PAYICON/icon_k-bank.jpg" />
+                        </button>
+                        @*<button class="btn btn-lg btn-default" type="button" name="bct" id="BlueCardType3"><i class="fa fa-lg fa-credit-card"></i> K-Bank</button>*@
+
+                    </div>
+                </div>
+                @*<input type="hidden" name="BlueCardType" id="BlueCardType" value="" />*@
+                <br />
+                <div class="row">
+                    <div class="offset-2 col-8 bluecard-form">
+                            @*<div class="form-group row">
+                                <span class="col-4 col-form-label col-form-label-sm">Telephone number</span>
+                                <input type="text" class="form-control form-control-sm col-8 input-mobile" id="txtBlueCardMobile" aria-describedby="basic-addon1" readonly>
+                                <label id="lblBlueCardMobileRedeemIsValid" class="invalid offset-4">เบอร์โทรไม่ถูกต้อง</label>
+                            </div>*@
+                        <div class="form-group row">
+                            <span class="col-4 col-form-label col-form-label-sm">Blue No.</span>
+                            <input type="text" class="form-control form-control-sm col-8 input-card" id="txtBlueCardNo" aria-describedby="basic-addon1" style="background-color:#e9ecef">
+                        </div>
+                        <div class="form-group row">
+                            <span class="col-4 col-form-label col-form-label-sm">Point</span>
+                            <input type="text" class="form-control form-control-sm col-8 input-balance-point" id="txtBalancePoint" aria-describedby="basic-addon1" readonly>
+                        </div>
+                        <div class="form-group row">
+                            <span class="col-4 col-form-label col-form-label-sm">Blue Code</span>
+                            <input type="text" class="form-control form-control-sm col-8" id="txtBlueCardCode" aria-describedby="basic-addon1" maxlength="4" readonly>
+                        </div>
+                        <div class="form-group row">
+                            <span class="col-4 col-form-label col-form-label-sm">Used Point</span>
+                            <input type="text" class="form-control form-control-sm number-Integer col-8" id="txtUsePoint" aria-describedby="basic-addon1" readonly>
+                            @*ใส่คะแนนที่จะใช้ให้ถูกต้อง*@
+                            <label id="lblBlueCardUsePointRedeemIsValid" class="invalid offset-4">Please enter correct used point</label>
+                            <label id="lblBlueCardUsePointRedeemIsMinPointValid" class="invalid offset-4"></label>
+                            <input type="hidden" id="MIN_Redeem_Point" />
+                            <input type="hidden" id="Ratio_Point" />
+                            @*<input type="hidden" id="ExRateby" />
+                                <input type="hidden" id="BlueCard_RewardPoint" />
+                                <input type="hidden" id="BlueCard_Money" />*@
+                        </div>
+                        <div class="form-group row">
+                            <span class="col-4 col-form-label col-form-label-sm">Money</span>
+                            <input type="text" class="form-control form-control-sm money col-8" id="txtBlueCardMoney" aria-describedby="basic-addon1" readonly>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">หมายเหตุ</span>
+                    </div>
+                    <input type="text" class="form-control" id="txtBlueCardNote" aria-describedby="basic-addon1">
+                </div>
+                <button type="button" id="btnBlueCardReceiveMoney" class="btn btn-success">ยืนยัน</button>
+            </div>
+
+
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#BlueCardType').val('1');
+    });
+
+    $('#BlueCardType1').on('click', function () {
+
+        $('button[name=bct]').removeClass();
+        //  $('button[name=bct]').addClass('btn btn-info');
+        //   $(this).removeClass();
+        $(this).addClass('btn btn-success')
+        $('#BlueCardType').val('1');//By PTT Blue Card
+    });
+    $('#BlueCardType2').on('click', function () {
+
+        $('button[name=bct]').removeClass();
+        //  $('button[name=bct]').addClass('not-active');
+        $(this).removeClass();
+        $(this).addClass('btn btn-success')
+        $('#BlueCardType').val('4');//By PTT Co Brand
+    });
+    $('#BlueCardType3').on('click', function () {
+
+        $('button[name=bct]').removeClass();
+        // $('button[name=bct]').addClass('not-active');
+        //   $(this).removeClass();
+        $(this).addClass('btn btn-success')
+        $('#BlueCardType').val('5'); //By Other
+    });
+</script>

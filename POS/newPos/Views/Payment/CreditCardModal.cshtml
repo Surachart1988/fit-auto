@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "CreditCardModal";
+}
+
+<!-- Modal -->
+<div class="modal fade" id="creditCardModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">เครดิตการ์ด</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-5" style="margin-top: 20px;">
+                        <div class="card text-white bg-info">
+
+                            <div class="card-body card-lg">
+                                <p class="text-details">จำนวนเงิน (บาท)</p>
+                                <input id="txtPaymentCreditCard" class="input-no-bg text-result-lg money" readonly />
+                            </div>
+                        </div>
+                        @*<div class="row" style="margin-top: 20px;">
+                                <div class="col">
+                                    <img src="~/Content/img/PAYICON/mastercard-securecode.png" alt="mastercard" width="100%">
+                                </div>
+                                <div class="col">
+                                    <img src="~/Content/img/PAYICON/visa.png" alt="visa" alt="mastercard" width="100%">
+                                </div>
+                            </div>*@
+                    </div>
+                    <div class="col-6 credit-form">
+                        @*<label>ชื่อที่ปรากฎบนบัตร</label>
+                            <input type="text" id="txtCreditName">*@
+                        <div class="row">
+                            <div class="col-12">
+                                <label>หมายเลขบัตร<font class="invalid">*</font></label>
+                                <div class="row">
+                                    <div class="col-9">
+                                        <input type="text" id="txtCreditNumber" class="input-credit-card form-control form-control-sm">
+                                    </div>
+                                    <div class="col">
+                                        <i id="crIcon" style="font-size:30px"></i>
+                                    </div>
+                                </div>
+                                <label id="txtCreditNumberIsValid" class="invalid">รหัสบัตรไม่ถูกต้อง</label>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label>วันหมดอายุ<font class="invalid">*</font></label>
+                                <div class="row">
+                                    <div class="col">
+                                        <select id="ddCreditMonth" class="form-control  form-control-sm"></select>
+                                    </div>
+                                    <div class="col">
+                                        <select id="ddCreditYear" class="form-control  form-control-sm"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label>Appr.Code<font class="invalid">*</font></label>
+                                <input type="text" id="txtApprCode" class="form-control form-control-sm input-number" maxlength="6" />
+                                <label id="txtApprCodeIsValid" class="invalid">รหัส Appr.Code ไม่ถูกต้อง</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label>ธนาคารเจ้าของบัตร<font class="invalid">*</font></label>
+                                @Html.DropDownList("ddBank", (SelectList)ViewBag.BankDropDown, new { @class = "form-control form-control-sm" })
+                                <label id="lblbank" class="invalid">กรุณาเลือก ธนาคารเจ้าของบัตร</label>
+                            </div>
+                            <div class="col-6">
+                                <label>รูปแบบการชำระ<font class="invalid">*</font></label>
+                                @Html.DropDownList("ddPaymentFormat", (SelectList)ViewBag.PaymentFormatDropDown, new { @class = "form-control form-control-sm" })
+                                <label id="lblpaymentformat" class="invalid">กรุณาเลือก รูปแบบการชำระ</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label>ชนิดบัตร<font class="invalid">*</font></label>
+                                <select class="form-control" id="ddCardType" name="ddCardType">
+                                    @foreach (var CardType in Model.PayCardList)
+                                    {
+                                        <option value="@CardType.Code" bank_code="@CardType.dfField1">@CardType.Name</option>
+                                    }
+                                </select>
+                                <label id="lblddCardType" class="invalid">กรุณาเลือก ชนิดบัตร</label>
+                                @*@Html.Raw(ViewBag.CardTypeDropDown)*@
+                                @*@ViewBag.CardTypeDropDown*@
+                                @*@Html.DropDownList("ddCardType", (SelectList)ViewBag.CardTypeDropDown, new { @class = "form-control form-control-sm" })*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">หมายเหตุ</span>
+                    </div>
+                    <input type="text" class="form-control" id="txtCreditCardNote" aria-describedby="basic-addon1">
+                </div>
+                <button type="button" id="btnCreditCardReceiveMoney" class="btn btn-success">รับเงิน</button>
+            </div>
+
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div>
+

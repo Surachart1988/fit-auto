@@ -1,0 +1,279 @@
+﻿.card-header.main {
+    background-color: #363167;
+    color: white;
+}
+
+.text-head-summary {
+    font-size: 3.5vh;
+    margin-bottom: 0;
+    font-weight: bold;
+    text-align: right;
+}
+
+.text-result-bluecard {
+    margin-bottom: 0;
+    /*text-align: right;*/
+    width: 100%;
+    border: 0;
+    color: #363167;
+    background-color: transparent;
+}
+
+.text-result-md {
+    font-size: 5vh;
+    margin-bottom: 0;
+    font-weight: bold;
+    text-align: right;
+}
+
+.text-result-lg {
+    font-size: 6.5vh;
+    margin-bottom: 0;
+    font-weight: bold;
+    text-align: right;
+}
+
+.text-details {
+    font-size: 1vw;
+    margin-bottom: 0;
+    text-align: right;
+}
+
+.text-head {
+    font-size: 1.5vh;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+    .text-head .col-3 {
+        text-align: center;
+    }
+
+.text-list .col-3 {
+    text-align: center;
+}
+
+.text-list {
+    font-size: 1.5vh;
+    margin-bottom: 0;
+}
+
+.text-list label{
+    margin-bottom: 0
+}
+
+    .card-list {
+        overflow-y: auto;
+        height: 25vh;
+    }
+
+.text-white .card-body {
+    padding-top: 0.3vh;
+    height: 8.7vh;
+}
+
+.card-body.card-lg {
+    height: 13vh;
+}
+
+.calculator-card {
+    width: 70%;
+    margin-left: 15%;
+}
+
+.card.border-light {
+    background-color: #ecf0f5;
+    color: #363167;
+}
+
+    .card.border-light .card-header {
+        padding: 0;
+        padding-bottom: 1vh;
+        background-color: rgba(0,0,0,0);
+        font-size: 2vh
+    }
+
+.payment-icon {
+    height: 12vh;
+}
+
+.discount-icon {
+    height: 7vh;
+    font-size: 0.5vw;
+    color: #363167;
+}
+
+.discount-icon.card {
+    background-color: #a0c1ff;
+}
+
+.discount-icon label{
+    margin: 7%;
+}
+
+.discount-col {
+    text-align: center;
+    height: 7.3vh;
+    padding-right: 1px;
+    padding-left: 1px;
+}
+
+thead tr {
+    background-color: #363167;
+    color: white;
+}
+
+.payment-col {
+    text-align: center;
+    height: 12.3vh;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.text-payment {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: 70%;
+    transform: translate(-50%, -50%);
+    color: #363167;
+}
+
+.input-no-bg {
+    background-color: transparent;
+    color: white;
+    width: 85%;
+    right: 25px;
+    position: absolute;
+    border: 0;
+}
+
+.row.text-right {
+    text-align: right;
+}
+
+.modal .modal-dialog,
+.modal .modal-dialog {
+    position: fixed;
+    margin: auto;
+    margin-top: 140px;
+    width: 55vw;
+    height: 52vh;
+    padding-left: 100px;
+    -webkit-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    -o-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+}
+
+.modal .modal-content,
+.modal .modal-content {
+    height: 100%;
+    overflow-y: auto;
+}
+
+/*Left*/
+.modal.left.fade .modal-dialog {
+    left: -320px;
+    -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+    transition: opacity 0.3s linear, left 0.3s ease-out;
+}
+
+.modal.left.fade.in .modal-dialog {
+    left: 0;
+}
+
+/*Right*/
+.modal.right.fade .modal-dialog {
+    right: -320px;
+    -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+    transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.fade.show .modal-dialog {
+    right: 0;
+}
+
+/* ----- MODAL STYLE ----- */
+.modal-content {
+    border-radius: 0;
+    border: none;
+}
+
+.modal-header {
+    border-bottom-color: #EEEEEE;
+    background-color: #FAFAFA;
+}
+
+/* ----- v CAN BE DELETED v ----- */
+body {
+    background-color: #78909C;
+}
+
+tbody {
+    font-size: 2vh;
+    padding: 0;
+    line-height: .5vh;
+}
+
+
+.modal-header {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    color: #363167;
+}
+
+.container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+#btnBack {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.credit-form {
+    padding: 0;
+    font-size: 1.7vh;
+    color: #363167;
+}
+
+    .credit-form label {
+        display: block;
+        margin-bottom: 0;
+        margin-top: .3rem;
+    }
+
+.not-active {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.not-active-finish {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.bluecard-form .form-group.row {
+    margin-bottom: 0.5rem;
+    text-align: right;
+    color: #363167;
+}
+
+.remove {
+    position: absolute;
+}

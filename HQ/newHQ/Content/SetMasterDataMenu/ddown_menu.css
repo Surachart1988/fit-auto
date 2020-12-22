@@ -1,0 +1,125 @@
+﻿/* CSS For Dropdown Menu Start user */
+
+
+
+
+
+
+
+
+
+/* CSS For Dropdown Menu Start admin */
+.topmenu2 ul
+{
+  list-style:none;
+  padding-bottom:60px;
+  margin:5px 0px 0px ;
+  padding-left:0px;
+
+
+}
+
+.topmenu2 ul li
+{
+  display:inline;
+  float:left; 
+
+
+   
+}
+
+.topmenu2 ul li a
+{
+  color:#ffffff;
+  background-color:#808080;
+  margin-right:2px;
+  font-weight:bold;
+  font-size:13px;
+  text-decoration:none;
+  display:block;
+  width:175px;
+  height:31px;
+  line-height:31px;
+  text-align:center;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border: 1px solid #000000;
+  z-index: 100;
+}
+
+.topmenu2 ul li a:hover
+{
+  color:#000000;
+  background:#ffe665;
+  font-weight:bold;
+  text-decoration:none;
+  display:block;
+  width:175px;
+  text-align:center;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border: 1px solid #000000;
+  z-index: 100;
+}
+
+.topmenu2 .addmenu
+{
+  color:#cccccc;
+  background:#560E00;
+  font-weight:bold;
+  text-decoration:none;
+  display:block;
+  width:163px;
+  text-align:center;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border: 1px solid #000000;
+  z-index: 100;
+}
+
+.topmenu2 ul li.sublinks a
+{
+  color:#000000;
+  background:#f6f6f6;
+  border-bottom:1px solid #cccccc;
+  font-weight:normal;
+  text-decoration:none;
+  display:block;
+  width:175px;
+  text-align:center;
+  margin-top:0px;
+  z-index: 100;
+}
+
+.topmenu2 ul li.sublinks a:hover
+{
+  color:#000000;
+  background:#ffe665;
+  font-weight:normal;
+  text-decoration:none;
+  display:block;
+  width:175px;
+  text-align:center;
+  z-index: 100;
+}
+
+.topmenu2 ul li.sublinks
+{
+	display:none;
+}
+/* CSS For Dropdown Menu End */
+
+.clear
+{
+  clear:both;
+}
+
+.left
+{
+  float:left;
+}
+
+.right
+{
+  float:right;
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="287877e1-6d8a-4da2-82bf-2b7de6ad604b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://ptt-lybpgw-t01.pttcrm.local/BluePointGateway/Service/BlueServiceRestFulApp.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="BlueServiceRestFulApp.xsd" MetadataType="Schema" ID="d5c55ac4-2b85-4bb1-91fe-31a4c0efb78c" SourceId="1" SourceUrl="http://ptt-lybpgw-t01.pttcrm.local/BluePointGateway/Service/BlueServiceRestFulApp.svc?xsd=xsd2" />
+    <MetadataFile FileName="BlueServiceRestFulApp1.xsd" MetadataType="Schema" ID="74251c5b-92fb-4a85-b42d-8662fff7ae9c" SourceId="1" SourceUrl="http://ptt-lybpgw-t01.pttcrm.local/BluePointGateway/Service/BlueServiceRestFulApp.svc?xsd=xsd1" />
+    <MetadataFile FileName="BlueServiceRestFulApp2.xsd" MetadataType="Schema" ID="cceb9b6b-4931-4508-a13d-8d925d977ea7" SourceId="1" SourceUrl="http://ptt-lybpgw-t01.pttcrm.local/BluePointGateway/Service/BlueServiceRestFulApp.svc?xsd=xsd0" />
+    <MetadataFile FileName="BlueServiceRestFulApp.disco" MetadataType="Disco" ID="ba7e379d-dba4-4e41-8519-bbb66c77eb62" SourceId="1" SourceUrl="http://ptt-lybpgw-t01.pttcrm.local/BluePointGateway/Service/BlueServiceRestFulApp.svc?disco" />
+    <MetadataFile FileName="BlueServiceRestFulApp.wsdl" MetadataType="Wsdl" ID="ef5c235d-3ad6-4882-89f2-0efce905a245" SourceId="1" SourceUrl="http://ptt-lybpgw-t01.pttcrm.local/BluePointGateway/Service/BlueServiceRestFulApp.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

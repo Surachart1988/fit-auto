@@ -1,0 +1,76 @@
+﻿@model List<CentralService.Models.PaymentIconModel>
+@{
+    ViewBag.Title = "Partial Payment";
+}
+
+<!-- Modal -->
+<div class="modal fade" id="OnlinePayment" tabindex="-1" data-toggle="modal" data-backdrop="static" >
+    <div class="modal-dialog" role="document" style="height: auto;width: 40vw;margin-top:10%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Online Payment</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+
+            <div class="modal-body" style="background-color:#ecf0f5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                          
+                            <div class="panel-body">
+
+                                <div class="row" align="center">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-11">
+                                        @*<div>รูปแบบการรับชำระ </div>*@
+                                        <div class="row">
+                                            @foreach (var item in Model.Where(x => x.PartialPaymentShow == true).ToList())
+                                            {
+
+                                                var ModelId = item.ModalId;
+
+                                                <div class="col-3" style="margin:15px;">
+                                                    <a data-toggle="modal" onclick="OpenPaymentModal('@item.PaymentTypeCode','@item.Name')" title="@item.Name">
+                                                        <img class="payment-icon" src="~/Content/img/PAYICON/@item.ImgName">
+
+                                                    </a>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+             
+                @*<div class="row">
+                    <div class="col-md-12" id="PartialPaymentTable">
+                      @Html.Action("PartialPaymentTable")
+                    </div>
+                </div>*@
+
+
+            </div>
+            @*<div class="modal-footer center">
+                <button type="button" id="ConfirmSavePartialPayment" onclick="SavePartialPayment()" class="btn btn-success">ยืนยัน</button>
+            </div>*@
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+
+</div>
+<script>
+    $(document).ready(function () {
+     });
+
+    function OpenPaymentModal(PaymentTypeCode, TitleName) {
+        $('#hd_OnlinePaymentType').val(PaymentTypeCode);
+        $('#OP_Title').text(TitleName);
+        $('#OnlinePaymentDetailModal').modal('show');
+    }
+
+</script>
+
+

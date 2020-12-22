@@ -1,0 +1,717 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{68C23C72-9ECF-4DED-86E0-73DC677B2367}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HQPosData</RootNamespace>
+    <AssemblyName>HQPosData</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Authorize2_Approve_User.cs" />
+    <Compile Include="Models\Authorize2_Approve_User_Web_Log.cs" />
+    <Compile Include="Models\Authorize2_Document.cs" />
+    <Compile Include="Models\Authorize2_Document_User.cs" />
+    <Compile Include="Models\Authorize2_Document_User_Web_Log.cs" />
+    <Compile Include="Models\Authorize2_Group.cs" />
+    <Compile Include="Models\Authorize2_Group_Web_Log.cs" />
+    <Compile Include="Models\Authorize2_Menu.cs" />
+    <Compile Include="Models\Authorize2_Menu_User.cs" />
+    <Compile Include="Models\Authorize2_Menu_User_Web_Log.cs" />
+    <Compile Include="Models\Authorize_Approve.cs" />
+    <Compile Include="Models\Authorize_Approve_User.cs" />
+    <Compile Include="Models\Authorize_Document.cs" />
+    <Compile Include="Models\Authorize_Document_User.cs" />
+    <Compile Include="Models\Authorize_Group.cs" />
+    <Compile Include="Models\Authorize_Group_Approve.cs" />
+    <Compile Include="Models\Authorize_Group_Document.cs" />
+    <Compile Include="Models\Authorize_Group_Menu.cs" />
+    <Compile Include="Models\Authorize_Menu.cs" />
+    <Compile Include="Models\Authorize_Menu_Document.cs" />
+    <Compile Include="Models\Authorize_Menu_Tree.cs" />
+    <Compile Include="Models\Authorize_Menu_User.cs" />
+    <Compile Include="Models\Authorize_User_Level.cs" />
+    <Compile Include="Models\CAR_MASTER.cs" />
+    <Compile Include="Models\CS_cdDetail.cs" />
+    <Compile Include="Models\CS_cdHeader.cs" />
+    <Compile Include="Models\CS_dcDetail.cs" />
+    <Compile Include="Models\CS_dcHeader.cs" />
+    <Compile Include="Models\CS_DocNo.cs" />
+    <Compile Include="Models\CS_dsDetail.cs" />
+    <Compile Include="Models\CS_dsHeader.cs" />
+    <Compile Include="Models\CS_ProCodeNew.cs" />
+    <Compile Include="Models\CS_ProLocation.cs" />
+    <Compile Include="Models\CS_proserial.cs" />
+    <Compile Include="Models\CS_sdDetail.cs" />
+    <Compile Include="Models\CS_sdHeader.cs" />
+    <Compile Include="Models\CS_SN.cs" />
+    <Compile Include="Models\CS_tmpcdDetail.cs" />
+    <Compile Include="Models\CS_tmpcdHeader.cs" />
+    <Compile Include="Models\CS_tmpITEM.cs" />
+    <Compile Include="Models\dtproperty.cs" />
+    <Compile Include="Models\HQEntities.cs" />
+    <Compile Include="Models\IP_Address.cs" />
+    <Compile Include="Models\ISB_Transfer_Data.cs" />
+    <Compile Include="Models\logupdate_data.cs" />
+    <Compile Include="Models\MessageData.cs" />
+    <Compile Include="Models\RP_AgeAp.cs" />
+    <Compile Include="Models\RP_AgeAr.cs" />
+    <Compile Include="Models\RP_ApkeepHeader.cs" />
+    <Compile Include="Models\RP_ArkeepHeader.cs" />
+    <Compile Include="Models\RP_Barcode.cs" />
+    <Compile Include="Models\RP_DayEnd_Temp.cs" />
+    <Compile Include="Models\RP_Financial_Detail.cs" />
+    <Compile Include="Models\RP_Financial_Detail_Day_End.cs" />
+    <Compile Include="Models\RP_Financial_Header.cs" />
+    <Compile Include="Models\RP_Financial_Header_Day_End.cs" />
+    <Compile Include="Models\RP_SaleAndReceive.cs" />
+    <Compile Include="Models\RP_TaxSaleHeader.cs" />
+    <Compile Include="Models\RP_TAXSUMGROUP.cs" />
+    <Compile Include="Models\RP_VB_Adjust_stock.cs" />
+    <Compile Include="Models\RP_VB_income.cs" />
+    <Compile Include="Models\RP_VB_sale.cs" />
+    <Compile Include="Models\SBHRUser.cs" />
+    <Compile Include="Models\SBHRUser_Web_Log.cs" />
+    <Compile Include="Models\SBQty.cs" />
+    <Compile Include="Models\SBQty0000.cs" />
+    <Compile Include="Models\SBQtyInv.cs" />
+    <Compile Include="Models\sbqty_change.cs" />
+    <Compile Include="Models\SBSale_Head.cs" />
+    <Compile Include="Models\SBSale_Head_Prn.cs" />
+    <Compile Include="Models\SBSale_Temp.cs" />
+    <Compile Include="Models\SBWorkf.cs" />
+    <Compile Include="Models\SBWorkf_Detail.cs" />
+    <Compile Include="Models\SB_3Day_List.cs" />
+    <Compile Include="Models\SB_3Day_List_Web_Log.cs" />
+    <Compile Include="Models\SB_Alltable.cs" />
+    <Compile Include="Models\SB_Approve_Status.cs" />
+    <Compile Include="Models\SB_AutoCheck.cs" />
+    <Compile Include="Models\SB_AutoCheck_Set_Detail.cs" />
+    <Compile Include="Models\SB_AutoCheck_Set_Head.cs" />
+    <Compile Include="Models\SB_AutoCheck_Set_Temp.cs" />
+    <Compile Include="Models\SB_AutoCheck_Web_Log.cs" />
+    <Compile Include="Models\SB_Bank.cs" />
+    <Compile Include="Models\SB_bankaccount.cs" />
+    <Compile Include="Models\SB_Bank_Web_Log.cs" />
+    <Compile Include="Models\SB_Billing_Document.cs" />
+    <Compile Include="Models\SB_Billing_Log.cs" />
+    <Compile Include="Models\SB_BlueCardRedeemSetting.cs" />
+    <Compile Include="Models\SB_BlueCard.cs" />
+    <Compile Include="Models\ST_Transfer_Data_Log.cs" />
+    <Compile Include="Models\SB_Branch.cs" />
+    <Compile Include="Models\SB_Branch_Web_Log.cs" />
+    <Compile Include="Models\SB_busstype.cs" />
+    <Compile Include="Models\SB_busstype_Web_Log.cs" />
+    <Compile Include="Models\SB_BVat.cs" />
+    <Compile Include="Models\SB_BVat_Web_log.cs" />
+    <Compile Include="Models\SB_Callpoint.cs" />
+    <Compile Include="Models\SB_Callstatus.cs" />
+    <Compile Include="Models\SB_Campaign.cs" />
+    <Compile Include="Models\SB_Cancel_icard.cs" />
+    <Compile Include="Models\SB_Carbrand.cs" />
+    <Compile Include="Models\SB_Carbrand_Web_Log.cs" />
+    <Compile Include="Models\SB_CarColor.cs" />
+    <Compile Include="Models\SB_CarColor_Web_Log.cs" />
+    <Compile Include="Models\SB_CardType.cs" />
+    <Compile Include="Models\SB_CardType_Web_Log.cs" />
+    <Compile Include="Models\SB_CarGear.cs" />
+    <Compile Include="Models\SB_CarGear_Web_Log.cs" />
+    <Compile Include="Models\SB_CarMaster.cs" />
+    <Compile Include="Models\SB_CarModel.cs" />
+    <Compile Include="Models\SB_CarModel_Web_Log.cs" />
+    <Compile Include="Models\SB_Cartype.cs" />
+    <Compile Include="Models\SB_Cartype_Web_log.cs" />
+    <Compile Include="Models\SB_CarVariant.cs" />
+    <Compile Include="Models\SB_CarYear.cs" />
+    <Compile Include="Models\SB_Cash_Drawer.cs" />
+    <Compile Include="Models\SB_Cash_Drawer_Type.cs" />
+    <Compile Include="Models\SB_Chq_Status.cs" />
+    <Compile Include="Models\SB_Chq_Status_Sub.cs" />
+    <Compile Include="Models\SB_CLUB_TYPE.cs" />
+    <Compile Include="Models\SB_PromotionCouponDetailEmp.cs" />
+    <Compile Include="Models\SB_CouponDetail.cs" />
+    <Compile Include="Models\SB_Coupon.cs" />
+    <Compile Include="Models\SB_Credit_card.cs" />
+    <Compile Include="Models\SB_CusCar.cs" />
+    <Compile Include="Models\SB_Cuscar_Mileage_Job_Log.cs" />
+    <Compile Include="Models\SB_Cuscar_Mileage_Log.cs" />
+    <Compile Include="Models\SB_CusCar_Web_Log.cs" />
+    <Compile Include="Models\SB_Customer.cs" />
+    <Compile Include="Models\SB_Customer_Contact.cs" />
+    <Compile Include="Models\SB_Customer_Mobile_Log.cs" />
+    <Compile Include="Models\SB_Customer_Proprice.cs" />
+    <Compile Include="Models\SB_Customer_Proprice_Web_Log.cs" />
+    <Compile Include="Models\SB_Customer_Web_Log.cs" />
+    <Compile Include="Models\SB_Custype.cs" />
+    <Compile Include="Models\SB_Custype_pay.cs" />
+    <Compile Include="Models\SB_Custype_Web_log.cs" />
+    <Compile Include="Models\SB_Dealercode_Master.cs" />
+    <Compile Include="Models\SB_Dealercode_Master_Web_Log.cs" />
+    <Compile Include="Models\SB_decpay.cs" />
+    <Compile Include="Models\SB_Docno_Ref_Log.cs" />
+    <Compile Include="Models\SB_document.cs" />
+    <Compile Include="Models\SB_ExtraDiscount.cs" />
+    <Compile Include="Models\SB_FilmCarModel.cs" />
+    <Compile Include="Models\SB_FilmCar_Detail.cs" />
+    <Compile Include="Models\SB_FilmCar_Detail_Temp.cs" />
+    <Compile Include="Models\SB_FilmCar_Header.cs" />
+    <Compile Include="Models\SB_FilmCar_Model.cs" />
+    <Compile Include="Models\SB_FilmCar_Model_Temp.cs" />
+    <Compile Include="Models\SB_FilmCar_Size.cs" />
+    <Compile Include="Models\SB_FilmPosition.cs" />
+    <Compile Include="Models\SB_Grooveprice.cs" />
+    <Compile Include="Models\SB_HQ.cs" />
+    <Compile Include="Models\SB_incpay.cs" />
+    <Compile Include="Models\SB_Installment_Type.cs" />
+    <Compile Include="Models\SB_Installment_Type_Web_Log.cs" />
+    <Compile Include="Models\SB_Letter.cs" />
+    <Compile Include="Models\SB_location.cs" />
+    <Compile Include="Models\SB_Location_DOT.cs" />
+    <Compile Include="Models\SB_Location_DOT_Web_Log.cs" />
+    <Compile Include="Models\SB_location_Web_log.cs" />
+    <Compile Include="Models\SB_log.cs" />
+    <Compile Include="Models\SB_meeting.cs" />
+    <Compile Include="Models\SB_paytype.cs" />
+    <Compile Include="Models\SB_Paytype_Web_Log.cs" />
+    <Compile Include="Models\SB_priceown.cs" />
+    <Compile Include="Models\SB_Priceown_Web_Log.cs" />
+    <Compile Include="Models\SB_Print_Log.cs" />
+    <Compile Include="Models\SB_Probrand.cs" />
+    <Compile Include="Models\SB_Probrand_Web_Log.cs" />
+    <Compile Include="Models\SB_Product.cs" />
+    <Compile Include="Models\SB_Product_Barcode.cs" />
+    <Compile Include="Models\SB_Product_Barcode_Web_Log.cs" />
+    <Compile Include="Models\SB_Product_Child.cs" />
+    <Compile Include="Models\SB_Product_Child_Log.cs" />
+    <Compile Include="Models\SB_Product_FirstGroup.cs" />
+    <Compile Include="Models\SB_product_group.cs" />
+    <Compile Include="Models\SB_product_group_detail.cs" />
+    <Compile Include="Models\SB_Product_Picture.cs" />
+    <Compile Include="Models\SB_Product_Qty.cs" />
+    <Compile Include="Models\SB_Product_Qty_Web_Log.cs" />
+    <Compile Include="Models\SB_Product_Replace.cs" />
+    <Compile Include="Models\SB_Product_Replace_Code.cs" />
+    <Compile Include="Models\SB_Product_Replace_Code_Web_Log.cs" />
+    <Compile Include="Models\SB_Product_Set_Detail.cs" />
+    <Compile Include="Models\SB_Product_Set_Head.cs" />
+    <Compile Include="Models\SB_Product_Set_Temp.cs" />
+    <Compile Include="Models\SB_Product_Sub.cs" />
+    <Compile Include="Models\SB_Product_Temp_Delete.cs" />
+    <Compile Include="Models\SB_Product_Type_Used.cs" />
+    <Compile Include="Models\SB_Product_Type_Used_Web_Log.cs" />
+    <Compile Include="Models\SB_Product_Web_Log.cs" />
+    <Compile Include="Models\SB_Progroup.cs" />
+    <Compile Include="Models\SB_Progroup_Web_Log.cs" />
+    <Compile Include="Models\SB_Prolocation.cs" />
+    <Compile Include="Models\SB_promo.cs" />
+    <Compile Include="Models\SB_Promodel.cs" />
+    <Compile Include="Models\SB_Promodel_Web_Log.cs" />
+    <Compile Include="Models\SB_promotion.cs" />
+    <Compile Include="Models\SB_PromotionConditionTime.cs" />
+    <Compile Include="Models\SB_PromotionDetail.cs" />
+    <Compile Include="Models\SB_PromotionDiscount.cs" />
+    <Compile Include="Models\SB_PromotionGiveType.cs" />
+    <Compile Include="Models\SB_PromotionGroupUsed.cs" />
+    <Compile Include="Models\SB_PromotionHeader.cs" />
+    <Compile Include="Models\SB_PromotionPrice.cs" />
+    <Compile Include="Models\SB_PromotionType.cs" />
+    <Compile Include="Models\SB_proprice.cs" />
+    <Compile Include="Models\SB_Proprice_Log.cs" />
+    <Compile Include="Models\SB_Proprice_Log_Web_Log.cs" />
+    <Compile Include="Models\SB_proprice_Web_Log.cs" />
+    <Compile Include="Models\SB_ProSize.cs" />
+    <Compile Include="Models\SB_ProSize_Web_Log.cs" />
+    <Compile Include="Models\SB_PROSUB_NEXTSERV.cs" />
+    <Compile Include="Models\SB_PROSUB_NEXTSERV_CAR.cs" />
+    <Compile Include="Models\SB_prounit.cs" />
+    <Compile Include="Models\SB_province.cs" />
+    <Compile Include="Models\SB_Prov_Amphur.cs" />
+    <Compile Include="Models\SB_Prov_Bak.cs" />
+    <Compile Include="Models\SB_Prov_Bak_Amphur.cs" />
+    <Compile Include="Models\SB_Prov_Bak_Tambol.cs" />
+    <Compile Include="Models\SB_Prov_Tambol.cs" />
+    <Compile Include="Models\SB_Prov_Zone.cs" />
+    <Compile Include="Models\SB_Question_Choice.cs" />
+    <Compile Include="Models\SB_Question_Choice_Web_Log.cs" />
+    <Compile Include="Models\SB_Question_Detail.cs" />
+    <Compile Include="Models\SB_Question_Detail_Web_Log.cs" />
+    <Compile Include="Models\SB_Question_Head.cs" />
+    <Compile Include="Models\SB_Question_Head_Web_Log.cs" />
+    <Compile Include="Models\SB_SeeCar.cs" />
+    <Compile Include="Models\SB_sex.cs" />
+    <Compile Include="Models\SB_statuscar.cs" />
+    <Compile Include="Models\SB_statuscar_Web_Log.cs" />
+    <Compile Include="Models\SB_Stock_Status.cs" />
+    <Compile Include="Models\SB_svat.cs" />
+    <Compile Include="Models\SB_Svat_Web_Log.cs" />
+    <Compile Include="Models\SB_System.cs" />
+    <Compile Include="Models\SB_System_Web_Log.cs" />
+    <Compile Include="Models\SB_Tax_Condition.cs" />
+    <Compile Include="Models\SB_Tax_Condition_Web_Log.cs" />
+    <Compile Include="Models\SB_Tax_Income.cs" />
+    <Compile Include="Models\SB_Tax_Income_Rate.cs" />
+    <Compile Include="Models\SB_Tax_Income_Rate_Web_Log.cs" />
+    <Compile Include="Models\SB_Tax_Income_Web_Log.cs" />
+    <Compile Include="Models\SB_Tax_Money.cs" />
+    <Compile Include="Models\SB_Tax_Money_Web_Log.cs" />
+    <Compile Include="Models\SB_Tax_Type.cs" />
+    <Compile Include="Models\SB_Tax_Type_Web_Log.cs" />
+    <Compile Include="Models\SB_TBPoint.cs" />
+    <Compile Include="Models\SB_TextReport.cs" />
+    <Compile Include="Models\SB_TextReport_Web_Log.cs" />
+    <Compile Include="Models\SB_Time_Sell_Product.cs" />
+    <Compile Include="Models\SB_Title.cs" />
+    <Compile Include="Models\SB_TypeReceiveCheque.cs" />
+    <Compile Include="Models\SB_TYRE_POSITION.cs" />
+    <Compile Include="Models\SB_UnitName.cs" />
+    <Compile Include="Models\SB_UnitName_Web_Log.cs" />
+    <Compile Include="Models\SB_vattype.cs" />
+    <Compile Include="Models\SB_Vendor.cs" />
+    <Compile Include="Models\SB_Vendor_Replace.cs" />
+    <Compile Include="Models\SB_Vendor_Temp_Delete.cs" />
+    <Compile Include="Models\SB_Vendor_Web_Log.cs" />
+    <Compile Include="Models\SB_Vote.cs" />
+    <Compile Include="Models\SB_Vote_Detail.cs" />
+    <Compile Include="Models\SB_Vote_Detail_Web_Log.cs" />
+    <Compile Include="Models\SB_Vote_Web_Log.cs" />
+    <Compile Include="Models\SB_WARRANTY_TYPE.cs" />
+    <Compile Include="Models\SP_CheckCoupon.cs" />
+    <Compile Include="Models\ST_AbbDetail.cs" />
+    <Compile Include="Models\ST_AbbHeader.cs" />
+    <Compile Include="Models\ST_AbbTemp.cs" />
+    <Compile Include="Models\ST_ACADetail.cs" />
+    <Compile Include="Models\ST_ACAHeader.cs" />
+    <Compile Include="Models\ST_ACATemp.cs" />
+    <Compile Include="Models\ST_Addrbill.cs" />
+    <Compile Include="Models\ST_Apdetail.cs" />
+    <Compile Include="Models\ST_Apdetail_Web_Log.cs" />
+    <Compile Include="Models\ST_Apdocno.cs" />
+    <Compile Include="Models\ST_Apheader.cs" />
+    <Compile Include="Models\ST_Apheader_Web_Log.cs" />
+    <Compile Include="Models\ST_Aptemp.cs" />
+    <Compile Include="Models\ST_Ap_Log.cs" />
+    <Compile Include="Models\ST_Ap_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_Ardetail.cs" />
+    <Compile Include="Models\ST_Ardetail_Web_Log.cs" />
+    <Compile Include="Models\ST_Ardocno.cs" />
+    <Compile Include="Models\ST_Arheader.cs" />
+    <Compile Include="Models\ST_Arheader_Web_Log.cs" />
+    <Compile Include="Models\ST_ArPayCancel_Log.cs" />
+    <Compile Include="Models\ST_ArPayCancel_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_Artemp.cs" />
+    <Compile Include="Models\ST_Ar_Addr.cs" />
+    <Compile Include="Models\ST_Ar_DocNo2_LOG.cs" />
+    <Compile Include="Models\ST_Ar_Log.cs" />
+    <Compile Include="Models\ST_Ar_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_Ar_Payment_Temp.cs" />
+    <Compile Include="Models\ST_Ar_Payment_Temp_Web_Log.cs" />
+    <Compile Include="Models\ST_avg.cs" />
+    <Compile Include="Models\ST_avg_cal.cs" />
+    <Compile Include="Models\ST_AVG_PRO_STOCK.cs" />
+    <Compile Include="Models\ST_AVG_PRO_STOCK_CAL.cs" />
+    <Compile Include="Models\ST_Banktrans.cs" />
+    <Compile Include="Models\ST_Banktrans_Web_Log.cs" />
+    <Compile Include="Models\ST_BAPDetail.cs" />
+    <Compile Include="Models\ST_BAPHeader.cs" />
+    <Compile Include="Models\ST_BAPTemp.cs" />
+    <Compile Include="Models\ST_BAP_Log.cs" />
+    <Compile Include="Models\ST_Barcode_Print.cs" />
+    <Compile Include="Models\ST_BILDetail.cs" />
+    <Compile Include="Models\ST_BILDetail_Web_Log.cs" />
+    <Compile Include="Models\ST_BILHeader.cs" />
+    <Compile Include="Models\ST_BILHeader_Web_Log.cs" />
+    <Compile Include="Models\ST_BILTemp.cs" />
+    <Compile Include="Models\ST_BIL_Log.cs" />
+    <Compile Include="Models\ST_BIL_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_Cancel_icard.cs" />
+    <Compile Include="Models\ST_CarClean.cs" />
+    <Compile Include="Models\ST_CarClean_Startup.cs" />
+    <Compile Include="Models\ST_CarClean_Temp.cs" />
+    <Compile Include="Models\ST_CarGlass.cs" />
+    <Compile Include="Models\ST_CarGlass_Startup.cs" />
+    <Compile Include="Models\ST_CarGlass_Temp.cs" />
+    <Compile Include="Models\ST_Car_reg.cs" />
+    <Compile Include="Models\ST_Car_Transfer.cs" />
+    <Compile Include="Models\ST_CheckStock_Transaction.cs" />
+    <Compile Include="Models\ST_ChkDetail.cs" />
+    <Compile Include="Models\ST_ChkHeader.cs" />
+    <Compile Include="Models\ST_ChkPicture.cs" />
+    <Compile Include="Models\ST_ChkTemp.cs" />
+    <Compile Include="Models\ST_Chk_Log.cs" />
+    <Compile Include="Models\ST_CkDetail.cs" />
+    <Compile Include="Models\ST_CkHeader.cs" />
+    <Compile Include="Models\ST_CkTemp.cs" />
+    <Compile Include="Models\ST_Ck_Log.cs" />
+    <Compile Include="Models\ST_Claim_Online.cs" />
+    <Compile Include="Models\ST_Claim_Online_Serial.cs" />
+    <Compile Include="Models\ST_CommDetail.cs" />
+    <Compile Include="Models\ST_CommDetail_Master.cs" />
+    <Compile Include="Models\ST_CommDetail_Temp.cs" />
+    <Compile Include="Models\ST_CommHeader.cs" />
+    <Compile Include="Models\ST_CommHeader_Temp.cs" />
+    <Compile Include="Models\ST_CommVariable_EmpRate.cs" />
+    <Compile Include="Models\ST_CommVariable_EmpRate_Master.cs" />
+    <Compile Include="Models\ST_CommVariable_EmpRate_Temp.cs" />
+    <Compile Include="Models\ST_CommVariable_Fixed.cs" />
+    <Compile Include="Models\ST_CommVariable_Fixed_JobDetail.cs" />
+    <Compile Include="Models\ST_CommVariable_Fixed_JobDetail_Temp.cs" />
+    <Compile Include="Models\ST_CommVariable_Fixed_Master.cs" />
+    <Compile Include="Models\ST_CommVariable_Fixed_Temp.cs" />
+    <Compile Include="Models\ST_CommVariable_NoComm.cs" />
+    <Compile Include="Models\ST_CommVariable_NoComm_JobDetail.cs" />
+    <Compile Include="Models\ST_CommVariable_NoComm_JobDetail_Temp.cs" />
+    <Compile Include="Models\ST_CommVariable_NoComm_Master.cs" />
+    <Compile Include="Models\ST_CommVariable_NoComm_Temp.cs" />
+    <Compile Include="Models\ST_CommVariable_OnProfit.cs" />
+    <Compile Include="Models\ST_CommVariable_OnProfit_JobDetail.cs" />
+    <Compile Include="Models\ST_CommVariable_OnProfit_JobDetail_Temp.cs" />
+    <Compile Include="Models\ST_CommVariable_OnProfit_Master.cs" />
+    <Compile Include="Models\ST_CommVariable_OnProfit_Temp.cs" />
+    <Compile Include="Models\ST_CommVariable_SaleAmt.cs" />
+    <Compile Include="Models\ST_CommVariable_SaleAmt_JobDetail.cs" />
+    <Compile Include="Models\ST_CommVariable_SaleAmt_JobDetail_Temp.cs" />
+    <Compile Include="Models\ST_CommVariable_SaleAmt_Master.cs" />
+    <Compile Include="Models\ST_CommVariable_SaleAmt_Temp.cs" />
+    <Compile Include="Models\ST_Coupon_Create_Log.cs" />
+    <Compile Include="Models\ST_CSTApprove_Log.cs" />
+    <Compile Include="Models\ST_CSTDetail.cs" />
+    <Compile Include="Models\ST_CSTDetail_Approve.cs" />
+    <Compile Include="Models\ST_CSTHeader.cs" />
+    <Compile Include="Models\ST_CSTHeader_Approve.cs" />
+    <Compile Include="Models\ST_CSTTemp.cs" />
+    <Compile Include="Models\ST_CST_Create.cs" />
+    <Compile Include="Models\ST_CST_Create_Cancel.cs" />
+    <Compile Include="Models\ST_CST_Log.cs" />
+    <Compile Include="Models\ST_DayEnd_Docno.cs" />
+    <Compile Include="Models\ST_DayEnd_DocState.cs" />
+    <Compile Include="Models\ST_DayEnd_Head.cs" />
+    <Compile Include="Models\ST_DayEnd_LOG.cs" />
+    <Compile Include="Models\ST_Docno.cs" />
+    <Compile Include="Models\ST_Document_Log.cs" />
+    <Compile Include="Models\ST_Document_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_DSTDetail.cs" />
+    <Compile Include="Models\ST_DSTHeader.cs" />
+    <Compile Include="Models\ST_DSTTEMP.cs" />
+    <Compile Include="Models\ST_DST_Log.cs" />
+    <Compile Include="Models\ST_Header_Update.cs" />
+    <Compile Include="Models\ST_ICAApprove_Log.cs" />
+    <Compile Include="Models\ST_ICADetail.cs" />
+    <Compile Include="Models\ST_ICADetail_Approve.cs" />
+    <Compile Include="Models\ST_ICADetail_Web_Log.cs" />
+    <Compile Include="Models\ST_ICAHeader.cs" />
+    <Compile Include="Models\ST_ICAHeader_Approve.cs" />
+    <Compile Include="Models\ST_ICAHeader_Web_Log.cs" />
+    <Compile Include="Models\ST_ICARD_EXPIRE.cs" />
+    <Compile Include="Models\ST_icard_id.cs" />
+    <Compile Include="Models\ST_ICATemp.cs" />
+    <Compile Include="Models\ST_ICA_Log.cs" />
+    <Compile Include="Models\ST_ICA_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_ICTDetail.cs" />
+    <Compile Include="Models\ST_ICTDetail_Web_Log.cs" />
+    <Compile Include="Models\ST_ICTHeader.cs" />
+    <Compile Include="Models\ST_ICTHeader_Web_Log.cs" />
+    <Compile Include="Models\ST_ICTTemp.cs" />
+    <Compile Include="Models\ST_ICT_Log.cs" />
+    <Compile Include="Models\ST_ICT_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_Job3Day_LOG.cs" />
+    <Compile Include="Models\ST_Job3Day_Question.cs" />
+    <Compile Include="Models\ST_JobApprove_Log.cs" />
+    <Compile Include="Models\ST_Jobdetail.cs" />
+    <Compile Include="Models\ST_Jobdetail_Approve.cs" />
+    <Compile Include="Models\ST_Jobdetail_Web_Log.cs" />
+    <Compile Include="Models\ST_Jobdocno.cs" />
+    <Compile Include="Models\ST_Jobheader.cs" />
+    <Compile Include="Models\ST_Jobheader_Approve.cs" />
+    <Compile Include="Models\ST_Jobheader_Web_Log.cs" />
+    <Compile Include="Models\ST_JobPicture.cs" />
+    <Compile Include="Models\ST_Jobtemp.cs" />
+    <Compile Include="Models\ST_Jobtemp_Approve.cs" />
+    <Compile Include="Models\ST_Job_Docno_Ref_Log.cs" />
+    <Compile Include="Models\ST_Job_Log.cs" />
+    <Compile Include="Models\ST_Job_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_Lineno_Update.cs" />
+    <Compile Include="Models\ST_Logupdate_Data.cs" />
+    <Compile Include="Models\ST_Movement.cs" />
+    <Compile Include="Models\ST_Movement_Cal.cs" />
+    <Compile Include="Models\ST_Movement_Export.cs" />
+    <Compile Include="Models\ST_Movement_NO_ICT.cs" />
+    <Compile Include="Models\ST_Movement_Report.cs" />
+    <Compile Include="Models\ST_Movement_Sum.cs" />
+    <Compile Include="Models\ST_Movement_Sum_Log.cs" />
+    <Compile Include="Models\ST_Movement_Vat.cs" />
+    <Compile Include="Models\ST_Movement_Vat_All.cs" />
+    <Compile Include="Models\ST_Movement_Vat_All_Cal.cs" />
+    <Compile Include="Models\ST_Movement_Vat_All_Log.cs" />
+    <Compile Include="Models\ST_Movement_Vat_Cal.cs" />
+    <Compile Include="Models\ST_Movement_Vat_Day.cs" />
+    <Compile Include="Models\ST_Movement_Vat_Day_All.cs" />
+    <Compile Include="Models\ST_Movement_Vat_Day_All_Cal.cs" />
+    <Compile Include="Models\ST_Movement_Vat_Day_All_Log.cs" />
+    <Compile Include="Models\ST_Movement_Vat_Day_Cal.cs" />
+    <Compile Include="Models\ST_Movement_Vat_Ex.cs" />
+    <Compile Include="Models\ST_Movement_Vat_Ex_All.cs" />
+    <Compile Include="Models\ST_Movement_Vat_Ex_All_Cal.cs" />
+    <Compile Include="Models\ST_Movement_Vat_Ex_All_Log.cs" />
+    <Compile Include="Models\ST_Movement_Vat_Ex_Cal.cs" />
+    <Compile Include="Models\ST_Movement_View.cs" />
+    <Compile Include="Models\ST_Movement_Web_Log.cs" />
+    <Compile Include="Models\ST_Payadj.cs" />
+    <Compile Include="Models\ST_PayCancel_Log.cs" />
+    <Compile Include="Models\ST_PayCard.cs" />
+    <Compile Include="Models\ST_PayCard_Log.cs" />
+    <Compile Include="Models\ST_PayCard_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_PayCard_Web_Log.cs" />
+    <Compile Include="Models\ST_PayCash.cs" />
+    <Compile Include="Models\ST_PayCashCard.cs" />
+    <Compile Include="Models\ST_PayCashCard_Web_Log.cs" />
+    <Compile Include="Models\ST_PayCash_Web_Log.cs" />
+    <Compile Include="Models\ST_PayChq.cs" />
+    <Compile Include="Models\ST_PayChq_Web_Log.cs" />
+    <Compile Include="Models\ST_PayDep.cs" />
+    <Compile Include="Models\ST_PayDep_Web_Log.cs" />
+    <Compile Include="Models\ST_Paydoc.cs" />
+    <Compile Include="Models\ST_Paydoc_Web_Log.cs" />
+    <Compile Include="Models\ST_PayOnAcc.cs" />
+    <Compile Include="Models\ST_PayOther.cs" />
+    <Compile Include="Models\ST_PayOther_Web_Log.cs" />
+    <Compile Include="Models\ST_PayOwn.cs" />
+    <Compile Include="Models\ST_PCCDetail.cs" />
+    <Compile Include="Models\ST_PCCHeader.cs" />
+    <Compile Include="Models\ST_PCCTemp.cs" />
+    <Compile Include="Models\ST_PCC_Log.cs" />
+    <Compile Include="Models\ST_PCNApprove_Log.cs" />
+    <Compile Include="Models\ST_PCNDetail.cs" />
+    <Compile Include="Models\ST_PCNDetail_Approve.cs" />
+    <Compile Include="Models\ST_PCNHeader.cs" />
+    <Compile Include="Models\ST_PCNHeader_Approve.cs" />
+    <Compile Include="Models\ST_PCNTemp.cs" />
+    <Compile Include="Models\ST_Pcn_Log.cs" />
+    <Compile Include="Models\ST_PCPDetail.cs" />
+    <Compile Include="Models\ST_PCPHeader.cs" />
+    <Compile Include="Models\ST_PCPTemp.cs" />
+    <Compile Include="Models\ST_PCP_Log.cs" />
+    <Compile Include="Models\ST_PDCDetail.cs" />
+    <Compile Include="Models\ST_PDCHeader.cs" />
+    <Compile Include="Models\ST_PDCTemp.cs" />
+    <Compile Include="Models\ST_PDC_Log.cs" />
+    <Compile Include="Models\ST_PDPDetail.cs" />
+    <Compile Include="Models\ST_PDPHeader.cs" />
+    <Compile Include="Models\ST_PDPTemp.cs" />
+    <Compile Include="Models\ST_PDP_Log.cs" />
+    <Compile Include="Models\ST_Podetail.cs" />
+    <Compile Include="Models\ST_Podetail_Web_Log.cs" />
+    <Compile Include="Models\ST_Poheader.cs" />
+    <Compile Include="Models\ST_Poheader_Web_Log.cs" />
+    <Compile Include="Models\ST_Potemp.cs" />
+    <Compile Include="Models\ST_Po_Log.cs" />
+    <Compile Include="Models\ST_Po_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_PPADetail.cs" />
+    <Compile Include="Models\ST_PPAHeader.cs" />
+    <Compile Include="Models\ST_PPATemp.cs" />
+    <Compile Include="Models\ST_PPA_Log.cs" />
+    <Compile Include="Models\ST_PrApprove_Log.cs" />
+    <Compile Include="Models\ST_PrDetail.cs" />
+    <Compile Include="Models\ST_PrDetail_Approve.cs" />
+    <Compile Include="Models\ST_PrDetail_Web_Log.cs" />
+    <Compile Include="Models\ST_Prheader.cs" />
+    <Compile Include="Models\ST_Prheader_Approve.cs" />
+    <Compile Include="Models\ST_Prheader_Web_Log.cs" />
+    <Compile Include="Models\ST_ProDot.cs" />
+    <Compile Include="Models\ST_PromotionUsedDetail.cs" />
+    <Compile Include="Models\ST_PromotionUsedDetail_Web_Log.cs" />
+    <Compile Include="Models\ST_PromotionUsedHeader.cs" />
+    <Compile Include="Models\ST_PromotionUsedHeader_Web_Log.cs" />
+    <Compile Include="Models\ST_Proprice_Update.cs" />
+    <Compile Include="Models\ST_proserial.cs" />
+    <Compile Include="Models\ST_Proserial_Edit.cs" />
+    <Compile Include="Models\ST_Proserial_TB.cs" />
+    <Compile Include="Models\ST_PrTemp.cs" />
+    <Compile Include="Models\ST_Pr_Log.cs" />
+    <Compile Include="Models\ST_Pr_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_PTADetail.cs" />
+    <Compile Include="Models\ST_PTAHeader.cs" />
+    <Compile Include="Models\ST_PTATemp.cs" />
+    <Compile Include="Models\ST_PTA_Log.cs" />
+    <Compile Include="Models\ST_qr_05_ini_product.cs" />
+    <Compile Include="Models\ST_qr_05_sale_product.cs" />
+    <Compile Include="Models\ST_RCCDetail.cs" />
+    <Compile Include="Models\ST_RCCDetail_Web_Log.cs" />
+    <Compile Include="Models\ST_RCCHeader.cs" />
+    <Compile Include="Models\ST_RCCHeader_Web_Log.cs" />
+    <Compile Include="Models\ST_RCCTemp.cs" />
+    <Compile Include="Models\ST_RCC_Log.cs" />
+    <Compile Include="Models\ST_RCC_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_RCPDetail.cs" />
+    <Compile Include="Models\ST_RCPDetail_Web_Log.cs" />
+    <Compile Include="Models\ST_RCPHeader.cs" />
+    <Compile Include="Models\ST_RCPHeader_Web_Log.cs" />
+    <Compile Include="Models\ST_RCPTemp.cs" />
+    <Compile Include="Models\ST_RCP_Log.cs" />
+    <Compile Include="Models\ST_RCP_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_RDADetail.cs" />
+    <Compile Include="Models\ST_RDADetail_Web_Log.cs" />
+    <Compile Include="Models\ST_RDAHeader.cs" />
+    <Compile Include="Models\ST_RDAHeader_Web_Log.cs" />
+    <Compile Include="Models\ST_RDATemp.cs" />
+    <Compile Include="Models\ST_Rda_Log.cs" />
+    <Compile Include="Models\ST_Rda_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_RDCDetail.cs" />
+    <Compile Include="Models\ST_RDCDetail_Web_Log.cs" />
+    <Compile Include="Models\ST_RDCHeader.cs" />
+    <Compile Include="Models\ST_RDCHeader_Web_Log.cs" />
+    <Compile Include="Models\ST_RDCTemp.cs" />
+    <Compile Include="Models\ST_RDC_Log.cs" />
+    <Compile Include="Models\ST_RDC_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_Rdisc_Detail.cs" />
+    <Compile Include="Models\ST_Rdisc_Detail_Web_Log.cs" />
+    <Compile Include="Models\ST_Rdisc_Head.cs" />
+    <Compile Include="Models\ST_Rdisc_Head_Web_Log.cs" />
+    <Compile Include="Models\ST_Rdisc_Log.cs" />
+    <Compile Include="Models\ST_Rdisc_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_Rdisc_Temp.cs" />
+    <Compile Include="Models\ST_RDPDetail.cs" />
+    <Compile Include="Models\ST_RDPDetail_Web_Log.cs" />
+    <Compile Include="Models\ST_RDPHeader.cs" />
+    <Compile Include="Models\ST_RDPHeader_Web_Log.cs" />
+    <Compile Include="Models\ST_RDPTemp.cs" />
+    <Compile Include="Models\ST_RDP_Log.cs" />
+    <Compile Include="Models\ST_RDP_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_Records.cs" />
+    <Compile Include="Models\ST_RETURNDETAIL.cs" />
+    <Compile Include="Models\ST_RETURNDETAIL_Web_Log.cs" />
+    <Compile Include="Models\ST_RETURNHEADER.cs" />
+    <Compile Include="Models\ST_RETURNHEADER_Web_Log.cs" />
+    <Compile Include="Models\ST_RETURNTEMP.cs" />
+    <Compile Include="Models\ST_Return_Log.cs" />
+    <Compile Include="Models\ST_Return_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_RPAdetail.cs" />
+    <Compile Include="Models\ST_RPAdetail_Web_Log.cs" />
+    <Compile Include="Models\ST_RPAdocno.cs" />
+    <Compile Include="Models\ST_RPAheader.cs" />
+    <Compile Include="Models\ST_RPAheader_Web_Log.cs" />
+    <Compile Include="Models\ST_RPATemp.cs" />
+    <Compile Include="Models\ST_RPA_Log.cs" />
+    <Compile Include="Models\ST_RPA_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_RTADetail.cs" />
+    <Compile Include="Models\ST_RTADetail_Web_Log.cs" />
+    <Compile Include="Models\ST_RTAHeader.cs" />
+    <Compile Include="Models\ST_RTAHeader_Web_Log.cs" />
+    <Compile Include="Models\ST_RTATemp.cs" />
+    <Compile Include="Models\ST_RTA_Log.cs" />
+    <Compile Include="Models\ST_RTA_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_SCARD_DETAIL.cs" />
+    <Compile Include="Models\ST_SCARD_DETAIL_TB.cs" />
+    <Compile Include="Models\ST_SCARD_HEAD.cs" />
+    <Compile Include="Models\ST_SCARD_HEAD_TB.cs" />
+    <Compile Include="Models\ST_Services.cs" />
+    <Compile Include="Models\ST_SERVICES_CHECK.cs" />
+    <Compile Include="Models\ST_ShipPicture.cs" />
+    <Compile Include="Models\ST_SSTDetail.cs" />
+    <Compile Include="Models\ST_SSTHeader.cs" />
+    <Compile Include="Models\ST_SSTTemp.cs" />
+    <Compile Include="Models\ST_SST_Log.cs" />
+    <Compile Include="Models\ST_Trclaim.cs" />
+    <Compile Include="Models\ST_TRNDetail.cs" />
+    <Compile Include="Models\ST_TRNDetail_Web_Log.cs" />
+    <Compile Include="Models\ST_TRNHeader.cs" />
+    <Compile Include="Models\ST_TRNHeader_Web_Log.cs" />
+    <Compile Include="Models\ST_TRNTemp.cs" />
+    <Compile Include="Models\ST_TRN_Log.cs" />
+    <Compile Include="Models\ST_TRN_Log_Web_Log.cs" />
+    <Compile Include="Models\ST_UpdateDetail.cs" />
+    <Compile Include="Models\ST_UpdateHeader.cs" />
+    <Compile Include="Models\ST_UpdateTemp.cs" />
+    <Compile Include="Models\ST_Voidno_Create_Log.cs" />
+    <Compile Include="Models\ST_Voidno_Del_Log.cs" />
+    <Compile Include="Models\ST_Vote_Log.cs" />
+    <Compile Include="Models\ST_WTHDetail.cs" />
+    <Compile Include="Models\ST_WTHHeader.cs" />
+    <Compile Include="Models\ST_WTH_Log.cs" />
+    <Compile Include="Models\sysdiagram.cs" />
+    <Compile Include="Models\TClam_case.cs" />
+    <Compile Include="Models\TCS_ITEM.cs" />
+    <Compile Include="Models\TCS_location.cs" />
+    <Compile Include="Models\Transfer_Data.cs" />
+    <Compile Include="Models\TRepair_case.cs" />
+    <Compile Include="Models\vote_link_customer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "DeductibleModal";
+}
+
+<!-- Modal -->
+<div class="modal right fade" id="deductibleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="height: 31vh;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">หัก ณ ที่จ่าย 3%</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+            </div>
+
+            <div class="modal-body">
+                <div class="card text-white bg-info calculator-card ">
+                    <div class="card-body card-lg">
+                        <p class="text-details">รับเงินมา (บาท)</p>
+                        <input id="txtPaymentDeductible" class="input-no-bg text-result-lg money" readonly />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">หมายเหตุ</span>
+                    </div>
+                    <input type="text" class="form-control" id="txtDeductibleNote" aria-describedby="basic-addon1">
+                </div>
+                <button type="button" id="btnDeductibleReceiveMoney" class="btn btn-success">ยืนยัน</button>
+            </div>
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div>
+

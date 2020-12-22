@@ -1,0 +1,66 @@
+﻿@model  CentralService.Models.SystemData.BranchModel
+@{
+    ViewBag.Title = "กำหนดข้อมูลสาขา";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section css{
+    @Styles.Render("~/Content/datatables-style")
+}
+
+<div class="row">
+    <div class="col-md-12 title-head">
+        <h1 style="margin: 0;">
+            <img src="~/Content/img/ICON/config.jpg" width="80" height="80" hspace="3" vspace="3" align="middle" alt="" style="padding-right: 0;" />
+            <font size="5"><b style="font-weight: 700;">&nbsp;&nbsp;กำหนดข้อมูลสาขา</b></font>
+        </h1>
+    </div>
+</div>
+<div id="page-wrapper" class="container-fluid" style="padding: 0;padding-right: 15px;padding-left: 15px;">
+    <div class="row">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "searchForm", name = "searchForm" }))
+        {
+            <div class="row">
+                <div class="col-md-8"></div>
+                <div id="divAdd" class="col-md-4">
+                    <br>
+                    <div class="table-page text-right">
+                       
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <table class="table table-striped table-bordered nowrap" id="gv_branch" style="width:100%;font-size: 13px;">
+                    <thead>
+                        <tr>
+                            <th class="text-center">@Html.LabelFor(m => m.dealercode)</th>
+                            <th class="text-center">@Html.LabelFor(m => m.plant_no)</th>
+                            <th class="text-center">@Html.LabelFor(m => m.branch_name)</th>
+                            <th class="text-center">@Html.LabelFor(m => m.add_province)</th>
+                            <th class="text-center">@Html.LabelFor(m => m.add_tel)</th>
+                            <th class="text-center">@Html.LabelFor(m => m.sold_to)</th>
+                            <th class="text-center">@Html.LabelFor(m => m.ship_to)</th>
+                            <th class="text-center">กำหนดการทำงานระบบ POS</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/datatables-script")
+    @Scripts.Render("~/bundles/branch/index")
+    <script>
+        var pageForm = new BranchIndex();
+        $(document).ready(function () {
+            pageForm.getUrl = '@Url.Action("GetAll")';
+            pageForm.editUrl = '@Url.Action("Create")';
+            pageForm.settingUrl = '@Url.Action("Configs")';
+            pageForm.init();
+    });
+    </script>
+}

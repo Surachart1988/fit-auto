@@ -1,0 +1,123 @@
+﻿@model  CentralService.Models.MasterData.Campaign.CampaignModel
+@{
+    ViewBag.Title = "กำหนดข้อมูลแคมเปญ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section css{
+    @Styles.Render("~/Content/datatables-style")
+    <style>
+        .has-feedback {
+            margin-bottom: 0;
+        }
+    </style>
+}
+<div class="row">
+    <div class="col-md-12 title-head">
+        <h1 style="margin: 0;">
+            <img src="~/Content/img/ICON/config.jpg" width="80" height="80" hspace="3" vspace="3" align="middle" alt="" style="padding-right: 0;" />
+            <font size="5"><b style="font-weight: 700;">&nbsp;&nbsp;กำหนดข้อมูลแคมเปญ</b></font>
+        </h1>
+    </div>
+</div>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1">&nbsp;</div>
+            <div class="col-md-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @{
+                            if (Model.Mode == "v")
+                            {
+                                @Html.Raw("ข้อมูลแคมเปญ")
+                            }
+                            else
+                            {
+
+                                if (String.IsNullOrEmpty(Model.campaign_id))
+                                {
+                                    @Html.Raw("เพิ่มข้อมูลแคมเปญ")
+                                }
+                                else
+                                {
+                                    @Html.Raw("แก้ไขข้อมูลแคมเปญ")
+                                }
+                            }
+                        }
+                    </div>
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myForm", name = "myForm" }))
+                    {
+                        @Html.HiddenFor(Model => Model.campaign_id, new { data_pk_id = Model.campaign_id })
+                        <div class="panel-body">
+                            @if (!String.IsNullOrWhiteSpace(Model.campaign_id))
+                            {
+
+                                <div class="form-group row has-feedback">
+                                    <label for="inputdealercode" class="col-sm-2 col-form-label text-right">รหัสแคมเปญ<font color="#FF0000">*</font></label>
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(model => model.campaign_id, new { @class = "form-control", autocomplete = "off" ,@readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.campaign_id, "", new { @class = "text-danger" })
+                                        <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            }
+                            <div class="form-group row has-feedback">
+                                <label for="inputdealercode" class="col-sm-2 col-form-label text-right">ชื่อแคมเปญ<font color="#FF0000">*</font></label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(model => model.campaign_name, ""
+                                     , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                     : (object)new { @class = "form-control", autocomplete = "off", data_remote = "checkNameCampaign", data_error = "กรุณาระบุ ชื่อแคมเปญ", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.campaign_name, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            @if (Model.Mode != "v")
+                            {
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <input type="submit" name="btnSave" value="บันทึก" id="btnSave" class="btn btn-success">
+                                        &nbsp;
+                                        <a class="btn btn-danger" href="@Url.Action("Index")">ยกเลิก</a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-1">&nbsp;</div>
+
+                        @Html.HiddenFor(Model => Model.campaign_add_date)
+                        @Html.HiddenFor(Model => Model.campaign_add_time)
+                        @Html.HiddenFor(Model => Model.deleted)
+                        @Html.HiddenFor(Model => Model.dealercode)
+                        @Html.HiddenFor(Model => Model.branch_no)
+
+                    }
+                </div>
+                    </div>
+        </div>
+    </div>
+</div>
+@{
+    var _url = $"{Request.Url.GetLeftPart(UriPartial.Authority)}{Url.Content("~/")}";
+    var dateNow = DateTime.Now.ToString("MM/dd/yyyy");
+}
+@section scripts {
+    @Scripts.Render("~/bundles/datatables-script")
+    @Scripts.Render("~/bundles/campaign/create")
+    @Scripts.Render("~/bundles/admin/form")
+    <script>
+        var pageForm = new CampaignForm()
+        var _form = new _Form()
+        $(document).ready(function () {
+            pageForm.init();
+            _form.sendUrl = '@Url.Action("Index", "SendClient")';
+            _form.hqUrl = '@_url';
+            _form.init()
+        })
+    </script>
+}
+
+
+
+

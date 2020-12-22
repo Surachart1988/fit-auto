@@ -1,0 +1,68 @@
+﻿<div class="modal right fade" id="prodselectlocat-modal" role="dialog">
+    <div class="modal-dialog modal-lg" style="margin-top: 0;">
+        <div class="modal-content">
+            <div class="modal-header" style="padding-bottom: 0;background-color: #313167;">
+                <div class="row">
+                    <div class="col-sm-10 title-head">
+                        <div>
+                            <font color="#FFFFFF"><b>ชื่อสินค้า </b></font>
+                            <label id="lblpro_code_name" class="col-form-label" style="color: red;"></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 1;color: #FFFFFF;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <br />
+            </div><br />
+            <div class="modal-body" style="padding-top: 0;padding-bottom:0">
+                <div class="row">
+                    <table class="table table-bordered nowrap table-none-style" id="gv_productdetail-list" style="width:100%;font-size: 13px;">
+                        <thead>
+                            <tr style="box-shadow: none;">
+                                <th>รหัสสินค้า</th>
+                                <th>รหัสผู้ผลิต</th>
+                                <th>ชื่อสินค้า</th>
+                                <th>ประเภทสินค้า</th>
+                                <th>ยี่ห้อสินค้า</th>
+                                <th>รุ่นสินค้า</th>
+                                <th>ขนาดสินค้า</th>
+                                <th>จำนวน</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size:13px"></tbody>
+                    </table>
+                </div>
+                <div class="form-group row"></div>
+                <div hidden class="row" id="div_gvprolocat">
+                    <table class="table table-bordered nowrap table-none-style" id="gv_productlocat-list" style="font-size: 13px;">
+                        <thead>
+                            <tr style="box-shadow: none;">
+                                <th>สถานที่เก็บ</th>
+                                <th>จำนวนคงเหลือ</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size:13px"></tbody>
+                    </table>
+                </div>
+                <div hidden class="row" id="div_gvprolocatDot">
+                    <table class="table table-bordered nowrap table-none-style" id="gv_productlocatDot-list" style="font-size: 13px;">
+                        <thead>
+                            <tr style="box-shadow: none;">
+                                <th>DOT</th>
+                                <th>จำนวนคงเหลือ</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size:13px"></tbody>
+                    </table>
+                </div>
+            </div>
+            <button class="invisible" type="button" class="btn btn-success" id="btnprolocat" data-dismiss="modal">ตกลง</button>
+            <div class="modal-footer" style="text-align: center;">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+            </div>
+        </div>
+    </div>
+</div>

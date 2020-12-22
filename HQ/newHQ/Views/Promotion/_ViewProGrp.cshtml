@@ -1,0 +1,17 @@
+﻿@model CentralService.Models.ExtraPromotionModel
+
+@Html.DropDownListFor(model => model.progroup_code, new SelectList(Model.ddlProGrpList, "progroup_code", "progroup_name")
+    , Model.Mode == "v" ?
+        (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" } :
+        (object)new { @class = "form-control", autocomplete = "off" })
+
+<script>
+    $("#progroup_code").change(function () {
+        $.get("Getddlprobrand", {
+            progroup_code: $(this).val()
+        }).done(function (data) {
+            $('#divPVProBrand').html(data);
+            $('#divPVProBrand').fadeIn('fast');
+        });
+    });
+</script>

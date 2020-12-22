@@ -1,0 +1,420 @@
+﻿@model CentralService.Models.MasterData.VendorModel
+
+@{
+    ViewBag.Title = "กำหนดข้อมูลสาขา";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var len = 10;
+}
+
+@section css{
+    @Styles.Render("~/Content/datatables-style")
+    <style>
+        .has-feedback {
+            margin-bottom: 0;
+        }
+    </style>
+}
+
+<div class="row">
+    <div class="col-md-12 title-head">
+        <h1 style="margin: 0;">
+            <img src="~/Content/img/ICON/config.jpg" width="80" height="80" hspace="3" vspace="3" align="middle" alt="" style="padding-right: 0;" />
+            <font size="5"><b style="font-weight: 700;">&nbsp;&nbsp;กำหนดข้อมูลผู้จำหน่าย</b></font>
+        </h1>
+    </div>
+</div>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myForm", name = "myForm" }))
+{
+    @Html.HiddenFor(Model => Model.ven_code, new { data_pk_id = Model.ven_code })
+    @Html.HiddenFor(Model => Model.Mode)
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            @Html.Raw("ข้อมูลผู้จำหน่าย")
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                @if (Model.Mode == "v" || !String.IsNullOrWhiteSpace(Model.ven_code))
+                                {
+
+                                    <label for="inputdven_code" class="col-sm-2 col-form-label text-right">@Html.LabelFor(model => model.ven_code)</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.ven_code, "", new { @class = "form-control", autocomplete = "off", @disabled = "disabled" })
+                                    </div>
+                                    len = 4;
+                                }
+                                else
+                                {
+                                }
+
+
+
+                                <label for="inputdsap_no" class="col-sm-2 col-form-label text-right">@Html.LabelFor(model => model.sap_no)</label>
+                                <div class="col-sm-@len">
+                                    @Html.TextBoxFor(model => model.sap_no, ""
+                                    , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled", }
+                                    : (object)new { @class = "form-control", autocomplete = "off", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="inputpre_name" class="col-sm-2 col-form-label text-right">@Html.LabelFor(model => model.pre_name)</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(model => model.pre_name, ""
+                                    , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                    : (object)new { @maxlength = "30", @class = "form-control", autocomplete = "off" })
+                                    @Html.ValidationMessageFor(model => model.pre_name, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group has-feedback">
+                                    <label for="inputven_name" class="col-sm-2 col-form-label text-right">@Html.LabelFor(model => model.ven_name)<font color="#FF0000"> *</font></label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.ven_name, ""
+                                        , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                        : (object)new { @class = "form-control", autocomplete = "off", data_remote = "checkVenName", data_error = "กรุณาระบุ ชื่อผู้จำหน่าย", required = "required" })
+                                        @Html.ValidationMessageFor(model => model.ven_name, "", new { @class = "text-danger" })
+                                        <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    @Html.Raw("ข้อมูลผู้จำหน่าย")
+                                </div>
+
+                                <div class="panel-body">
+
+                                    <div class="form-group row has-feedback">
+                                        <label for="inputtax_id" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.tax_id)<font color="#FF0000"> *</font></label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(model => model.tax_id, "{0:N2}"
+                                     , Model.Mode == "v" ? (object)new { @class = "form-control ", autocomplete = "off", @disabled = "disabled" }
+                                     : (object)new { @maxlength = "13", @class = "form-control keyInteger", autocomplete = "off", data_remote = "checkTaxId", data_error = "กรุณาระบุ เลขประจำตัวผู้เสียภาษี", required = "required", data_minlength_error = "กรุณาระบุ ให้ครบ 13 หลัก", data_minlength = "13" })
+                                            @Html.ValidationMessageFor(model => model.tax_id, "", new { @class = "text-danger" })
+                                            <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group has-feedback">
+                                            <label for="inputtax_branch" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.tax_branch)<font color="#FF0000"> *</font></label>
+                                            <div class="col-sm-3">
+                                                @Html.DropDownListFor(model => model.tax_branch, new SelectListItem[]{
+                                                new SelectListItem() {Text = "เลือกข้อมูล",Value=""},
+                                                new SelectListItem() {Text = "สำนักงานใหญ่", Value="สำนักงานใหญ่"},
+                                                new SelectListItem() {Text = "สาขา", Value="สาขา"}}
+      , Model.Mode == "v" ?
+      (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" } :
+      (object)new { @class = "form-control", autocomplete = "off", data_error = "กรุณาระบุ สถานประกอบการ", required = "required" })
+                                                <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-feedback">
+                                            <label for="inputtax_branch_id" class="col-sm-2 col-form-label text-right">@Html.LabelFor(model => model.tax_branch_id)</label>
+                                            <div class="col-sm-4">
+                                                @Html.TextBoxFor(model => model.tax_branch_id, ""
+                                         , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                         : (object)new { @maxlength = "5", @class = "form-control keyInteger", @disabled = "disabled", autocomplete = "off", data_error = "กรุณาระบุ เลขที่สาขา", data_minlength_error = "กรุณาระบุ เลขที่สาขา ให้ครบ 5 ตัวอักษร", data_minlength = "5" })
+                                                @Html.ValidationMessageFor(model => model.tax_branch_id, "", new { @class = "text-danger" })
+                                                <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row ">
+                                        <label for="inputcontact_name" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.contact_name)</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(model => model.contact_name, ""
+                                     , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                     : (object)new { @class = "form-control", autocomplete = "off" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="inputadd_name" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.add_name)</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextAreaFor(model => model.add_name,
+                                           Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", rows = 3, cols = 20, @disabled = "disabled" }
+                                            : (object)new { @class = "form-control", rows = 3, cols = 20, autocomplete = "off" })
+
+                                        </div>
+                                    </div>
+                                    @{
+                                        var lbcustom = 3;
+                                        var ipcustom = 9;
+                                    }
+                                    @Html.Partial("~/Views/Components/_AddressForm.cshtml", new CentralService.Models.AddressModel() { _mode = Model.Mode }, new ViewDataDictionary { { "lbcustom", lbcustom }, { "ipcustom", ipcustom } })
+                                    @Html.HiddenFor(Model => Model.add_provid, new { @id = "add_providselect" })
+                                    @Html.HiddenFor(Model => Model.add_amphur_id, new { @id = "add_amphur_idselect" })
+                                    @Html.HiddenFor(Model => Model.add_tumbol_id, new { @id = "add_tumbol_idselect" })
+                                    @Html.HiddenFor(Model => Model.add_zip, new { @id = "add_zipselect" })
+
+
+                                    <div class="row">
+                                        <div class="form-group has-feedback">
+                                            <label for="inputadd_tel" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.add_tel)<font color="#FF0000"> *</font></label>
+                                            <div class="col-sm-6">
+                                                @Html.TextBoxFor(model => model.add_tel, ""
+                                         , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                         : (object)new { @maxlength = "50", @class = "form-control input-telephone", autocomplete = "off", data_error = "กรุณาระบุ เบอร์โทรศัพท์", @required = "required" })
+                                                <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="inputadd_tel1_ext" class="col-sm-1 col-form-label text-right">@Html.LabelFor(model => model.add_tel1_ext)</label>
+                                        <div class="col-sm-2">
+                                            @Html.TextBoxFor(model => model.add_tel1_ext, ""
+                                     , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                     : (object)new { @maxlength = "4", @class = "form-control keyInteger", autocomplete = "off" })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="inputadd_phone" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.add_phone)</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(model => model.add_phone, ""
+                                                , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                                : (object)new { @maxlength = "50", @class = "form-control input-phone", autocomplete = "off" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="inputadd_fax" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.add_fax)</label>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.add_fax, ""
+         , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+         : (object)new { @maxlength = "50", @class = "form-control input-fax", autocomplete = "off" })
+                                        </div>
+
+                                        <label for="inputadd_fax_ext" class="col-sm-1 col-form-label text-right">@Html.LabelFor(model => model.add_fax_ext)</label>
+                                        <div class="col-sm-2">
+                                            @Html.TextBoxFor(model => model.add_fax_ext, ""
+                                     , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                     : (object)new { @maxlength = "4", @class = "form-control keyInteger", autocomplete = "off" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row has-feedback">
+                                        <label for="inpute_mail" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.add_email)</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(model => model.add_email, ""
+         , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+         : (object)new { @maxlength = "50", @class = "form-control", autocomplete = "off", @type = "email", data_error = "ระบุอีเมลไม่ถูกต้อง" })
+                                            <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    @Html.Raw("ข้อมูลการชำระ")
+                                </div>
+                                <div class="panel-body">
+
+                                    <div class="form-group row">
+                                        <label for="inputvender_type" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.vender_type)</label>
+                                        <div class="col-sm-9">
+                                            <div class="radio radio-success">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <div class="row">
+                                                        <div class="col-sm-3">
+                                                            @Html.RadioButtonFor(m => m.vender_type, 1
+                                                            , Model.Mode == "v" ? (object)new { id = "vender_type1", @disabled = "disabled" }
+                                                            : (object)new { id = "vender_type1" })
+                                                            @Html.Label("vender_type1", "สั่งซื้อแบบปกติ"
+                                                                , Model.Mode == "v" ? (object)new { @disabled = "disabled" }
+                                                                    : "")
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            @Html.RadioButtonFor(m => m.vender_type, 2
+                                   , Model.Mode == "v" ? (object)new { id = "vender_type2", @disabled = "disabled" }
+                                       : (object)new { id = "vender_type2" })
+                                                            @Html.Label("vender_type2", "สั่งซื้อแบบพิเศษ"
+                                                                , Model.Mode == "v" ? (object)new { @disabled = "disabled" }
+                                                                    : "")
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row has-feedback">
+                                        <label for="inputvat_type" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.vat_type)<font color="#FF0000"> *</font></label>
+                                        <div class="col-sm-9">
+                                            @Html.DropDownListFor(model => model.vat_type, new SelectList(Model.VattypeList, "vat_type", "vat_type_name")
+                                            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" } : (object)new { @class = "form-control", autocomplete = "off", @required = "required", data_error = "กรุณาระบุ ชนิดภาษีมูลค่าเพิ่ม" })
+                                            <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row has-feedback">
+                                        <label for="inputvat_code" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.vat_code)<font color="#FF0000"> *</font></label>
+                                        <div class="col-sm-9">
+                                            @Html.DropDownListFor(model => model.vat_code, new SelectList(Model.BvatList, "vat_code", "vat_desc")
+                                           , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" } : (object)new { @class = "form-control", autocomplete = "off", @required = "required", data_error = "กรุณาระบุ อัตราภาษี" })
+                                            <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="inputven_credit_term" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.ven_credit_term)</label>
+                                        <div class="col-sm-9">
+                                            @Html.DropDownListFor(model => model.ven_credit_term, new SelectListItem[]{
+                                            new SelectListItem() {Text = "15", Value="15"},
+                                            new SelectListItem() {Text = "30", Value="30"},
+                                            new SelectListItem() {Text = "45", Value="45"},
+                                            new SelectListItem() { Text = "60", Value = "60" }}
+      , Model.Mode == "v" ?
+      (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" } :
+      (object)new { @class = "form-control", autocomplete = "off" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="inputven_credit_limit" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.ven_credit_limit)</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(model => model.ven_credit_limit, ""
+             , Model.Mode == "v" ? (object)new { @class = "form-control keyInteger", autocomplete = "off", @disabled = "disabled", @style = "text-align:right" }
+             : (object)new { @class = "form-control keyInteger", autocomplete = "off", @style = "text-align:right" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="inputven_balance" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.ven_balance)</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(model => model.ven_balance, "{0:N2}"
+             , Model.Mode == "v" ? (object)new { @class = "form-control onKeysPrice", autocomplete = "off", @disabled = "disabled", @style = "text-align:right" }
+             : (object)new { @maxlength = "50", @class = "form-control onKeysPrice", autocomplete = "off", @readonly = "readonly", @style = "text-align:right" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="inputcontact_ldate" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.contact_ldate)</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(model => model.contact_ldate
+                                             , Model.Mode == "v" ? (object)new { @class = "form-control datepicker", autocomplete = "off", @disabled = "disabled" }
+                                                 : (object)new { @class = "form-control", autocomplete = "off", @readonly = "readonly" })
+                                            @Html.ValidationMessageFor(model => model.contact_ldate)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row has-feedback">
+                                        <label for="inputcontact_fdate" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.contact_fdate)<font color="#FF0000"> *</font></label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(model => model.contact_fdate
+                                             , Model.Mode == "v" ? (object)new { @class = "form-control datepicker", autocomplete = "off", @disabled = "disabled" }
+                                                 : (object)new { @class = "form-control datepicker", autocomplete = "off", @required = "required", data_error = "กรุณาระบุ วันที่ติดต่อครั้งแรก" })
+                                            @Html.ValidationMessageFor(model => model.contact_fdate)
+                                            <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="inputcancel_date" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.cancel_date)</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(model => model.cancel_date
+                                             , Model.Mode == "v" ? (object)new { @class = "form-control datepicker", autocomplete = "off", @disabled = "disabled" }
+                                                 : (object)new { @class = "form-control datepicker", autocomplete = "off" })
+                                            @Html.ValidationMessageFor(model => model.cancel_date)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="inputrec_memo" class="col-sm-3 col-form-label text-right">@Html.LabelFor(model => model.rec_memo)</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextAreaFor(model => model.rec_memo,
+                                            Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", rows = 3, cols = 20, @disabled = "disabled" }
+                                             : (object)new { @class = "form-control", rows = 3, cols = 20, autocomplete = "off" })
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    @if (Model.Mode != "v")
+                    {
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <input type="submit" name="btnSave" value="บันทึก" id="btnSave" class="btn btn-success">
+                                &nbsp;
+                                <a class="btn btn-danger" href="@Url.Action("Index")">ยกเลิก</a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <a class="btn btn-default" href="@Url.Action("Index")">กลับ</a>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(Model => Model.add_date)
+    @Html.HiddenFor(Model => Model.add_time)
+    @Html.HiddenFor(Model => Model.AF_Status)
+    @Html.HiddenFor(Model => Model.branch_no)
+    @Html.HiddenFor(Model => Model.add_no)
+    @Html.HiddenFor(Model => Model.add_moo)
+    @Html.HiddenFor(Model => Model.add_soi)
+    @Html.HiddenFor(Model => Model.add_trog)
+    @Html.HiddenFor(Model => Model.add_road)
+
+    @Html.HiddenFor(Model => Model.ven_discount)
+    @Html.HiddenFor(Model => Model.ven_ship_term)
+    @Html.HiddenFor(Model => Model.ven_ct_code)
+    @Html.HiddenFor(Model => Model.ordering_date)
+    @Html.HiddenFor(Model => Model.ordering_cycle)
+    @Html.HiddenFor(Model => Model.ven_balance_cs)
+    @Html.HiddenFor(Model => Model.dealercode)
+    @Html.HiddenFor(Model => Model.sap_no)
+    @Html.HiddenFor(Model => Model.branch_no)
+}
+@{
+    var _url = $"{Request.Url.GetLeftPart(UriPartial.Authority)}{Url.Content("~/")}";
+    var dateNow = DateTime.Now.ToString("MM/dd/yyyy");
+}
+@section scripts {
+    @Scripts.Render("~/bundles/datatables-script")
+    @Scripts.Render("~/bundles/admin/form")
+    @Scripts.Render("~/bundles/vendor/create")
+    <script>
+        var pageForm = new VendorForm()
+        var _form = new _Form()
+        $(document).ready(function () {
+            _form.sendUrl = '@Url.Action("Index", "SendClient")';
+            _form.posUrl = '@_url';
+            pageForm.indexForm = _form;
+            pageForm.init();
+            _form.init();
+        })
+    </script>
+}

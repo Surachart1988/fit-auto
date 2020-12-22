@@ -1,0 +1,102 @@
+﻿@model CentralService.Models.ExtraPromotionModel
+@{
+    ViewBag.Title = "กำหนดข้อมูลโปรโมชั่น";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section css{
+    @Styles.Render("~/Content/datatables-style")
+}
+
+<style>
+    body {
+        min-height: 100vh !important;
+        width: 100% !important;
+    }
+    #page-wrapper {
+        padding: 0px;
+    }
+
+        #page-wrapper .container-fluid {
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+
+            #page-wrapper .container-fluid .card-body {
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+</style>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 title-head">
+                <h1>
+                    <img src="@Url.Content("~/Content/img/ICON/icon_customer.png")" alt="">กำหนดข้อมูลโปรโมชั่น
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">&nbsp;</div>
+            <div class="col-md-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">เพิ่มข้อมูลโปรโมชั่น</div>
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myForm", name = "myForm", style = "background-color: #EEEEEE;" }))
+                    {
+                        <div id="Step2" class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 rows">
+                                    <p style="font-weight: bold; color: #555;">เลือกประเภทโปรโมชั่น :</p>
+                                    <div class="panel">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-6 rows" align="center">
+                                                    <div class="radio radio-success">
+                                                        <table id="rbl_pro_group_used_id">
+                                                            <tbody>
+                                                                @foreach (var p in Model.PromotionGrpUsed)
+                                                                {
+                                                                    <tr>
+                                                                        <td>
+                                                                            @if (p.pro_group_used_id == 5 || p.pro_group_used_id == 6)
+                                                                            {
+                                                                                <text> &nbsp; &nbsp; &nbsp;</text>
+                                                                            }
+                                                                            @Html.RadioButtonFor(m => m.pro_group_used_id, p.pro_group_used_id, new { id = "pro_group_used_id" + p.pro_group_used_id })
+                                                                            @Html.Label("pro_group_used_id" + p.pro_group_used_id, p.pro_group_used_name)
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>&nbsp;</div>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <a href="@Url.Action("CreatePromotion")" name="btnPreviousStep1" id="btnPreviousStep1" class="btn btn-default">ย้อนกลับ</a>
+                                    &nbsp;
+
+                                    <input type="submit" name="btnNextStep3" value="ถัดไป" id="btnNextStep3" class="btn btn-primary">
+                                </div>
+                            </div>
+                            <div>&nbsp;</div>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-1">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/datatables-script")
+    @Scripts.Render("~/bundles/promotion/create")
+}

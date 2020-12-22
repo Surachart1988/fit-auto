@@ -1,0 +1,17 @@
+﻿@model CentralService.Models.ExtraPromotionModel
+
+@Html.DropDownListFor(model => model.pro_model_code, new SelectList(Model.ddlProModelList, "pro_model_code", "pro_model")
+    , Model.Mode == "v" ?
+        (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" } :
+        (object)new { @class = "form-control", autocomplete = "off" })
+
+<script>
+    $("#pro_model_code").change(function () {
+        $.get("Getddlprosize", {
+            promodel_code: $(this).val()
+        }).done(function (data) {
+            $('#divPVProSize').html(data);
+            $('#divPVProSize').fadeIn('fast');
+        });
+    });
+</script>

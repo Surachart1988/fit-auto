@@ -1,0 +1,834 @@
+﻿@model  CentralService.Models.Sale.JobModel
+
+@{
+    ViewBag.Title = "ใบสั่งซ่อม";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myForm", name = "myForm" }))
+    {
+        @Html.HiddenFor(Model => Model.doc_no)
+        <div class="col-md-12">
+            <div class="panel panel-default" style="padding: 0px 0px 12px 3px;border: 1px solid #CCC;">
+                <div class="panel-heading">
+                    ใบสั่งซ่อม
+                </div>
+                <div class="panel-body" style="background-color: white;">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4">
+                            <div class="form-group row has-feedback">
+                                <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">
+                                    ทะเบียนรถ จังหวัด
+                                    <font color="#FF0000">*</font>
+                                    <a id="a_CarReg" style="cursor: pointer;">
+                                        <img src="~/Content/img/ICON/BTSEMP.GIF" width="19" height="18" border="0" alt="" />
+                                    </a>
+                                </label>
+                                <div class="col-sm-3" style="padding-right: 2px;">
+                                    @Html.TextBoxFor(model => model.car_reg, "",
+                                   Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                   : (object)new
+                                   {
+                                       @class = "form-control",
+                                       autocomplete = "off",
+                                       data_equalscar_error = "กรุณาเลือก ทะเบียนรถ จังหวัด",
+                                       data_equalscar = "",
+                                       data_error = "กรุณาเลือก ทะเบียนรถ จังหวัด",
+                                       required = "required",
+                                       @readonly = "readonly",
+                                       @style = "padding-right: 10px;"
+                                   })
+                                    @Html.ValidationMessageFor(model => model.car_reg, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                                </div>
+
+                                <div class="form-group col-sm-5" style="margin-bottom: 5px;">
+                                    @Html.TextBoxFor(model => model.car_province, "",
+                                   Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                   : (object)new
+                                   {
+                                       @class = "form-control",
+                                       autocomplete = "off",
+                                       data_requiredif = "#car_reg",
+                                       data_requiredif_error = "กรุณาเลือก ทะเบียนรถ",
+                                       @readonly = "readonly"
+                                   })
+                                    @Html.ValidationMessageFor(model => model.car_province, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                </div>
+
+                                <div class="help-block with-errors" style="text-align: center;padding-left: 50px;"></div>
+
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-4">
+                            <div class="form-group row">
+                                <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right" style="padding-right: 0;">ยี่ห้อ</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(model => model.Car_Brand, "",
+                                   Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                   : (object)new { @class = "form-control", autocomplete = "off", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-4">
+                            <div class="form-group row">
+                                <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">รุ่น</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(model => model.Car_model, "",
+                                   Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                   : (object)new { @class = "form-control", autocomplete = "off", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4">
+                            <div class="form-group row has-feedback">
+                                <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">เลขไมล์ปัจจุบัน <font color="#FF0000">*</font></label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(model => model.car_mileage, "",
+                                   Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                   : (object)new
+                                   {
+                                       @maxlength = "6",
+                                       @class = "form-control numberonly",
+                                       autocomplete = "off",
+                                       data_equals = 0,
+                                       data_equals_error = "กรุณากรอกเลขไมล์ให้มากกว่าหรือเท่ากับเลขไมล์ครั้งก่อน",
+                                       data_error = "กรุณากรอก เลขไมล์ปัจจุบัน",
+                                       required = "required"
+                                   })
+                                    @Html.ValidationMessageFor(model => model.car_mileage, "", new { @class = "text-danger" })
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-4">
+                            <div class="form-group row">
+                                <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">เลขไมล์ครั้งก่อน </label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(model => model.last_mileage, "",
+                                   Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                   : (object)new { @class = "form-control numberonly", autocomplete = "off", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-4">
+                            <div class="form-group row">
+                                <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">เลขไมล์เฉลี่ย/วัน </label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(model => model.km_perday, "",
+                                   Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                   : (object)new { @class = "form-control numberonly", autocomplete = "off", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4">
+                            <div class="form-group row">
+                                <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">
+                                    ชื่อ-สกุล
+                                    <a id="a_Customer" style="cursor: pointer;">
+                                        <img src="~/Content/img/ICON/BTSEMP.GIF" width="19" height="18" border="0" alt="" />
+                                    </a>
+                                </label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(model => model.cus_name, "",
+                                   Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                   : (object)new { @class = "form-control", autocomplete = "off", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-4">
+                            <div class="form-group row">
+                                <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">ผู้ส่งซ่อม</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(model => model.job_contact, "",
+                                   Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                   : (object)new { @class = "form-control", autocomplete = "off" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-4">
+                            <div class="form-group row">
+                                <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">โทรศัพท์</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(model => model.job_conttel, "",
+                                   Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                   : (object)new { @class = "form-control input-telephone", autocomplete = "off" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4">
+                            <div class="form-group row">
+                                <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">ประเภทเอกสาร</label>
+                                <div class="col-sm-8">
+                                    @Html.DropDownListFor(model => model.invoice_type, new SelectListItem[]{
+                                        new SelectListItem() {Text = "ใบเสร็จรับเงิน/ใบกำกับภาษี (อย่างย่อ)", Value="01"},
+                                        new SelectListItem() {Text = "ใบส่งของชั่วคราว", Value="02"},
+                                        new SelectListItem() { Text = "บิลเชื่อ PTTOR", Value = "03" } }
+                                    , Model.Mode == "v" ?
+                                    (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" } :
+                                    (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-4">
+                            <div class="form-group row">
+                                <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">ประเภทภาษี</label>
+                                <div class="col-sm-8">
+                                    @Html.DropDownListFor(model => model.vat_type, new SelectListItem[]{
+                                        new SelectListItem() {Text = "1.รวมภาษี", Value="1"},
+                                        new SelectListItem() {Text = "2.ไม่รวมภาษี", Value="2"}}
+                                    , Model.Mode == "v" ?
+                                    (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" } :
+                                    (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-4">
+                            <div class="form-group row">
+                                <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">อัตราภาษี(%)</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(model => model.vat_mrate, "",
+                                   Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                   : (object)new { @class = "form-control", autocomplete = "off", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4">
+                            <div class="form-group row">
+                                <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">เลขที่การจองจาก Website	</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(model => model.online_reserv, "",
+                                   Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                   : (object)new { @class = "form-control", autocomplete = "off" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-4">
+                            <div class="form-group row">
+                                <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">คำสั่งงาน	</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(model => model.job_detail, "",
+                                   Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                   : (object)new { @class = "form-control", autocomplete = "off" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-4">
+                            <div class="form-group row">
+                                <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">ช่างซ่อม <img src="~/Content/img/ICON/BTSEMP.GIF" width="19" height="18" border="0" alt="" /></label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(model => model.mechanic_by, "",
+                                   Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                   : (object)new { @class = "form-control", autocomplete = "off" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4">
+                            <div class="form-group row">
+                                <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">เลขที่ใบแจ้งซ่อม/สัญญา</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(model => model.sale_docno, "",
+                                   Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                   : (object)new { @class = "form-control", autocomplete = "off" })
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    @Html.HiddenFor(Model => Model.cus_code)
+                    @Html.HiddenFor(Model => Model.cus_type)
+                </div>
+            </div>
+        </div>
+        @Html.HiddenFor(Model => Model.first_contdate)
+        @Html.HiddenFor(Model => Model.last_contdate)
+        @Html.HiddenFor(Model => Model.first_mileage)
+        <div class="col-md-12">
+            <div class="panel panel-default" style="border: 1px solid #CCC; margin-bottom: 5px;">
+                <div style="padding: 10px 3px 12px 3px;">
+                    <div class="card">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#product" aria-controls="product" role="tab" data-toggle="tab">
+                                    <i class="fa fa-shopping-cart"></i>  <span>สินค้า/บริการ</span>
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#customer" aria-controls="customer" role="tab" data-toggle="tab">
+                                    <i class="fa fa-user"></i>  <span>ลูกค้า</span>
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#document" aria-controls="document" role="tab" data-toggle="tab">
+                                    <i class="fa fa-file"></i>  <span>เอกสาร</span>
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#car" aria-controls="car" role="tab" data-toggle="tab">
+                                    <i class="fa fa-car"></i>  <span>รถยนต์</span>
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#image" aria-controls="image" role="tab" data-toggle="tab">
+                                    <i class="fa fa-image"></i>  <span>รูปประกอบ</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="product">
+                                <div class="form-group row"></div>
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        <div class="form-group row has-feedback">
+                                            <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right" style="margin-bottom: 0;">
+                                                รหัสสินค้า
+                                                <font color="#FF0000">*</font>
+                                                <button id="a_Product" type="button" style="border: none !important;background-color: #ffffff !important;padding: 0;">
+                                                    <img src="~/Content/img/ICON/BTSEMP.GIF" width="19" height="18" border="0" alt="" />
+                                                </button><label style="margin-right: 30px;margin-bottom: 0;">/บริการ</label>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(model => model.pro_code, "",
+                                               Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                               : (object)new
+                                               {
+                                                   @class = "form-control",
+                                                   autocomplete = "off",
+                                                   @readonly = "readonly",
+                                                   data_hasproduct_error = "กรุณาเลือก สินค้าหรือบริการ",
+                                                   data_hasproduct = "",
+                                                   data_error = "กรุณาเลือก สินค้าหรือบริการ",
+                                                   required = "required",
+                                               })
+                                                <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <div class="form-group row">
+                                            <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">
+                                                ชื่อสินค้า/บริการ
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(model => model.pro_tname, "",
+                                               Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                               : (object)new { @class = "form-control", autocomplete = "off", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-2">
+                                        <div class="form-group row">
+                                            <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">
+                                                ที่เก็บ
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(model => model.locat_name, "",
+                                               Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                               : (object)new { @class = "form-control", autocomplete = "off", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-2">
+                                        <div class="form-group row">
+                                            <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">
+                                                หน่วย
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(model => model.sale_unit_code,
+                                               new SelectList(Model.ddlSaleUnitCodeList, "unit_code", "unit_name"),
+                                                (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-2">
+                                        <div class="form-group row">
+                                            <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">
+                                                DOT
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(model => model.dot_name, "",
+                                               Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                               : (object)new { @class = "form-control", autocomplete = "off", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        <div class="form-group row has-feedback">
+                                            <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">
+                                                จำนวน
+                                                <font color="#FF0000">*</font>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(model => model.store_qty, "",
+                                               Model.Mode == "v" ?
+                                               (object)new { @maxlength = "4", @class = "form-control numberonly", autocomplete = "off", @disabled = "disabled" }
+                                               : (object)new
+                                               {
+                                                   @maxlength = "4",
+                                                   @class = "form-control numberonly",
+                                                   autocomplete = "off",
+                                                   data_morethanstock_error = "ไม่สามารถขายสินค้าจำนวนที่มากกว่าสินค้าคลัง",
+                                                   data_morethanstock = "0",
+                                                   data_zeroqty_error = "กรุณาระบุ จำนวนมากกว่า 0",
+                                                   data_zeroqty = "0",
+                                                   data_noqty_error = "กรุณาระบุ จำนวน",
+                                                   data_noqty = "",
+                                                   data_error = "กรุณาระบุ จำนวน",
+                                                   required = "required",
+                                               })
+                                                <span class="glyphicon form-control-feedback" aria-hidden="true" style="text-align: left;"></span>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <div class="form-group row">
+                                            <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">
+                                                ราคา/หน่วย
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(model => model.pro_price, "",
+                                               Model.Mode == "v" ?
+                                               (object)new { @maxlength = "10", @class = "form-control numberonly text-right", autocomplete = "off", @disabled = "disabled" }
+                                               : (object)new { @maxlength = "10", @class = "form-control numberonly text-right", autocomplete = "off", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-2">
+                                        <div class="form-group row">
+                                            <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">
+                                                ราคาล่าสุด
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(model => model.pro_amt, "",
+                                               Model.Mode == "v" ? (object)new { @class = "form-control text-right", autocomplete = "off", @disabled = "disabled" }
+                                               : (object)new { @class = "form-control text-right", autocomplete = "off", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-2">
+                                        <div class="form-group row">
+                                            <label for="inputplant_no" class="panel-ajust col-sm-4 col-form-label text-right">
+                                                ช่างซ่อม
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(model => model.io_by, "",
+                                               Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                               : (object)new { @class = "form-control", autocomplete = "off" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-2">
+                                        <div class="form-group row">
+                                            <label for="input" class="panel-ajust col-sm-4 col-form-label text-right">
+
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <button type="button" id="btnaddprod" data-mode="add" class="btn btn-success" style="width: 100%;">
+                                                    เพิ่มรายการ
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.HiddenFor(Model => Model.locat_code)
+                                @Html.HiddenFor(Model => Model.dot_id)
+                                @Html.HiddenFor(Model => Model.pro_ohqty)
+                                @Html.HiddenFor(Model => Model.pro_qty)
+                                @Html.HiddenFor(Model => Model.doc_ps_code)
+                                @Html.HiddenFor(Model => Model.is_proset)
+                                @Html.HiddenFor(Model => Model.ps_gen_id)
+                                @Html.HiddenFor(Model => Model.ps_code)
+                                @Html.HiddenFor(Model => Model.ps_name)
+
+                                @*<div class="form-group row"></div>*@
+                                <div class="row">
+                                    <table class="table table-bordered nowrap table-none-style" id="gv_jobtemp" style="width:100%;font-size: 13px;">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">รหัสสินค้า/บริการ</th>
+                                                <th class="text-center">DOT</th>
+                                                <th class="text-center">ชื่อสินค้า/บริการ</th>
+                                                <th class="text-center">หน่วย</th>
+                                                <th class="text-center">ที่เก็บ</th>
+                                                <th class="text-center">จำนวน</th>
+                                                <th class="text-center">ราคา/หน่วย</th>
+                                                <th class="text-center">จำนวนเงิน</th>
+                                                <th class="text-center">ช่างซ่อม</th>
+                                                <th class="text-center"><label>คำสั่ง</label></th>
+                                                <th class="text-center"><label>Stock online</label></th>
+                                                <th style="display:none">&nbsp;</th>
+                                                <th style="display:none">&nbsp;</th>
+                                                <th style="display:none">&nbsp;</th>
+                                                <th style="display:none">&nbsp;</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="customer">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                    <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="document">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="car">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-12">.col-xs-6 .col-sm-12</div>
+                                    <div class="col-xs-6 col-sm-12">.col-xs-6 .col-sm-12</div>
+                                    <div class="col-xs-6 col-sm-12">.col-xs-6 .col-sm-12</div>
+                                    <div class="col-xs-6 col-sm-12">.col-xs-6 .col-sm-12</div>
+                                    <div class="col-xs-6 col-sm-12">.col-xs-6 .col-sm-12</div>
+                                    <div class="col-xs-6 col-sm-12">.col-xs-6 .col-sm-12</div>
+                                    <div class="col-xs-6 col-sm-12">.col-xs-6 .col-sm-12</div>
+                                    <div class="col-xs-6 col-sm-12">.col-xs-6 .col-sm-12</div>
+                                    <div class="col-xs-6 col-sm-12">.col-xs-6 .col-sm-12</div>
+                                    <div class="col-xs-6 col-sm-12">.col-xs-6 .col-sm-12</div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="image">
+                                <div class="row">
+                                    <table class="table table-striped table-bordered nowrap">
+                                        <caption><button type="button" class="btn btn-success">เพิ่ม/แก้ไข/ลบ รูปรถยนต์</button></caption>
+                                        <thead>
+                                            <tr>
+                                                <th>รูป</th>
+                                                <th>ชื่อรูป</th>
+                                                <th>หมายเหตุ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>mdo</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>fat</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Larry</td>
+                                                <td>the Bird</td>
+                                                <td>twitter</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input hidden type="text" id="hdnProdPanel" value="" data-error="กรุณาเลือกสินค้าหรือบริการอย่างน้อย 1 รายการ" required>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body" style="padding-top:0;">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card border-light">
+                                <div class="card-body" style="padding-top: 0;padding-left: 0;padding-right: 0;">
+                                    <div class="text-summary">
+                                        <div class="row-summary">
+                                            <div class="col-6" style="text-align: right;"><label>รวมเงิน</label></div>
+                                            <div class="col" style="text-align: right;">
+                                                <input class="input-no-bg money" id="txtjob_amt" name="txtjob_amt" readonly="readonly" type="text" value="0">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label for="lbl_sumtotal" class="col-form-label">บาท </label>
+                                            </div>
+                                        </div>
+                                        <div class="row-summary">
+                                            <div class="col-6" style="text-align: right;"><label>ภาษีมูลค่าเพิ่ม</label></div>
+                                            <div class="col" style="text-align: right;">
+                                                <input class="input-no-bg money" id="txtjob_vatamt" name="txtjob_vatamt" readonly="readonly" type="text" value="0">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label for="lbl_sumvat" class="col-form-label">บาท </label>
+                                            </div>
+                                        </div>
+                                        <div class="row-summary">
+                                            <div class="col-6" style="text-align: right;"><label>รวมยอดสุทธิ</label></div>
+                                            <div class="col" style="text-align: right;">
+                                                <input class="input-no-bg money" id="txtjob_netamt" name="txtjob_netamt" readonly="readonly" type="text" value="0">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label for="lbl_sum_nettotal" class="col-form-label">บาท </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default" style="border: 1px solid #CCC;">
+                <div class="panel-body" style="padding: 10px 3px 12px 3px; background-color: white;">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-5">
+                            <div class="form-group row">
+                                <label for="inputrec_memo" class="col-sm-2 col-form-label" style="font-size: 12px !important;">หมายเหตุ : </label>
+                                <div class="col-sm-10">
+                                    @Html.TextAreaFor(model => model.rec_memo,
+                                   Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" }
+                                   : (object)new { @class = "form-control", autocomplete = "off" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-7">
+                            <div class="form-group row">
+                                <div class="col-xs-6 col-sm-12">
+                                    @Html.HiddenFor(Model => Model.job_totalamt)
+                                    @Html.HiddenFor(model => model.job_amt)
+                                </div>
+                                <div class="col-xs-6 col-sm-12">
+                                    @Html.HiddenFor(model => model.job_vatamt)
+                                </div>
+                                <div class="col-xs-6 col-sm-12">
+                                    @Html.HiddenFor(model => model.job_netamt)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.Mode != "v")
+                {
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <input type="submit" name="btnSave" value="บันทึก" id="btnSave" class="btn btn-success">
+                            &nbsp;
+                            <a class="btn btn-danger" href="@Url.Action("Index")">ยกเลิก</a>
+                        </div>
+                    </div>
+                    <div class="col-md-1">&nbsp;</div>
+                    <div class="row">
+                        <br />
+                    </div>
+                }
+            </div>
+        </div>
+
+        if (Model.Mode == "v")
+        {
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a class="btn btn-default" href="@Url.Action("Index")">กลับ</a>
+                </div>
+            </div>
+            <div class="row">
+                <br />
+            </div>
+        }
+
+    }
+</div>
+@Html.Partial("~/Views/Components/_CarRegModal.cshtml", new CentralService.Models.SearchModel())
+@Html.Partial("~/Views/Components/_CustomerModal.cshtml", new CentralService.Models.SearchModel())
+@Html.Partial("ProductJobModal", new CentralService.Models.ProductSearchModel())
+@Html.Partial("~/Views/Components/_ProductStockOnline.cshtml")
+@Html.Partial("~/Views/Components/_ProductSetDetail.cshtml")
+@Html.Partial("~/Views/Components/_ProductSelectLocat.cshtml")
+@{
+    var _url = $"{Request.Url.GetLeftPart(UriPartial.Authority)}{Url.Content("~/")}";
+    var dateNow = DateTime.Now.ToString("MM/dd/yyyy");
+}
+@section css{
+    @Styles.Render("~/Content/datatables-style")
+    @Styles.Render("~/Content/job")
+    <style>
+        .input-no-bg {
+            background-color: transparent;
+            /* color: white; */
+            width: 85%;
+            /* right: 50px; */
+            /* position: absolute; */
+            border: 0;
+        }
+
+            .input-no-bg:focus {
+                outline: none;
+            }
+
+        .row-summary {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+        .col-6 {
+            -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        .col {
+            -ms-flex-preferred-size: 0;
+            flex-basis: 0;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            max-width: 100%;
+        }
+
+        .text-summary input {
+            text-align: right;
+        }
+
+        .card.border-light {
+            background-color: #ecf0f5;
+            color: #363167;
+        }
+
+            .card.border-light .card-header {
+                padding: 5px;
+                padding-bottom: 1vh;
+                background-color: rgba(0,0,0,0);
+                font-size: 2vh
+            }
+
+        .text-summary label, .text-summary input {
+            color: #363167;
+            font-weight: bold;
+        }
+    </style>
+    <style>
+
+        .has-feedback {
+            margin-bottom: 0;
+        }
+
+        body:not(.modal-open) {
+            padding-right: 0px !important;
+        }
+
+        .panel-body-Font {
+            /*font-weight: bold !important;*/
+            /*text-align: right !important;*/
+        }
+
+        .with-errors {
+            font-size: 12px !important;
+            font-weight: bold !important;
+        }
+
+        .panel-ajust {
+            font-size: 12px !important;
+            padding-right: 0;
+            padding-left: 0;
+        }
+    </style>
+}
+@section scripts {
+    @Scripts.Render("~/bundles/datatables-script")
+    @Scripts.Render("~/bundles/admin/form")
+    @Scripts.Render("~/bundles/job/create")
+
+    <script>
+        var jobForm = new JobForm()
+        var _form = new _Form()
+        $(document).ready(function () {
+            jobForm.dateNow = '@dateNow';
+            jobForm.posUrl = '@_url';
+            jobForm.getGenCodeUrl = '@Url.Action("GetJOrderCode")';
+            jobForm.getJobOrderUrl = '@Url.Action("GetJobOrder")';
+            jobForm.addProdUrl = '@Url.Action("AddProductJobOrder")';
+            jobForm.addProdSetUrl = '@Url.Action("AddProductSetJobOrder")';
+            jobForm.delProdUrl = '@Url.Action("DeleteProductJobOrder")'
+            jobForm.hqUrl = '@Session["netHQUrl"]';
+            _form.posUrl = '@_url';
+            _form.RoundUnitType = '@Model.PaymentRoundDigit';
+            jobForm.indexForm = _form
+            jobForm.init();
+            _form.init()
+        })
+    </script>
+}

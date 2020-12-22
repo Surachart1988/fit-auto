@@ -1,0 +1,87 @@
+﻿<!-- Modal -->
+<div class="modal fade" id="EndOldBatchModal" tabindex="-1" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document" style="height:40vh;">
+        <div class="modal-content">
+
+            <div id="loaderEndOldBatchModal" class="spinner" style="display:none">
+                <div class="center-div">
+                    <div class="inner-div">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loading-base" class="modal fade" data-keyboard="false" data-backdrop="static">
+                <div class="cssload-dots">
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                </div>
+            </div>
+
+            <div class="modal-header">
+                <h4 class="modal-title">แจ้งเตือน</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="col-md-12" style="text-align:center;font-size:1.5vw">
+                        <div class="card-body card-lg">
+                            กรุณาปิดสิ้นวัน วันที่
+                            <p id="reqdate" class="text-details" style="font-size: 1.5vw; text-align: center;">
+                                @DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6" style="text-align: right">
+                        <label id="alertmsg" style="color: #ff0000"></label>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal-footer">
+                <div class="col-md-12" style="text-align: center">
+                    <button type="button" id="btnConfirm" class="btn btn-lg btn-success">ตกลง</button>
+                    @*<a class="btn btn-lg btn-success" type="button" href="/Home/ClassicAsp?AspFile=day_end_list.asp">ตกลง</a>*@
+                </div>
+            </div>
+
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+
+</div>
+<script>
+    $(document).ready(function () {
+
+        $('#btnConfirm').on('click', function () {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("TryToConnectBlueCardGateWay","BlueCard")',
+                beforeSend: function beforeSend() {
+                    $("#loaderEndOldBatchModal").show();
+                },
+                success: function success(resp) {
+                    if (resp.Message != "") {
+                        //  warningAlert(resp.Message);
+                        $('#alertmsg').text('*'+resp.Message);
+
+                    } else {
+
+                        $.redirect('./Home/ClassicAsp?AspFile=day_end_list.asp', {
+                            AspFile: 'day_end_new.asp?doc_date='+$("#reqdate").prop("innerText")
+                        });
+                    }
+                    $("#loaderEndOldBatchModal").hide();
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,116 @@
+﻿th {
+    text-align: center;
+}
+
+a {
+    color: #2e92cf;
+    text-decoration: none;
+}
+
+    a:hover {
+        color: #2e92cf;
+    }
+
+.GridPager a, .GridPager span {
+    display: block;
+    height: 25px;
+    width: 25px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+
+
+
+.input-daterange .input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+}
+
+
+.swal-icon img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.swal-text {
+    font-size: 35px !important;
+    position: relative !important;
+    float: none !important;
+    line-height: normal !important;
+    vertical-align: top !important;
+    text-align: center !important;
+    display: inline-block !important;
+    margin: 0 !important;
+    padding: 0 10px !important;
+    font-weight: 1000 !important;
+    color: rgba(0,0,0,.64) !important;
+    max-width: calc(100% - 20px) !important;
+    overflow-wrap: break-word !important;
+    box-sizing: border-box !important;
+    font-family: "JasmineUPC", Times, serif !important;
+}
+
+.swal-button--cancel {
+    color: #efefef;
+    background-color: #4682B4;
+}
+
+.swal-button {
+    background-color: #4682B4 !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 5px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    padding: 10px 24px !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+}
+
+.swal-modal {
+    width: 550px;
+    opacity: 0;
+    pointer-events: none;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    position: static;
+    margin: 20px auto;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    z-index: 10001;
+    transition: opacity .2s,-webkit-transform .3s;
+    transition: transform .3s,opacity .2s;
+    transition: transform .3s,opacity .2s,-webkit-transform .3s;
+}
+
+.swal-icon:first-child {
+    margin-top: 15px;
+}
+
+.swal-footer {
+    text-align: center;
+    padding-top: 13px;
+    margin-top: 13px;
+    padding: 13px 16px;
+    border-radius: inherit;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.swal-button--danger {
+    background-color: #32CD32;
+}

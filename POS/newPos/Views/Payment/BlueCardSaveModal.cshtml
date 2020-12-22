@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "BlueCardSaveModal";
+}
+
+<!-- Modal -->
+<div class="modal fade" id="blueCardSaveModal" tabindex="-1" data-toggle="modal" data-backdrop="static" data-keyboard="false" >
+    <div class="modal-dialog" role="document" style="height: 40vh;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Blue Card</h4>
+                @*<button type="button" class="close" id="CancelCashReceive" ><span aria-hidden="true">&times;</span></button>*@
+
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="offset-2 col-8 bluecard-form">
+                        <div class="form-group row">
+                            <span class="col-4 col-form-label col-form-label-sm">Blue No.</span>
+                            <input type="text" class="form-control form-control-sm col-8 input-card-save" id="txtBlueCardSaveNo" aria-describedby="basic-addon1" style="background-color:#e9ecef" >
+                        </div>
+                        <div class="form-group row">
+                            <span class="col-4 col-form-label col-form-label-sm">เบอร์โทรศัพท์</span>
+                            <input type="text" class="form-control form-control-sm col-8 input-mobile-save" id="txtBlueCardSaveTel" name="txtBlueCardSaveTel" aria-describedby="basic-addon1" autofocus>
+                            <label id="lblBlueCardSaveIsValid" class="invalid offset-4">เบอร์โทรไม่ถูกต้อง</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnBlueCardSave" class="btn btn-success" onclick="$('#myForm').submit()">ยืนยัน(Blue Card)</button>
+                <button type="button" id="btnClose" class="btn btn-info" onclick="$('#BlueCardSaveNo').val(''); $('#myForm').submit()" >ถัดไป</button>
+                @*<button type="button" class="btn btn-warning" data-dismiss="modal" aria-label="Close"> ข้ามต่อไป </button>*@
+            </div>
+
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div>
+

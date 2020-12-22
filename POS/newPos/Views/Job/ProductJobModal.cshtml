@@ -1,0 +1,80 @@
+﻿@model CentralService.Models.ProductSearchModel
+
+<div class="modal right fade" id="product_job-modal" role="dialog">
+    <div class="modal-dialog modal-lg" style="margin-top: 0;">
+        <div class="modal-content">
+            <div class="modal-header" style="padding-bottom: 0;background-color: #313167;">
+                <div class="row">
+                    <div class="col-sm-12 title-head">
+                        <div><font color="#FFFFFF"><b>ข้อมูลสินค้า</b></font></div>
+                    </div>
+                </div>
+                <br />
+            </div><br />
+            <div class="modal-body" style="padding-top: 0;padding-bottom:0">
+                <div class="card">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#search_product" aria-controls="search_product" role="tab" data-toggle="tab">
+                                <i class="fa fa-cube"></i>  <span>สินค้า</span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#search_productset" aria-controls="search_productset" role="tab" data-toggle="tab">
+                                <i class="fa fa-cubes"></i>  <span>สินค้าชุด</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="search_product">
+                            @Html.Partial("~/Views/Components/_ProductList.cshtml", new CentralService.Models.ProductSearchModel())
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="search_productset">
+                            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "productsetjob-form", name = "productsetjobForm" }))
+                            {
+                                <div class="form-group row"></div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="input-daterange input-group">
+                                            <span class="input-group-addon first-text">จากวันที่ :</span>
+                                            @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control datepicker", autocomplete = "off", placeholder = "วันที่เริ่มต้น" })
+                                            <span class="input-group-addon">ถึง :</span>
+                                            @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control datepicker", autocomplete = "off", placeholder = "วันที่สิ้นสุด" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="input-daterange input-group">
+                                            @Html.EditorFor(model => model.prodSetSearch, new { htmlAttributes = new { @class = "form-control", placeholder = "รหัสสินค้า/ชื่อสินค้าชุด" } })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div>
+                                            <button id="btn_search2" type="button" class="btn btn-success">ค้นหา</button>
+                                            <input id="btn_clear2" type="button" name="btn_clear" value="เคลียร์" class="btn btn-default">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row"></div>
+                                <div class="row">
+                                    <table class="table table-style nowrap" id="gv_productsetjob-list" style="width:100%;font-size: 13px;">
+                                        <thead>
+                                            <tr style="box-shadow: none;">
+                                                <th>รหัสสินค้าชุด</th>
+                                                <th>ชื่อสินค้าชุด</th>
+                                                <th>วันที่เริ่ม</th>
+                                                <th>วันที่สิ้นสุด</th>
+                                                @*<th>คำสั่ง</th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody style="font-size:13px"></tbody>
+                                    </table>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

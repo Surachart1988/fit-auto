@@ -1,0 +1,162 @@
+﻿@model  CentralService.Models.SendClientModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=11, IE=10, IE=9, ie=8, ie=7">
+    <title>นำข้อมูลออกไปสาขา - newHQ App</title>
+    @Styles.Render("~/Content/admin/css")
+    @Styles.Render("~/Content/datatables-style")
+    <style>
+        .normal2-black {
+            background-color: rgb(238, 238, 238);
+            border-bottom: 1px solid #eeeeee;
+            padding: 4px;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        table {
+            border-radius: 4px;
+            width: 70%;
+            margin: 100px auto;
+            background-color: white;
+            border-collapse: collapse;
+        }
+
+        tr {
+            border: 1px solid transparent;
+            z-index: 7;
+        }
+
+        td {
+            padding: 20px;
+            transition: all 0.2s ease-in-out;
+        }
+
+            td.highlight {
+                padding: 0;
+                width: 4px;
+            }
+
+                td.highlight div {
+                    width: 4px;
+                    height: 60px;
+                    border-radius: 4px;
+                    background-color: white;
+                    transition: all 0.2s ease-in-out;
+                }
+
+        tr:hover {
+            box-shadow: 0px 9px 4px -6px grey;
+        }
+
+            tr:hover td {
+                cursor: pointer;
+                color: #0194D9;
+                border-top: 1px solid grey;
+                border-bottom: 1px solid grey;
+            }
+
+                /* tr:first-child:hover td {
+          border-top: none;
+        }
+        tr:last-child:hover td {
+          border-bottom: none;
+        } */
+                tr:hover td.highlight div {
+                    transform: scaleX(3);
+                }
+    </style>
+</head>
+<body bgcolor="#FFFFFF" text="#000000">
+    @Scripts.Render("~/bundles/admin/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/admin/bootstrap")
+    @Scripts.Render("~/bundles/admin-lte/js")
+    @Scripts.Render("~/bundles/js")
+    @Scripts.Render("~/bundles/admin/js")
+    <div id="pageLoading"></div>
+    <div class="wrapper">
+        <div>
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 title-head normal2-black">
+                            <div align="center"><font color="#000000"><b>สาขาที่ต้องการส่งข้อมูล</b></font></div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myForm", name = "myForm" }))
+                        {
+                            @Html.HiddenFor(model => model.act)
+
+                            <div class="row">
+                                <table class="table nowrap" id="gv_clibranch" style="width:100%;font-size: 13px;">
+                                    <thead>
+                                        <tr>
+                                            <th class="check">
+                                                <input id="chkall" type="checkbox" name="chkall">
+                                                <label for="chkall"> เลือกสาขา<br>ทั้งหมด</label>
+                                            </th>
+                                            <th width="20%" class="text-center">รหัสสาขา</th>
+                                            <th width="80%" class="text-center">ชื่อสาขา</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            for (int i = 0; i < Model.BranchList.Count; i++)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.CheckBoxFor(x => Model.BranchList[i].IsCheck, new { style = "opacity: 1;" })
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @Html.HiddenFor(m => Model.BranchList[i].plant_no)
+                                                        @Html.HiddenFor(m => Model.BranchList[i].DealerName)
+                                                        @Html.DisplayFor(x => Model.BranchList[i].plant_no)
+                                                    </td>
+                                                    <td>
+                                                        @Html.HiddenFor(m => Model.BranchList[i].dealercode)
+                                                        @Html.HiddenFor(m => Model.BranchList[i].http_path)
+                                                        @Html.DisplayFor(x => Model.BranchList[i].DealerName)
+                                                    </td>
+                                                </tr>
+                                            }
+                                            @:
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <input type="submit" name="btnSend" value="ส่งข้อมูล" id="btnSend" class="btn btn-success">
+                                    <input type="button" name="btnClose" value="ยกเลิก" id="btnClose" onclick="window.close();" class="btn btn-danger">
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.Partial("_LoadingModal", "loading-base")
+    </div>
+    @Scripts.Render("~/bundles/datatables-script")
+    @Scripts.Render("~/bundles/sendclient")
+    <script>
+        var pageForm = new SendClientForm()
+        $(document).ready(function () {
+            pageForm.init();
+        });
+        $("#myForm").submit(function (e) {
+            $("#loading").show();
+        });
+
+    </script>
+</body>
+</html>

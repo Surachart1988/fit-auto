@@ -1,0 +1,2262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7B42252B-4096-42D3-83BA-F97A3CB3B4AF}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>newHQ</RootNamespace>
+    <AssemblyName>newHQ</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App_Data\LocalizationAttribute.cs" />
+    <Compile Include="App_Data\LocalizedControllerActivator.cs" />
+    <Compile Include="App_Data\MyHelpers.cs" />
+    <Compile Include="App_Data\SessionTimeout.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\UnityResolver.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\ProductController.cs" />
+    <Compile Include="Controllers\DropStoreController.cs" />
+    <Compile Include="Controllers\Api\HqApiController.cs" />
+    <Compile Include="Controllers\MasterData\CampaignController.cs" />
+    <Compile Include="Controllers\SendClientController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JsonResponseController.cs" />
+    <Compile Include="Controllers\JsonResponseApiController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\MasterData\MasterDataController.cs" />
+    <Compile Include="Controllers\MasterData\PromotionController.cs" />
+    <Compile Include="Controllers\PushStoreController.cs" />
+    <Compile Include="Controllers\CouponApiController.cs" />
+    <Compile Include="Controllers\SystemData\BranchController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspModel.cs" />
+    <Compile Include="Models\MenuListModel.cs" />
+    <Compile Include="Models\MessageViewModel.cs" />
+    <Compile Include="Models\RecordsNumberModel.cs" />
+    <Compile Include="Models\ResponseModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Helper\EnumHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="admin-lte\css\AdminLTE.css" />
+    <Content Include="admin-lte\css\AdminLTE.min.css" />
+    <Content Include="admin-lte\css\alt\AdminLTE-bootstrap-social.css" />
+    <Content Include="admin-lte\css\alt\AdminLTE-bootstrap-social.min.css" />
+    <Content Include="admin-lte\css\alt\AdminLTE-fullcalendar.css" />
+    <Content Include="admin-lte\css\alt\AdminLTE-fullcalendar.min.css" />
+    <Content Include="admin-lte\css\alt\AdminLTE-select2.css" />
+    <Content Include="admin-lte\css\alt\AdminLTE-select2.min.css" />
+    <Content Include="admin-lte\css\alt\AdminLTE-without-plugins.css" />
+    <Content Include="admin-lte\css\alt\AdminLTE-without-plugins.min.css" />
+    <Content Include="admin-lte\css\skins\skin-black-light.css" />
+    <Content Include="admin-lte\css\skins\skin-black-light.min.css" />
+    <Content Include="admin-lte\css\skins\skin-black.css" />
+    <Content Include="admin-lte\css\skins\skin-black.min.css" />
+    <Content Include="admin-lte\css\skins\skin-blue-light.css" />
+    <Content Include="admin-lte\css\skins\skin-blue-light.min.css" />
+    <Content Include="admin-lte\css\skins\skin-blue.css" />
+    <Content Include="admin-lte\css\skins\skin-blue.min.css" />
+    <Content Include="admin-lte\css\skins\skin-green-light.css" />
+    <Content Include="admin-lte\css\skins\skin-green-light.min.css" />
+    <Content Include="admin-lte\css\skins\skin-green.css" />
+    <Content Include="admin-lte\css\skins\skin-green.min.css" />
+    <Content Include="admin-lte\css\skins\skin-purple-light.css" />
+    <Content Include="admin-lte\css\skins\skin-purple-light.min.css" />
+    <Content Include="admin-lte\css\skins\skin-purple.css" />
+    <Content Include="admin-lte\css\skins\skin-purple.min.css" />
+    <Content Include="admin-lte\css\skins\skin-red-light.css" />
+    <Content Include="admin-lte\css\skins\skin-red-light.min.css" />
+    <Content Include="admin-lte\css\skins\skin-red.css" />
+    <Content Include="admin-lte\css\skins\skin-red.min.css" />
+    <Content Include="admin-lte\css\skins\skin-yellow-light.css" />
+    <Content Include="admin-lte\css\skins\skin-yellow-light.min.css" />
+    <Content Include="admin-lte\css\skins\skin-yellow.css" />
+    <Content Include="admin-lte\css\skins\skin-yellow.min.css" />
+    <Content Include="admin-lte\css\skins\_all-skins.css" />
+    <Content Include="admin-lte\css\skins\_all-skins.min.css" />
+    <Content Include="admin-lte\img\avatar.png" />
+    <Content Include="admin-lte\img\avatar04.png" />
+    <Content Include="admin-lte\img\avatar2.png" />
+    <Content Include="admin-lte\img\avatar3.png" />
+    <Content Include="admin-lte\img\avatar5.png" />
+    <Content Include="admin-lte\img\boxed-bg.jpg" />
+    <Content Include="admin-lte\img\boxed-bg.png" />
+    <Content Include="admin-lte\img\credit\american-express.png" />
+    <Content Include="admin-lte\img\credit\cirrus.png" />
+    <Content Include="admin-lte\img\credit\mastercard.png" />
+    <Content Include="admin-lte\img\credit\mestro.png" />
+    <Content Include="admin-lte\img\credit\paypal.png" />
+    <Content Include="admin-lte\img\credit\paypal2.png" />
+    <Content Include="admin-lte\img\credit\visa.png" />
+    <Content Include="admin-lte\img\default-50x50.gif" />
+    <Content Include="admin-lte\img\icons.png" />
+    <Content Include="admin-lte\img\photo1.png" />
+    <Content Include="admin-lte\img\photo2.png" />
+    <Content Include="admin-lte\img\photo3.jpg" />
+    <Content Include="admin-lte\img\photo4.jpg" />
+    <Content Include="admin-lte\img\user1-128x128.jpg" />
+    <Content Include="admin-lte\img\user2-160x160.jpg" />
+    <Content Include="admin-lte\img\user3-128x128.jpg" />
+    <Content Include="admin-lte\img\user4-128x128.jpg" />
+    <Content Include="admin-lte\img\user5-128x128.jpg" />
+    <Content Include="admin-lte\img\user6-128x128.jpg" />
+    <Content Include="admin-lte\img\user7-128x128.jpg" />
+    <Content Include="admin-lte\img\user8-128x128.jpg" />
+    <Content Include="admin-lte\js\adminlte.js" />
+    <Content Include="admin-lte\js\adminlte.min.js" />
+    <Content Include="admin-lte\js\demo.js" />
+    <Content Include="admin-lte\js\pages\dashboard.js" />
+    <Content Include="admin-lte\js\pages\dashboard2.js" />
+    <Content Include="Content\bootstrap-datepicker.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-radio.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cos.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.dataTables.css" />
+    <Content Include="Content\DataTables\css\autoFill.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.foundation.css" />
+    <Content Include="Content\DataTables\css\autoFill.foundation.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.jqueryui.css" />
+    <Content Include="Content\DataTables\css\autoFill.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.semanticui.css" />
+    <Content Include="Content\DataTables\css\autoFill.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\buttons.dataTables.css" />
+    <Content Include="Content\DataTables\css\buttons.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\buttons.foundation.css" />
+    <Content Include="Content\DataTables\css\buttons.foundation.min.css" />
+    <Content Include="Content\DataTables\css\buttons.jqueryui.css" />
+    <Content Include="Content\DataTables\css\buttons.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\buttons.semanticui.css" />
+    <Content Include="Content\DataTables\css\buttons.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.dataTables.css" />
+    <Content Include="Content\DataTables\css\colReorder.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.foundation.css" />
+    <Content Include="Content\DataTables\css\colReorder.foundation.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.jqueryui.css" />
+    <Content Include="Content\DataTables\css\colReorder.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.semanticui.css" />
+    <Content Include="Content\DataTables\css\colReorder.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.foundation.css" />
+    <Content Include="Content\DataTables\css\dataTables.foundation.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.jqueryui.css" />
+    <Content Include="Content\DataTables\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.material.css" />
+    <Content Include="Content\DataTables\css\dataTables.material.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.semanticui.css" />
+    <Content Include="Content\DataTables\css\dataTables.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.uikit.css" />
+    <Content Include="Content\DataTables\css\dataTables.uikit.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.dataTables.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.foundation.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.foundation.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.jqueryui.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.semanticui.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.dataTables.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.foundation.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.foundation.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.jqueryui.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.semanticui.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.dataTables.css" />
+    <Content Include="Content\DataTables\css\keyTable.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.foundation.css" />
+    <Content Include="Content\DataTables\css\keyTable.foundation.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.jqueryui.css" />
+    <Content Include="Content\DataTables\css\keyTable.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.semanticui.css" />
+    <Content Include="Content\DataTables\css\keyTable.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\responsive.dataTables.css" />
+    <Content Include="Content\DataTables\css\responsive.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\responsive.foundation.css" />
+    <Content Include="Content\DataTables\css\responsive.foundation.min.css" />
+    <Content Include="Content\DataTables\css\responsive.jqueryui.css" />
+    <Content Include="Content\DataTables\css\responsive.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\responsive.semanticui.css" />
+    <Content Include="Content\DataTables\css\responsive.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.bootstrap.css" />
+    <Content Include="Content\DataTables\css\rowGroup.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\rowGroup.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.dataTables.css" />
+    <Content Include="Content\DataTables\css\rowGroup.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.foundation.css" />
+    <Content Include="Content\DataTables\css\rowGroup.foundation.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.jqueryui.css" />
+    <Content Include="Content\DataTables\css\rowGroup.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.semanticui.css" />
+    <Content Include="Content\DataTables\css\rowGroup.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.dataTables.css" />
+    <Content Include="Content\DataTables\css\rowReorder.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.foundation.css" />
+    <Content Include="Content\DataTables\css\rowReorder.foundation.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.jqueryui.css" />
+    <Content Include="Content\DataTables\css\rowReorder.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.semanticui.css" />
+    <Content Include="Content\DataTables\css\rowReorder.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\scroller.dataTables.css" />
+    <Content Include="Content\DataTables\css\scroller.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\scroller.foundation.css" />
+    <Content Include="Content\DataTables\css\scroller.foundation.min.css" />
+    <Content Include="Content\DataTables\css\scroller.jqueryui.css" />
+    <Content Include="Content\DataTables\css\scroller.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\scroller.semanticui.css" />
+    <Content Include="Content\DataTables\css\scroller.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\select.dataTables.css" />
+    <Content Include="Content\DataTables\css\select.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\select.foundation.css" />
+    <Content Include="Content\DataTables\css\select.foundation.min.css" />
+    <Content Include="Content\DataTables\css\select.jqueryui.css" />
+    <Content Include="Content\DataTables\css\select.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\select.semanticui.css" />
+    <Content Include="Content\DataTables\css\select.semanticui.min.css" />
+    <Content Include="Content\DataTables\images\details_close.png" />
+    <Content Include="Content\DataTables\images\details_open.png" />
+    <Content Include="Content\DataTables\images\sort_asc.png" />
+    <Content Include="Content\DataTables\images\sort_asc_disabled.png" />
+    <Content Include="Content\DataTables\images\sort_both.png" />
+    <Content Include="Content\DataTables\images\sort_desc.png" />
+    <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\img\Control_HQ.jpg" />
+    <Content Include="Content\img\ICON\cancel_icon.png" />
+    <Content Include="Content\img\ICON\Color Code.png" />
+    <Content Include="Content\img\ICON\config.jpg" />
+    <Content Include="Content\img\ICON\Configure.png" />
+    <Content Include="Content\img\ICON\edit.png" />
+    <Content Include="Content\img\ICON\ICON-01.png" />
+    <Content Include="Content\img\ICON\ICON-02.png" />
+    <Content Include="Content\img\ICON\ICON-03.png" />
+    <Content Include="Content\img\ICON\ICON-04.png" />
+    <Content Include="Content\img\ICON\ICON-05.png" />
+    <Content Include="Content\img\ICON\ICON-06.png" />
+    <Content Include="Content\img\ICON\ICON-07.png" />
+    <Content Include="Content\img\ICON\ICON-08.png" />
+    <Content Include="Content\img\ICON\ICON-09.png" />
+    <Content Include="Content\img\ICON\ICON-10.png" />
+    <Content Include="Content\img\ICON\ICON-11.png" />
+    <Content Include="Content\img\ICON\ICON-12.png" />
+    <Content Include="Content\img\ICON\ICON-13.png" />
+    <Content Include="Content\img\ICON\ICON-14.png" />
+    <Content Include="Content\img\ICON\ICON-15.png" />
+    <Content Include="Content\img\ICON\ICON-16.png" />
+    <Content Include="Content\img\ICON\ICON-17.png" />
+    <Content Include="Content\img\ICON\ICON-18.png" />
+    <Content Include="Content\img\ICON\ICON-19.png" />
+    <Content Include="Content\img\ICON\ICON-20.png" />
+    <Content Include="Content\img\ICON\ICON-21.png" />
+    <Content Include="Content\img\ICON\ICON-22.png" />
+    <Content Include="Content\img\ICON\ICON-23.png" />
+    <Content Include="Content\img\ICON\ICON-24.png" />
+    <Content Include="Content\img\ICON\ICON-25.png" />
+    <Content Include="Content\img\ICON\ICON-26.png" />
+    <Content Include="Content\img\ICON\ICON-27.png" />
+    <Content Include="Content\img\ICON\ICON-28.png" />
+    <Content Include="Content\img\ICON\ICON-30.png" />
+    <Content Include="Content\img\ICON\ICON-31.png" />
+    <Content Include="Content\img\ICON\ICON-32.png" />
+    <Content Include="Content\img\ICON\ICON-33.png" />
+    <Content Include="Content\img\ICON\icon_allow_false.png" />
+    <Content Include="Content\img\ICON\icon_allow_true.png" />
+    <Content Include="Content\img\ICON\icon_cancel.png" />
+    <Content Include="Content\img\ICON\icon_customer.png" />
+    <Content Include="Content\img\ICON\icon_expired.png" />
+    <Content Include="Content\img\ICON\icon_masterdata.gif" />
+    <Content Include="Content\img\ICON\icon_not_uesd.png" />
+    <Content Include="Content\img\ICON\icon_setting.gif" />
+    <Content Include="Content\img\ICON\icon_social.png" />
+    <Content Include="Content\img\ICON\news.jpg" />
+    <Content Include="Content\img\ICON\promotion.gif" />
+    <Content Include="Content\img\ICON\search.png" />
+    <Content Include="Content\img\ICON\warning-icon.png" />
+    <Content Include="Content\img\Logo_HQ.png" />
+    <Content Include="Content\img\PAYICON\icon-01.png" />
+    <Content Include="Content\img\PAYICON\icon-02.png" />
+    <Content Include="Content\img\PAYICON\icon-03.png" />
+    <Content Include="Content\img\PAYICON\icon-04.png" />
+    <Content Include="Content\img\PAYICON\icon-05.png" />
+    <Content Include="Content\img\PAYICON\icon-06.png" />
+    <Content Include="Content\img\PAYICON\icon-07.png" />
+    <Content Include="Content\img\PAYICON\icon-08.png" />
+    <Content Include="Content\img\PAYICON\icon-09.png" />
+    <Content Include="Content\img\PAYICON\icon-10.png" />
+    <Content Include="Content\img\PAYICON\icon-11.png" />
+    <Content Include="Content\img\PAYICON\icon-12.png" />
+    <Content Include="Content\img\PAYICON\icon-13.png" />
+    <Content Include="Content\img\PAYICON\icon-14.png" />
+    <Content Include="Content\img\PAYICON\icon-15.png" />
+    <Content Include="Content\img\PAYICON\icon-16.png" />
+    <Content Include="Content\img\PAYICON\icon-discount.png" />
+    <Content Include="Content\img\PAYICON\mastercard-securecode.png" />
+    <Content Include="Content\img\PAYICON\visa.png" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\payment.css" />
+    <Content Include="Content\custom_cos.css" />
+    <Content Include="Content\Promotion\promotion-create.css" />
+    <Content Include="Content\sb-admin.css" />
+    <Content Include="Content\SetMasterDataMenu\ddown_menu.css" />
+    <Content Include="Content\SetMasterDataMenu\metro-bootstrap.css" />
+    <Content Include="Content\SetMasterDataMenu\tabcontent_customer.css" />
+    <Content Include="Content\tether\tether-theme-arrows-dark.css" />
+    <Content Include="Content\tether\tether-theme-arrows-dark.min.css" />
+    <Content Include="Content\tether\tether-theme-arrows.css" />
+    <Content Include="Content\tether\tether-theme-arrows.min.css" />
+    <Content Include="Content\tether\tether-theme-basic.css" />
+    <Content Include="Content\tether\tether-theme-basic.min.css" />
+    <Content Include="Content\tether\tether.css" />
+    <Content Include="Content\tether\tether.min.css" />
+    <Content Include="Content\vendors\bootstrap-datepicker-1.9.0\bootstrap-datepicker.css" />
+    <Content Include="Content\vendors\bootstrap-datepicker-1.9.0\bootstrap-datepicker.min.css" />
+    <Content Include="Content\vendors\bootstrap-theme.css" />
+    <Content Include="Content\vendors\bootstrap-theme.min.css" />
+    <Content Include="Content\vendors\bootstrap.css" />
+    <Content Include="Content\vendors\bootstrap.min.css" />
+    <Content Include="Content\vendors\datepicker.min.css" />
+    <Content Include="Content\vendors\datetimepicker\bootstrap-datetimepicker.css" />
+    <Content Include="Content\vendors\select2-4.0.6\css\select2.css" />
+    <Content Include="Content\vendors\select2-4.0.6\css\select2.min.css" />
+    <Content Include="Content\vendors\select2-bootstrap\select2-bootstrap.css" />
+    <Content Include="Content\vendors\select2-bootstrap\select2-bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="node_modules\bootstrap-daterangepicker\daterangepicker.css" />
+    <Content Include="node_modules\bootstrap-daterangepicker\daterangepicker.js" />
+    <Content Include="node_modules\bootstrap-daterangepicker\demo.html" />
+    <Content Include="node_modules\bootstrap-daterangepicker\drp.png" />
+    <Content Include="node_modules\bootstrap-daterangepicker\example\amd\index.html" />
+    <Content Include="node_modules\bootstrap-daterangepicker\example\amd\main.js" />
+    <Content Include="node_modules\bootstrap-daterangepicker\example\amd\require.js" />
+    <Content Include="node_modules\bootstrap-daterangepicker\example\browserify\bundle.js" />
+    <Content Include="node_modules\bootstrap-daterangepicker\example\browserify\index.html" />
+    <Content Include="node_modules\bootstrap-daterangepicker\example\browserify\main.js" />
+    <Content Include="node_modules\bootstrap-daterangepicker\index.html" />
+    <Content Include="node_modules\bootstrap-daterangepicker\moment.min.js" />
+    <Content Include="node_modules\bootstrap-daterangepicker\package.js" />
+    <Content Include="node_modules\bootstrap-daterangepicker\website.css" />
+    <Content Include="node_modules\bootstrap-daterangepicker\website.js" />
+    <Content Include="node_modules\bootstrap-daterangepicker\website\index.html" />
+    <Content Include="node_modules\bootstrap-daterangepicker\website\website.css" />
+    <Content Include="node_modules\bootstrap-daterangepicker\website\website.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ac.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ad.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ae.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.af.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ag.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ai.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.al.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.am.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ao.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ar.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.as.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.at.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.au-cn.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.au.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.aw.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ax.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.az.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ba.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.bb.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.bd.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.be.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.bf.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.bg.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.bh.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.bi.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.bj.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.bl.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.bm.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.bn.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.bo.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.bq.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.br.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.bs.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.bt.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.bw.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.by.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.bz.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ca.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.cc.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.cd.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.cf.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.cg.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ch.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ci.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ck.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.cl.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.cm.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.cn.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.co.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.cr.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.cu.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.cv.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.cw.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.cx.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.cy.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.cz.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.de.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.dj.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.dk.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.dm.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.do.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.dz.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ec.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ee.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.eg.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.eh.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.er.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.es.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.et.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.fi.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.fj.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.fk.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.fm.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.fo.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.fr.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ga.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.gb.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.gd.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ge.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.gf.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.gg.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.gh.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.gi.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.gl.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.gm.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.gn.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.gp.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.gq.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.gr.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.gt.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.gu.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.gw.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.gy.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.hk.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.hn.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.hr.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ht.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.hu.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.i18n.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.id.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ie.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.il.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.im.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.in.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.io.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.iq.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ir.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.is.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.it.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.je.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.jm.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.jo.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.jp.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ke.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.kg.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.kh.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ki.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.km.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.kn.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.kp.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.kr.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.kw.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ky.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.kz.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.la.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.lb.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.lc.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.li.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.lk.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.lr.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ls.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.lt.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.lu.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.lv.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ly.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ma.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mc.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.md.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.me.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mf.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mg.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mh.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mk.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ml.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mm.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mn.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mo.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mp.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mq.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mr.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ms.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mt.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mu.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mv.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mw.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mx.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.my.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.mz.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.na.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.nc.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ne.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.nf.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ng.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ni.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.nl.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.no.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.np.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.nr.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.nu.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.nz.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.om.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.pa.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.pe.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.pf.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.pg.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ph.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.pk.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.pl.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.pm.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.pr.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ps.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.pt.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.pw.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.py.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.qa.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.re.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ro.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.rs.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ru.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.rw.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.sa.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.sb.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.sc.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.sd.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.se.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.sg.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.sh.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.si.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.sj.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.sk.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.sl.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.sm.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.sn.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.so.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.sr.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ss.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.st.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.sv.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.sx.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.sy.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.sz.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ta.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.tc.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.td.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.tg.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.th.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.tj.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.tk.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.tl.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.tm.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.tn.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.to.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.tr.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.tt.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.tv.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.tw.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.tz.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ua.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ug.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.us.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.uy.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.uz.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.va.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.vc.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ve.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.vg.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.vi.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.vn.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.vu.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.wf.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ws.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.ye.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.yt.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.za.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.zm.js" />
+    <Content Include="node_modules\cleave.js\dist\addons\cleave-phone.zw.js" />
+    <Content Include="node_modules\cleave.js\dist\cleave-angular.js" />
+    <Content Include="node_modules\cleave.js\dist\cleave-angular.min.js" />
+    <Content Include="node_modules\cleave.js\dist\cleave-react-node.js" />
+    <Content Include="node_modules\cleave.js\dist\cleave-react-node.min.js" />
+    <Content Include="node_modules\cleave.js\dist\cleave-react.js" />
+    <Content Include="node_modules\cleave.js\dist\cleave-react.min.js" />
+    <Content Include="node_modules\cleave.js\dist\cleave.js" />
+    <Content Include="node_modules\cleave.js\dist\cleave.min.js" />
+    <Content Include="node_modules\cleave.js\react.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ac.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ad.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ae.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.af.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ag.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ai.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.al.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.am.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ao.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ar.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.as.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.at.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.au.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.aw.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ax.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.az.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ba.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.bb.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.bd.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.be.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.bf.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.bg.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.bh.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.bi.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.bj.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.bl.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.bm.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.bn.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.bo.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.bq.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.br.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.bs.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.bt.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.bw.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.by.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.bz.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ca.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.cc.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.cd.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.cf.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.cg.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ch.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ci.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ck.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.cl.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.cm.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.cn.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.co.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.cr.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.cu.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.cv.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.cw.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.cx.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.cy.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.cz.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.de.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.dj.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.dk.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.dm.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.do.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.dz.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ec.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ee.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.eg.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.eh.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.er.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.es.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.et.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.fi.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.fj.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.fk.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.fm.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.fo.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.fr.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ga.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.gb.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.gd.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ge.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.gf.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.gg.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.gh.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.gi.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.gl.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.gm.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.gn.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.gp.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.gq.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.gr.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.gt.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.gu.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.gw.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.gy.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.hk.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.hn.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.hr.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ht.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.hu.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.i18n.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.id.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ie.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.il.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.im.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.in.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.io.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.iq.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ir.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.is.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.it.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.je.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.jm.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.jo.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.jp.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ke.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.kg.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.kh.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ki.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.km.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.kn.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.kp.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.kr.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.kw.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ky.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.kz.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.la.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.lb.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.lc.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.li.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.lk.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.lr.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ls.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.lt.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.lu.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.lv.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ly.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ma.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mc.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.md.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.me.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mf.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mg.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mh.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mk.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ml.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mm.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mn.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mo.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mp.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mq.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mr.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ms.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mt.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mu.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mv.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mw.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mx.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.my.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.mz.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.na.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.nc.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ne.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.nf.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ng.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ni.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.nl.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.no.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.np.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.nr.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.nu.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.nz.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.om.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.pa.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.pe.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.pf.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.pg.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ph.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.pk.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.pl.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.pm.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.pr.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ps.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.pt.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.pw.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.py.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.qa.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.re.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ro.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.rs.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ru.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.rw.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.sa.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.sb.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.sc.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.sd.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.se.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.sg.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.sh.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.si.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.sj.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.sk.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.sl.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.sm.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.sn.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.so.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.sr.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ss.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.st.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.sv.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.sx.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.sy.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.sz.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ta.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.tc.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.td.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.tg.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.th.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.tj.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.tk.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.tl.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.tm.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.tn.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.to.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.tr.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.tt.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.tv.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.tw.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.tz.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ua.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ug.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.us.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.uy.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.uz.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.va.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.vc.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ve.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.vg.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.vi.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.vn.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.vu.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.wf.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ws.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.ye.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.yt.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.za.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.zm.js" />
+    <Content Include="node_modules\cleave.js\src\addons\phone-type-formatter.zw.js" />
+    <Content Include="node_modules\cleave.js\src\build\license.txt" />
+    <Content Include="node_modules\cleave.js\src\Cleave.angular.js" />
+    <Content Include="node_modules\cleave.js\src\Cleave.js" />
+    <Content Include="node_modules\cleave.js\src\Cleave.react.js" />
+    <Content Include="node_modules\cleave.js\src\common\DefaultProperties.js" />
+    <Content Include="node_modules\cleave.js\src\shortcuts\CreditCardDetector.js" />
+    <Content Include="node_modules\cleave.js\src\shortcuts\DateFormatter.js" />
+    <Content Include="node_modules\cleave.js\src\shortcuts\NumeralFormatter.js" />
+    <Content Include="node_modules\cleave.js\src\shortcuts\PhoneFormatter.js" />
+    <Content Include="node_modules\cleave.js\src\shortcuts\TimeFormatter.js" />
+    <Content Include="node_modules\cleave.js\src\utils\Util.js" />
+    <Content Include="node_modules\sweetalert\dist\sweetalert.min.js" />
+    <Content Include="Scripts\autoNumeric\autoNumeric-min.js" />
+    <Content Include="Scripts\autoNumeric\autoNumeric.js" />
+    <Content Include="Scripts\bootstrap-datepicker\bootstrap-datepicker-1.5.1.js" />
+    <Content Include="Scripts\bootstrap-datepicker\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker-en-CA.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ar-tn.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ar.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.az.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.bg.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.bn.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.br.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.bs.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ca.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.cs.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.cy.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.da.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.de.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.el.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.en-AU.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.en-CA.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.en-GB.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.en-IE.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.en-NZ.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.en-ZA.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.eo.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.es.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.et.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.eu.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.fa.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.fi.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.fo.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.fr-CH.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.fr.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.gl.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.he.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.hi.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.hr.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.hu.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.hy.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.id.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.is.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.it-CH.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.it.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ja.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ka.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.kh.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.kk.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.km.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ko.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.kr.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.lt.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.lv.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.me.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.mk.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.mn.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ms.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.nl-BE.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.nl.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.no.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.oc.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.pl.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.pt-BR.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.pt.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ro.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.rs-latin.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.rs.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ru.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.si.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.sk.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.sl.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.sq.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.sr-latin.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.sr.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.sv.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.sw.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.ta.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.tg.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.th.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.tk.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.tr.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.uk.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.uz-cyrl.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.uz-latn.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.vi.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.zh-CN.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\locales\bootstrap-datepicker.zh-TW.min.js" />
+    <Content Include="Scripts\bootstrap-validator\validator.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ckeditor\adapters\jquery.js" />
+    <Content Include="Scripts\ckeditor\CHANGES.html" />
+    <Content Include="Scripts\ckeditor\ckeditor.asp" />
+    <Content Include="Scripts\ckeditor\ckeditor.js" />
+    <Content Include="Scripts\ckeditor\ckeditor.php" />
+    <Content Include="Scripts\ckeditor\ckeditor_basic.js" />
+    <Content Include="Scripts\ckeditor\ckeditor_basic_source.js" />
+    <Content Include="Scripts\ckeditor\ckeditor_php4.php" />
+    <Content Include="Scripts\ckeditor\ckeditor_php5.php" />
+    <Content Include="Scripts\ckeditor\ckeditor_source.js" />
+    <Content Include="Scripts\ckeditor\config.js" />
+    <Content Include="Scripts\ckeditor\contents.css" />
+    <Content Include="Scripts\ckeditor\images\spacer.gif" />
+    <Content Include="Scripts\ckeditor\INSTALL.html" />
+    <Content Include="Scripts\ckeditor\lang\af.js" />
+    <Content Include="Scripts\ckeditor\lang\ar.js" />
+    <Content Include="Scripts\ckeditor\lang\bg.js" />
+    <Content Include="Scripts\ckeditor\lang\bn.js" />
+    <Content Include="Scripts\ckeditor\lang\bs.js" />
+    <Content Include="Scripts\ckeditor\lang\ca.js" />
+    <Content Include="Scripts\ckeditor\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\lang\da.js" />
+    <Content Include="Scripts\ckeditor\lang\de.js" />
+    <Content Include="Scripts\ckeditor\lang\el.js" />
+    <Content Include="Scripts\ckeditor\lang\en-au.js" />
+    <Content Include="Scripts\ckeditor\lang\en-ca.js" />
+    <Content Include="Scripts\ckeditor\lang\en-gb.js" />
+    <Content Include="Scripts\ckeditor\lang\en.js" />
+    <Content Include="Scripts\ckeditor\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\lang\es.js" />
+    <Content Include="Scripts\ckeditor\lang\et.js" />
+    <Content Include="Scripts\ckeditor\lang\eu.js" />
+    <Content Include="Scripts\ckeditor\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\lang\fo.js" />
+    <Content Include="Scripts\ckeditor\lang\fr-ca.js" />
+    <Content Include="Scripts\ckeditor\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\lang\gl.js" />
+    <Content Include="Scripts\ckeditor\lang\gu.js" />
+    <Content Include="Scripts\ckeditor\lang\he.js" />
+    <Content Include="Scripts\ckeditor\lang\hi.js" />
+    <Content Include="Scripts\ckeditor\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\lang\hu.js" />
+    <Content Include="Scripts\ckeditor\lang\id.js" />
+    <Content Include="Scripts\ckeditor\lang\is.js" />
+    <Content Include="Scripts\ckeditor\lang\it.js" />
+    <Content Include="Scripts\ckeditor\lang\ja.js" />
+    <Content Include="Scripts\ckeditor\lang\ka.js" />
+    <Content Include="Scripts\ckeditor\lang\km.js" />
+    <Content Include="Scripts\ckeditor\lang\ko.js" />
+    <Content Include="Scripts\ckeditor\lang\lt.js" />
+    <Content Include="Scripts\ckeditor\lang\lv.js" />
+    <Content Include="Scripts\ckeditor\lang\mk.js" />
+    <Content Include="Scripts\ckeditor\lang\mn.js" />
+    <Content Include="Scripts\ckeditor\lang\ms.js" />
+    <Content Include="Scripts\ckeditor\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\lang\no.js" />
+    <Content Include="Scripts\ckeditor\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\lang\pt.js" />
+    <Content Include="Scripts\ckeditor\lang\ro.js" />
+    <Content Include="Scripts\ckeditor\lang\ru.js" />
+    <Content Include="Scripts\ckeditor\lang\sk.js" />
+    <Content Include="Scripts\ckeditor\lang\sl.js" />
+    <Content Include="Scripts\ckeditor\lang\sr-latn.js" />
+    <Content Include="Scripts\ckeditor\lang\sr.js" />
+    <Content Include="Scripts\ckeditor\lang\sv.js" />
+    <Content Include="Scripts\ckeditor\lang\th.js" />
+    <Content Include="Scripts\ckeditor\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\lang\uk.js" />
+    <Content Include="Scripts\ckeditor\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\lang\zh.js" />
+    <Content Include="Scripts\ckeditor\lang\_languages.js" />
+    <Content Include="Scripts\ckeditor\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\LICENSE.html" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\da.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\de.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\el.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\gu.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\he.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\it.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\mk.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\no.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\ro.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="Scripts\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="Scripts\ckeditor\plugins\adobeair\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\ajax\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\autogrow\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\bbcode\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Scripts\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\bg.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\da.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\de.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\el.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\et.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\gu.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\he.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\it.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\no.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\uk.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\plugins\devtools\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Scripts\ckeditor\plugins\div\dialogs\div.js" />
+    <Content Include="Scripts\ckeditor\plugins\docprops\dialogs\docprops.js" />
+    <Content Include="Scripts\ckeditor\plugins\docprops\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\find\dialogs\find.js" />
+    <Content Include="Scripts\ckeditor\plugins\flash\dialogs\flash.js" />
+    <Content Include="Scripts\ckeditor\plugins\flash\images\placeholder.png" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\button.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\checkbox.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\form.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\hiddenfield.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\radio.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\select.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\textarea.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\textfield.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\images\hiddenfield.gif" />
+    <Content Include="Scripts\ckeditor\plugins\iframedialog\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\iframe\dialogs\iframe.js" />
+    <Content Include="Scripts\ckeditor\plugins\iframe\images\placeholder.png" />
+    <Content Include="Scripts\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="Scripts\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="Scripts\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="Scripts\ckeditor\plugins\link\images\anchor.gif" />
+    <Content Include="Scripts\ckeditor\plugins\liststyle\dialogs\liststyle.js" />
+    <Content Include="Scripts\ckeditor\plugins\pagebreak\images\pagebreak.gif" />
+    <Content Include="Scripts\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="Scripts\ckeditor\plugins\pastetext\dialogs\pastetext.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\dialogs\placeholder.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\bg.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\da.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\de.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\el.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\et.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\he.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\it.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\no.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\uk.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\placeholder.gif" />
+    <Content Include="Scripts\ckeditor\plugins\placeholder\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\preview\preview.html" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_address.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_blockquote.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_div.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h1.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h2.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h3.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h4.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h5.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h6.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_p.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_pre.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\angel_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\angry_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\broken_heart.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\confused_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\cry_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\devil_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\envelope.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\heart.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\kiss.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\lightbulb.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\omg_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\regular_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\sad_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\shades_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\teeth_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\thumbs_down.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\thumbs_up.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\tounge_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\wink_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\de.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\el.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\et.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\he.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\it.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\no.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\plugins\stylesheetparser\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\styles\styles\default.js" />
+    <Content Include="Scripts\ckeditor\plugins\tableresize\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="Scripts\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="Scripts\ckeditor\plugins\templates\dialogs\templates.js" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\default.js" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\images\template1.gif" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\images\template2.gif" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\images\template3.gif" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\dialogs\uicolor.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\bg.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\da.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\de.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\el.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\et.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\he.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\it.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\mk.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\no.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\uk.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\uicolor.gif" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\yui\assets\hue_bg.png" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\yui\assets\hue_thumb.png" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\yui\assets\picker_mask.png" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\yui\assets\picker_thumb.png" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\yui\assets\yui.css" />
+    <Content Include="Scripts\ckeditor\plugins\uicolor\yui\yui.js" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="Scripts\ckeditor\plugins\xml\plugin.js" />
+    <Content Include="Scripts\ckeditor\skins\kama\dialog.css" />
+    <Content Include="Scripts\ckeditor\skins\kama\editor.css" />
+    <Content Include="Scripts\ckeditor\skins\kama\icons.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\icons_rtl.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\dialog_sides.gif" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\dialog_sides.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\dialog_sides_rtl.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\mini.gif" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\noimage.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\sprites.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\sprites_ie6.png" />
+    <Content Include="Scripts\ckeditor\skins\kama\images\toolbar_start.gif" />
+    <Content Include="Scripts\ckeditor\skins\kama\skin.js" />
+    <Content Include="Scripts\ckeditor\skins\kama\templates.css" />
+    <Content Include="Scripts\ckeditor\skins\office2003\dialog.css" />
+    <Content Include="Scripts\ckeditor\skins\office2003\editor.css" />
+    <Content Include="Scripts\ckeditor\skins\office2003\icons.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\icons_rtl.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\dialog_sides.gif" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\dialog_sides.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\dialog_sides_rtl.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\mini.gif" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\noimage.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\sprites.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\images\sprites_ie6.png" />
+    <Content Include="Scripts\ckeditor\skins\office2003\skin.js" />
+    <Content Include="Scripts\ckeditor\skins\office2003\templates.css" />
+    <Content Include="Scripts\ckeditor\skins\v2\dialog.css" />
+    <Content Include="Scripts\ckeditor\skins\v2\editor.css" />
+    <Content Include="Scripts\ckeditor\skins\v2\icons.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\icons_rtl.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\dialog_sides.gif" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\dialog_sides.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\dialog_sides_rtl.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\mini.gif" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\noimage.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\sprites.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\sprites_ie6.png" />
+    <Content Include="Scripts\ckeditor\skins\v2\images\toolbar_start.gif" />
+    <Content Include="Scripts\ckeditor\skins\v2\skin.js" />
+    <Content Include="Scripts\ckeditor\skins\v2\templates.css" />
+    <Content Include="Scripts\ckeditor\themes\default\theme.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.foundation.js" />
+    <Content Include="Scripts\DataTables\autoFill.foundation.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.jqueryui.js" />
+    <Content Include="Scripts\DataTables\autoFill.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.semanticui.js" />
+    <Content Include="Scripts\DataTables\autoFill.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\buttons.colVis.js" />
+    <Content Include="Scripts\DataTables\buttons.colVis.min.js" />
+    <Content Include="Scripts\DataTables\buttons.flash.js" />
+    <Content Include="Scripts\DataTables\buttons.flash.min.js" />
+    <Content Include="Scripts\DataTables\buttons.foundation.js" />
+    <Content Include="Scripts\DataTables\buttons.foundation.min.js" />
+    <Content Include="Scripts\DataTables\buttons.html5.js" />
+    <Content Include="Scripts\DataTables\buttons.html5.min.js" />
+    <Content Include="Scripts\DataTables\buttons.jqueryui.js" />
+    <Content Include="Scripts\DataTables\buttons.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\buttons.print.js" />
+    <Content Include="Scripts\DataTables\buttons.print.min.js" />
+    <Content Include="Scripts\DataTables\buttons.semanticui.js" />
+    <Content Include="Scripts\DataTables\buttons.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.autoFill.js" />
+    <Content Include="Scripts\DataTables\dataTables.autoFill.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.buttons.js" />
+    <Content Include="Scripts\DataTables\dataTables.buttons.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.colReorder.js" />
+    <Content Include="Scripts\DataTables\dataTables.colReorder.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedColumns.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedColumns.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedHeader.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedHeader.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.foundation.js" />
+    <Content Include="Scripts\DataTables\dataTables.foundation.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.jqueryui.js" />
+    <Content Include="Scripts\DataTables\dataTables.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.keyTable.js" />
+    <Content Include="Scripts\DataTables\dataTables.keyTable.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.material.js" />
+    <Content Include="Scripts\DataTables\dataTables.material.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.responsive.js" />
+    <Content Include="Scripts\DataTables\dataTables.responsive.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowGroup.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowGroup.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowReorder.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowReorder.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.scroller.js" />
+    <Content Include="Scripts\DataTables\dataTables.scroller.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.select.js" />
+    <Content Include="Scripts\DataTables\dataTables.select.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.semanticui.js" />
+    <Content Include="Scripts\DataTables\dataTables.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.uikit.js" />
+    <Content Include="Scripts\DataTables\dataTables.uikit.min.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\responsive.foundation.js" />
+    <Content Include="Scripts\DataTables\responsive.foundation.min.js" />
+    <Content Include="Scripts\DataTables\responsive.jqueryui.js" />
+    <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\responsive.semanticui.js" />
+    <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="admin-lte\css\adminlte.css.map" />
+    <Content Include="admin-lte\css\adminlte.min.css.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\DataTables\css\semanticui.scss" />
+    <Content Include="Content\DataTables\css\mixins.scss" />
+    <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="node_modules\bootstrap-daterangepicker\bower.json" />
+    <Content Include="node_modules\bootstrap-daterangepicker\example\browserify\README.md" />
+    <Content Include="node_modules\bootstrap-daterangepicker\package.json" />
+    <Content Include="node_modules\bootstrap-daterangepicker\README.md" />
+    <Content Include="node_modules\cleave.js\dist\.DS_Store" />
+    <Content Include="node_modules\cleave.js\LICENSE" />
+    <Content Include="node_modules\cleave.js\package.json" />
+    <Content Include="node_modules\cleave.js\README.md" />
+    <Content Include="node_modules\cleave.js\src\.DS_Store" />
+    <Fakes Include="Fakes\EntityFramework.fakes" />
+    <Fakes Include="Fakes\Antlr3.Runtime.fakes" />
+    <Content Include="node_modules\sweetalert\LICENSE.md" />
+    <Content Include="node_modules\sweetalert\package.json" />
+    <Content Include="node_modules\sweetalert\README.md" />
+    <Content Include="Content\vendors\bootstrap-theme.css.map" />
+    <Content Include="Content\vendors\bootstrap-theme.min.css.map" />
+    <Content Include="Content\vendors\bootstrap.css.map" />
+    <Content Include="Content\vendors\bootstrap.min.css.map" />
+    <None Include="Properties\PublishProfiles\Forder_HQ.pubxml" />
+    <None Include="Properties\PublishProfiles\HqProfile.pubxml" />
+    <Content Include="Scripts\ckeditor\ckeditor.pack" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.redirect.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\login.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\modules\dashboard\index.js" />
+    <Content Include="Scripts\modules\dashboard\message-modal.js" />
+    <Content Include="Scripts\modules\index-form.js" />
+    <Content Include="Scripts\modules\message\form.js" />
+    <Content Include="Scripts\modules\message\index.js" />
+    <Content Include="Scripts\modules\payment\blue-card-modal.js" />
+    <Content Include="Scripts\modules\payment\cash-modal.js" />
+    <Content Include="Scripts\modules\payment\credit-card-modal.js" />
+    <Content Include="Scripts\modules\payment\credit-edc-modal.js" />
+    <Content Include="Scripts\modules\payment\deductible-modal.js" />
+    <Content Include="Scripts\modules\payment\deposit-modal.js" />
+    <Content Include="Scripts\modules\payment\extra-discount-form.js" />
+    <Content Include="Scripts\modules\payment\index.js" />
+    <Content Include="Scripts\modules\payment\lazada-modal.js" />
+    <Content Include="Scripts\modules\payment\list.js" />
+    <Content Include="Scripts\bootstrap-datepicker-1.9.0\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker-1.9.0\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\admin\bootstrap.min.js" />
+    <Content Include="Scripts\datetimepicker\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\transpiled\base-form.js" />
+    <Content Include="Scripts\transpiled\masterdata\campaign\create.js" />
+    <Content Include="Scripts\transpiled\masterdata\campaign\index.js" />
+    <Content Include="Scripts\transpiled\masterdata\promotion\promotion-create-step3.js" />
+    <Content Include="Scripts\transpiled\masterdata\promotion\promotion-create.js" />
+    <Content Include="Scripts\transpiled\masterdata\promotion\promotion-index-ex.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\af.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\ar.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\az.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\bg.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\bn.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\bs.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\ca.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\cs.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\da.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\de.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\dsb.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\el.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\en.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\es.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\et.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\eu.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\fa.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\fi.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\fr.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\gl.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\he.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\hi.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\hr.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\hsb.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\hu.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\hy.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\id.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\is.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\it.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\ja.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\ka.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\km.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\ko.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\lt.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\lv.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\mk.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\ms.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\nb.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\ne.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\nl.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\pl.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\ps.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\pt-BR.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\pt.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\ro.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\ru.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\sk.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\sl.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\sq.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\sr-Cyrl.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\sr.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\sv.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\th.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\tk.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\tr.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\uk.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\vi.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\zh-CN.js" />
+    <Content Include="Scripts\select2-4.0.6\js\i18n\zh-TW.js" />
+    <Content Include="Scripts\select2-4.0.6\js\select2.full.js" />
+    <Content Include="Scripts\select2-4.0.6\js\select2.full.min.js" />
+    <Content Include="Scripts\select2-4.0.6\js\select2.js" />
+    <Content Include="Scripts\select2-4.0.6\js\select2.min.js" />
+    <Content Include="Scripts\modules\tools.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\tether.js" />
+    <Content Include="Scripts\tether.min.js" />
+    <Content Include="Scripts\transpiled\dashboard\index.js" />
+    <Content Include="Scripts\transpiled\dashboard\message-modal.js" />
+    <Content Include="Scripts\transpiled\index-form.js" />
+    <Content Include="Scripts\transpiled\message\form.js" />
+    <Content Include="Scripts\transpiled\message\index.js" />
+    <Content Include="Scripts\transpiled\payment\blue-card-modal.js" />
+    <Content Include="Scripts\transpiled\payment\cash-modal.js" />
+    <Content Include="Scripts\transpiled\payment\credit-card-modal.js" />
+    <Content Include="Scripts\transpiled\payment\credit-edc-modal.js" />
+    <Content Include="Scripts\transpiled\payment\deductible-modal.js" />
+    <Content Include="Scripts\transpiled\payment\deposit-modal.js" />
+    <Content Include="Scripts\transpiled\payment\extra-discount-form.js" />
+    <Content Include="Scripts\transpiled\payment\index.js" />
+    <Content Include="Scripts\transpiled\payment\lazada-modal.js" />
+    <Content Include="Scripts\transpiled\payment\list.js" />
+    <Content Include="Scripts\transpiled\masterdata\promotion\index.js" />
+    <Content Include="Scripts\transpiled\masterdata\index.js" />
+    <Content Include="Scripts\transpiled\masterdata\jdropdown_menu.js" />
+    <Content Include="Scripts\transpiled\masterdata\tabcontent.js" />
+    <Content Include="Scripts\transpiled\sendclient\index.js" />
+    <Content Include="Scripts\transpiled\systemdata\branch\create.js" />
+    <Content Include="Scripts\transpiled\systemdata\branch\index.js" />
+    <Content Include="Scripts\transpiled\tools.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\validator.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\ClassicAsp.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\IcardAPI.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LoadingModal.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\Head.cshtml" />
+    <Content Include="Views\Shared\Menu.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Home\SearchModal.cshtml" />
+    <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\Message\Create.cshtml" />
+    <Content Include="Views\Payment\List.cshtml" />
+    <Content Include="Views\Payment\CreateDiscount.cshtml" />
+    <Content Include="Views\Payment\EditDiscount.cshtml" />
+    <Content Include="Views\Payment\FormPartial.cshtml" />
+    <Content Include="Views\Payment\SendData.cshtml" />
+    <Content Include="Views\Message\Edit.cshtml" />
+    <Content Include="Views\Message\FormPartial.cshtml" />
+    <Content Include="Views\Message\Modal.cshtml" />
+    <Content Include="Views\Payment\BlueCardModal.cshtml" />
+    <Content Include="Views\Payment\CashModal.cshtml" />
+    <Content Include="Views\Payment\CreditCardModal.cshtml" />
+    <Content Include="Views\Payment\CreditEdcModal.cshtml" />
+    <Content Include="Views\Payment\DeductibleModal.cshtml" />
+    <Content Include="Views\Payment\DepositModal.cshtml" />
+    <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\Payment\LazadaModal.cshtml" />
+    <Content Include="Views\Payment\LastDiscountModal.cshtml" />
+    <Content Include="Views\Promotion\CreatePromotion.cshtml" />
+    <Content Include="Views\Promotion\_ModalSelectBranch.cshtml" />
+    <Content Include="Views\Promotion\Index.cshtml" />
+    <Content Include="Views\Promotion\_ModalSelectSentBranch.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Promotion\CreatePromotion2.cshtml" />
+    <Content Include="Views\Promotion\CreatePromotion3.cshtml" />
+    <Content Include="Views\Promotion\ViewPromotion.cshtml" />
+    <Content Include="Views\Promotion\ViewCondition.cshtml" />
+    <Content Include="Views\Promotion\_ModalProductGroup.cshtml" />
+    <Content Include="Views\Promotion\GetProgroup.cshtml" />
+    <Content Include="Views\Promotion\GetProbrand.cshtml" />
+    <Content Include="Views\Promotion\GetPromodel.cshtml" />
+    <Content Include="Views\Promotion\GetProSize.cshtml" />
+    <Content Include="Views\Promotion\GetProduct.cshtml" />
+    <Content Include="Views\Promotion\GetProductGift.cshtml" />
+    <Content Include="Views\Promotion\_ViewCoupon.cshtml" />
+    <Content Include="Views\MasterData\Index.cshtml" />
+    <Content Include="Views\Shared\SetMasterDataMenu.cshtml" />
+    <Content Include="Views\MasterData\BlueCardRedeemSetting.cshtml" />
+    <Content Include="Views\Promotion\_ViewPromotion.cshtml" />
+    <Content Include="Views\Promotion\_ViewProCouponEmp.cshtml" />
+    <Content Include="Views\Promotion\_ViewProGrp.cshtml" />
+    <Content Include="Views\Promotion\_ViewProBrand.cshtml" />
+    <Content Include="Views\Promotion\_ViewProModel.cshtml" />
+    <Content Include="Views\Promotion\_ViewProSize.cshtml" />
+    <Content Include="Views\Shared\Sendclient_flag.cshtml" />
+    <Content Include="Views\Branch\Index.cshtml" />
+    <Content Include="Views\Shared\_SearchForm.cshtml" />
+    <Content Include="Views\SendClient\Index.cshtml" />
+    <Content Include="Views\Branch\Create.cshtml" />
+    <Content Include="Views\Components\_AddressForm.cshtml" />
+    <Content Include="Views\Branch\Configs.cshtml" />
+    <Content Include="Views\SendClient\Success.cshtml" />
+    <Content Include="Views\Campaign\Index.cshtml" />
+    <Content Include="Views\Campaign\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\core.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\actions.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\class-list\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\event-listeners.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\init\buttons.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\init\content.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\init\icon.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\init\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\init\modal.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\init\overlay.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\init\text.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\markup\buttons.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\markup\content.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\markup\icons.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\markup\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\markup\modal.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\markup\overlay.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\options\buttons.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\options\content.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\options\deprecations.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\options\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\state.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\modules\utils.d.ts" />
+    <TypeScriptCompile Include="node_modules\sweetalert\typings\sweetalert.d.ts" />
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\UploadPdfOfMessage\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.94.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.94.2\lib\net46\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>bin\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.3.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.3\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastMember.1.3.0\lib\net45\FastMember.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.4.0.1\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.Win32.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Mvc.Routing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mvc.Routing.1.0.0.4\lib\net40\Mvc.Routing.dll</HintPath>
+    </Reference>
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\netstandard.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.AppContext, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.AppContext.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.ComponentModel.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.ComponentModel.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.TypeConverter, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.ComponentModel.TypeConverter.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Console, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Common, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlClient, Version=4.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.6.0\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.FileVersionInfo, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Diagnostics.FileVersionInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.Process, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Diagnostics.Process.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.StackTrace, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Diagnostics.StackTrace.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.TextWriterTraceListener, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Diagnostics.TextWriterTraceListener.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.TraceSource, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Diagnostics.TraceSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tracing, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Diagnostics.Tracing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Drawing.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Globalization.Calendars, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Globalization.Calendars.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Globalization.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Globalization.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.IO.Compression.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.IO.Compression.ZipFile.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.IO.FileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.DriveInfo, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.IO.FileSystem.DriveInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Watcher, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.IO.FileSystem.Watcher.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.IsolatedStorage, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.IO.IsolatedStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.MemoryMappedFiles, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.IO.MemoryMappedFiles.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Pipes, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.IO.Pipes.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.UnmanagedMemoryStream, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.IO.UnmanagedMemoryStream.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Expressions, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Linq.Expressions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.NameResolution, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Net.NameResolution.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.NetworkInformation, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Net.NetworkInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Ping, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Net.Ping.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Security, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Net.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Net.Sockets.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.WebHeaderCollection, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Net.WebHeaderCollection.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.WebSockets, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Net.WebSockets.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.WebSockets.Client, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Net.WebSockets.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Resources.Reader, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Resources.Reader.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Resources.Writer, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Resources.Writer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.VisualC, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Runtime.CompilerServices.VisualC.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Runtime.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Runtime.InteropServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Formatters, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Runtime.Serialization.Formatters.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Runtime.Serialization.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Xml, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Runtime.Serialization.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Claims, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Security.Claims.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Csp, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Security.Cryptography.Csp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.SecureString, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Security.SecureString.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Cors, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.6\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.6\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Xml.ReaderWriter.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.XPath, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Xml.XPath.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.XPath.XDocument, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Xml.XPath.XDocument.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.7.0.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc, Version=5.0.13.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Unity.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CentralService\CentralService.csproj">
+      <Project>{5F33C19F-7393-4BF9-99D0-89912466E2B6}</Project>
+      <Name>CentralService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HQPosData\HQPosData.csproj">
+      <Project>{68C23C72-9ECF-4DED-86E0-73DC677B2367}</Project>
+      <Name>HQPosData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HQService\HQService.csproj">
+      <Project>{EEF5377D-2416-40B4-9EC0-EBD10BFF062F}</Project>
+      <Name>HQService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>57475</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:10000/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+  </Target>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

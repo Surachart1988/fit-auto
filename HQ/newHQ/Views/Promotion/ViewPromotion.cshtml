@@ -1,0 +1,76 @@
+﻿@model CentralService.Models.ExtraPromotionModel
+<style>
+    .modal-content {
+        width: 115%;
+    }
+</style>
+
+<div class="modal fade" id="modal-select-viewpro" tabindex="-1" role="dialog" aria-labelledby="selectviewpro" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 title-head">
+                            <h4>สินค้าที่ร่วมรายการ</h4>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div id="bError_viewpro" class="row" style="display: none">
+                                <div class="col-md-12">
+                                    <div>
+                                        <table class="col-md-12 table-bordered table-striped table-condensed tables" cellspacing="0" id="gv_error" style="border-collapse:collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="11">
+                                                        <center><span style="font-size: 20px; color: Red;">ไม่พบข้อมูลโปรโมชั่น</span></center>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="gv_viewpro_wrapper" class="row" style="display: normal">
+                                <div class="col-md-12">
+                                    <table class="table table-hover table-striped dataTable no-footer" cellspacing="0" id="gv_viewpro" style="border-collapse:collapse; width: 100%;" role="grid" aria-describedby="gv_viewpro_info">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">ยี่ห้อสินค้า</th>
+                                                <th class="text-center">รุ่นสินค้า</th>
+                                                <th class="text-center">รหัสสินค้า</th>
+                                                <th class="text-center">ชื่อสินค้า</th>
+                                                <th class="text-center">ขนาดสินค้า</th>
+                                                <th class="text-center">@Model.title_price_view</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.PromotionItems)
+                                            {
+                                                <tr>
+                                                    <td>@item.pro_brand</td>
+                                                    <td>@item.pro_model</td>
+                                                    <td>@item.pro_code</td>
+                                                    <td>@item.pro_tname</td>
+                                                    <td>@item.size_name</td>
+                                                    <td>@item.pro_discount</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @*<div class="col-md-12 text-center">
+                                <input type="button" name="btnSave" value="บันทึก" id="btnSaveProduct" class="btn btn-primary">
+                                <input type="button" name="btnClose" value="ยกเลิก" id="btnClose" data-dismiss="modal" class="btn btn-danger">
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

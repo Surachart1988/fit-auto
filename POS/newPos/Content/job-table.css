@@ -1,0 +1,86 @@
+﻿.product-style {
+    border-radius: 4px;
+    width: 70%;
+    margin: 100px auto;
+    background-color: white;
+    border-collapse: collapse;
+}
+
+    .product-style th {
+        background-color: #313167;
+        color: white;
+    }
+
+    .product-style tr {
+        border: 1px solid transparent;
+        z-index: 7;
+    }
+
+        .product-style tr:hover td {
+            border-top: 2px solid #0194D9;
+            border-bottom: 2px solid #0194D9;
+        }
+
+.table-none-style {
+    border-radius: 4px;
+    width: 70%;
+    margin: 100px auto;
+    background-color: white;
+    border-collapse: collapse;
+}
+
+    .table-none-style th {
+        background-color: #313167;
+        color: white;
+    }
+
+.table-style {
+    border-radius: 4px;
+    width: 70%;
+    margin: 100px auto;
+    background-color: white;
+    border-collapse: collapse;
+}
+
+    .table-style tr {
+        border: 1px solid transparent;
+        z-index: 7;
+    }
+
+    .table-style td {
+        padding: 20px;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .table-style td.highlight {
+            padding: 0;
+            width: 4px;
+        }
+
+            .table-style td.highlight div {
+                width: 4px;
+                height: 60px;
+                border-radius: 4px;
+                background-color: white;
+                transition: all 0.2s ease-in-out;
+            }
+
+    .table-style tr:hover {
+        box-shadow: 0px 9px 4px -6px grey;
+    }
+
+        .table-style tr:hover td {
+            cursor: pointer;
+            color: #0194D9;
+            border-top: 1px solid grey;
+            border-bottom: 1px solid grey;
+        }
+
+            .table-style tr:hover td.highlight div {
+                transform: scaleX(3);
+            }
+
+    .table-style th {
+        background-color: #313167;
+        color: white;
+    }

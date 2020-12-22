@@ -1,0 +1,160 @@
+﻿@model CentralService.Models.UserAccountModel
+@{
+    Session["version1"] = "FIT V.1.0.1";
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - FIT-HQ App</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/login/css")
+</head>
+
+<body>
+    <div class="container">
+        <label id="txtDetail1">บริษัท โปรคอนซัลท์พลัส จำกัด โทร.02-060-0981</label>
+        <label id="txtDetail2">Engineerd by PTT Lubricant</label>
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "login100-form validate-form", @autocomplete = "off", @id = "loginForm" }))
+        {
+            @Html.HiddenFor(u => u.IpAddress)
+            <div class="login-box">
+                <img class="logo" src="~/Content/img/Logo_HQ.png" />
+                <div class="wrap-input100 validate-input">
+                    @Html.TextBoxFor(u => u.UserName, new { @class = "input100" })
+                    <span class="focus-input100" data-placeholder="&#xf007 &ensp;รหัสเข้าใช้งาน"></span>
+                </div>
+                <div class="validate UserName">
+                    <span><i class="fa fa-warning"></i></span>
+                    กรุณาป้อนรหัสเข้าใช้งาน
+                </div>
+                <div style="margin-bottom: 3vh;"></div>
+                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                    <span class="btn-show-pass">
+                        <i class="fa fa-eye"></i>
+                    </span>
+                    @Html.PasswordFor(u => u.Password, new { @class = "input100" })
+                    <span class="focus-input100" data-placeholder="&#xf023; &ensp;รหัสผ่าน"></span>
+                </div>
+                <div class="validate Password">
+                    <span><i class="fa fa-warning"></i></span>
+                    กรุณาป้อนรหัสผ่านให้ถูกต้อง
+                </div>
+                @Html.ValidationSummary(true, "", new { @Style = "color:yellow;width: 30vw;" })
+
+                <div id="chkPassword" class="input-group pull-right">
+                    <span class="input-group-addon beautiful">
+                        @Html.EditorFor(u => u.RememberMe)
+                    </span>
+                    <label>จำรหัสผ่าน</label>
+                </div>
+                <div class="input-group">
+                </div>
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <button class="login100-form-btn">
+                            เข้าสู่ระบบ
+                        </button>
+                    </div>
+                </div>
+                <label class="version">@Session["version1"]</label>
+                @*<label class="version"> FIT V.1.1.5</label>*@
+
+                <div class="input-group">
+                </div>
+
+            </div>
+        }
+    </div>
+
+</body>
+</html>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/admin-lte/js")
+@Scripts.Render("~/bundles/login/js")
+
+<script type="text/javascript">
+    var txtUsername = $('#UserName')
+    var txtPassword = $('#Password')
+    var chkRememberMe = $('#RememberMe')
+    $(document).ready(function () {
+
+        getMessageDBGen();
+
+        if (localStorage.getItem('Username') && localStorage.getItem('Password') && localStorage.getItem('RememberMe')) {
+            txtUsername.val(localStorage.getItem('Username'))
+            txtPassword.val(localStorage.getItem('Password'))
+            chkRememberMe.attr("checked", true);
+            $('.input-group-addon.beautiful .fa').attr('class', 'fa fa-check-circle-o');
+            $('.login100-form-bgbtn').addClass('effice')
+        }
+
+        if (txtUsername.val()) {
+            txtUsername.addClass('has-val')
+        }
+
+        if (txtPassword.val()) {
+            txtPassword.addClass('has-val')
+        }
+
+        $("#loginForm").submit(function (event) {
+            if (chkRememberMe.is(':checked')) {
+                localStorage.setItem('Username', txtUsername.val())
+                localStorage.setItem('Password', txtPassword.val())
+                localStorage.setItem('RememberMe', true)
+            }
+            else {
+                localStorage.clear()
+            }
+        });
+
+        $.getJSON("http://jsonip.com/?callback=?", function (data) {
+            $('#IpAddress').val(data.ip)
+        });
+
+        $('input').on('blur', function () {
+            if ($(this).val())
+                $(this).addClass('has-val')
+            else
+                $(this).removeClass('has-val')
+
+            if ($('#UserName').val() && $('#Password').val())
+                $('.login100-form-bgbtn').addClass('effice')
+            else
+                $('.login100-form-bgbtn').removeClass('effice')
+        })
+
+        $('.validate').hide()
+    })
+    function UpdateDbGen() {
+        var port = window.location.port == "" ? "" : ":" + window.location.port;
+        var pageBack = window.location.protocol + "//" + window.location.hostname + port + window.location.pathname;
+        var url = window.location.protocol + "//" + window.location.hostname + port + "/PTT_HQ/update_db_gen.asp?pageBack=" + pageBack;
+
+        window.location.href = url;
+    }
+    function getMessageDBGen() {
+        // var url = new URL(window.location.href);
+        var Message = getUrlVars()["db_gen_message"]
+        if (Message != undefined) {
+
+            $('#UpdateDBGen').text("Update DB Gen Success");
+        } else {
+            $('#UpdateDBGen').text("Update DB Gen");
+        }
+    }
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+</script>

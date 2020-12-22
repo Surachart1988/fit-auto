@@ -1,0 +1,181 @@
+﻿@model CentralService.Models.UserAccountModel
+@{
+    Session["version1"] = "FIT V.1.1.29";
+    ViewBag.Title = "Bypass";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - FIT-POS App</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/login/css")
+</head>
+<body>
+    <div class="container">
+        <label id="txtDetail1">บริษัท ไอเอสบี คอร์ปอเรชั่น จำกัด โทร.02-108-2626</label>
+        @*<label id="txtDetail2">Engineerd by PTT Lubricant</label>*@
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "login100-form validate-form", @autocomplete = "off", @id = "loginForm" }))
+        {
+            var IpV4 = "";
+            //if (Dns.GetHostEntry(Dns.GetHostName()).AddressList.Length > 4)
+            //{
+
+
+            //}
+            //else
+            //{
+            //    IpV4 = Dns.GetHostEntry(Dns.GetHostName()).AddressList[4].ToString();
+            //}
+            switch (Dns.GetHostEntry(Dns.GetHostName()).AddressList.Length)
+            {
+                case 4:
+                    IpV4 = Dns.GetHostEntry(Dns.GetHostName()).AddressList[3].ToString();
+                    break;
+                case 3:
+                    IpV4 = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    break;
+            }
+        <div class="login-box">
+            <img class="logo" src="~/Content/img/Logo_POS.png" />
+            <div class="wrap-input100 validate-input" style="padding-bottom: 4.5vh;  margin-bottom: 3vh;">
+                <span class="focus-input100" style="font:100px" data-placeholder="&#xf015 @Session["dealerName"]"></span>
+            </div>
+            <div class="wrap-input100 validate-input">
+                @Html.TextBox("iisName", null, new { @class = "input100" })
+                <span class="focus-input100" data-placeholder="&#xf007 &ensp;ClientName"></span>
+            </div>
+            <div class="wrap-input100 validate-input">
+                @Html.TextBox("ipAdvs", IpV4, new { @class = "input100", @autocomplete = "off", @readonly = "readonly" })
+            </div>
+
+            @Html.ValidationMessage("error", new { @Style = "color:yellow;width: 30vw;" })
+            @*@Html.ValidationSummary(true, "", new { @Style = "color:yellow;width: 30vw;" })*@
+
+            @*<div id="chkPassword" class="input-group pull-right">
+            <span class="input-group-addon beautiful">
+                @Html.EditorFor(u => u.RememberMe)
+            </span>
+            <label>จำรหัสผ่าน</label>
+        </div>*@
+
+            <div class="input-group">
+            </div>
+            <div class="container-login100-form-btn">
+                <div class="wrap-login100-form-btn">
+                    <div class="login100-form-bgbtn"></div>
+                    <button class="login100-form-btn">
+                        Update ip Address
+                    </button>
+                </div>
+            </div>
+            <label class="version">@Session["version1"]</label>
+            @*<label class="version"> FIT V.1.1.5</label>*@
+
+            <div class="input-group">
+            </div>
+            @*<label class="version" id="MsgDB">&nbsp;</label>*@
+            <label class="version" onclick="UpdateDbGen()" style="cursor:pointer" id="UpdateDBGen"> Update DB Gen </label>
+
+
+
+        </div>
+
+        }
+    </div>
+
+</body>
+</html>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/admin-lte/js")
+@Scripts.Render("~/bundles/login/js")
+
+<script type="text/javascript">
+    var txtUsername = $('#UserName')
+    var txtPassword = $('#Password')
+    var chkRememberMe = $('#RememberMe')
+    $(document).ready(function () {
+
+            getMessageDBGen();
+
+            localStorage.removeItem('menu-open')
+
+        //$('.login-box').width(($('.login-box span').text().length * 4) + $('.login-box').width())
+
+            if (localStorage.getItem('Username') && localStorage.getItem('Password') && localStorage.getItem('RememberMe')) {
+                txtUsername.val(localStorage.getItem('Username'))
+            txtPassword.val(localStorage.getItem('Password'))
+            chkRememberMe.attr("checked", true);
+            $('.input-group-addon.beautiful .fa').attr('class', 'fa fa-check-circle-o');
+            $('.login100-form-bgbtn').addClass('effice')
+        }
+
+            if (txtUsername.val()) {
+                txtUsername.addClass('has-val')
+            }
+
+            if (txtPassword.val()) {
+                txtPassword.addClass('has-val')
+            }
+
+        $("#loginForm").submit(function (event) {
+                if (chkRememberMe.is(':checked')) {
+                    localStorage.setItem('Username', txtUsername.val())
+                    localStorage.setItem('Password', txtPassword.val())
+                    localStorage.setItem('RememberMe', true)
+                }
+                else {
+                    localStorage.clear()
+                }
+                localStorage.setItem('LoginUrl', location.href)
+        });
+
+        $.getJSON("http://jsonip.com/?callback=?", function (data) {
+            $('#IpAddress').val(data.ip)
+        })
+
+        $('input').on('blur', function () {
+                if ($(this).val())
+                $(this).addClass('has-val')
+            else
+                $(this).removeClass('has-val')
+
+            if ($('#UserName').val() && $('#Password').val())
+                $('.login100-form-bgbtn').addClass('effice')
+            else
+                $('.login100-form-bgbtn').removeClass('effice')
+        })
+
+        $('.validate').hide()
+    })
+
+    function UpdateDbGen() {
+            var port = window.location.port == "" ? "" : ":" + window.location.port;
+            var pageBack = window.location.protocol + "//" + window.location.hostname + port + window.location.pathname;
+            var url = window.location.protocol + "//" + window.location.hostname + port + "/ptt_client_1/update_db_gen.asp?pageBack=" + pageBack;
+
+            window.location.href = url;
+        }
+        function getMessageDBGen() {
+            // var url = new URL(window.location.href);
+            var Message = getUrlVars()["db_gen_message"]
+            if (Message != undefined) {
+
+            $('#UpdateDBGen').text("Update DB Gen Success");
+            } else {
+            $('#UpdateDBGen').text("Update DB Gen");
+            }
+        }
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+</script>

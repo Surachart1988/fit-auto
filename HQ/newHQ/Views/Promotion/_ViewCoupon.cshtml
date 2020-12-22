@@ -1,0 +1,33 @@
+﻿@model CentralService.Models.ExtraPromotionModel
+
+<table class="table table-hover table-striped dataTable no-footer" cellspacing="0" id="gv_viewCoupon" style="border-collapse:collapse; width: 100%;" role="grid" aria-describedby="gv_viewCoupon_info">
+    <thead>
+        <tr>
+            <th scope="col">ชุดรหัสคูปอง</th>
+            <th scope="col">ชื่อคูปอง</th>
+            <th scope="col">โค้ดคูปอง</th>
+            <th scope="col">จำนวนเงินส่วนลด</th>
+            <th scope="col">เปอร์เชนต์ส่วนลด</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model.SBCouponDetail)
+            {
+                <tr>
+                    <td>@item.coupon_group_id</td>
+                    <td>@item.coupon_name</td>
+                    <td>@item.coupon_code</td>
+                    <td>@item.coupon_value_amount</td>
+                    <td>@item.coupon_value_percent</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@if (!string.IsNullOrEmpty(ViewBag.DuplicatedCoupon))
+{
+    <script type="text/javascript">
+        warningAlert("ชุดโค้ดคูปอง  @ViewBag.DuplicatedCoupon  มีอยู่แล้วในระบบ");
+    </script>
+}

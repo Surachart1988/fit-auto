@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "CashModal";
+}
+
+<!-- Modal -->
+<div class="modal right fade" id="cashModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">เงินสด</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+            </div>
+
+            <div class="modal-body">
+                <div class="card text-white bg-info calculator-card ">
+                    <div class="card-body card-lg">
+                        <p class="text-details">รับเงินมา (บาท)</p>
+                        <input id="txtPaymentCash" class="input-no-bg text-result-lg money" />
+                    </div>
+                </div>
+                <div class="card text-white bg-warning calculator-card ">
+                    <div class="card-body card-lg">
+                        <p class="text-details">เงินทอน (บาท)</p>
+                        <input id="txtChangeMoney" class="input-no-bg text-result-lg money" value="0" readonly />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">หมายเหตุ</span>
+                    </div>
+                    <input type="text" class="form-control" id="txtCashNote" aria-describedby="basic-addon1">
+                </div>
+                <button type="button" id="btnCashReceiveMoney" class="btn btn-success">รับเงิน</button>
+            </div>
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div>
+

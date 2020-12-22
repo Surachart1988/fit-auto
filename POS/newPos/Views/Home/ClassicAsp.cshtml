@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "ClassicAsp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+<div id="classicAspContainer">
+    <iframe name="form-iframe" id="form-iframe" src="@Url.Content(@ViewBag.AspFile)"></iframe>
+</div>
+<div id="modalPopup" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+@{
+    if (!string.IsNullOrEmpty(ViewBag.AspFile2))
+    {
+        <div id="classicAspContainer">
+            <iframe name="form-iframe2" id="form-iframe2" src="@Url.Content(@ViewBag.AspFile2)"></iframe>
+        </div>
+    }
+}
+<script type="text/javascript">
+    //console.log('url = ' + document.getElementById('form-iframe').src);
+    if (document.getElementById('form-iframe2') != null) {
+        var _url = document.getElementById('form-iframe2').src;
+
+        if (_url != "") {
+            window.open(_url, "Window", 'width=800,height=600');
+            window.close();
+        }
+    }
+    
+</script>
+
+
+

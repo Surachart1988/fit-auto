@@ -1,0 +1,193 @@
+﻿@{
+    Layout = null;
+}
+
+<style type="text/css">
+    /* CSS For Dropdown Menu Start admin */
+    .topmenu2 ul {
+        list-style: none;
+        padding-bottom: 60px;
+        margin: 5px 0px 0px;
+        padding-left: 0px;
+    }
+
+        .topmenu2 ul li {
+            display: inline;
+            float: left;
+        }
+
+            .topmenu2 ul li a {
+                color: #ffffff;
+                background-color: #808080;
+                margin-right: 2px;
+                font-weight: bold;
+                font-size: 13px;
+                text-decoration: none;
+                display: block;
+                width: 169px;
+                height: 31px;
+                line-height: 31px;
+                text-align: center;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border: 1px solid #000000;
+                z-index: 100;
+            }
+
+                .topmenu2 ul li a:hover {
+                    color: #000000;
+                    background: #ffe665;
+                    font-weight: bold;
+                    text-decoration: none;
+                    display: block;
+                    width: 169px;
+                    text-align: center;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    border: 1px solid #000000;
+                    z-index: 100;
+                }
+
+    .topmenu2 .addmenu {
+        color: #cccccc;
+        background: #560E00;
+        font-weight: bold;
+        text-decoration: none;
+        display: block;
+        width: 169px;
+        text-align: center;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border: 1px solid #000000;
+        z-index: 100;
+    }
+
+    .topmenu2 ul li.sublinks a {
+        color: #000000;
+        background: #f6f6f6;
+        border-bottom: 1px solid #cccccc;
+        font-weight: normal;
+        text-decoration: none;
+        display: block;
+        width: 169px;
+        text-align: center;
+        margin-top: 0px;
+        z-index: 100;
+    }
+
+        .topmenu2 ul li.sublinks a:hover {
+            color: #000000;
+            background: #ffe665;
+            font-weight: normal;
+            text-decoration: none;
+            display: block;
+            width: 169px;
+            text-align: center;
+            z-index: 100;
+        }
+
+    .topmenu2 ul li.sublinks {
+        display: none;
+    }
+    /* CSS For Dropdown Menu End */
+
+    .clear {
+        clear: both;
+    }
+
+    .left {
+        float: left;
+    }
+
+    .right {
+        float: right;
+    }
+</style>
+<div style="margin-left: 10px;margin-top:10px;">
+    <span class="text-bold">
+        <img src="~/Content/img/ICON/Configure.png" height="90" width="90">&nbsp;&nbsp;&nbsp;กำหนดข้อมูลหลัก
+    </span>
+</div>
+<div align="left">
+    <div class="topmenu2">
+        <ul>
+            <li>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_13.asp" })" class="dropdown">สินค้า</a>
+            </li>
+            <li class="sublinks">
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_13.asp" })">ประเภทสินค้า</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_15.asp" })">ยี่ห้อสินค้า</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_16.asp" })">รุ่นสินค้า</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_17.asp" })">ขนาดสินค้า</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_18.asp" })">หน่วยสินค้า</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_19.asp" })">ที่เก็บสินค้า</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_44.asp" })">ชื่อที่เก็บ DOT</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_22.asp" })">Customer Price Group</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_nextservice.asp" })">บริการครั้งถัดไป</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_sub_nextservice.asp" })">บริการครั้งถัดไปย่อย</a>
+            </li>
+
+            <li><a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_11.asp" })" class="dropdown">รถยนต์</a></li>
+            <li class="sublinks">
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_11.asp" })">ประเภทรถยนต์</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_12_1.asp" })">ยี่ห้อรถยนต์</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_12.asp" })">รุ่นรถยนต์</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_12_2.asp" })">รุ่นย่อยรถยนต์</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_49.asp" })">ปีรถยนต์</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_33.asp" })">สีรถยนต์</a>
+                <!--       <a href="bs_setmain_31.asp">ตำแหน่งติดฟิล์มรถยนต์</a> -->
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_29.asp" })">รายการตรวจสภาพรถยนต์</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_47.asp" })">เกียร์</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_48.asp" })">จังหวัดรถยนต์</a>
+            </li>
+
+            <li><a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_09.asp" })" class="dropdown">ลูกค้า</a></li>
+            <li class="sublinks">
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_09.asp" })">ประเภทลูกค้า</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_10.asp" })">ประเภทธุรกิจ</a>
+                <!--        <a href="bs_setmain_34.asp">ลูกค้าเงินสด Tablet</a> -->
+            </li>
+
+            <li><a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_20.asp" })" class="dropdown">เอกสาร</a></li>
+            <li class="sublinks">
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_20.asp" })">เหตุผลการปรับลดปรับเพิ่ม</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_23.asp" })">หัวข้อการประเมิน</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_30.asp" })">รายการติดตามหลังรับบริการ</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_32.asp" })">กำหนดข้อเสนอแนะ</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_35.asp" })">กำหนดสถานะใบสั่งซ่อม</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_36.asp" })" hidden>กำหนดข้อความหัวท้ายเอกสาร</a>
+            </li>
+
+            <li><a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_04.asp" })" class="dropdown">การเงิน</a></li>
+            <li class="sublinks">
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_04.asp" })">ชื่อธนาคาร</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_05.asp" })">ชนิดบัตรเครดิต</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_06.asp" })">ประเภทการชำระ</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_37.asp" })">รูปแบบเช็ค</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_46.asp" })">รูปการรูดบัตร</a>
+                <a href="@Url.Action("Index", "MasterData", new { menuid = 99 })">กำหนดข้อมูล BlueCard</a>
+            </li>
+
+            <li><a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_02.asp" })" class="dropdown">ภาษี</a></li>
+            <li class="sublinks">
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_02.asp" })">อัตราภาษีซื้อ</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_03.asp" })">อัตราภาษีขาย</a>
+            </li>
+
+            <li><a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_38.asp" })" class="dropdown">หักภาษี ณ ที่จ่าย</a></li>
+            <li class="sublinks">
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_38.asp" })">เงื่อนไขการหักภาษี</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_39.asp" })">ประเภทการหักภาษี</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_40.asp" })" hidden>แบบภาษีเงินได้</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_41.asp" })" hidden>หัวข้อเงินได้พึงประเมินที่จ่าย</a>
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_42.asp" })" hidden>ประเภทเงินได้พึงประเมินที่จ่าย</a>
+            </li>
+
+            <li><a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_43.asp" })" class="dropdown">พนักงาน</a></li>
+            <li class="sublinks">
+                <a href="@Url.Action("ClassicAsp", "Home", new { AspFile = "bs_setmain_43.asp" })">ตำแหน่งหน้าที่</a>
+            </li>
+
+        </ul>
+    </div>
+</div>

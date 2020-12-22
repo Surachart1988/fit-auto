@@ -1,0 +1,94 @@
+﻿@using CentralService.Models
+
+@model RegisterBlueCardModel
+
+
+
+<div class="modal right fade" id="bluecard-modal" role="dialog" style="z-index:2000">
+    <div class="modal-dialog" style="margin: auto;
+    margin-top: 140px;
+    width: 55vw;
+    height: 30vh;
+    max-width: none;">
+        <div class="modal-content">
+            <div id="loaderDiv2" class="spinner" style="display:none">
+                <div class="center-div">
+                    <div class="inner-div">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loading-base" class="modal fade" data-keyboard="false" data-backdrop="static">
+                <div class="cssload-dots">
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                </div>
+            </div>
+            <div class="modal-header" style="border-bottom-color: #363167; background-color: #0194D9; color: white;">
+                <h4 class="modal-title">สมัคร Blue Card</h4>
+                <button type="button" class="close" onclick="popup2();return false;" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+            </div>
+            <div class="modal-body" style="padding-top: 15px; padding-bottom: 0;">
+                <form name="register" style="width: 90%" id="register">
+                    <div class="row">
+
+
+                        <div class="col-md-1">
+                            &nbsp;
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-group row">
+                                <span class="col-md-4 col-form-label col-form-label-sm">เลขบัตร ปชช. <font class="invalid">*</font> </span>
+
+                                @Html.TextBoxFor(x => x.ThaiIDCard, new { @class = "form-control form-control-sm col-md-7 input-thai-idcard" })
+                                <div class="col-md-1" style="color: #0bb525; display: none" id="ThaiIDCardMarkSuccess"><i class="fa fa-check-circle-o"></i></div>
+                                <div class="col-md-1" style="color: #b80a0a; display: none" id="ThaiIDCardMarkFail"><i class="fa fa-times-circle"></i></div>
+                                <input type="hidden" value="" name="ThaiIDCardCheck" id="ThaiIDCardCheck" />
+                            </div>
+                            <div class="form-group row">
+                                <span class="col-md-4 col-form-label col-form-label-sm">เบอร์โทรศัพท์ <font class="invalid">*</font></span>
+
+                                @Html.TextBoxFor(x => x.MoblieNumber, new { @class = "form-control form-control-sm col-md-7 input-mobile", @readonly = "true" })
+                                <div class="col-md-1" style="color: #0bb525; display: none" id="MoblieSuccess"><i class="fa fa-check-circle-o"></i></div>
+                                <div class="col-md-1" style="color: #b80a0a; display: none" id="MoblieFalil"><i class="fa fa-times-circle"></i></div>
+                                <input type="hidden" value="" name="MoblieCheck" id="MoblieCardCheck" />
+
+                            </div>
+                            <div class="form-group row">
+                                <span class="col-md-4 col-form-label col-form-label-sm">Blue No. <font class="invalid">*</font></span>
+                                @Html.TextBoxFor(x => x.CardNumber, new { @class = "form-control form-control-sm col-md-7 input-blue-card" })
+                                <div class="col-md-1" style="color: #0bb525; display: none" id="BlueCardSuccess"><i class="fa fa-check-circle-o"></i></div>
+                                <div class="col-md-1" style="color: #b80a0a; display: none" id="BlueCardFail"><i class="fa fa-times-circle"></i></div>
+                                <input type="hidden" value="" name="CardNumberCheck" id="CardNumberCheck" />
+                            </div>
+                            @*<div class="form-group row">
+                            <span class="col-md-4 col-form-label col-form-label-sm">อีเมลล์</span>
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control form-control-sm col-md-8 input-email" })
+
+                        </div>*@
+                            @Html.HiddenFor(x => x.MID)
+                            @Html.HiddenFor(x => x.TID)
+
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="display: block; text-align: right">
+                <button type="button" id="btnConfirmBlueCardRegister" disabled class="btn btn-success">ยืนยัน</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function popup2(){
+        $('[id="bluecard-modal"]').hide(); 
+        $('.modal-backdrop').remove();
+    }
+</script>

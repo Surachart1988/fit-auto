@@ -1,0 +1,386 @@
+﻿@model CentralService.Models.ExtraPromotionModel
+
+<style>
+    .modal-content {
+        width: 115%;
+    }
+</style>
+
+<div class="modal fade" id="modal-select-procode" tabindex="-1" role="dialog" aria-labelledby="selectPromotionCode" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div id="loaderDiv" class="spinner" style="display:none">
+                <div class="center-div">
+                    <div class="inner-div">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loading-base" class="modal fade" data-keyboard="false" data-backdrop="static">
+                <div class="cssload-dots">
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                    <div class="cssload-dot"></div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 title-head">
+                            <h4>ข้อมูลสินค้า</h4>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div id="bError_procode" class="row" style="display: none">
+                                <div class="col-md-12">
+                                    <div>
+                                        <table class="col-md-12 table-bordered table-striped table-condensed tables" cellspacing="0" id="gv_error" style="border-collapse:collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="11">
+                                                        <center><span style="font-size: 20px; color: Red;">ไม่พบข้อมูลโปรโมชั่น</span></center>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="gv_procode_wrapper" class="row" style="display: normal">
+                                <div class="col-md-12">
+                                    <table class="table table-hover table-striped dataTable no-footer" cellspacing="0" id="gv_procode" style="border-collapse:collapse; width: 100%;" role="grid" aria-describedby="gv_procode_info">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <input id="gv_procode_CheckBox_all" type="checkbox" name="gv_procode_CheckBox_all">
+                                                    <label for="gv_procode_CheckBox_all"> เลือกทั้งหมด</label>
+                                                </th>
+                                                <th class="text-center">รหัสสินค้า</th>
+                                                <th class="text-center">สินค้า</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                for (int i = 0; i < Model.ProductsList.Count; i++)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.CheckBoxFor(x => Model.ProductsList[i].IsCheck, new { style = "opacity: 1;" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => Model.ProductsList[i].pro_code)
+                                                            @Html.HiddenFor(m => Model.ProductsList[i].pro_tname)
+                                                            @Html.DisplayFor(x => Model.ProductsList[i].pro_code)
+                                                        </td>
+                                                        <td>
+                                                            @Html.HiddenFor(m => Model.ProductsList[i].pro_code)
+                                                            @Html.HiddenFor(m => Model.ProductsList[i].pro_tname)
+                                                            @Html.DisplayFor(x => Model.ProductsList[i].pro_tname)
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                @:
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <input type="button" name="btnSave" value="บันทึก" id="btnSaveProduct" class="btn btn-primary">
+                            <input type="button" name="btnClose" value="ยกเลิก" id="btnClose" data-dismiss="modal" class="btn btn-danger">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#btnSaveProduct").click(function (e) {
+
+            var list = []; var values = []; var Item = ""; var value = "";
+            var listprod = []; var listprogrp = []; var listprobrand = []; var listpromodal = []; var listprosize = [];
+            $("#gv_procode").DataTable().rows().nodes().to$().find('input[type="checkbox"]:checked').each(function () {
+
+                Item = $(this).closest('tr').find("td").eq(2).text().trim();
+                list.push(Item);
+                value = $(this).closest('tr').find("td").eq(1).text().trim();
+                values.push(value);
+            });
+
+            if (list.length === 0) {
+                warningAlert('กรุณาเลือกข้อมูล');
+                e.preventDefault();
+            } else {
+                $("#gv_productgrp").DataTable().rows().nodes().to$().find('input[type="checkbox"]:checked').each(function () {
+                    listprod.push($(this).closest('tr').find("td").eq(1).text().trim());
+                });
+                $("#gv_progroup").DataTable().rows().nodes().to$().find('input[type="checkbox"]:checked').each(function () {
+                    listprogrp.push($(this).closest('tr').find("td").eq(1).text().trim());
+                });
+                $("#gv_probrand").DataTable().rows().nodes().to$().find('input[type="checkbox"]:checked').each(function () {
+                    listprobrand.push($(this).closest('tr').find("td").eq(1).text().trim());
+                });
+                $("#gv_promodel").DataTable().rows().nodes().to$().find('input[type="checkbox"]:checked').each(function () {
+                    listpromodal.push($(this).closest('tr').find("td").eq(1).text().trim());
+                });
+                $("#gv_prosize").DataTable().rows().nodes().to$().find('input[type="checkbox"]:checked').each(function () {
+                    listprosize.push($(this).closest('tr').find("td").eq(1).text().trim());
+                });
+                if (list.length === 1
+                    && listprod.length === 0
+                    && listprogrp.length === 0
+                    && listprobrand.length === 0
+                    && listpromodal.length === 0
+                    && listprosize.length === 0) {
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        url: "GetSkuData",
+                        data: { 'data': values.join(), '_type': "procode" },
+                        beforeSend: function () {
+                            $("#loading").show();
+                        },
+                        success: function (result) {
+                            $('#modal-select-procode').modal('toggle'); // close yourself
+                            $("#txt_pro_code").val(list.join(', '));
+
+                            var obj = result.Skudetail;
+                            $.ajax({
+                                cache: false,
+                                type: "GET",
+                                url: "GetProdgroup",
+                                data: { 'data': [], 'hasChk': obj.product_group_code },
+                                success: function (data) {
+                                    $('#div_ModalProductGroup').html(data);
+                                    $('#div_ModalProductGroup').fadeIn('fast');
+                                    intitable("gv_productgrp", "gv_productgrp_CheckBox_all", 0);
+                                    firepopup("gv_productgrp", "txt_prodgroup");
+                                    $.ajax({
+                                        cache: false,
+                                        type: "GET",
+                                        url: "GetProgroup",
+                                        data: { 'data': [], 'hasChk': obj.progroup_code },
+                                        success: function (data) {
+                                            $("#progroup_popup").html(data);
+                                            intitable("gv_progroup", "gv_progroup_CheckBox_all", 25);
+                                            firepopup("gv_progroup", "txt_progroup");
+                                            $.ajax({
+                                                cache: false,
+                                                type: "GET",
+                                                url: "GetProbrand",
+                                                data: { 'data': [], 'hasChk': obj.pro_brand_code },
+                                                success: function (data) {
+                                                    $("#probrand_popup").html(data);
+                                                    intitable("gv_probrand", "gv_probrand_CheckBox_all", 0);
+                                                    firepopup("gv_probrand", "txt_pro_brand");
+                                                    $.ajax({
+                                                        cache: false,
+                                                        type: "GET",
+                                                        url: "GetPromodel",
+                                                        data: { 'data': [], 'hasChk': obj.pro_model_code },
+                                                        success: function (data) {
+                                                            $("#promodel_popup").html(data);
+                                                            intitable("gv_promodel", "gv_promodel_CheckBox_all", 0);
+                                                            firepopup("gv_promodel", "txt_pro_model");
+                                                            $.ajax({
+                                                                cache: false,
+                                                                type: "GET",
+                                                                url: "GetProSize",
+                                                                data: { 'data': [], 'hasChk': obj.pro_size_code },
+                                                                success: function (data) {
+                                                                    $("#prosize_popup").html(data);
+                                                                    intitable("gv_prosize", "gv_prosize_CheckBox_all", 0);
+                                                                    firepopup("gv_prosize", "txt_pro_size");
+                                                                    $("#loading").hide();
+                                                                },
+                                                                error: function (xhr, ajaxOptions, thrownError) {
+                                                                    alert('Failed to retrieve.');
+                                                                    $("#loading").hide();
+                                                                }
+                                                            });
+                                                        },
+                                                        error: function (xhr, ajaxOptions, thrownError) {
+                                                            alert('Failed to retrieve.');
+                                                            $("#loading").hide();
+                                                        }
+                                                    });
+                                                },
+                                                error: function (xhr, ajaxOptions, thrownError) {
+                                                    alert('Failed to retrieve.');
+                                                }
+                                            });
+                                        },
+                                        error: function (xhr, ajaxOptions, thrownError) {
+                                            alert('Failed to retrieve.');
+                                        }
+                                    });
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    alert('Failed to retrieve.');
+                                }
+                            });
+
+                            //$.each(obj, function (index, value) {
+                            //    /*
+                            //     product_group_code = s.product_group_code,
+                            //        progroup_code = s.progroup_code,
+                            //        pro_brand_code = s.pro_brand_code,
+                            //        pro_model_code = s.pro_model_code,
+                            //        pro_size_code = s.pro_size_code
+                            //     */
+
+                            //    switch (index) {
+                            //        case 'progroup_code':
+                            //            $.ajax({
+                            //                cache: false,
+                            //                type: "GET",
+                            //                url: "GetProgroup",
+                            //                data: { 'data': [], 'hasChk': value },
+                            //                success: function (data) {
+                            //                    $("#progroup_popup").html(data);
+                            //                    intitable("gv_progroup", "gv_progroup_CheckBox_all", 25);
+                            //                    firepopup("gv_progroup", "txt_progroup");
+                            //                },
+                            //                error: function (xhr, ajaxOptions, thrownError) {
+                            //                    alert('Failed to retrieve.');
+                            //                }
+                            //            });
+                            //        case 'pro_brand_code':
+                            //            $.ajax({
+                            //                cache: false,
+                            //                type: "GET",
+                            //                url: "GetProbrand",
+                            //                data: { 'data': [], 'hasChk': value },
+                            //                success: function (data) {
+                            //                    $("#probrand_popup").html(data);
+                            //                    intitable("gv_probrand", "gv_probrand_CheckBox_all", 0);
+                            //                    firepopup("gv_probrand", "txt_pro_brand");
+                            //                },
+                            //                error: function (xhr, ajaxOptions, thrownError) {
+                            //                    alert('Failed to retrieve.');
+                            //                }
+                            //            });
+                            //        case 'pro_model_code':
+                            //            $.ajax({
+                            //                cache: false,
+                            //                type: "GET",
+                            //                url: "GetPromodel",
+                            //                data: { 'data': [], 'hasChk': value },
+                            //                success: function (data) {
+                            //                    $("#promodel_popup").html(data);
+                            //                    intitable("gv_promodel", "gv_promodel_CheckBox_all", 0);
+                            //                    firepopup("gv_promodel", "txt_pro_model");
+                            //                },
+                            //                error: function (xhr, ajaxOptions, thrownError) {
+                            //                    alert('Failed to retrieve.');
+                            //                    $("#loading").hide();
+                            //                }
+                            //            });
+                            //        case 'pro_size_code':
+                            //            $.ajax({
+                            //                cache: false,
+                            //                type: "GET",
+                            //                url: "GetProSize",
+                            //                data: { 'data': [], 'hasChk': value },
+                            //                success: function (data) {
+                            //                    $("#prosize_popup").html(data);
+                            //                    intitable("gv_prosize", "gv_prosize_CheckBox_all", 0);
+                            //                    firepopup("gv_prosize", "txt_pro_size");
+                            //                },
+                            //                error: function (xhr, ajaxOptions, thrownError) {
+                            //                    alert('Failed to retrieve.');
+                            //                    $("#loading").hide();
+                            //                }
+                            //            });
+                            //    }
+                            //});
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert('Failed to retrieve.');
+                        }
+                    });
+                }
+                else {
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        url: "SaveData",
+                        data: { 'data': values.join(), '_type': "procode" },
+                        beforeSend: function () {
+                            $("#loaderDiv").show();
+                        },
+                        success: function (data) {
+                            $("#loaderDiv").hide();
+                            $('#modal-select-procode').modal('toggle'); // close yourself
+                            $("#txt_pro_code").val(list.join(', '));
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert('Failed to retrieve.');
+                        }
+                    });
+                }
+            }
+        });
+        function firepopup(Tname, TxtArea) {
+            var list = []; var values = []; var Item = ""; var value = "";
+            $('#' + Tname).DataTable().rows().nodes().to$().find('input[type="checkbox"]:checked').each(function () {
+
+                Item = $(this).closest('tr').find("td").eq(2).text().trim();
+                list.push(Item);
+                value = $(this).closest('tr').find("td").eq(1).text().trim();
+                values.push(value);
+            });
+            $('#' + TxtArea).val(list.join(', '));
+        }
+    });
+
+</script>
+<script>
+                                                    //$(document).ready(function () {
+                                                    //    $("#btnSaveProduct").click(function (e) {
+                                                    //        var values = [], rowValue = "";
+                                                    //        var values2 = [], rowValue2 = "";
+                                                    //        $('#gv_procode tbody tr  input:checkbox').each(function () {
+                                                    //            if (this.checked) {
+                                                    //                $(this).closest('tr').find("td:not([class])").map(function () {
+                                                    //                    rowValue = $(this).text().trim();
+                                                    //                    rowValue2 = $(this).closest('tr').find("td:not([class])").eq(0).find('input').val();
+                                                    //                });
+                                                    //                values.push(rowValue);
+                                                    //                values2.push(rowValue2);
+                                                    //            }
+                                                    //        });
+                                                    //        if (values2.length === 0) {
+                                                    //            warningAlert('กรุณาเลือกข้อมูล');
+                                                    //            e.preventDefault();
+                                                    //        } else {
+                                                    //            //$.ajax({
+                                                    //            //    cache: false,
+                                                    //            //    type: "GET",
+                                                    //            //    url: "GetProduct",
+                                                    //            //    data: { 'data': values2.join() },
+                                                    //            //    success: function (data) {
+                                                    //            //        $("#procode_popup").html(data);
+                                                    //            //        $("#gv_procode").DataTable();
+                                                    //            $('#modal-select-procode').modal('toggle'); // close yourself
+                                                    //            $("#txt_pro_code").val(values.join(', '));
+                                                    //            //    },
+                                                    //            //    error: function (xhr, ajaxOptions, thrownError) {
+                                                    //            //        alert('Failed to retrieve.');
+                                                    //            //    }
+                                                    //            //});
+                                                    //        }
+                                                    //    });
+                                                    //});
+</script>

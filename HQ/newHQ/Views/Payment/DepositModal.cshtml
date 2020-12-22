@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "DepositModal";
+}
+<style>
+
+
+    tr.selected {
+        background-color: #0194D9 !important;
+        background-color: #0194d947 !important;
+    }
+</style>
+<!-- Modal -->
+<div class="modal right fade" id="depositModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document"style="height: 35vh;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title"> เงินมัดจำ</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true"> &times;</span> </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card text-white bg-info">
+                            <div class="card-body card-lg" style="height: 17vh;">
+                                <p class="text-details">จำนวนเงิน (บาท)</p>
+                                <input id="txtPaymentDeposit" class="input-no-bg text-result-lg money" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 credit-form">
+                        <div class="row">
+                            <div class="col-11">
+                                <label>เอกสารมัดจำ</label>
+                                <div class="row">
+                                    <div class="col-9">
+                                        <select id="ddDepositNo" class="form-control  form-control-sm"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-11">
+                                <label>ลูกค้า</label>
+                                <div class="row">
+                                    <div class="col-9">
+                                        <input type="text" id="txtCustomerName" class="form-control form-control-sm" readonly="readonly">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"> หมายเหตุ</span>
+                    </div>
+                    <input type="text" class="form-control" id="txtDepositNote" aria-describedby="basic-addon1">
+                </div>
+                <button type="button" id="btnDepositReceiveMoney" class="btn btn-success"> รับเงิน</button>
+            </div>
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div>

@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "CreditEdcModal";
+}
+
+<!-- Modal -->
+<div class="modal fade" id="creditEdcModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">เครดิต Edc</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-5" style="margin-top: 20px;">
+                        <div class="card text-white bg-info">
+
+                            <div class="card-body card-lg">
+                                <p class="text-details">จำนวนเงิน (บาท)</p>
+                                <input id="txtPaymentCreditEdc" class="input-no-bg text-result-lg money" />
+                            </div>
+                        </div>
+                        @*<div class="row" style="margin-top: 20px;">
+                            <div class="col">
+                                <img src="~/Content/img/PAYICON/mastercard-securecode.png" alt="mastercard" width="100%">
+                            </div>
+                            <div class="col">
+                                <img src="~/Content/img/PAYICON/visa.png" alt="visa" alt="mastercard" width="100%">
+                            </div>
+                        </div>*@
+                    </div>
+                    <div class="col-6 credit-form">
+                        @*<label>ชื่อที่ปรากฎบนบัตร</label>
+                            <input type="text" id="txtCreditName">*@
+                        <div class="row">
+                            <div class="col-11">
+                                <label>หมายเลขบัตร</label>
+                                <div class="row">
+                                    <div class="col-9">
+                                        <input type="text" id="txtCreditEdcNumber" class=" form-control form-control-sm" readonly>
+                                    </div>
+                                    <div class="col">
+                                        <i id="crEdcIcon" style="font-size:30px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label>วันหมดอายุ</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" id="txtCreditMonth" class="form-control form-control-sm" readonly>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="txtCreditYear" class="form-control form-control-sm" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <label>Appr.Code</label>
+                                <input type="text" id="txtApprCodeEdc" class="form-control form-control-sm" maxlength="6" readonly/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label>ธนาคารเจ้าของบัตร</label>
+                               @Html.DropDownList("ddBank", (SelectList)ViewBag.BankDropDown, new { @class = "dd-search form-control form-control-sm" })
+                            </div>
+                            <div class="col-5">
+                                <label>รูปแบบการชำระ</label>
+                                @Html.DropDownList("ddPaymentFormat", (SelectList)ViewBag.PaymentFormatDropDown, new { @class = "dd-search form-control form-control-sm" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-11">
+                                <label>ชนิดบัตร</label>
+                                @*@Html.DropDownList("ddCardType", (SelectList)ViewBag.CardTypeDropDown, new { @class = "dd-search form-control form-control-sm" })*@
+                                <input type="text" name="ddCardType" id="ddCardType" class="form-control form-control-sm" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">หมายเหตุ</span>
+                    </div>
+                    <input type="text" class="form-control" id="txtEdcNote" aria-describedby="basic-addon1">
+                </div>
+                <button type="button" id="btnEdcReceiveMoney" class="btn btn-success">รับเงิน</button>
+            </div>
+
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div>
+

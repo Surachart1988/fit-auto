@@ -1,0 +1,61 @@
+﻿@model CentralService.Models.ExtraDiscountIconModel
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+    .input-group-prepend label {
+        width: 8vw;
+    }
+</style>
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-6">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "input-group-text" })
+                </div>
+                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "input-group-text" })
+                </div>
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    @Html.LabelFor(model => model.Baht, htmlAttributes: new { @class = "input-group-text" })
+                </div>
+                <select class="custom-select" id="valueType">
+                    <option value="0">บาท</option>
+                    <option value="1">เปอร์เซ็นต์</option>
+                </select>
+                @Html.EditorFor(model => model.Baht, new { htmlAttributes = new { @class = "form-control money", @Style = "width: 2vw;text-align: right;" } })
+                @Html.EditorFor(model => model.Percents, new { htmlAttributes = new { @class = "form-control percent", @Style = "width: vw;text-align: right;" } })
+                <div class="input-group-append">
+                    <label class="input-group-text" id="unit">บาท</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    @Html.LabelFor(model => model.CustypeCode, htmlAttributes: new { @class = "input-group-text" })
+                </div>
+                @Html.DropDownListFor(model => model.CustypeCode, (SelectList)ViewBag.CustomerGroupDropDown, new { @class = "form-control " })
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    @Html.LabelFor(model => model.ProgroupCode, htmlAttributes: new { @class = "input-group-text" })
+                </div>
+                @Html.DropDownListFor(model => model.ProgroupCode, (SelectList)ViewBag.ProductGroupDropDown, new { @class = "form-control " })
+            </div>
+        </div>
+    </div>
+</div>
+
+

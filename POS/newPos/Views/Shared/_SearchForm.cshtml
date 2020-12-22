@@ -1,0 +1,171 @@
+﻿@model CentralService.Injection.ISearchModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default" visible="true">
+            <div class="panel-heading">@Html.Label(Model.TitleName)</div>
+            <div class="panel-body">
+                @{
+                    switch (Model.PageType)
+                    {
+                        case "Job":
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <div class="col-md-6 rows">
+                                            <div class="input-daterange input-group">
+                                                <span class="input-group-addon first-text">วันที่เริ่มใช้</span>
+                                                @*<input name = "txt_start_date" type="text" id="txt_start_date" class="form-control">*@
+                                                @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control datepicker", autocomplete = "off", placeholder = "วันที่เริ่มต้น" })
+                                                <span class="input-group-addon">ถึง</span>
+                                                @*<input name = "txt_end_date" type="text" id="txt_end_date" class="form-control">*@
+                                                @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control datepicker", autocomplete = "off", placeholder = "วันที่สิ้นสุด" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 rows">
+                                            <div class="input-daterange input-group">
+                                                @Html.EditorFor(model => model.KeywordsSearch, new { htmlAttributes = new { @class = "form-control", placeholder = "เลขที่ใบสั่งซ่อม/รหัสลูกค้า/ชื่อ-สกุล/เลขทะเบียน" } })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 rows">
+                                            @Html.DropDownListFor(model => model.Status, new List<SelectListItem>
+                                            {
+                                                new SelectListItem() { Text = "เลือกสถานะ", Value = ""},
+                                                new SelectListItem() { Text = "ทั้งหมด", Value = "all"},
+                                                new SelectListItem() { Text = "ยกเลิก", Value = "cancel"},
+                                                new SelectListItem() { Text = "ปิดแล้ว", Value = "close"}
+                                            }, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div style="padding-top: 5px; text-align: center">
+                                        <button id="btn_search" type="button" class="btn btn-success">ค้นหา</button>
+                                        <input id="btn_clear" type="submit" name="btn_clear" value="เคลียร์" class="btn btn-default">
+                                    </div>
+                                </div>
+                            </div>
+                            break;
+                        case "Vendor":
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <div class="col-md-10 rows">
+                                            <div class="input-daterange input-group">
+                                                @Html.EditorFor(model => model.KeywordsSearch, new { htmlAttributes = new { @class = "form-control", placeholder = "รหัสผู้จำหน่าย/ชื่อผู้จำหน่าย/โทรศัพท์" } })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 rows">
+                                            @Html.DropDownListFor(model => model.Status, new List<SelectListItem>
+                                            {
+                                                new SelectListItem() { Text = "สถานะทั้งหมด", Value = "all"},
+                                                new SelectListItem() { Text = "ใช้งาน", Value = "0"},
+                                                new SelectListItem() { Text = "ยกเลิกการใช้", Value = "1"}
+                                            }, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div style="padding-top: 5px; text-align: center">
+                                        <button id="btn_search" type="button" class="btn btn-success">ค้นหา</button>
+                                        <input id="btn_clear" type="submit" name="btn_clear" value="เคลียร์" class="btn btn-default">
+                                    </div>
+                                </div>
+                            </div>
+                            break;
+                        case "Campaign":
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <div class="col-md-10 rows">
+                                            <div class="input-daterange input-group">
+                                                @Html.EditorFor(model => model.KeywordsSearch, new { htmlAttributes = new { @class = "form-control", placeholder = "พิมพ์ชื่อแคมเปญที่ต้องการค้นหา" } })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 rows">
+                                            @Html.DropDownListFor(model => model.Status, new List<SelectListItem>
+                                            {
+                                                new SelectListItem() { Text = "สถานะทั้งหมด", Value = "all"},
+                                                new SelectListItem() { Text = "ใช้งาน", Value = "0"},
+                                                new SelectListItem() { Text = "ยกเลิกการใช้", Value = "1"}
+                                            }, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div style="padding-top: 5px; text-align: center">
+                                        <button id="btn_search" type="button" class="btn btn-success">ค้นหา</button>
+                                        <input id="btn_clear" type="submit" name="btn_clear" value="เคลียร์" class="btn btn-default">
+                                    </div>
+                                </div>
+                            </div>
+                            break;
+                        case "Promotion":
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <div class="col-md-6 rows">
+                                            <div class="input-daterange input-group">
+                                                <span class="input-group-addon first-text">วันที่เริ่มใช้</span>
+                                                @*<input name = "txt_start_date" type="text" id="txt_start_date" class="form-control">*@
+                                                @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control datepicker", autocomplete = "off", placeholder = "วันที่เริ่มต้น" })
+                                                <span class="input-group-addon">ถึง</span>
+                                                @*<input name = "txt_end_date" type="text" id="txt_end_date" class="form-control">*@
+                                                @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control datepicker", autocomplete = "off", placeholder = "วันที่สิ้นสุด" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 rows">
+                                            <div class="input-daterange input-group">
+                                                @Html.EditorFor(model => model.KeywordsSearch, new { htmlAttributes = new { @class = "form-control", placeholder = "พิมพ์ชื่อโปรโมชั่นที่ต้องการค้นหา" } })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 rows">
+                                            @Html.DropDownListFor(model => model.Status, new List<SelectListItem>
+                                            {
+                                                new SelectListItem() { Text = "สถานะทั้งหมด", Value = "all"},
+                                                new SelectListItem() { Text = "ใช้งาน", Value = "true"},
+                                                new SelectListItem() { Text = "หยุดใช้งานชั่วคราว", Value = "false"},
+                                                new SelectListItem() { Text = "ยังไม่ถึงกำหนด", Value = "notused"},
+                                                new SelectListItem() { Text = "หมดอายุ", Value = "expired"},
+                                                new SelectListItem() { Text = "ยกเลิกการใช้", Value = "cancel"}
+                                            }, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div style="padding-top: 5px; text-align: center">
+                                        <button id="btn_search" type="button" class="btn btn-success">ค้นหา</button>
+                                        <input id="btn_clear" type="submit" name="btn_clear" value="เคลียร์" class="btn btn-default">
+                                    </div>
+                                </div>
+                            </div>
+                            break;
+                        case "Branch":
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <div class="col-md-12 rows">
+                                            <div class="input-daterange input-group">
+                                                @Html.EditorFor(model => model.KeywordsSearch, new { htmlAttributes = new { @class = "form-control", placeholder = "รหัสสาขา/Plant No./ชื่อสาขา/Sold to/Ship to/จังหวัด" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div style="padding-top: 5px; text-align: center">
+                                        <button id="btn_search" type="button" class="btn btn-success">ค้นหา</button>
+                                        <input id="btn_clear" type="submit" name="btn_clear" value="เคลียร์" class="btn btn-default">
+                                    </div>
+                                </div>
+                            </div>
+                            break;
+                        case "PageName": break;
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+﻿@model CentralService.Models.MessageModel
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    table thead tr {
+        background-color: #363167;
+        color: white;
+    }
+
+    tr.selected {
+        background-color: #0194d9 !important;
+        background-color: #0194d947 !important;
+    }
+</style>
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a id="new" class="nav-link" href="#">ข้อมูลข่าวสาร</a>
+            </li>
+            <li class="nav-item">
+                <a id="promotion" class="nav-link" href="#">แจ้งโปรโมชั่น</a>
+            </li>
+            <li class="nav-item ml-auto">
+                <button type="button" class="btn btn-outline-success" 
+                        onclick="
+    pageForm.create('@Url.Action("Create")')">
+                <i class="fa fa-calendar-plus-o" style="font-size: 25px;"></i>สร้างคอนเทนต์</button>
+                <button type="button" class="btn btn-outline-warning"
+                        onclick="openDocFull('@Session["aspUrl"].ToString()/message_sendclient.asp')">
+                    <i class="fa fa-share-square" style="font-size: 25px;"></i>นำข้อมูลออกไปสาขา
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "searchForm" }))
+        {
+            @Html.HiddenFor(model=>model.DocType)
+            <table class="table table-striped table-bordered nowrap" id="message-list" style="width:100%;font-size: 13px;">
+                <thead>
+                    <tr>
+                        <th id="header-center">@Html.LabelFor(m => m.DateRange)</th>
+                        <th id="header-center">@Html.LabelFor(m => m.Name)</th>
+                        <th id="header-center">@Html.LabelFor(m => m.StatusName)</th>
+                        <th id="header-center"><label>คำสั่ง</label></th>
+                    </tr>
+                </thead>
+            </table>
+        }
+    </div>
+</div>
+
+
+@section css{
+    @Styles.Render("~/Content/datatables-style")
+}
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/datatables-script")
+    @Scripts.Render("~/bundles/message")
+    <script>
+        var pageForm = new MessagePage()
+        $(document).ready(function () {
+            pageForm.getUrl = '@Url.Action("GetDTResult")'
+            pageForm.selectUrl = '@Url.Action("Edit")'
+            pageForm.init()
+        })
+    </script>
+}
+

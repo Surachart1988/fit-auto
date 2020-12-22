@@ -1,0 +1,9 @@
+diff a/newPos/Scripts/transpiled/payment/index.js b/newPos/Scripts/transpiled/payment/index.js	(rejected hunks)
+@@ -221,6 +221,7 @@
+                 var txtCouponDigit = $('#txtCouponDigit').val();
+ 
+                 
++
+                 if (txtCouponDigit == CouponDigit) {
+ 
+                     var _url = me.CheckCouponDigitUrl;

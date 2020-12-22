@@ -1,0 +1,182 @@
+﻿@model CentralService.Models.MasterDataModel
+@using CentralService.Models
+@using newHQ.Views.Helper
+@{
+    ViewBag.Title = "กำหนดข้อมูล BlueCard";
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "searchForm" }))
+{
+    @Html.HiddenFor(Model => Model.Id)
+   
+    <table bgcolor="#999999" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody>
+            <tr>
+                <td align="right" height="40">
+                    @if (Model.canCrate)
+                    {
+                        @*<button type="button" class="button success "
+                                    onclick="pageForm.create('@Url.Action("Create")')">
+                                <img src="~/Content/img/ICON/icon_social.png" width="18">&nbsp;เพิ่มข้อมูล
+                            </button>*@
+                    }
+                    <button class="button warning" name="Submit" type="button"
+                            onclick="openDocPrint('@Session["aspUrl"].ToString()/bs_setmain_99_sendclient_flag.asp?page=@Request.Url.ToString()')">
+                        <img src="~/Content/img/ICON/icon_masterdata.gif" width="18">&nbsp;นำข้อมูลออกไปสาขา
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td valign="center" height="30" bgcolor="#363167">
+                    <font color="#ffffff"> &nbsp;&nbsp;</font>
+                    @{
+                        var menuName = EnumHelper<SetMsDataType>.GetDisplayValue(Model.menuType);
+                    }
+                    <font color="#FFFFFF"><b>@Model.menuHeadType&nbsp;&gt;&nbsp;@Html.DisplayFor(e => menuName)</b></font>
+                </td>
+            </tr>
+            @if (Model.canSearch)
+            {
+                <tr height="50" bgcolor="#eeeeee">
+                    <td align="center">
+                        ค้นหา&nbsp;:&nbsp;
+                        <input type="text" name="sSearch" size="40" value="" maxlength="60" placeholder="ชื่อรูปแบบการรูดบัตร">&nbsp;
+                        <input class="button info" type="submit" name="search" value="ค้นหา">&nbsp;
+                        <input class="button" type="button" name="search" value="เคลียร์" onclick="location.href='bs_setmain_46.asp';">
+                    </td>
+                </tr>
+            }
+            <tr bgcolor="#363167">
+                <td align="center">
+                    <div align="center"><font size="3" color="red"><b></b></font></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    if (Model.canPagelist)
+    {
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped table-bordered nowrap" align="center" height="9">
+            <thead>
+                <tr>
+                    @*<th>@Html.LabelFor(m => m.pro_name)</th>
+                        <th class="text-center"><label>ของรางวัล</label></th>
+                        <th>@Html.LabelFor(m => m.pro_start_date)</th>
+                        <th>@Html.LabelFor(m => m.pro_end_date)</th>
+                        <th>@Html.LabelFor(m => m.Status)</th>
+                        <th class="text-center">สินค้าร่วมรายการ</th>
+                        <th class="text-center"><label>คำสั่ง</label></th>
+                        <th class="text-center"><label>ยกเลิก</label></th>*@
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    }
+}
+
+<form name="IrredeemableForm" id="IrredeemableForm">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(Model => Model.Id)
+    @Html.HiddenFor(Model => Model.menuHeadType)
+    @Html.HiddenFor(Model => Model.menuType)
+    <div class="card">
+        <div class="card-body">
+            วิธีการแลกคะแนนสะสม Blue Card
+            <div class="row">
+                <div class="col-md-6 rows" align="center">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="radio radio-success">
+                                        @Html.RadioButtonFor(m => m.BlueCardRedeemSetting.blueCard_exchange_rateby, true, new { id = "blueCard_exchange_ratebyBlue" })
+                                        @Html.Label("blueCard_exchange_ratebyBlue", "กำหนดอัตราแลกโดย BlueCard", new { style = "display: inline;" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="radio radio-success">
+                                        @Html.RadioButtonFor(m => m.BlueCardRedeemSetting.blueCard_exchange_rateby, false, new { id = "blueCard_exchange_ratebyFit" })
+                                        @Html.Label("blueCard_exchange_ratebyFit", "กำหนดอัตราแลกโดย FitAuto", new { style = "display: inline;" })
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 rows" align="center">
+                    <table class="rolebluecard" style="display: none;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="radio radio-success">
+                                        <span class="aspNetDisabled">
+                                        </span>
+                                    </div>
+                                    <span>กำหนดอัตราการแลกคะแนนต่อแต้ม</span>&nbsp;
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m.BlueCardRedeemSetting.blueCard_Ratio_Point, "{0:0.0}", new
+                                    { @min = "0", @class = "form-control onKeysPrice", autocomplete = "off", style = "font-size: 14px;" })
+                                </td>
+                                @*<td>
+                                        <div class="radio radio-success">
+                                            <span class="aspNetDisabled">
+                                            </span>
+                                        </div>
+                                        <span>จำนวนคะแนนสะสม</span>&nbsp;
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.blueCard_RewardPoint, "", new { type = "number", min = "1", @class = "form-control keyInteger", autocomplete = "off" })
+                                        @Html.ValidationMessageFor(model => model.blueCard_RewardPoint, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td> &nbsp;</td>
+                                    <td>
+                                        เป็นจำนวนเงิน
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.blueCard_Money, "", new { type = "number", min = "1", @class = "form-control keyInteger", autocomplete = "off" })
+                                        @Html.ValidationMessageFor(model => model.blueCard_Money, "", new { @class = "text-danger" })
+                                    </td>*@
+                            </tr>
+                            <tr>
+                                <td>
+                                    จำนวนคะแนนสะสมขั่นต่ำในการแลก
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(model => model.BlueCardRedeemSetting.blueCard_MinimumRewardPoint, "", new
+                                    {
+                                        type = "number",
+                                        min = "1",
+                                        @class = "form-control keyInteger",
+                                        autocomplete = "off",
+                                        style = "font-size: 14px;"
+                                    })
+                                    @Html.ValidationMessageFor(model => model.BlueCardRedeemSetting.blueCard_MinimumRewardPoint, "", new { @class = "text-danger" })
+                                </td>
+                                <td> &nbsp;</td>
+                                <td>
+                                    คะแนน
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="card-footer text-center">
+    <button type="button" id="btnIrredeem" class="btn success">บันทึก</button>
+    @*<input class="button success" type="submit" name="Submit4" value="บันทึก">*@
+</div>
+
+
+

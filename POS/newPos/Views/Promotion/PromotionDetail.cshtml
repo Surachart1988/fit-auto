@@ -1,0 +1,380 @@
+﻿@model CentralService.Models.ExtraPromotionModel
+@{
+    ViewBag.Title = "กำหนดข้อมูลโปรโมชั่น";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section css{
+    @Styles.Render("~/Content/datatables-style")
+    @Styles.Render("~/Content/promotion/PromotionDetail")
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 title-head">
+                <h1>
+                    <img src="@Url.Content("~/Content/img/ICON/icon_customer.png")" alt="">กำหนดข้อมูลโปรโมชั่น
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">&nbsp;</div>
+            <div class="col-md-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @{
+                            var title = "";
+                            if (Model.Mode == "v")
+                            {
+                                @Html.Raw("ข้อมูลโปรโมชั่น&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;&nbsp;&nbsp;<span id='lbl_pro_name'>" + Model.pro_name + "</span>")
+                            }
+                            else
+                            {
+                                @Html.Raw("เพิ่มข้อมูลโปรโมชั่น")
+                            }
+                        }
+                    </div>
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myForm", name = "myForm" }))
+                    {
+                        <div id="Step1" class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6 rows">
+                                    <div class="input-group input-daterange">
+                                        <span class="input-group-addon edit-text">
+                                            ชื่อแคมเปญ
+                                            <span class="validate-text">*</span>
+                                        </span>
+                                        @Html.DropDownListFor(model => model.campaign_id, new SelectList(Model.CampaignList, "campaign_id", "campaign_name")
+                                            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" } : (object)new { @class = "form-control", autocomplete = "off" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 rows">
+                                    <div class="input-group input-daterange">
+                                        <span class="input-group-addon edit-text">
+                                            ชื่อโปรโมชั่น
+                                            <span class="validate-text">*</span>
+                                        </span>
+                                        @Html.TextBoxFor(model => model.pro_name, ""
+                                            , Model.Mode == "v" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled" } : (object)new { @class = "form-control", autocomplete = "off" })
+                                        @Html.ValidationMessageFor(model => model.pro_name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 rows">
+                                    <div class="input-daterange input-group">
+                                        <span class="input-group-addon edit-text">
+                                            เริ่มวันที่
+                                            <span class="validate-text">*</span>
+                                        </span>
+                                        @Html.TextBoxFor(model => model.pro_start_date
+                                            , Model.Mode == "v" ? (object)new { @class = "form-control datepicker", autocomplete = "off", @disabled = "disabled" }
+                                                : (object)new { @class = "form-control datepicker", autocomplete = "off", placeholder = "วันที่เริ่มต้น" })
+                                        @Html.ValidationMessageFor(model => model.pro_start_date)
+                                    </div>
+                                </div>
+                                <div class="col-md-6 rows">
+                                    <div class="input-daterange input-group">
+                                        <span class="input-group-addon edit-text">
+                                            ถึงวันที่
+                                            <span class="validate-text">*</span>
+                                        </span>
+                                        @Html.TextBoxFor(model => model.pro_end_date
+                                            , Model.Mode == "v" ? (object)new { @class = "form-control datepicker", autocomplete = "off", @disabled = "disabled" }
+                                                : (object)new { @class = "form-control datepicker", autocomplete = "off", placeholder = "วันที่สิ้นสุด" })
+                                        @Html.ValidationMessageFor(model => model.pro_end_date)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 rows">
+                                    <div class="input-group input-daterange">
+                                        <span class="input-group-addon edit-text">เริ่มเวลา</span>
+                                        @Html.TextBoxFor(model => model.pro_start_time
+                                            , Model.Mode == "v" ? (object)new { @class = "form-control time", autocomplete = "off", @disabled = "disabled" }
+                                                : (object)new { @class = "form-control time", autocomplete = "off", placeholder = "เวลาเริ่มต้น" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6 rows">
+                                    <div class="input-group input-daterange">
+                                        <span class="input-group-addon edit-text">ถึงเวลา</span>
+                                        @Html.TextBoxFor(model => model.pro_end_time
+                                            , Model.Mode == "v" ? (object)new { @class = "form-control time", autocomplete = "off", @disabled = "disabled" }
+                                                : (object)new { @class = "form-control time", autocomplete = "off", placeholder = "เวลาสิ้นสุด" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div>&nbsp;</div>
+                            <p style="font-weight: bold; color: #555;">เงื่อนไขรอบเวลา</p>
+                            <div class="radio radio-success">
+                                @Html.RadioButtonFor(m => m.pro_condition_time_id, 3
+                                    , Model.Mode == "v" ? (object)new { id = "ProConditionTime3", @disabled = "disabled" }
+                                        : (object)new { id = "ProConditionTime3" })
+                                @Html.Label("ProConditionTime3", "ไม่กำหนดรอบเวลา"
+                                    , Model.Mode == "v" ? (object)new { @disabled = "disabled" }
+                                        : "")
+                                <br>
+                                @Html.RadioButtonFor(m => m.pro_condition_time_id, 0
+                                    , Model.Mode == "v" ? (object)new { id = "ProConditionTime0", @disabled = "disabled" }
+                                        : (object)new { id = "ProConditionTime0" })
+                                @Html.Label("ProConditionTime0", "กำหนดรอบเวลา"
+                                    , Model.Mode == "v" ? (object)new { @disabled = "disabled" }
+                                        : "")
+                            </div>
+                            <div class="panel form_det" style="display: none;">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12 rows">
+                                            <div class="radio radio-success">
+                                                @Html.RadioButtonFor(m => m.pro_condition_time_id, 1
+                                                    , Model.Mode == "v" ? (object)new { id = "ProConditionTime1", @disabled = "disabled" }
+                                                        : (object)new { id = "ProConditionTime1" })
+                                                @Html.Label("ProConditionTime1", "รอบสัปดาห์"
+                                                    , Model.Mode == "v" ? (object)new { @disabled = "disabled" }
+                                                        : "")
+                                            </div>
+                                            <div class="checkbox checkbox-success">
+                                                <table>
+                                                    <tr>
+                                                        @{
+                                                            for (int i = 0; i < Model.ConditionWeek.Count; i++)
+                                                            {
+                                                                @:<td style="width: 80px;">
+                                                                    @Html.CheckBoxFor(x => Model.ConditionWeek[i].IsSelected
+                                                                        , Model.Mode == "v" ? (object)new { style = "opacity: 1;", @disabled = "disabled" }
+                                                                            : (object)new { style = "opacity: 1;" })
+                                                                    @Html.HiddenFor(m => Model.ConditionWeek[i].Id)
+                                                                    @Html.HiddenFor(m => Model.ConditionWeek[i].Name)
+                                                                    @Html.DisplayFor(x => Model.ConditionWeek[i].Name)
+                                                                @:</td>
+                                                            }
+
+                                                        @:</tr>
+                                                        }
+                                                    </table>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 rows">
+                                                        <div class="input-group input-daterange">
+                                                            <span class="input-group-addon edit-text">เริ่มเวลา</span>
+                                                            @Html.TextBoxFor(model => model.ProConditionWeekStart
+                                                                , Model.Mode == "v" ? (object)new { @class = "form-control time", autocomplete = "off", @disabled = "disabled" }
+                                                                    : (object)new { @class = "form-control time", autocomplete = "off", placeholder = "เวลาเริ่มต้น" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 rows">
+                                                        <div class="input-group input-daterange">
+                                                            <span class="input-group-addon edit-text">ถึงเวลา</span>
+                                                            @Html.TextBoxFor(model => model.ProConditionWeekTimeEnd
+                                                                , Model.Mode == "v" ? (object)new { @class = "form-control time", autocomplete = "off", @disabled = "disabled" }
+                                                                    : (object)new { @class = "form-control time", autocomplete = "off", placeholder = "เวลาสิ้นสุด" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>&nbsp;</div>
+                                                <div class="radio radio-success">
+                                                    @Html.RadioButtonFor(m => m.pro_condition_time_id, 2
+                                                        , Model.Mode == "v" ? (object)new { id = "ProConditionTime2", @disabled = "disabled" }
+                                                            : (object)new { id = "ProConditionTime2" })
+                                                    @Html.Label("ProConditionTime2", "รอบเดือน")
+                                                </div>
+                                                <div class="checkbox checkbox-success">
+                                                    <table>
+                                                        <tr>
+                                                            @{
+                                                                for (int i = 0; i < Model.ConditionMonth.Count; i++)
+                                                                {
+                                                                    if (i % 10 == 0)
+                                                                    {
+                                                                    @:</tr><tr>
+                                                                    }
+                                                                    @:<td style="width: 80px;">
+                                                                        @Html.CheckBoxFor(x => Model.ConditionMonth[i].IsSelected
+                                                                            , Model.Mode == "v" ? (object)new { style = "opacity: 1;", @disabled = "disabled" }
+                                                                                : (object)new { style = "opacity: 1;" })
+                                                                        @Html.HiddenFor(m => Model.ConditionMonth[i].Id)
+                                                                        @Html.HiddenFor(m => Model.ConditionMonth[i].Name)
+                                                                        @Html.DisplayFor(x => Model.ConditionMonth[i].Name)
+                                                                    @:</td>
+                                                                }
+
+                                                            @:</tr>
+                                                            }
+                                                        </table>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6 rows">
+                                                            <div class="input-group input-daterange">
+                                                                <span class="input-group-addon edit-text">เริ่มเวลา</span>
+                                                                @Html.TextBoxFor(model => model.ProConditionMonthStart
+                                                                    , Model.Mode == "v" ? (object)new { @class = "form-control time", autocomplete = "off", @disabled = "disabled" }
+                                                                        : (object)new { @class = "form-control time", autocomplete = "off", placeholder = "เวลาเริ่มต้น" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 rows">
+                                                            <div class="input-group input-daterange">
+                                                                <span class="input-group-addon edit-text">ถึงเวลา</span>
+                                                                @Html.TextBoxFor(model => model.ProConditionMonthEnd
+                                                                    , Model.Mode == "v" ? (object)new { @class = "form-control time", autocomplete = "off", @disabled = "disabled" }
+                                                                        : (object)new { @class = "form-control time", autocomplete = "off", placeholder = "เวลาสิ้นสุด" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div>&nbsp;</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    @if (Model.Mode == "v")
+                                    {
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <p style="font-weight: bold; color: #555;">สาขาที่ร่วมรายการ <span style="color: red">*</span></p>
+                                            </div>
+                                            <div class="col-md-10">
+                                                @if (Model.Dealers.Any(w => w.IsCheck))
+                                                {
+                                                    @Html.TextArea("txtBranch", string.Join(", ", Model.Dealers.Where(w => w.IsCheck).Select(s => s.plant_no + " " + s.DealerName))
+                                                        , new { @class = "form-control", rows = 3, cols = 20, @disabled = "disabled" })
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="row mt-15">
+                                        <div class="col-md-6 rows">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 240px;">
+                                                            <p style="font-weight: bold; color: #555;">อนุญาตใช้ร่วมกับโปรโมชั่นอื่น</p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="radio radio-success">
+                                                                @Html.RadioButtonFor(m => m.allow_muti_promotion, true
+                                                                    , Model.Mode == "v" ? (object)new { id = "allowmuti_yes", @disabled = "disabled" }
+                                                                        : (object)new { id = "allowmuti_yes" })
+                                                                @Html.Label("allowmuti_yes", "ใช่"
+                                                                    , Model.Mode == "v" ? (object)new { @disabled = "disabled" }
+                                                                        : "")
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                @Html.RadioButtonFor(m => m.allow_muti_promotion, false
+                                                                    , Model.Mode == "v" ? (object)new { id = "allowmuti_no", @disabled = "disabled" }
+                                                                        : (object)new { id = "allowmuti_no" })
+                                                                @Html.Label("allowmuti_no", "ไม่ใช่"
+                                                                    , Model.Mode == "v" ? (object)new { @disabled = "disabled" }
+                                                                                            : "")
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="panel form_allmutipro" style="display: none;">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-12 rows">
+                                                    @if (Model.Mode != "v")
+                                                    {
+                                                        <div class="col-md-12">
+                                                            <input id="chkPromotionAll" type="checkbox" name="chkPromotionAll"><label for="chkPromotionAll">เลือกทั้งหมด</label>
+                                                        </div>
+                                                    }
+                                                    <div class="col-md-12">
+                                                        <div class="checkbox checkbox-success">
+                                                            <table>
+                                                                <tr>
+                                                                    @{
+                                                                        if (Model.PromotionList != null)
+                                                                        {
+                                                                            for (int i = 0; i < Model.PromotionList.Count; i++)
+                                                                            {
+                                                                                if (i % 8 == 0)
+                                                                                {
+                                                                                @:</tr><tr>
+                                                                                }
+                                                                                @:<td class="text-overflow-detail" title="@Html.DisplayFor(x => Model.PromotionList[i].pro_name)">
+                                                                                    @Html.CheckBoxFor(x => Model.PromotionList[i].IsCheck
+                                                                                        , Model.Mode == "v" ? (object)new { style = "opacity: 1;", @disabled = "disabled" }
+                                                                                            : (object)new { style = "opacity: 1;" })
+                                                                                    @Html.HiddenFor(m => Model.PromotionList[i].pro_id)
+                                                                                    @Html.HiddenFor(m => Model.PromotionList[i].pro_name)
+                                                                                    @Html.DisplayFor(x => Model.PromotionList[i].pro_name)
+                                                                                @:</td>
+                                                                            }
+                                                                        }
+                                                                    @:</tr>
+                                                                    }
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 rows">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="width: 240px;">
+                                                                <p style="font-weight: bold; color: #555;">สถานะการใช้โปรโมชั่น</p>
+                                                            </td>
+                                                            <td>
+                                                                <div class="radio radio-success">
+                                                                    @Html.RadioButtonFor(m => m.allow_promotion, true
+                                                                        , Model.Mode == "v" ? (object)new { id = "allow_yes", @disabled = "disabled" }
+                                                                            : (object)new { id = "allow_yes" })
+                                                                    @Html.Label("allow_yes", "Active"
+                                                                    , Model.Mode == "v" ? (object)new { @disabled = "disabled" }
+                                                                    : "")
+                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    @Html.RadioButtonFor(m => m.allow_promotion, false
+                                                                        , Model.Mode == "v" ? (object)new { id = "allow_no", @disabled = "disabled" }
+                                                                            : (object)new { id = "allow_no" })
+                                                                    @Html.Label("allow_no", "Inactive"
+                                                                        , Model.Mode == "v" ? (object)new { @disabled = "disabled" }
+                                                                            : "")
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div>&nbsp;</div>
+                                        @if (Model.Mode != "v")
+                                        {
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <input type="submit" name="btnNextStep2" value="ถัดไป" id="btnNextStep2" class="btn btn-primary">
+                                                    &nbsp;
+                                                    <input name="Button3" type="button" id="Button3" class="btn btn-default" onclick="Cancel('@Url.Action("Index")');" value="ยกเลิก">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">&nbsp;</div>
+                                        }
+                                        <div>&nbsp;</div>
+                                    </div>
+                                }
+                </div>
+                @if (Model.Mode == "v")
+                {
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <a id="Button1" class="btn btn-default" href="@Url.Action("Index")">กลับ</a>&nbsp;
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/datatables-script")
+    @Scripts.Render("~/bundles/promotion/create")
+}

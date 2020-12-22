@@ -1,0 +1,281 @@
+﻿@model CentralService.Models.ExtraPromotionModel
+
+<style>
+    body {
+        font-size: 14px;
+    }
+
+    input, select {
+        font-size: 14px;
+        line-height: 16px;
+        font-family: Tahoma, 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+    }
+
+    .table tr td {
+        border-bottom: 1px solid #eeeeee;
+        padding: 4px;
+        font-size: 14px;
+    }
+
+    .button {
+        padding: 2px 8px;
+        text-align: center;
+        /*vertical-align: middle !important;*/
+        border: 1px transparent solid;
+        color: #ffffff;
+        border-radius: 0;
+        cursor: pointer;
+        display: inline-block;
+        outline: none;
+        font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        /*line-height: 16px;*/
+        margin: auto;
+    }
+
+    .sucsess {
+        background-color: #60a917;
+        border: 1px solid #ffffff;
+    }
+
+    .default {
+        background-color: #f44336;
+    }
+
+    .warning {
+        background-color: #ff6a00;
+    }
+
+    .info {
+        background-color: #0094ff;
+    }
+
+    .green {
+        background-color: #4CAF50;
+    }
+
+    .danger {
+        background-color: #f55555;
+    }
+
+    .primary1 {
+        background-color: #3F51B5;
+    }
+
+    .cyan {
+        background-color: #00BCD4;
+    }
+
+    .dealer_label label {
+        display: inline-block;
+        font-weight: 100;
+    }
+
+    .btn_mini {
+        padding: 2px;
+        text-align: center;
+        vertical-align: top !important;
+        color: #ffffff;
+        cursor: pointer;
+        font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        /*line-height: 16px;*/
+        border: 1px solid #ffffff;
+    }
+</style>
+
+<div class="modal fade" id="modal-select-branch" tabindex="-1" role="dialog" aria-labelledby="selectBranchModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span id="lblheader">เลือกสาขาที่เข้าร่วมโปรโมชั่น</span>
+                    </div>
+                    <div class="panel-body">
+                        <div id="panel4" class="row">
+                            <div class="col-md-12 rows">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <div class="row" style="padding-left: 0px; padding-right: 0px;">
+                                            <div class="col-md-12 rows">
+                                                <div class="col-md-12">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="normal2-black" colspan="6" bgcolor="#eeeeee">
+                                                                    <div align="center"><font color="#000000"><b style="font-weight: bold;">กรุณาเลือกข้อมูลสาขา</b></font></div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="normal2-black"></td>
+                                                                <td class="normal2-black"></td>
+                                                                <td class="normal2-black"></td>
+                                                                <td class="normal2-black"></td>
+                                                                <td class="normal2-black"></td>
+                                                                <td class="normal2-black"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="normal2-black" style="text-align: left" colspan="6">
+                                                                    &nbsp;ค้นหา :&nbsp;
+                                                                    <input placeholder="ชื่อสาขา" type="text" name="keyword" size="50" maxlength="60" value="">&nbsp;&nbsp;
+                                                                    <input class="button sucsess" type="button" name="search" value="ค้นหา" onclick="reload()">&nbsp;
+                                                                    <input class="button" type="button" name="search" style="background-color: #D9D9D9; color: black;" value="เคลียร์">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="3" class="normal2-black check">
+                                                                    <input name="CheckAll" type="checkbox" id="chkall">
+                                                                    <label for="chkall"> เลือกทั้งสาขาหมด</label>
+                                                                </td>
+                                                                @*<th colspan="3" class="check">
+                <input type="checkbox" id="chkall" value="" />
+                <label for="chkall"> เลือกทั้งสาขาหมด</label>
+            </th>*@
+                                                                <td class="normal2-black"></td>
+                                                                <td class="normal2-black"></td>
+                                                                <td class="normal2-black"></td>
+                                                            </tr>
+                                                            <tr>
+
+                                                                @{
+                                                                    var j = 1;
+                                                                    for (int i = 0; i < Model.Dealers.Count; i++)
+                                                                    {
+
+                                                                        if (i % 3 == 0 && i != 0  )
+                                                                        {
+
+                                                                        <tr></tr>
+                                                                    }
+
+                                                                        <td class="normal2-black" style="text-align: right; width: 1%">
+
+                                                                            @Html.CheckBoxFor(x => Model.Dealers[i].IsCheck, new { style = "opacity: 1;" })
+                                                                        </td>
+
+                                                                        <td class="normal2-black dealer_label" style="text-align: left; width: 32%">
+                                                                            @Html.HiddenFor(m => Model.Dealers[i].plant_no)
+                                                                            @Html.HiddenFor(m => Model.Dealers[i].dealercode)
+                                                                            @Html.HiddenFor(m => Model.Dealers[i].DealerName)
+
+                                                                            @Html.Label("Dealers[" + i + "].IsCheck", Model.Dealers[i].plant_no + " - " + Model.Dealers[i].DealerName)
+                                                                        </td>
+
+                                                                        
+                                                                    
+
+
+                                                                    j++;
+
+
+
+                                                                }@*End For*@
+
+                                                                @*@Html.DisplayFor(x => Model.Dealers[i].plant_no) @Html.Raw(" - ") @Html.DisplayFor(x => Model.Dealers[i].DealerName)*@
+                                                                }<!-- End @**@ -->
+                                                                </tr>
+
+                                                                <tr height="30">
+                                                                    <td align="center" colspan="6"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="center" colspan="6">
+                                                                        <input type="hidden" name="loop_num" value="3">
+                                                                        <input type="hidden" name="act" value="add">
+                                                                        <input type="hidden" name="pro_id" value="">
+
+                                                                        <input class="button sucsess" type="button" name="btnSaveBranch" id="btnSaveBranch" value="บันทึก">
+                                                                        &nbsp;<input class="button danger" type="button" name="btnClose" style="width:53.75px" data-dismiss="modal" value="ยกเลิก">
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="modal fade" id="modal-select-branch" tabindex="-1" role="dialog" aria-labelledby="selectBranchModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span id="lblheader">กรุณาเลือก</span>
+                        </div>
+                        <div class="panel-body">
+                            <div id="panel4" class="row">
+                                <div class="col-md-12 rows">
+                                    <div class="panel">
+                                        <div class="panel-body">
+                                            <div class="row" style="padding-left: 0px; padding-right: 0px;">
+                                                <div class="col-md-12 rows">
+                                                    <div class="col-md-12">
+                                                        <table id="gv_proBranch" class="table table-hover table-striped dataTable no-footer" cellspacing="0" style="border-collapse: collapse; width: 100%;" role="grid" aria-describedby="gv_progroup_info">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="check">
+                                                                        <input type="checkbox" id="chkall" value="" />
+                                                                        <label for="chkall"> เลือกทั้งหมด</label>
+                                                                    </th>
+                                                                    <th class="text-center">รหัสสาขา</th>
+                                                                    <th class="text-center">ชื่อสาขา</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @{
+                                                                    for (int i = 0; i < Model.Dealers.Count; i++)
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.CheckBoxFor(x => Model.Dealers[i].IsCheck, new { style = "opacity: 1;" })
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.HiddenFor(m => Model.Dealers[i].plant_no)
+                                                                                @Html.HiddenFor(m => Model.Dealers[i].DealerName)
+                                                                                @Html.DisplayFor(x => Model.Dealers[i].plant_no)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.HiddenFor(m => Model.Dealers[i].dealercode)
+                                                                                @Html.HiddenFor(m => Model.Dealers[i].DealerName)
+                                                                                @Html.DisplayFor(x => Model.Dealers[i].DealerName)
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                    @:
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+
+                                    <input type="button" name="btnSaveBranch" value="บันทึก" id="btnSaveBranch" class="btn btn-primary">
+                                    <input type="button" name="btnClose" value="ยกเลิก" id="btnClose" data-dismiss="modal" class="btn btn-danger">
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@

@@ -1,0 +1,800 @@
+﻿@model CentralService.Models.ExtraPromotionModel
+@{
+    ViewBag.Title = "กำหนดข้อมูลโปรโมชั่น";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section css{
+    @Styles.Render("~/Content/datatables-style")
+    @Styles.Render("~/Content/promotion/ProCondition")
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 title-head">
+                <h1>
+
+                    @{
+                        var title = "";
+                        if (Model.Mode == "c")
+                        {
+                            title = "เงื่อนไขโปรโมชั่น " + Model.pro_id + " : " + Model.pro_name;
+                        }
+                        else
+                        {
+                            title = "กำหนดข้อมูลโปรโมชั่น";
+                        }
+                    }
+                    <img src="@Url.Content("~/Content/img/ICON/icon_customer.png")" alt="" />@title
+                </h1>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-1">&nbsp;</div>
+            <div class="col-md-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">เพิ่มข้อมูลโปรโมชั่น</div>
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myForm", name = "myForm", style = "background-color: #EEEEEE;" }))
+                    {
+                        @Html.HiddenFor(Model => Model.Mode)
+                        <div id="Step5" class="panel-body">
+                            <div id="Step5_Give" class="row">
+                                @if (Model.pro_group_used_id != 6)
+                                {
+                                    <div class="col-md-12 rows">
+                                        <p style="font-weight: bold; color: #555;">เงื่อนไขโปรโมชั่น</p>
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 rows">
+                                                        @if (Model.pro_group_used_id != 3 && Model.pro_group_used_id != 6)
+                                                        {
+                                                            <div id="Step3_Customer" class="col-md-12 rows">
+                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-2" align="right">เลือกประเภทลูกค้า :</div>
+                                                                <div class="col-md-4">
+                                                                    <div class="checkbox checkbox-success">
+                                                                        <table id="cbl_customer">
+                                                                            @{
+                                                                                for (int i = 0; i < Model.ProGrpUsedDetailsList.Count; i++)
+                                                                                {
+                                                                                    var style = "opacity: 1;margin: 0;display: inline-block;position: absolute;width: 19px;height: 19px;/* left: 0; */margin-left: -20px;border: 1px solid #cccccc;border-radius: 3px;background-color: #fff;-webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;-o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;transition: border 0.15s ease-in-out, color 0.15s ease-in-out;";
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            @Html.CheckBoxFor(x => Model.ProGrpUsedDetailsList[i].IsCheck
+                                                                                                , Model.Mode == "c" ? (object)new { style = style, @disabled = "disabled" }
+                                                                                                    : (object)new { style = style })
+                                                                                            @Html.HiddenFor(m => Model.ProGrpUsedDetailsList[i].custype_code)
+                                                                                            @Html.HiddenFor(m => Model.ProGrpUsedDetailsList[i].custype_name)
+                                                                                            @Html.Label("ProGrpUsedDetailsList[" + i + "].IsCheck", Model.ProGrpUsedDetailsList[i].custype_name
+                                                                                                , Model.Mode == "c" ? (object)new { @disabled = "disabled" }
+                                                                                                    : "")
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                }
+                                                                                @:
+                                                                            }
+                                                                        </table>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        @{
+                                                            //var _prodgroup = Model.prodfirstgroupList.Where(w => w.IsCheck).Select(s => s.product_group_name).Any() ? Model.prodfirstgroupList.Where(w => w.IsCheck).Select(s => s.product_group_name) : Model.prodfirstgroupList.Select(s => s.product_group_name);
+                                                            var _prodgroup = Model.prodfirstgroupList.Where(w => w.IsCheck).Select(s => s.product_group_name).Any() ? Model.prodfirstgroupList.Where(w => w.IsCheck).Select(s => s.product_group_name) : Model.temp_prodgroupList.Select(s => s.product_group_name);
+                                                            var _codeprodgroup = Model.prodfirstgroupList.Where(w => w.IsCheck).Select(s => s.product_group_name).Any() ? Model.prodfirstgroupList.Where(w => w.IsCheck).Select(s => s.product_group_name) : Model.temp_prodgroupList.Select(s => s.product_group_code);
+
+
+                                                            var _progroup = Model.progroupList.Where(w => w.IsCheck).Select(s => s.progroup_name).Any() ? Model.progroupList.Where(w => w.IsCheck).Select(s => s.progroup_name) : Model.temp_progroupList.Select(s => s.progroup_name);
+                                                            var _codeprogroup = Model.progroupList.Where(w => w.IsCheck).Select(s => s.progroup_code).Any() ? Model.progroupList.Where(w => w.IsCheck).Select(s => s.progroup_code) : Model.temp_progroupList.Select(s => s.progroup_code);
+
+                                                            var _probrand = Model.probrandList.Where(w => w.IsCheck).Select(s => s.pro_brand).Any() ? Model.probrandList.Where(w => w.IsCheck).Select(s => s.pro_brand) : Model.temp_probrandList.Select(s => s.pro_brand);
+                                                            var _codeprobrand = Model.probrandList.Where(w => w.IsCheck).Select(s => s.pro_brand_code).Any() ? Model.probrandList.Where(w => w.IsCheck).Select(s => s.pro_brand_code) : Model.temp_probrandList.Select(s => s.pro_brand_code);
+
+                                                            var _promodel = Model.PromodelList.Where(w => w.IsCheck).Select(s => s.pro_model).Any() ? Model.PromodelList.Where(w => w.IsCheck).Select(s => s.pro_model) : Model.temp_PromodelList.Select(s => s.pro_model);
+                                                            var _codepromodel = Model.PromodelList.Where(w => w.IsCheck).Select(s => s.pro_model_code).Any() ? Model.PromodelList.Where(w => w.IsCheck).Select(s => s.pro_model_code) : Model.temp_PromodelList.Select(s => s.pro_model_code);
+
+
+                                                            var _prosize = Model.ProSizeList.Where(w => w.IsCheck).Select(s => s.size_name).Any() ? Model.ProSizeList.Where(w => w.IsCheck).Select(s => s.size_name) : Model.temp_ProSizeList.Select(s => s.size_name);
+                                                            var _codeprosize = Model.ProSizeList.Where(w => w.IsCheck).Select(s => s.pro_size_code).Any() ? Model.ProSizeList.Where(w => w.IsCheck).Select(s => s.pro_size_code) : Model.temp_ProSizeList.Select(s => s.pro_size_code);
+
+
+                                                            var _product = Model.ProductsList.Where(w => w.IsCheck).Select(s => s.pro_tname).Any() ? Model.ProductsList.Where(w => w.IsCheck).Select(s => s.pro_tname) : Model.temp_ProductsList.Select(s => s.pro_tname);
+                                                            var _codeproduct = Model.ProductsList.Where(w => w.IsCheck).Select(s => s.pro_code).Any() ? Model.ProductsList.Where(w => w.IsCheck).Select(s => s.pro_code) : Model.temp_ProductsList.Select(s => s.pro_code);
+
+                                                        }
+                                                        @if (Model.pro_group_used_id != 5 && Model.pro_group_used_id != 6)
+                                                        {
+                                                            <div class="col-md-12 rows">
+                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-2" align="right">กลุ่มสินค้า :</div>
+                                                                <div class="col-md-4">
+                                                                    @Html.TextArea("txt_prodgroup", string.Join(Environment.NewLine, _prodgroup)
+                                                                        , new { @class = "form-control", rows = 5, @disabled = "disabled", placeholder = "กลุ่มสินค้า" })
+                                                                    @Html.Hidden("hidden_prodgroup", string.Join(",", _codeprodgroup))
+                                                                </div>
+                                                                <div class="col-md-4" style="margin-left: 0; margin-top: 10px">
+                                                                    @if (Model.Mode != "c")
+                                                                    {
+                                                                        <input type="button" name="btn_prodgroup_popup" value="เลือกกลุ่มสินค้า" id="btn_prodgroup_popup" class="btn btn-info" data-toggle="modal" data-target="#modal-select-prodgroup" data-backdrop="static" data-keyboard="false" style="width: 130px;">
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 rows">
+                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-2" align="right">ประเภทสินค้า :</div>
+                                                                <div class="col-md-4">
+                                                                    @Html.TextArea("txt_progroup", string.Join(Environment.NewLine, _progroup)
+                                                                        , new { @class = "form-control", rows = 5, @disabled = "disabled", placeholder = "ประเภทสินค้า" })
+                                                                    @Html.Hidden("hiddenprogroup", string.Join(",", _codeprogroup))
+                                                                </div>
+                                                                <div class="col-md-4" style="margin-left: 0; margin-top: 10px">
+                                                                    @if (Model.Mode != "c")
+                                                                    {
+                                                                        <input type="button" name="btn_progroup_popup" value="เลือกประเภทสินค้า" id="btn_progroup_popup" class="btn btn-info" data-target="#modal-select-progroup" style="width: 130px;">
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 rows">
+                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-2" align="right">ยี่ห้อสินค้า :</div>
+                                                                <div class="col-md-4">
+                                                                    @Html.TextArea("txt_pro_brand", string.Join(Environment.NewLine, _probrand)
+                                                                        , new { @class = "form-control", rows = 5, @disabled = "disabled", placeholder = "ยี่ห้อสินค้า" })
+                                                                    @Html.Hidden("hiddenpro_brand", string.Join(",", _codeprobrand))
+                                                                </div>
+                                                                <div class="col-md-4" style="margin-left: 0; margin-top: 10px">
+                                                                    @if (Model.Mode != "c")
+                                                                    {
+                                                                        <input type="button" name="btn_brand_popup" value="เลือกยี่ห้อสินค้า" id="btn_brand_popup" class="btn btn-info" data-target="#modal-select-probrand" style="width: 130px;">
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 rows">
+                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-2" align="right">รุ่นสินค้า :</div>
+                                                                <div class="col-md-4">
+                                                                    @Html.TextArea("txt_pro_model", string.Join(Environment.NewLine, _promodel)
+                                                                        , new { @class = "form-control", rows = 5, @disabled = "disabled", placeholder = "รุ่นสินค้า" })
+                                                                    @Html.Hidden("hiddenpro_model", string.Join(",", _codepromodel))
+                                                                </div>
+                                                                <div class="col-md-4" style="margin-left: 0; margin-top: 10px">
+                                                                    @if (Model.Mode != "c")
+                                                                    {
+                                                                        <input type="button" name="btn_model_popup" value="เลือกรุ่นสินค้า" id="btn_model_popup" class="btn btn-info" data-target="#modal-select-promodel" style="width: 130px;">
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 rows">
+                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-2" align="right">ขนาดสินค้า :</div>
+                                                                <div class="col-md-4">
+                                                                    @Html.TextArea("txt_pro_size", string.Join(Environment.NewLine, _prosize)
+                                                                        , new { @class = "form-control", rows = 5, @disabled = "disabled", placeholder = "ขนาดสินค้า" })
+                                                                    @Html.Hidden("hiddenpro_size", string.Join(",", _codeprosize))
+                                                                </div>
+                                                                <div class="col-md-4" style="margin-left: 0; margin-top: 10px">
+                                                                    @if (Model.Mode != "c")
+                                                                    {
+                                                                        <input type="button" name="btn_size_popup" value="เลือกขนาดสินค้า" id="btn_size_popup" class="btn btn-info" data-target="#modal-select-prosize" style="width: 130px;">
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 rows">
+                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-2" align="right">ค้นหาสินค้า : </div>
+                                                                <div class="col-md-4">
+                                                                    @Html.TextArea("txt_pro_code", string.Join(Environment.NewLine, _product)
+                                                                        , new { @class = "form-control", rows = 5, @disabled = "disabled", placeholder = "สินค้า" })
+                                                                    @Html.Hidden("hiddenpro_code", string.Join(",", _codeproduct))
+                                                                </div>
+                                                                <div class="col-md-4" style="margin-left: 0; margin-top: 10px">
+                                                                    @if (Model.Mode != "c")
+                                                                    {
+                                                                        <input type="button" name="btn_code_popup" value="เลือกสินค้า" id="btn_code_popup" class="btn btn-info" data-target="#modal-select-procode" style="width: 130px;">
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        }
+
+                                                        <div class="col-md-12 rows">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @if (Model.pro_group_used_id != 4 && Model.pro_group_used_id != 5 && Model.pro_group_used_id != 6)
+                                                {
+                                                    <div class="row">
+                                                        <div class="col-md-2"></div>
+                                                        <div class="col-md-6 rows " align="center">
+                                                            <table>
+                                                                <tbody>
+                                                                    @foreach (var p in Model.ProGiveTypeList)
+                                                                    {
+                                                                        var id = "pro_give_type_id" + p.pro_give_type_id;
+                                                                        <tr class="@id">
+                                                                            <td class="radio radio-success">
+                                                                                @Html.RadioButtonFor(m => m.pro_give_type_id, p.pro_give_type_id
+                                                                                    , Model.Mode == "c" ? (object)new { id = id, @disabled = "disabled" }
+                                                                                        : (object)new { id = id })
+                                                                                @Html.Label("pro_give_type_id" + p.pro_give_type_id
+                                                                                    , p.pro_give_type_name
+                                                                                    , Model.Mode == "c" ? (object)new { @disabled = "disabled" }
+                                                                                        : "")
+                                                                                &nbsp;
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.TextBoxFor(model => model.pro_give_type_detail, ""
+                                                                                    , Model.Mode == "c" ? (object)new { @class = "form-control", autocomplete = "off", @disabled = "disabled", type = "number", min = "0" }
+                                                                                        : (object)new { @class = "form-control", autocomplete = "off", type = "number", min = "0" })
+                                                                                @Html.ValidationMessageFor(model => model.pro_give_type_detail, "", new { @class = "text-danger" })
+                                                                            </td>
+                                                                            <td>&nbsp; @Html.Label(p.pro_give_type_unit)</td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 rows">
+                                                        <div class="col-md-4" align="right">เงื่อนไขข้างต้นนี้ใช้สำหรับ :</div>
+                                                        <div class="col-md-4">
+                                                            <div class="radio radio-success">
+                                                                <table id="rbl_pro_give_product_same">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.RadioButtonFor(m => m.pro_give_product_same, true
+                                                                                    , Model.Mode == "c" ? (object)new { id = "pro_give_product_same_1", @disabled = "disabled" }
+                                                                                        : (object)new { id = "pro_give_product_same_1" })
+                                                                                @Html.Label("pro_give_product_same_1", "สินค้ารหัสเดียวกันเท่านั้น")
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.RadioButtonFor(m => m.pro_give_product_same, false
+                                                                                    , Model.Mode == "c" ? (object)new { id = "pro_give_product_same_0", @disabled = "disabled" }
+                                                                                        : (object)new { id = "pro_give_product_same_0" })
+                                                                                @Html.Label("pro_give_product_same_0", "เป็นสินค้าต่างรหัสกันได้")
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                                @if (Model.pro_group_used_id != 5 && Model.pro_group_used_id != 6)
+                                {
+                                    <div id="Step5_PriceTotal" class="col-md-12 rows">
+                                        <p style="font-weight: bold; color: #555;">กำหนดเงื่อนไขราคา</p>
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-3" align="center"></div>
+                                                    <div class="col-md-7">
+                                                        <div class="radio radio-success">
+                                                            <table id="rbl_pro_price_id">
+                                                                <tbody>
+                                                                    @foreach (var p in Model.ProPriceModelList)
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.RadioButtonFor(m => m.pro_price_id, p.pro_price_id
+                                                                                    , Model.Mode == "c" ? (object)new { id = "pro_price_id" + p.pro_price_id, @disabled = "disabled" }
+                                                                                        : (object)new { id = "pro_price_id" + p.pro_price_id })
+                                                                                @Html.Label("pro_price_id" + p.pro_price_id, p.pro_price_name
+                                                                                    , Model.Mode == "c" ? (object)new { @disabled = "disabled" }
+                                                                                        : "")
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3"></div>
+                                                    <div class="col-md-7">
+                                                        <span>ราคารวมขั้นต่ำของสินค้า</span>&nbsp;
+                                                        @Html.TextBoxFor(m => m.pro_price_total, "{0:0.00}"
+                                                            , Model.Mode == "c" ? (object)new { @min = "0", @class = "form-control onKeysPrice", autocomplete = "off", style = "width: 20%; display: inline-block;", @disabled = "disabled" }
+                                                                : (object)new { @min = "0", @class = "form-control onKeysPrice", autocomplete = "off", style = "width: 20%; display: inline-block;" })
+                                                        @Html.ValidationMessageFor(model => model.pro_price_total, "", new { @class = "text-danger" })
+                                                        @Html.Label("ProPriceTotal", "บาท")
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3"></div>
+                                                    <div class="col-md-7">
+                                                        @Html.Label("", "ราคารวมขั้นต่ำต้องเป็น 1.00 ขึ้นไป", new { style = "color: red;font-weight: normal;" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @*// โปรโมชั่นส่วนลดราคา,โปรโมชั่นส่วนลดพนักงาน,โปรโมชั่นส่วนลดบัตรกำนัน *@
+                                @if (Model.pro_group_used_id == 2 || Model.pro_group_used_id == 3)
+                                {
+                                    <div id="Step4" class="col-md-12 rows">
+                                        <p style="font-weight: bold; color: #555;">รูปแบบส่วนลด</p>
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <table>
+                                                    <tbody>
+                                                        @foreach (var p in Model.ProTypeList)
+                                                        {
+                                                            var id = "pro_type_id" + p.pro_type_id;
+                                                            bool check = Model.pro_type_id == p.pro_type_id;
+                                                            <tr class="@id">
+                                                                <td class="radio radio-success">
+                                                                    @Html.RadioButtonFor(m => m.pro_type_id, p.pro_type_id
+                                                                        , Model.Mode == "c" ? (object)new { id = id, @disabled = "disabled" }
+                                                                            : (object)new { id = id })
+                                                                    @Html.Label("pro_type_id" + p.pro_type_id, p.pro_type_name
+                                                                        , Model.Mode == "c" ? (object)new { @disabled = "disabled" }
+                                                                            : "")
+                                                                    &nbsp;
+                                                                </td>
+                                                                <td>
+                                                                    @Html.TextBoxFor(model => model.pro_type_detail, ""
+                                                                        , Model.Mode == "c" ? (object)new { type = "number", min = "0", @class = "form-control keyInteger", autocomplete = "off", Value = check ? Model.pro_type_detail : 0, @disabled = "disabled" }
+                                                                            : (object)new { type = "number", min = "0", @class = "form-control keyInteger", autocomplete = "off", Value = check ? Model.pro_type_detail : 0 })
+                                                                    @Html.ValidationMessageFor(model => model.pro_type_detail, "", new { @class = "text-danger" })
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @if (Model.pro_group_used_id == 1)
+                                {
+                                    <div id="div_search_pro_code_give" class="col-md-12 rows">
+                                        <p style="font-weight: bold; color: #555;">รูปแบบของรางวัล</p>
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-3"></div>
+                                                    <div class="col-md-8">
+                                                        <div class="checkbox checkbox-success">
+                                                            <span class="aspNetDisabled" name="cb_pro_give_same_buy_view">
+                                                                @Html.RadioButtonFor(m => m.pro_give_same_buy, true
+                                                                    , Model.Mode == "c" ? (object)new { id = "pro_give_same_buy0", @disabled = "disabled" }
+                                                                        : (object)new { id = "pro_give_same_buy0" })
+                                                                @Html.Label("pro_give_same_buy0", "แถมสินค้ารหัสเดียวกันกับที่ซื้อ")
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-3"></div>
+                                                    <div class="col-md-8">
+                                                        <div class="checkbox checkbox-success">
+                                                            <span class="aspNetDisabled" name="cb_pro_give_same_buy_view">
+                                                                @Html.RadioButtonFor(m => m.pro_give_same_buy, false
+                                                                    , Model.Mode == "c" ? (object)new { id = "pro_give_same_buy1", @disabled = "disabled" }
+                                                                        : (object)new { id = "pro_give_same_buy1" })
+                                                                @Html.Label("pro_give_same_buy1", "แถมสินค้าต่างชนิดกัน")
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @{
+                                                    var _productgive = Model.ProdGiveList.Where(w => w.IsCheck).Select(s => s.pro_tname).Any() ? Model.ProdGiveList.Where(w => w.IsCheck).Select(s => s.pro_tname) : Model.ProdGiveList.Select(s => s.pro_tname);
+                                                }
+                                                <div id="div_search_give_view" class="col-md-12 rows" style="display: none;">
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-2" align="right">สินค้า : </div>
+                                                    <div class="col-md-4">
+                                                        @if (Model.Mode == "c")
+                                                        {
+                                                            @Html.TextArea("txt_search_pro_code_give", string.Join(Environment.NewLine, _productgive)
+                                                                , new { @class = "form-control", rows = 5, @disabled = "disabled", placeholder = "ค้นหาสินค้า" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextArea("txt_search_pro_code_give", string.Join(Environment.NewLine, Model.ProdGiveList.Where(w => w.IsCheck).Select(s => s.pro_tname))
+                                                                , new { @class = "form-control", rows = 5, @disabled = "disabled", placeholder = "ค้นหาสินค้า" })
+                                                        }
+                                                    </div>
+                                                    <div class="col-md-4" style="margin-left: 0; margin-top: 10px">
+                                                        @if (Model.Mode != "c")
+                                                        {
+                                                            <input type="button" name="btn_gift_popup" value="เลือกสินค้า" id="btn_gift_popup" class="btn btn-info" data-target="#modal-select-progive" style="width: 130px;">
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-3"></div>
+                                                    <div class="col-md-8">
+                                                        <table>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="radio radio-success">
+                                                                            <span class="aspNetDisabled">
+                                                                            </span>
+                                                                        </div>
+                                                                        <span>จำนวนที่แถม</span>&nbsp;
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.TextBoxFor(model => model.pro_give_free_amount, ""
+                                                                            , Model.Mode == "c" ? (object)new { type = "number", min = "1", @class = "form-control keyInteger", autocomplete = "off", @disabled = "disabled" }
+                                                                                : (object)new { type = "number", min = "1", @class = "form-control keyInteger", autocomplete = "off" })
+                                                                        @Html.ValidationMessageFor(model => model.pro_give_free_amount, "", new { @class = "text-danger" })
+                                                                    </td>
+                                                                    <td> &nbsp;</td>
+                                                                    <td>
+                                                                        ชิ้น
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 rows">
+                                                    <div class="col-md-3"></div>
+                                                    <div class="col-md-8">
+                                                        <table>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="radio radio-success">
+                                                                            <span class="aspNetDisabled">
+                                                                                @*@Html.RadioButtonFor(m => m.pro_discount_id, 1
+                                                                                        , Model.Mode == "c" ? (object)new { id = "pro_discount_id1", @disabled = "disabled" }
+                                                                                            : (object)new { id = "pro_discount_id1" })
+                                                                                    @Html.Label("pro_discount_id1", "เป็นส่วนลดสินค้า")*@
+                                                                            </span>
+                                                                        </div>
+                                                                        <span>เป็นส่วนลดสินค้า</span>&nbsp;
+                                                                    </td>
+                                                                    <td>
+                                                                        @{
+                                                                            bool check1 = Model.pro_discount_id == 1;
+                                                                        }
+                                                                        @Html.TextBoxFor(model => model.pro_discount_rate, ""
+                                                                            , Model.Mode == "c" ? (object)new { type = "number", min = "0", @class = "form-control keyInteger", autocomplete = "off", @disabled = "disabled" }
+                                                                                : (object)new { type = "number", min = "0", @class = "form-control keyInteger", autocomplete = "off" })
+                                                                        @Html.ValidationMessageFor(model => model.pro_discount_rate, "", new { @class = "text-danger" })
+                                                                        @*<input name="txt_pro_discount_rate_1" type="text" id="txt_pro_discount_rate_1" class="form-control keyInteger" autocomplete="off" style="width: 60px; display: inline-block;">*@
+                                                                    </td>
+                                                                    <td> &nbsp;</td>
+                                                                    <td>
+                                                                        <div class="radio radio-success">
+                                                                            <span class="aspNetDisabled">
+                                                                                @Html.RadioButtonFor(x => x.pro_discount_unit_id, 0
+                                                                                    , Model.Mode == "c" ? (object)new { id = "pro_discount_unit_id0", @disabled = "disabled" }
+                                                                                        : (object)new { id = "pro_discount_unit_id0" })
+                                                                                @Html.Label("pro_discount_unit_id0", "ลดเป็น %")
+                                                                            </span>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td> &nbsp;</td>
+                                                                    <td>
+                                                                        <div class="radio radio-success">
+                                                                            <span class="aspNetDisabled">
+                                                                                @Html.RadioButtonFor(x => x.pro_discount_unit_id, 1
+                                                                                    , Model.Mode == "c" ? (object)new { id = "pro_discount_unit_id1", @disabled = "disabled" }
+                                                                                        : (object)new { id = "pro_discount_unit_id1" })
+                                                                                @Html.Label("pro_discount_unit_id1", "ลดเป็น บาท")
+                                                                            </span>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @if (Model.pro_group_used_id == 4)
+                                {
+                                    <div id="Step3_Coupon" class="col-md-12 rows">
+                                        <p style="font-weight: bold; color: #555;">รูปแบบคูปอง</p>
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    @{
+                                                        bool isGrp0 = Model.group_coupon_id == 0;
+                                                        bool isGrp1 = Model.group_coupon_id == 1;
+                                                        bool isGrp2 = Model.group_coupon_id == 2;
+                                                    }
+                                                    <div class="col-md-1" align="center">
+                                                        <div class="radio radio-success">
+                                                            @Html.RadioButtonFor(m => m.group_coupon_id, 0
+                                                                , Model.Mode == "c" ? (object)new { id = "group_coupon_id0", @disabled = "disabled" }
+                                                                    : (object)new { id = "group_coupon_id0" })
+                                                            <label for="group_coupon_id0"> </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <div class="col-md-12">
+                                                            <span class="">
+                                                                @Html.Label("group_coupon_id0", "คูปองแบบไม่ตรวจสอบรหัส"
+                                                                    , Model.Mode == "c" ? (object)new { @disabled = "disabled" }
+                                                                        : (object)new { style = "font-weight: 100;" })
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-1"></div>
+                                                    <div class="col-md-10">
+                                                        <div class="col-md-2"><span class="">ยอดส่วนลด</span></div>
+                                                        <div class="col-md-3">
+                                                            @Html.TextBoxFor(m => m.coupon_value_amount, "{0:0.00}"
+                                                                , Model.Mode == "c" ? (object)new { id = "coupon_value_amountd0", @min = "0", @class = "form-control onKeysPrice", autocomplete = "off", Value = isGrp0 ? Model.coupon_value_amount : 0, @disabled = "disabled" }
+                                                                    : (object)new { id = "coupon_value_amount0", @min = "0", @class = "form-control onKeysPrice", autocomplete = "off", Value = isGrp0 ? Model.coupon_value_amount : 0 })
+                                                            @Html.ValidationMessageFor(model => model.coupon_value_amount, "", new { @class = "text-danger" })
+                                                            @*<input name="CouponDiscountBath" type="text" id="CouponDiscountBath" class="form-control" autocomplete="off">*@
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <span class="">บาท</span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-1"></div>
+                                                    <div class="col-md-10">
+                                                        <div class="col-md-2"><span class="">ยอดส่วนลด</span></div>
+                                                        <div class="col-md-3">
+                                                            @Html.TextBoxFor(m => m.coupon_value_percent, "{0:0.00}"
+                                                                , Model.Mode == "c" ? (object)new { id = "coupon_value_percent0", @min = "0", @class = "form-control onKeysPrice", autocomplete = "off", Value = isGrp0 ? Model.coupon_value_percent : 0, @disabled = "disabled" }
+                                                                    : (object)new { id = "coupon_value_percent0", @min = "0", @class = "form-control onKeysPrice", autocomplete = "off", Value = isGrp0 ? Model.coupon_value_percent : 0 })
+                                                            @Html.ValidationMessageFor(model => model.coupon_value_percent, "", new { @class = "text-danger" })
+                                                            @*<input name="CouponDiscountPercent" type="text" id="CouponDiscountPercent" class="form-control" autocomplete="off">*@
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <span class="">%</span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-1" align="center">
+                                                        <div class="radio radio-success">
+                                                            @Html.RadioButtonFor(m => m.group_coupon_id, 1
+                                                                , Model.Mode == "c" ? (object)new { id = "group_coupon_id1", @disabled = "disabled" }
+                                                                    : (object)new { id = "group_coupon_id1" })
+                                                            <label for="group_coupon_id1"> </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <div class="col-md-2">
+                                                            <span class="">
+                                                                @Html.Label("group_coupon_id1", "จำนวนรหัสคูปอง"
+                                                                    , Model.Mode == "c" ? (object)new { @disabled = "disabled" }
+                                                                        : (object)new { style = "font-weight: 100;" })
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            @Html.TextBoxFor(model => model.coupon_code, ""
+                                                                , Model.Mode == "c" ? (object)new { @class = "form-control ", autocomplete = "off", Value = isGrp1 ? Model.coupon_code : "", @disabled = "disabled" }
+                                                                    : (object)new { @class = "form-control ", autocomplete = "off", Value = isGrp1 ? Model.coupon_code : "" })
+                                                            @Html.ValidationMessageFor(model => model.coupon_code, "", new { @class = "text-danger" })
+                                                            @*<input name="CouponDigitCount" type="text" id="CouponDigitCount" class="form-control" autocomplete="off">*@
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <span class="">ตัว</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-1"></div>
+                                                    <div class="col-md-10">
+                                                        <div class="col-md-2"><span class="">ยอดส่วนลด</span></div>
+                                                        <div class="col-md-3">
+                                                            @Html.TextBoxFor(m => m.coupon_value_amount, "{0:0.00}"
+                                                                , Model.Mode == "c" ? (object)new { @min = "0", @class = "form-control onKeysPrice", autocomplete = "off", Value = isGrp1 ? Model.coupon_value_amount : 0, @disabled = "disabled" }
+                                                                    : (object)new { @min = "0", @class = "form-control onKeysPrice", autocomplete = "off", Value = isGrp1 ? Model.coupon_value_amount : 0 })
+                                                            @Html.ValidationMessageFor(model => model.coupon_value_amount, "", new { @class = "text-danger" })
+                                                            @*<input name="CouponDiscountBath" type="text" id="CouponDiscountBath" class="form-control" autocomplete="off">*@
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <span class="">บาท</span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-1"></div>
+                                                    <div class="col-md-10">
+                                                        <div class="col-md-2"><span class="">ยอดส่วนลด</span></div>
+                                                        <div class="col-md-3">
+                                                            @Html.TextBoxFor(m => m.coupon_value_percent, "{0:0.00}"
+                                                                , Model.Mode == "c" ? (object)new { @min = "0", @class = "form-control onKeysPrice", autocomplete = "off", Value = isGrp1 ? Model.coupon_value_percent : 0, @disabled = "disabled" }
+                                                                    : (object)new { @min = "0", @class = "form-control onKeysPrice", autocomplete = "off", Value = isGrp1 ? Model.coupon_value_percent : 0 })
+                                                            @Html.ValidationMessageFor(model => model.coupon_value_percent, "", new { @class = "text-danger" })
+                                                            @*<input name="CouponDiscountPercent" type="text" id="CouponDiscountPercent" class="form-control" autocomplete="off">*@
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <span class="">%</span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-1" align="center">
+                                                        <div class="radio radio-success">
+                                                            @Html.RadioButtonFor(m => m.group_coupon_id, 2
+                                                                , Model.Mode == "c" ? (object)new { id = "group_coupon_id2", @disabled = "disabled" }
+                                                                    : (object)new { id = "group_coupon_id2" })
+                                                            <label for="group_coupon_id2"> </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-11 rows" align="center">
+                                                        <div class="input-daterange input-group">
+                                                            <span class="input-group-addon edit-text"> @Html.Label("group_coupon_id2", "กลุ่มรหัสคูปอง")</span>
+                                                            @Html.TextBoxFor(model => model.coupon_code2, ""
+                                                                , Model.Mode == "c" ? (object)new { @class = "form-control ", autocomplete = "off", Value = isGrp2 ? Model.coupon_code2 : "", @disabled = "disabled" }
+                                                                    : (object)new { @class = "form-control ", autocomplete = "off", Value = isGrp2 ? Model.coupon_code2 : "" })
+                                                            @Html.ValidationMessageFor(model => model.coupon_code2, "", new { @class = "text-danger" })
+                                                            <span class="validate-text">*</span>
+                                                            @*<input name="txt_coupon_code" type="text" id="txt_coupon_code" class="form-control" autocomplete="off" readonly="readonly">
+                                                                <span class="validate-text">*</span>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                @if (Model.Mode != "c")
+                                                {
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="file" name="FileUpload1" id="FileUpload1" class="form-control">
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <input type="button" name="btnImportCoupon" value="Upload Coupon" id="btnImportCoupon" class="btn btn-info">
+                                                            <button type="button" class="btn btn-warning" id="brn_downloadCoupon" onclick="DownloadTemplateCoupon()">Download Template</button>
+                                                            <iframe id="my_iframe" style="display: none;" __idm_frm__="23"></iframe>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <div id="div_ViewCoupon" style="display: none;">
+                                                            @{
+                                                                Html.RenderPartial("_ViewCoupon");
+
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @if (Model.pro_group_used_id == 6)
+                                {
+                                    <div id="StepEx2_promotion" class="col-md-12 rows">
+                                        <p style="font-weight: bold; color: #555;">import ข้อมูล promotion คูปองส่วนลดพนักงาน</p>
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    @if (Model.Mode != "c")
+                                                    {
+                                                        <div class="row">
+                                                            <div class="col-md-1">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <input type="file" name="FileUpload3" id="FileUpload3" class="form-control">
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <input type="button" name="btnImportProCouponEmp" value="Upload Coupon" id="btnImportProCouponEmp" class="btn btn-info">
+                                                                <button type="button" class="btn btn-warning" id="brn_exportProCouponEmp" onclick="DownloadTemplateProCouponEmp()">Download Template</button>
+                                                                <iframe id="my_iframeProCouponEmp" style="display: none;" __idm_frm__="23"></iframe>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <div id="div_ViewProCouponEmp" style=" @(Model.SBProCouponDetailEmp.Any() ? "" : "display: none;") ">
+                                                                @{
+                                                                    Html.RenderPartial("_ViewProCouponEmp");
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @if (Model.pro_group_used_id == 5 || Model.pro_group_used_id == 6)
+                                {
+                                    <div id="StepEx_promotion" class="col-md-12 rows">
+                                        <p style="font-weight: bold; color: #555;">import ข้อมูล promotion</p>
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    @if (Model.Mode != "c")
+                                                    {
+                                                        <div class="row">
+                                                            <div class="col-md-1">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <input type="file" name="FileUpload2" id="FileUpload2" class="form-control">
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <input type="button" name="btnImportpromotion" value="Upload Promotion" id="btnImportpromotion" class="btn btn-info">
+                                                                <button type="button" class="btn btn-warning" id="brn_exportpromotion" onclick="DownloadTemplatePromotion()">Download Template</button>
+                                                                <iframe id="my_iframepromotion" style="display: none;" __idm_frm__="23"></iframe>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <div id="div_Viewpromotion" style=" @(Model.SBPromotionDisDetail.Any() ? "" : "display: none;") ">
+                                                                @{
+                                                                    Html.RenderPartial("_ViewPromotion");
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div>&nbsp;</div>
+                            <div class="row">
+                                @if (Model.Mode == "c")
+                                {
+                                    <div class="col-md-12 text-center">
+                                        <a href="@Url.Action("Index")" name="btnindex" id="btnindex" class="btn btn-default">ย้อนกลับ</a>
+                                    </div>
+                                }
+                            </div>
+                            <div>&nbsp;</div>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-1">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="progroup_popup"></div>
+<div id="probrand_popup"></div>
+<div id="promodel_popup"></div>
+<div id="prosize_popup"></div>
+<div id="procode_popup"></div>
+<div id="progivecode_popup"></div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/datatables-script")
+    @Scripts.Render("~/bundles/promotion/create/step3")
+}
